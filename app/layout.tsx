@@ -6,17 +6,9 @@ import Footer from "@/components/layout/footer";
 import { Suspense } from "react";
 
 export const metadata = {
-  title: "Precedent - Building blocks for your Next.js project",
-  description:
-    "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
-  twitter: {
-    card: "summary_large_image",
-    title: "Precedent - Building blocks for your Next.js project",
-    description:
-      "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
-    creator: "@steventey",
-  },
-  metadataBase: new URL("https://precedent.dev"),
+  title: "ChenYifaer",
+  description: "陈一发儿 - 童话镇里一枝花, 人美歌甜陈一发.",
+  metadataBase: new URL("https://chenyifaer.com"),
   themeColor: "#FFF",
 };
 
@@ -33,7 +25,10 @@ export default async function RootLayout({
           {/* @ts-expect-error Server Component */}
           <Nav />
         </Suspense>
-        <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
+        <main
+          id="main"
+          className="flex min-h-screen w-full flex-col items-center justify-center py-32"
+        >
           {children}
         </main>
         <Footer />

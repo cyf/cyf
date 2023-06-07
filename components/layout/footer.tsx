@@ -1,15 +1,26 @@
+"use client";
+import useScroll from "@/lib/hooks/use-scroll";
+
 export default function Footer() {
+  const scrolled = useScroll(65);
+
   return (
-    <div className="absolute w-full border-t border-gray-200 bg-white py-5 text-center">
+    <div
+      className={`fixed bottom-0 w-full ${
+        !scrolled
+          ? "border-b border-gray-200 bg-white/50 backdrop-blur-xl"
+          : "bg-white/0"
+      } py-5 text-center`}
+    >
       <p className="text-gray-500">
-        A free template by{" "}
+        Source code hosted on{" "}
         <a
           className="font-medium text-gray-800 underline transition-colors"
-          href="https://twitter.com/steventey"
+          href="https://github.com/cyf"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Steven Tey
+          GitHub
         </a>
       </p>
     </div>
