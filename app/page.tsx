@@ -1,12 +1,13 @@
-"use client"
+"use client";
 import Balancer from "react-wrap-balancer";
+import { RoughNotation } from "react-rough-notation";
 import { Github } from "@/components/shared/icons";
 import { ShoppingBag, Instagram, Youtube, Mail, Gamepad2 } from "lucide-react";
 import { FaSpotify, FaWeibo } from "react-icons/fa";
 import Image from "next/image";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-const DynamicCard = dynamic(() => import('@/components/home/card'), {
+const DynamicCard = dynamic(() => import("@/components/home/card"), {
   ssr: false,
 });
 
@@ -30,10 +31,22 @@ export default function Home() {
           <Balancer>陈一发儿</Balancer>
         </h1>
         <p
-          className="mt-6 animate-fade-up text-center text-gray-500 opacity-0 md:text-xl"
+          className="mt-6 animate-fade-up text-center text-red-400 opacity-0 md:text-xl"
           style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
         >
-          <Balancer>童话镇里一枝花, 人美歌甜陈一发.</Balancer>
+          <Balancer>
+            <RoughNotation
+              animate
+              type="highlight"
+              show={true}
+              color="rgb(36, 54, 110)"
+              animationDelay={1000}
+              animationDuration={2500}
+            >
+              童话镇里一枝花, 人美歌甜陈一发
+            </RoughNotation>
+            .
+          </Balancer>
         </p>
         <div
           className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
@@ -72,63 +85,49 @@ const features = [
     title: "TaoBao",
     description:
       "Pre-built beautiful, a11y-first components, powered by [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Framer Motion](https://framer.com/motion)",
-    demo: (
-        <ShoppingBag className="h-24 w-24 text-gray-600 transition-all" />
-    ),
+    demo: <ShoppingBag className="h-24 w-24 text-gray-600 transition-all" />,
     url: "https://chenyifaer.taobao.com",
   },
   {
     title: "Instagram",
     description:
       "Built on [Next.js](https://nextjs.org/) primitives like `@next/font` and `next/image` for stellar performance.",
-    demo: (
-        <Instagram className="h-24 w-24 text-gray-600 transition-all" />
-    ),
+    demo: <Instagram className="h-24 w-24 text-gray-600 transition-all" />,
     url: "https://instagram.com/yifaer_chen",
   },
   {
     title: "YouTube",
     description:
       "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
-    demo: (
-        <Youtube className="h-24 w-24 text-gray-600 transition-all" />
-    ),
+    demo: <Youtube className="h-24 w-24 text-gray-600 transition-all" />,
     url: "https://www.youtube.com/@chenyifaer",
   },
   {
     title: "Spotify",
     description:
       "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
-    demo: (
-        <FaSpotify className="h-24 w-24 text-gray-600 transition-all" />
-    ),
+    demo: <FaSpotify className="h-24 w-24 text-gray-600 transition-all" />,
     url: "https://open.spotify.com/artist/10xtjTRMlKZ7aFx6VBQlSj",
   },
   {
     title: "Weibo",
     description:
       "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
-    demo: (
-        <FaWeibo className="h-24 w-24 text-gray-600 transition-all" />
-    ),
+    demo: <FaWeibo className="h-24 w-24 text-gray-600 transition-all" />,
     url: "https://weibo.com/u/7357828611",
   },
   {
     title: "Email",
     description:
       "Precedent comes with authentication and database via [Auth.js](https://authjs.dev/) + [Prisma](https://prisma.io/)",
-    demo: (
-        <Mail className="h-24 w-24 text-gray-600 transition-all" />
-    ),
+    demo: <Mail className="h-24 w-24 text-gray-600 transition-all" />,
     url: "mailto://chenyifaer888@163.com",
   },
   {
     title: "Game",
     description:
       "Precedent offers a collection of hooks, utilities, and `@vercel/og`",
-    demo: (
-        <Gamepad2 className="h-24 w-24 text-gray-600 transition-all" />
-    ),
+    demo: <Gamepad2 className="h-24 w-24 text-gray-600 transition-all" />,
     url: "https://chenyifaer.com/fafa-runner",
   },
 ];
