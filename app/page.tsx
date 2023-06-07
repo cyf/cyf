@@ -1,9 +1,14 @@
-import Card from "@/components/home/card";
+"use client"
 import Balancer from "react-wrap-balancer";
 import { Github } from "@/components/shared/icons";
 import { ShoppingBag, Instagram, Youtube, Mail, Gamepad2 } from "lucide-react";
 import { FaSpotify, FaWeibo } from "react-icons/fa";
 import Image from "next/image";
+import dynamic from 'next/dynamic';
+
+const DynamicCard = dynamic(() => import('@/components/home/card'), {
+  ssr: false,
+});
 
 export default function Home() {
   return (
@@ -49,7 +54,7 @@ export default function Home() {
       </div>
       <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">
         {features.map(({ title, description, demo, url }) => (
-          <Card
+          <DynamicCard
             key={title}
             title={title}
             description={description}
