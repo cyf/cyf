@@ -2,8 +2,8 @@
 import Balancer from "react-wrap-balancer";
 import { RoughNotation } from "react-rough-notation";
 import { Github } from "@/components/shared/icons";
-import { ShoppingBag, Instagram, Youtube, Mail, Gamepad2 } from "lucide-react";
-import { FaSpotify, FaWeibo } from "react-icons/fa";
+import { Mail, Gamepad2 } from "lucide-react";
+import { SiTaobao, SiSpotify, SiSinaweibo, SiInstagram, SiYoutube } from "react-icons/si";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
@@ -82,38 +82,38 @@ export default function Home() {
 
 const features = [
   {
-    title: "TaoBao",
+    title: "Taobao",
     description:
       "Pre-built beautiful, a11y-first components, powered by [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Framer Motion](https://framer.com/motion)",
-    demo: <ShoppingBag className="h-24 w-24 text-gray-600 transition-all" />,
+    demo: <SiTaobao className="h-24 w-24 text-gray-600 transition-all" />,
     url: "https://chenyifaer.taobao.com",
   },
   {
     title: "Instagram",
     description:
       "Built on [Next.js](https://nextjs.org/) primitives like `@next/font` and `next/image` for stellar performance.",
-    demo: <Instagram className="h-24 w-24 text-gray-600 transition-all" />,
+    demo: <SiInstagram className="h-24 w-24 text-gray-600 transition-all" />,
     url: "https://instagram.com/yifaer_chen",
   },
   {
     title: "YouTube",
     description:
       "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
-    demo: <Youtube className="h-24 w-24 text-gray-600 transition-all" />,
+    demo: <SiYoutube className="h-24 w-24 text-gray-600 transition-all" />,
     url: "https://www.youtube.com/@chenyifaer",
   },
   {
     title: "Spotify",
     description:
       "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
-    demo: <FaSpotify className="h-24 w-24 text-gray-600 transition-all" />,
+    demo: <SiSpotify className="h-24 w-24 text-gray-600 transition-all" />,
     url: "https://open.spotify.com/artist/10xtjTRMlKZ7aFx6VBQlSj",
   },
   {
     title: "Weibo",
     description:
       "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
-    demo: <FaWeibo className="h-24 w-24 text-gray-600 transition-all" />,
+    demo: <SiSinaweibo className="h-24 w-24 text-gray-600 transition-all" />,
     url: "https://weibo.com/u/7357828611",
   },
   {
