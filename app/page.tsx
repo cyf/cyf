@@ -121,7 +121,7 @@ const features = [
     description:
       "Precedent comes with authentication and database via [Auth.js](https://authjs.dev/) + [Prisma](https://prisma.io/)",
     demo: <Mail className="h-24 w-24 text-gray-600 transition-all" />,
-    url: "mailto://chenyifaer888@163.com",
+    url: "mailto:chenyifaer888@163.com",
   },
   {
     title: "Game",
