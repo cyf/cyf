@@ -3,7 +3,13 @@ import Balancer from "react-wrap-balancer";
 import { RoughNotation } from "react-rough-notation";
 import { Github } from "@/components/shared/icons";
 import { Mail, Gamepad2 } from "lucide-react";
-import { SiTaobao, SiSpotify, SiSinaweibo, SiInstagram, SiYoutube } from "react-icons/si";
+import {
+  SiTaobao,
+  SiSpotify,
+  SiSinaweibo,
+  SiInstagram,
+  SiYoutube,
+} from "react-icons/si";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
