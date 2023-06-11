@@ -9,6 +9,8 @@ import {
   SiSinaweibo,
   SiInstagram,
   SiYoutube,
+  SiTwitch,
+  SiTelegram,
 } from "react-icons/si";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -109,6 +111,13 @@ const features = [
     url: "https://www.youtube.com/@chenyifaer",
   },
   {
+    title: "Twitch",
+    description:
+      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
+    demo: <SiTwitch className="h-24 w-24 text-gray-600 transition-all" />,
+    url: "https://www.twitch.tv/thebs_chen",
+  },
+  {
     title: "Spotify",
     description:
       "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
@@ -123,6 +132,13 @@ const features = [
     url: "https://weibo.com/u/7357828611",
   },
   {
+    title: "Telegram",
+    description:
+      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
+    demo: <SiTelegram className="h-24 w-24 text-gray-600 transition-all" />,
+    url: "https://t.me/FaFa67373",
+  },
+  {
     title: "Email",
     description:
       "Precedent comes with authentication and database via [Auth.js](https://authjs.dev/) + [Prisma](https://prisma.io/)",
@@ -130,7 +146,7 @@ const features = [
     url: "mailto:chenyifaer888@163.com",
   },
   {
-    title: "Game",
+    title: "FaFa Runner",
     description:
       "Precedent offers a collection of hooks, utilities, and `@vercel/og`",
     demo: <Gamepad2 className="h-24 w-24 text-gray-600 transition-all" />,
