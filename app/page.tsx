@@ -1,7 +1,7 @@
 "use client";
 import Balancer from "react-wrap-balancer";
 import { RoughNotation } from "react-rough-notation";
-import { Github } from "@/components/shared/icons";
+import { Github, Test } from "@/components/shared/icons";
 import { Mail, Gamepad2 } from "lucide-react";
 import {
   SiTaobao,
@@ -135,5 +135,12 @@ const features = [
       "Precedent offers a collection of hooks, utilities, and `@vercel/og`",
     demo: <Gamepad2 className="h-24 w-24 text-gray-600 transition-all" />,
     url: "https://chenyifaer.com/fafa-runner",
+  },
+  {
+    title: "CYF Insider",
+    description:
+      "Precedent offers a collection of hooks, utilities, and `@vercel/og`",
+    demo: <Test className="h-24 w-24 text-gray-600 transition-all" />,
+    url: "https://insider.chenyifaer.com",
   },
 ];
