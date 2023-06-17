@@ -10,6 +10,7 @@ import {
   SiInstagram,
   SiYoutube,
   SiTwitch,
+  SiTwitter,
   SiTelegram,
 } from "react-icons/si";
 import Image from "next/image";
@@ -130,6 +131,13 @@ const features = [
       "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
     demo: <SiSinaweibo className="h-24 w-24 text-gray-600 transition-all" />,
     url: "https://weibo.com/u/7357828611",
+  },
+  {
+    title: "Twitter",
+    description:
+      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
+    demo: <SiTwitter className="h-24 w-24 text-gray-600 transition-all" />,
+    url: "https://twitter.com/yifaer_chen",
   },
   {
     title: "Telegram",
