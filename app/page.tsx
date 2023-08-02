@@ -165,6 +165,6 @@ const features = [
     description:
       "Precedent offers a collection of hooks, utilities, and `@vercel/og`",
     demo: <Test className="h-24 w-24 text-gray-600 transition-all" />,
-    url: "https://insider.chenyifaer.com",
+    url: "https://chenyifaer.com/join",
   },
 ];
