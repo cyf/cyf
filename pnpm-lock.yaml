@@ -39,7 +39,7 @@ dependencies:
     specifier: ^4.9.0
     version: 4.9.0(react@18.2.0)
   react-markdown:
-    specifier: ^8.0.4
+    specifier: ^8.0.7
     version: 8.0.7(@types/react@18.0.26)(react@18.2.0)
   react-rough-notation:
     specifier: ^1.0.5
