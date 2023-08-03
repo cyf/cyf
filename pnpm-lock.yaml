@@ -74,7 +74,7 @@ devDependencies:
     specifier: 18.0.10
     version: 18.0.10
   autoprefixer:
-    specifier: ^10.4.13
+    specifier: ^10.4.14
     version: 10.4.14(postcss@8.4.23)
   concurrently:
     specifier: ^7.6.0
