@@ -15,15 +15,11 @@ jobs:
         with:
           node-version: 16
 
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 8
-          run_install: true
+      - name: Install deps
+        run: yarn
 
       - name: Build
-        run: pnpm build
+        run: yarn build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
