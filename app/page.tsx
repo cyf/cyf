@@ -2,7 +2,8 @@
 import Balancer from "react-wrap-balancer";
 import { RoughNotation } from "react-rough-notation";
 import { Github, Test } from "@/components/shared/icons";
-import { Mail, Gamepad2 } from "lucide-react";
+import { FiMail } from "react-icons/fi";
+import { IoGameControllerOutline } from "react-icons/io5";
 import {
   SiTaobao,
   SiSpotify,
@@ -150,14 +151,14 @@ const features = [
     title: "Email",
     description:
       "Precedent comes with authentication and database via [Auth.js](https://authjs.dev/) + [Prisma](https://prisma.io/)",
-    demo: <Mail className="h-24 w-24 text-gray-600 transition-all" />,
+    demo: <FiMail className="h-24 w-24 text-gray-600 transition-all" />,
     url: "mailto:chenyifaer888@163.com",
   },
   {
     title: "FaFa Runner",
     description:
       "Precedent offers a collection of hooks, utilities, and `@vercel/og`",
-    demo: <Gamepad2 className="h-24 w-24 text-gray-600 transition-all" />,
+    demo: <IoGameControllerOutline className="h-24 w-24 text-gray-600 transition-all" />,
     url: "https://chenyifaer.com/fafa-runner",
   },
   {
