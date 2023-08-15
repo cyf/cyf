@@ -158,7 +158,9 @@ const features = [
     title: "FaFa Runner",
     description:
       "Precedent offers a collection of hooks, utilities, and `@vercel/og`",
-    demo: <IoGameControllerOutline className="h-24 w-24 text-gray-600 transition-all" />,
+    demo: (
+      <IoGameControllerOutline className="h-24 w-24 text-gray-600 transition-all" />
+    ),
     url: "https://chenyifaer.com/fafa-runner",
   },
   {
