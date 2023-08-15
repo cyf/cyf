@@ -2,5 +2,5 @@
 module.exports = {
   bracketSpacing: true,
   semi: true,
-  plugins: [require("prettier-plugin-tailwindcss")],
+  plugins: ["prettier-plugin-tailwindcss"],
 };
