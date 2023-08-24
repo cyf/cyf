@@ -7,7 +7,7 @@ export default function Footer() {
         Source code hosted on{" "}
         <a
           className="font-medium text-gray-800 underline transition-colors"
-          href="https://github.com/cyf"
+          href="https://github.com/cyf/cyf.github.io"
           target="_blank"
           rel="noopener noreferrer"
         >
