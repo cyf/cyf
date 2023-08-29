@@ -2,14 +2,11 @@
 
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { RiTranslate } from "react-icons/ri";
-import { MdAutoMode } from "react-icons/md";
+import { MdOutlineDesktopMac } from "react-icons/md";
 import type { IconType } from "react-icons";
 import Popover from "@/components/shared/popover";
-import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useTranslation } from "@/i18n/client";
-import { languages } from "@/i18n/settings";
 import { LngProps } from "@/i18next-lng";
 import { themes, icons, Theme, ThemeMode } from "@/theme";
 
@@ -20,7 +17,7 @@ export default function ThemeDropdown(props: LngProps) {
   const [openPopover, setOpenPopover] = useState(false);
 
   const ThemeIcon: IconType = useMemo(() => {
-    return icons[(theme || "system") as ThemeMode] || MdAutoMode;
+    return icons[(theme || "system") as ThemeMode] || MdOutlineDesktopMac;
   }, [theme]);
 
   return (
