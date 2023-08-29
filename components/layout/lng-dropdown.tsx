@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { RiTranslate } from "react-icons/ri";
 import Popover from "@/components/shared/popover";
 import { usePathname } from "next/navigation";
@@ -11,7 +10,6 @@ import { languages } from "@/i18n/settings";
 import { LngProps } from "@/i18next-lng";
 
 export default function LngDropdown(props: LngProps) {
-  const router = useRouter();
   const { t } = useTranslation(props.lng);
   const pathName = usePathname();
   const [openPopover, setOpenPopover] = useState(false);
