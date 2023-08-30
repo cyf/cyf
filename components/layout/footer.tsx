@@ -7,7 +7,7 @@ import { useTranslation } from "@/i18n/client";
 export default function Footer(props: LngProps) {
   const { t } = useTranslation(props.lng, "footer");
   return (
-    <div className="absolute w-full border-b border-gray-200 py-5 text-center">
+    <div className="absolute w-full border-b border-gray-200 dark:border-gray-700 py-5 text-center">
       <p className="text-gray-500 dark:text-white/80">
         {t("footer")}{" "}
         <a
