@@ -8,7 +8,7 @@ import ThemeDropdown from "./theme-dropdown";
 import { LngProps } from "@/i18next-lng";
 import { useTranslation } from "@/i18n/client";
 
-export default function NavBar(props: LngProps) {
+export default function Header(props: LngProps) {
   const { t } = useTranslation(props.lng, "header");
   const scrolled = useScroll(50);
 
@@ -16,7 +16,7 @@ export default function NavBar(props: LngProps) {
     <div
       className={`fixed top-0 w-full ${
         scrolled
-          ? "border-b border-gray-200 bg-white/50 backdrop-blur-xl dark:border-gray-800 dark:bg-gray-900"
+          ? "border-b border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-gray-900 backdrop-blur-xl"
           : "bg-white/0 dark:bg-black/0"
       } z-30 transition-all`}
     >
