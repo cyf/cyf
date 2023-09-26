@@ -15,7 +15,7 @@
     "@radix-ui/react-tooltip": "^1.0.6",
     "accept-language": "^3.0.18",
     "classnames": "^2.3.2",
-    "focus-trap-react": "^10.2.1",
+    "focus-trap-react": "^10.2.2",
     "framer-motion": "^10.16.4",
     "i18next": "^23.5.1",
     "i18next-browser-languagedetector": "^7.1.0",
