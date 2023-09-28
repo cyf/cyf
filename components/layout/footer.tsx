@@ -19,25 +19,25 @@ export default function Footer(props: LngProps) {
           GitHub
         </a>
       </p>
-      <p className="mt-2 flex items-center justify-center">
-        <a
-          className="font-medium text-gray-800 underline transition-colors dark:text-white/90"
-          href="https://chenyifaer.com/fafa-runner/privacy"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Privacy Policy
-        </a>
-        &nbsp;&nbsp;
-        <a
-          className="font-medium text-gray-800 underline transition-colors dark:text-white/90"
-          href="https://chenyifaer.com/fafa-runner/terms-of-use"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Terms &amp; Conditions
-        </a>
-      </p>
+      {/*<p className="mt-2 flex items-center justify-center">*/}
+      {/*  <a*/}
+      {/*    className="font-medium text-gray-800 underline transition-colors dark:text-white/90"*/}
+      {/*    href="https://chenyifaer.com/fafa-runner/privacy"*/}
+      {/*    target="_blank"*/}
+      {/*    rel="noopener noreferrer"*/}
+      {/*  >*/}
+      {/*    Privacy Policy*/}
+      {/*  </a>*/}
+      {/*  &nbsp;&nbsp;*/}
+      {/*  <a*/}
+      {/*    className="font-medium text-gray-800 underline transition-colors dark:text-white/90"*/}
+      {/*    href="https://chenyifaer.com/fafa-runner/terms-of-use"*/}
+      {/*    target="_blank"*/}
+      {/*    rel="noopener noreferrer"*/}
+      {/*  >*/}
+      {/*    Terms &amp; Conditions*/}
+      {/*  </a>*/}
+      {/*</p>*/}
       <p className="mt-2 flex items-center justify-center">
         <Image
           src="https://visitor-badge.laobi.icu/badge?page_id=chenyifaer.com"
