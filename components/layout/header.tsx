@@ -16,7 +16,7 @@ export default function Header(props: LngProps) {
     <div
       className={`fixed top-0 w-full ${
         scrolled
-          ? "border-b border-gray-200 dark:border-gray-800 bg-white/50 dark:bg-gray-900 backdrop-blur-xl"
+          ? "border-b border-gray-200 bg-white/50 backdrop-blur-xl dark:border-gray-800 dark:bg-gray-900"
           : "bg-white/0 dark:bg-black/0"
       } z-30 transition-all`}
     >

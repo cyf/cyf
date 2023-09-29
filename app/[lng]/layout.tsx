@@ -7,7 +7,9 @@ import { languages } from "@/i18n/settings";
 import { sfPro, inter } from "./fonts";
 import { Providers } from "./providers";
 
-const Header = dynamic(() => import("@/components/layout/header"), { ssr: false });
+const Header = dynamic(() => import("@/components/layout/header"), {
+  ssr: false,
+});
 
 export const metadata = {
   title: "ChenYifaer",
