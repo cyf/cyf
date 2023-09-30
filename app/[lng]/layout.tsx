@@ -2,6 +2,7 @@ import "./globals.css";
 import cx from "classnames";
 import Footer from "@/components/layout/footer";
 import { dir } from "i18next";
+import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { languages } from "@/i18n/settings";
 import { sfPro, inter } from "./fonts";
@@ -11,12 +12,23 @@ const Header = dynamic(() => import("@/components/layout/header"), {
   ssr: false,
 });
 
-export const metadata = {
-  title: "ChenYifaer",
-  description: "陈一发儿 - 童话镇里一枝花, 人美歌甜陈一发.",
-  metadataBase: new URL("https://chenyifaer.com"),
-  themeColor: "#FFF",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { lng: string };
+}): Promise<Metadata | undefined> {
+  return {
+    title: params.lng === "en" ? "ChenYifaer" : "陈一发儿",
+    description: `${
+      params.lng === "en" ? "ChenYifaer" : "陈一发儿"
+    } - 童话镇里一枝花, 人美歌甜陈一发.`,
+    metadataBase: new URL("https://chenyifaer.com"),
+    themeColor: "#FFF",
+    icons: {
+      icon: "/blog/logo.jpg",
+    },
+  };
+}
 
 export async function generateStaticParams() {
   return languages.map((lng: string) => ({ lng }));
