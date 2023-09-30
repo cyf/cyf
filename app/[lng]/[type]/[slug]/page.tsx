@@ -15,10 +15,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string; lng: string };
+  params: { slug: string; type: string; lng: string };
 }): Promise<Metadata | undefined> {
   const post = allPosts.find(
-    (post) => post.slug === `${params.lng}/${params.slug}`,
+    (post) => post.slug === `${params.lng}/${params.type}/${params.slug}`,
   );
 
   if (!post) return;
@@ -34,10 +34,10 @@ export async function generateMetadata({
 export default async function Legal({
   params,
 }: {
-  params: { slug: string; lng: string };
+  params: { slug: string; type: string; lng: string };
 }) {
   const post = allPosts.find(
-    (post) => post.slug === `${params.lng}/${params.slug}`,
+    (post) => post.slug === `${params.lng}/${params.type}/${params.slug}`,
   );
 
   if (!post) notFound();
@@ -58,7 +58,7 @@ export default async function Legal({
             <PostNav />
 
             {/* Main content */}
-            <div>
+            <div className="flex-1">
               {/* Article meta */}
               <div className="mb-6 flex items-center">
                 {post.authorImg && (

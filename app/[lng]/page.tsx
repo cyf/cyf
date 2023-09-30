@@ -1,7 +1,7 @@
 "use client";
+import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 import { RoughNotation } from "react-rough-notation";
-import { Github } from "@/components/shared/icons";
 import { FiMail } from "react-icons/fi";
 import { IoGameControllerOutline } from "react-icons/io5";
 import {
@@ -15,9 +15,12 @@ import {
   SiTelegram,
 } from "react-icons/si";
 import { BiTestTube } from "react-icons/bi";
+import { FaBlog } from "react-icons/fa";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import { Github } from "@/components/shared/icons";
 import { useTranslation } from "@/i18n/client";
+import { allPosts } from "contentlayer/generated";
 
 const DynamicCard = dynamic(() => import("@/components/home/card"), {
   ssr: false,
@@ -31,9 +34,23 @@ export default function Home({
   };
 }) {
   const { t } = useTranslation(params.lng, "header");
+  const post = allPosts
+    .filter((post) => post.slug.startsWith(`${params.lng}/blog`))
+    .at(0);
   return (
     <>
       <div className="z-10 w-full max-w-xl px-5 xl:px-0">
+        {post && (
+          <Link
+            href={`/${post.slug}`}
+            target="_blank"
+            rel="noreferrer"
+            className="mx-auto mb-12 flex max-w-fit animate-fade-up items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-7 py-2 transition-colors hover:bg-blue-200"
+          >
+            <FaBlog className="h-5 w-5 text-[#1d9bf0]" />
+            <p className="text-sm font-semibold text-[#1d9bf0]">{post.title}</p>
+          </Link>
+        )}
         <div className="mb-8 flex items-center justify-center space-x-20">
           <Image
             className="rounded-full"
