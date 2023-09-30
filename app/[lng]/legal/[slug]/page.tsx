@@ -99,7 +99,7 @@ export default async function Legal({
                   </span>
                 </div>
               </div>
-              <hr className="mb-6 h-px w-full border-0 bg-gray-200 dark:bg-gray-600 pt-px" />
+              <hr className="mb-6 h-px w-full border-0 bg-gray-200 pt-px dark:bg-gray-600" />
 
               {/* Article body */}
               <div>
