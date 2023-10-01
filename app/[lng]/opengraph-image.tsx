@@ -26,7 +26,7 @@ export default async function OG() {
         }}
       >
         <img
-          src="/blog/logo.jpg"
+          src="/portal/logo.jpg"
           alt="Precedent Logo"
           tw="w-20 h-20 mb-4 opacity-95"
         />
