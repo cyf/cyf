@@ -4,7 +4,9 @@ import Footer from "@/components/layout/footer";
 import { dir } from "i18next";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
+import { BiArrowToTop } from "react-icons/bi";
 import NextTopLoader from "nextjs-toploader";
+import ScrollToTop from "@/components/layout/scroll-to-top";
 import { languages } from "@/i18n/settings";
 import { sfPro, inter } from "./fonts";
 import { Providers } from "./providers";
@@ -59,6 +61,7 @@ export default async function RootLayout({
           </main>
           <Footer lng={params.lng} />
         </Providers>
+        <ScrollToTop smooth component={<BiArrowToTop className="mx-auto my-0 h-5 w-5 text-gray-700" />} />
       </body>
     </html>
   );
