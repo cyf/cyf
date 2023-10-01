@@ -24,7 +24,6 @@ export default function Footer(props: LngProps) {
         <Link
           className="font-medium text-gray-800 underline transition-colors dark:text-white/90"
           href={`/${props.lng}/legal/privacy`}
-          target="_blank"
           rel="noopener noreferrer"
         >
           {t("privacy")}
@@ -33,7 +32,6 @@ export default function Footer(props: LngProps) {
         <Link
           className="font-medium text-gray-800 underline transition-colors dark:text-white/90"
           href={`/${props.lng}/legal/terms-of-use`}
-          target="_blank"
           rel="noopener noreferrer"
         >
           {t("terms-of-use")}
