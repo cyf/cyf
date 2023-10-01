@@ -46,7 +46,6 @@ export default function Home({
         {post && (
           <Link
             href={`/${post.slug}`}
-            target="_blank"
             rel="noreferrer"
             className="mx-auto mb-12 flex max-w-fit animate-fade-up items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-7 py-2 transition-colors hover:bg-blue-200"
           >

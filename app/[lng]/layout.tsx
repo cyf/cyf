@@ -4,6 +4,7 @@ import Footer from "@/components/layout/footer";
 import { dir } from "i18next";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
+import NextTopLoader from "nextjs-toploader";
 import { languages } from "@/i18n/settings";
 import { sfPro, inter } from "./fonts";
 import { Providers } from "./providers";
@@ -46,6 +47,7 @@ export default async function RootLayout({
   return (
     <html lang={params.lng} dir={dir(params.lng)} suppressHydrationWarning>
       <body className={cx(sfPro.variable, inter.variable)}>
+        <NextTopLoader height={1} />
         <Providers>
           <div className="fixed h-screen w-full bg-cyan-50 dark:bg-black" />
           <Header lng={params.lng} />
