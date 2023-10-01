@@ -23,7 +23,7 @@ export default function Header(props: LngProps) {
       <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between xl:mx-auto">
         <Link href="/" className="flex items-center font-display text-2xl">
           <Image
-            src="/blog/logo.jpg"
+            src="/portal/logo.jpg"
             alt="logo"
             width="30"
             height="30"

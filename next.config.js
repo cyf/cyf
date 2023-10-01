@@ -2,7 +2,7 @@ const { withContentlayer } = require("next-contentlayer");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath: "/blog",
+  basePath: "/portal",
   trailingSlash: true,
   reactStrictMode: true,
   swcMinify: true,
