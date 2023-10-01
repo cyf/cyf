@@ -36,6 +36,9 @@ export default function Home({
   const { t } = useTranslation(params.lng, "header");
   const post = allPosts
     .filter((post) => post.slug.startsWith(`${params.lng}/blog`))
+    .sort((a, b) => {
+      return new Date(a.publishedAt) > new Date(b.publishedAt) ? -1 : 1;
+    })
     .at(0);
   return (
     <>
