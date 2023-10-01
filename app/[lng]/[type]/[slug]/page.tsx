@@ -122,7 +122,7 @@ export default async function Legal({
                   {/*</div>*/}
                   <div className="mt-6">
                     <Link
-                      href={`/${params.lng}/blog`}
+                      href={`/${params.lng}/${params.type}`}
                       className="inline-flex items-center text-base font-medium text-blue-600 hover:underline"
                     >
                       <svg
