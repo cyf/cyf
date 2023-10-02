@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { BiArrowToTop } from "react-icons/bi";
 import NextTopLoader from "nextjs-toploader";
-import GoogleAnalytics from "@/components/google-analytics";
+import GoogleAnalytics from "@/components/shared/google-analytics";
 import ScrollToTop from "@/components/layout/scroll-to-top";
 import { languages } from "@/i18n/settings";
 import { sfPro, inter } from "./fonts";
