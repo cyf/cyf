@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 // import dynamic from "next/dynamic";
 import { DiscussionEmbed } from "disqus-react";
-import { Providers } from "../../providers";
 import PostDate from "@/components/post/post-date";
 import { Mdx } from "@/components/mdx/mdx";
 import PostNav from "@/components/post/post-nav";
@@ -152,19 +151,17 @@ export default function Legal({
         </article>
       </div>
       {params.type === "blog" && (
-        <Providers>
-          <DiscussionEmbed
-            shortname="chenyifaer"
-            config={{
-              url: `https://www.chenyifaer.com/portal/${slug}`,
-              identifier: post.slug
-                .replace(`${params.lng}/`, "")
-                .replaceAll("/", "-"),
-              title: post.title,
-              language: params.lng,
-            }}
-          />
-        </Providers>
+        <DiscussionEmbed
+          shortname="chenyifaer"
+          config={{
+            url: `https://www.chenyifaer.com/portal/${slug}`,
+            identifier: post.slug
+              .replace(`${params.lng}/`, "")
+              .replaceAll("/", "-"),
+            title: post.title,
+            language: params.lng,
+          }}
+        />
       )}
     </div>
   );
