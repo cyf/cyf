@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { BiArrowToTop } from "react-icons/bi";
 import NextTopLoader from "nextjs-toploader";
+import GoogleAnalytics from "@/components/google-analytics";
 import ScrollToTop from "@/components/layout/scroll-to-top";
 import { languages } from "@/i18n/settings";
 import { sfPro, inter } from "./fonts";
@@ -58,6 +59,7 @@ export default async function RootLayout({
             className="flex min-h-screen w-full flex-col items-center justify-center py-32"
           >
             {children}
+            <GoogleAnalytics />
           </main>
           <Footer lng={params.lng} />
         </Providers>
