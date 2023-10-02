@@ -155,7 +155,9 @@ export default function Legal({
           shortname="chenyifaer"
           config={{
             url: `https://www.chenyifaer.com/portal/${slug}`,
-            identifier: post.slug.replace(`${params.lng}/`, "").replaceAll("/", "-"),
+            identifier: post.slug
+              .replace(`${params.lng}/`, "")
+              .replaceAll("/", "-"),
             title: post.title,
             language: params.lng,
           }}
