@@ -1,45 +1,52 @@
-import type { Metadata } from "next";
+"use client";
+// import type { Metadata } from "next";
 import { allPosts } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+// import dynamic from "next/dynamic";
+import { DiscussionEmbed } from "disqus-react";
 import PostDate from "@/components/post/post-date";
 import { Mdx } from "@/components/mdx/mdx";
 import PostNav from "@/components/post/post-nav";
 
-export async function generateStaticParams() {
-  return allPosts.map((post) => ({
-    slug: post.slug,
-  }));
-}
+// const DiscussionEmbed = dynamic(
+//     () => import('disqus-react').then((mod) => mod.DiscussionEmbed),
+//     { ssr: false }
+// )
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string; type: string; lng: string };
-}): Promise<Metadata | undefined> {
-  const post = allPosts.find(
-    (post) => post.slug === `${params.lng}/${params.type}/${params.slug}`,
-  );
+// export async function generateStaticParams() {
+//   return allPosts.map((post) => ({
+//     slug: post.slug,
+//   }));
+// }
 
-  if (!post) return;
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: { slug: string; type: string; lng: string };
+// }): Promise<Metadata | undefined> {
+//   const post = allPosts.find(
+//     (post) => post.slug === `${params.lng}/${params.type}/${params.slug}`,
+//   );
+//
+//   if (!post) return;
+//
+//   const { title, summary: description } = post;
+//
+//   return {
+//     title,
+//     description,
+//   };
+// }
 
-  const { title, summary: description } = post;
-
-  return {
-    title,
-    description,
-  };
-}
-
-export default async function Legal({
+export default function Legal({
   params,
 }: {
   params: { slug: string; type: string; lng: string };
 }) {
-  const post = allPosts.find(
-    (post) => post.slug === `${params.lng}/${params.type}/${params.slug}`,
-  );
+  const slug = `${params.lng}/${params.type}/${params.slug}`;
+  const post = allPosts.find((post) => post.slug === slug);
 
   if (!post) notFound();
 
@@ -143,6 +150,17 @@ export default async function Legal({
           {/* Article footer */}
         </article>
       </div>
+      {params.type === "blog" && (
+        <DiscussionEmbed
+          shortname="chenyifaer"
+          config={{
+            url: `https://www.chenyifaer.com/portal/${slug}`,
+            identifier: post.slug.replace(`${params.lng}/`, "").replaceAll("/", "-"),
+            title: post.title,
+            language: params.lng,
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -61,7 +61,12 @@ export default async function RootLayout({
           </main>
           <Footer lng={params.lng} />
         </Providers>
-        <ScrollToTop smooth component={<BiArrowToTop className="mx-auto my-0 h-5 w-5 text-gray-700" />} />
+        <ScrollToTop
+          smooth
+          component={
+            <BiArrowToTop className="mx-auto my-0 h-5 w-5 text-gray-700" />
+          }
+        />
       </body>
     </html>
   );
