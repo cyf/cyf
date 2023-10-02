@@ -51,7 +51,7 @@ export default async function RootLayout({
       <body className={cx(sfPro.variable, inter.variable)}>
         <NextTopLoader height={1} />
         <Providers>
-          <div className="fixed h-screen w-full bg-cyan-50 dark:bg-black" />
+          <div className="fixed h-full w-full bg-cyan-50 dark:bg-black" />
           <Header lng={params.lng} />
           <main
             id="main"
