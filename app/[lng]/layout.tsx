@@ -12,6 +12,8 @@ import { languages } from "@/i18n/settings";
 import { sfPro, inter } from "./fonts";
 import { Providers } from "./providers";
 
+if (process.env.NODE_ENV === "production") console.log = (...data: any[]) => {}
+
 const Header = dynamic(() => import("@/components/layout/header"), {
   ssr: false,
 });
