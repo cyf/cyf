@@ -49,7 +49,7 @@ export default function LngDropdown(props: LngProps) {
       >
         <button
           onClick={() => setOpenPopover(!openPopover)}
-          className="mr-2 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
+          className="mx-1 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
         >
           <RiTranslate className="h-5 w-5" />
         </button>
