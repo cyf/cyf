@@ -198,7 +198,7 @@ const features = [
     demo: (
       <FiMail className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
-    url: "mailto:chenyifaer888@163.com",
+    url: "mailto:chenyifaer777@gmail.com",
   },
   {
     title: "FaFa Runner",
