@@ -14,7 +14,7 @@ export default function Live({
 }) {
   const { t } = useTranslation(params.lng, "header");
   return (
-    <div className="z-10 w-full h-full px-5 xl:px-0">
+    <div className="z-10 h-full w-full px-5 xl:px-0">
       {/*https://yuanbao.chatcyf.com/hls/chatcyf.m3u8*/}
       {/*http://streamer1.streamhost.org:1935/salive/GMIlcbgM/playlist.m3u8*/}
       <ReactPlayer
