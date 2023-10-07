@@ -22,6 +22,7 @@ export default function Live({
         volume={0.5}
         width="100%"
         height="100%"
+        pip={true}
         controls={true}
       />
     </div>
