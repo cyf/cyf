@@ -25,7 +25,7 @@ export default function LngDropdown(props: LngProps) {
     <div className="relative inline-block text-left">
       <Popover
         content={
-          <div className="w-full rounded-md bg-white p-2 dark:bg-black">
+          <div className="w-full rounded-md bg-white p-2 dark:bg-black min-w-[14rem]">
             {languages.map((locale) => {
               return (
                 <Link
