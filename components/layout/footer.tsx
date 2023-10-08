@@ -7,6 +7,9 @@ import { useTranslation } from "@/i18n/client";
 
 export default function Footer(props: LngProps) {
   const { t } = useTranslation(props.lng, "footer");
+  const { t: th } = useTranslation(props.lng, "header");
+  const fullYear = new Date().getFullYear();
+
   return (
     <div className="absolute w-full border-b border-gray-200 py-5 text-center dark:border-gray-700">
       <p className="text-gray-500 dark:text-white/80">
@@ -37,26 +40,32 @@ export default function Footer(props: LngProps) {
           {t("terms-of-use")}
         </Link>
       </p>
-      <p className="mt-2 flex items-center justify-center">
+      <span className="mt-2 flex items-center justify-center text-sm text-gray-500 dark:text-gray-400 sm:text-center">
+        © {`2023${fullYear === 2023 ? "" : `-${fullYear}`}`}&nbsp;
+        <a href="https://www.chenyifaer.com" className="hover:underline">
+          {th("title")}
+        </a>
+        . All Rights Reserved.&nbsp;
+        {process.env.VERCEL_GIT_COMMIT_SHA && (
+          <p className="mt-2 flex items-center justify-center">
+            <a
+              href={`https://github.com/cyf/cyf.github.io/commit/${process.env.VERCEL_GIT_COMMIT_SHA}`}
+              target="_blank"
+              className="hover:underline"
+              rel="noreferrer"
+            >
+              {process.env.VERCEL_GIT_COMMIT_SHA.substring(0, 8)}
+            </a>
+          </p>
+        )}
+        &nbsp;
         <Image
           src="https://visitor-badge.laobi.icu/badge?page_id=chenyifaer.com"
           width={60}
           height={20}
           alt="visitor badge"
         />
-      </p>
-      {process.env.VERCEL_GIT_COMMIT_SHA && (
-        <p className="mt-2 flex items-center justify-center">
-          <a
-            href={`https://github.com/cyf/cyf.github.io/commit/${process.env.VERCEL_GIT_COMMIT_SHA}`}
-            target="_blank"
-            className="hover:underline"
-            rel="noreferrer"
-          >
-            {process.env.VERCEL_GIT_COMMIT_SHA.substring(0, 8)}
-          </a>
-        </p>
-      )}
+      </span>
     </div>
   );
 }
