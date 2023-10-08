@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { useRouter } from "next/navigation";
 import { MdOutlineDesktopMac } from "react-icons/md";
 import type { IconType } from "react-icons";
 import Popover from "@/components/shared/popover";
@@ -11,8 +10,7 @@ import { LngProps } from "@/i18next-lng";
 import { themes, icons, Theme, ThemeMode } from "@/theme";
 
 export default function ThemeDropdown(props: LngProps) {
-  const router = useRouter();
-  const { t } = useTranslation(props.lng);
+  const { t } = useTranslation(props.lng, "header");
   const { theme, setTheme } = useTheme();
   const [openPopover, setOpenPopover] = useState(false);
 
@@ -25,19 +23,19 @@ export default function ThemeDropdown(props: LngProps) {
       <Popover
         content={
           <div className="w-full min-w-[14rem] rounded-md bg-white p-2 dark:bg-black">
-            {themes.map((t: Theme) => {
+            {themes.map((t1: Theme) => {
               return (
                 <button
-                  key={t.mode}
-                  onClick={() => setTheme(t.mode)}
+                  key={t1.mode}
+                  onClick={() => setTheme(t1.mode)}
                   className={`relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100 dark:hover:bg-gray-700 ${
-                    theme === t.mode
+                    theme === t1.mode
                       ? "cursor-not-allowed bg-gray-100 dark:bg-gray-700"
                       : ""
                   }`}
                 >
-                  <t.icon className="mr-2" />
-                  <p className="text-sm">{t.name}</p>
+                  <t1.icon className="mr-2" />
+                  <p className="text-sm">{t(`menus.${t1.mode}`)}</p>
                 </button>
               );
             })}
