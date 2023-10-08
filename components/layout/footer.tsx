@@ -40,14 +40,14 @@ export default function Footer(props: LngProps) {
           {t("terms-of-use")}
         </Link>
       </p>
-      <span className="mt-2 flex items-center justify-center text-sm text-gray-500 dark:text-gray-400 sm:text-center">
+      <span className="mt-2 flex flex-wrap items-center justify-center text-sm text-gray-500 dark:text-gray-400 sm:text-center">
         © {`2023${fullYear === 2023 ? "" : `-${fullYear}`}`}&nbsp;
         <a href="https://www.chenyifaer.com" className="hover:underline">
           {th("title")}
         </a>
         . All Rights Reserved.&nbsp;
         {process.env.VERCEL_GIT_COMMIT_SHA && (
-          <p className="mt-2 flex items-center justify-center">
+          <p className="flex items-center justify-center">
             <a
               href={`https://github.com/cyf/cyf.github.io/commit/${process.env.VERCEL_GIT_COMMIT_SHA}`}
               target="_blank"
