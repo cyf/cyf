@@ -24,3 +24,8 @@
     @apply text-4xl;
   }
 }
+
+/* https://github.com/disqus/disqus-react/issues/134 */
+#disqus_thread {
+  color-scheme: none;
+}
