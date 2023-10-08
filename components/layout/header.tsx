@@ -70,7 +70,10 @@ export default function Header(props: LngProps) {
             </li>
             <li className="h-8 w-8 sm:h-9 sm:w-9">
               <button
-                onClick={() => router.push(`/${props.lng}/live`)}
+                onClick={() => {
+                  router.push(`/${props.lng}/live`);
+                  toggleMenu();
+                }}
                 className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
               >
                 <MdLiveTv className="h-5 w-5" />
