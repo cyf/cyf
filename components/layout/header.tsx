@@ -49,37 +49,37 @@ export default function Header(props: LngProps) {
           className="w-18 hidden items-center justify-between max-md:absolute max-md:right-5 max-md:top-16 md:order-1 md:flex md:w-auto"
           id="navbar-language"
         >
-          <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 p-4 font-medium dark:border-gray-700 md:mt-0 md:flex-row md:space-x-0 md:border-0 md:p-0">
-            <li>
+          <ul className="flex flex-col rounded-lg border border-gray-100 p-4 font-medium dark:border-gray-700 md:mt-0 md:flex-row md:space-x-0 md:border-0 md:p-0">
+            <li className="h-8 w-8 sm:h-9 sm:w-9">
               <button
                 onClick={() =>
                   router.push("https://www.chenyifaer.com/fafa-runner")
                 }
-                className="mx-1 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
+                className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
               >
                 <IoGameControllerOutline className="h-5 w-5" />
               </button>
             </li>
-            <li>
+            <li className="h-8 w-8 sm:h-9 sm:w-9">
               <button
                 onClick={() => router.push("https://www.chenyifaer.com/join")}
-                className="mx-1 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
+                className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
               >
                 <BiTestTube className="h-5 w-5" />
               </button>
             </li>
-            <li>
+            <li className="h-8 w-8 sm:h-9 sm:w-9">
               <button
                 onClick={() => router.push(`/${props.lng}/live`)}
-                className="mx-1 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
+                className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
               >
                 <MdLiveTv className="h-5 w-5" />
               </button>
             </li>
-            <li>
+            <li className="h-8 w-8 sm:h-9 sm:w-9">
               <LngDropdown lng={props.lng} />
             </li>
-            <li>
+            <li className="h-8 w-8 sm:h-9 sm:w-9">
               <ThemeDropdown lng={props.lng} />
             </li>
           </ul>

@@ -25,7 +25,7 @@ export default function LngDropdown(props: LngProps) {
     <div className="relative inline-block text-left">
       <Popover
         content={
-          <div className="w-full rounded-md bg-white p-2 dark:bg-black min-w-[14rem]">
+          <div className="w-full min-w-[14rem] rounded-md bg-white p-2 dark:bg-black">
             {languages.map((locale) => {
               return (
                 <Link
@@ -49,7 +49,7 @@ export default function LngDropdown(props: LngProps) {
       >
         <button
           onClick={() => setOpenPopover(!openPopover)}
-          className="mx-1 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
+          className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
         >
           <RiTranslate className="h-5 w-5" />
         </button>
