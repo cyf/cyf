@@ -45,6 +45,18 @@ export default function Footer(props: LngProps) {
           alt="visitor badge"
         />
       </p>
+      {process.env.VERCEL_GIT_COMMIT_SHA && (
+        <p className="mt-2 flex items-center justify-center">
+          <a
+            href={`https://github.com/cyf/cyf.github.io/commit/${process.env.VERCEL_GIT_COMMIT_SHA}`}
+            target="_blank"
+            className="hover:underline"
+            rel="noreferrer"
+          >
+            {process.env.VERCEL_GIT_COMMIT_SHA.substring(0, 8)}
+          </a>
+        </p>
+      )}
     </div>
   );
 }
