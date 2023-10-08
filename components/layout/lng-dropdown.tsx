@@ -10,7 +10,7 @@ import { languages } from "@/i18n/settings";
 import { LngProps } from "@/i18next-lng";
 
 export default function LngDropdown(props: LngProps) {
-  const { t } = useTranslation(props.lng);
+  const { t } = useTranslation(props.lng, "header");
   const pathName = usePathname();
   const [openPopover, setOpenPopover] = useState(false);
 
@@ -37,7 +37,7 @@ export default function LngDropdown(props: LngProps) {
                       : ""
                   }`}
                 >
-                  <p className="text-sm">{t(locale)}</p>
+                  <p className="text-sm">{t(`languages.${locale}`)}</p>
                 </Link>
               );
             })}
