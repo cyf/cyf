@@ -1,5 +1,3 @@
-@import "utility-patterns.css";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

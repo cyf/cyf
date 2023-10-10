@@ -1,4 +1,7 @@
+import "@knocklabs/react-notification-feed/dist/index.css";
 import "./globals.css";
+import "./notifications.scss";
+import "./utility-patterns.css";
 import cx from "classnames";
 import Footer from "@/components/layout/footer";
 import { dir } from "i18next";

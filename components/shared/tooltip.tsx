@@ -2,7 +2,7 @@
 
 import { ReactNode, useState } from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import useWindowSize from "@/lib/hooks/use-window-size";
+import { useWindowSize } from "@/lib/hooks";
 import Leaflet from "./leaflet";
 
 export default function Tooltip({

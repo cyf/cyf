@@ -3,16 +3,23 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 import { MdLiveTv } from "react-icons/md";
 import { BiTestTube } from "react-icons/bi";
+import { AiOutlineMessage } from "react-icons/ai";
 import { IoGameControllerOutline } from "react-icons/io5";
-import useScroll from "@/lib/hooks/use-scroll";
+import { KnockFeedProvider } from "@knocklabs/react-notification-feed";
+import { useScroll, useUserUuid } from "@/lib/hooks";
 import LngDropdown from "./lng-dropdown";
 import ThemeDropdown from "./theme-dropdown";
+import NotificationFeed from "../feed/notification-feed";
 import { LngProps } from "@/i18next-lng";
 import { useTranslation } from "@/i18n/client";
+import { notify } from "@/lib/api";
 
 export default function Header(props: LngProps) {
+  const { userId, isLoading, isError } = useUserUuid();
+  const { systemTheme } = useTheme();
   const { t } = useTranslation(props.lng, "header");
   const scrolled = useScroll(50);
   const router = useRouter();
@@ -21,6 +28,10 @@ export default function Header(props: LngProps) {
   const toggleMenu = () => {
     const $navbar = document.querySelector("#navbar-language");
     $navbar?.classList.toggle("hidden");
+  };
+
+  const sendMessage = async () => {
+    await notify({ message: "message", showToast: true, userId });
   };
 
   return (
@@ -77,6 +88,26 @@ export default function Header(props: LngProps) {
                 className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
               >
                 <MdLiveTv className="h-5 w-5" />
+              </button>
+            </li>
+            {!isLoading && !isError && (
+              <KnockFeedProvider
+                userId={userId}
+                apiKey={process.env.NEXT_PUBLIC_KNOCK_PUBLIC_API_KEY}
+                feedId={process.env.NEXT_PUBLIC_KNOCK_FEED_CHANNEL_ID}
+                colorMode={systemTheme}
+              >
+                <li className="h-8 w-8 sm:h-9 sm:w-9">
+                  <NotificationFeed />
+                </li>
+              </KnockFeedProvider>
+            )}
+            <li className="h-8 w-8 sm:h-9 sm:w-9">
+              <button
+                onClick={sendMessage}
+                className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
+              >
+                <AiOutlineMessage className="h-5 w-5" />
               </button>
             </li>
             <li className="h-8 w-8 sm:h-9 sm:w-9">

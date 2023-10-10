@@ -1,0 +1,7 @@
+.rnf-notification-icon-button {
+  @apply h-8 w-8 sm:h-9 sm:w-9 #{!important};
+}
+
+.rnf-notification-icon-button > svg {
+  @apply h-5 w-5 #{!important};
+}
