@@ -46,10 +46,10 @@ export default function Header(props: LngProps) {
           <p>{t("title")}</p>
         </Link>
         <div
-          className="w-18 hidden items-center justify-between max-md:absolute max-md:right-5 max-md:top-16 md:order-1 md:flex md:w-auto"
+          className="w-18 hidden items-center justify-between max-md:absolute max-md:right-5 max-md:top-16 max-md:bg-white max-md:dark:bg-gray-900 md:order-1 md:flex md:w-auto"
           id="navbar-language"
         >
-          <ul className="flex flex-col items-center rounded-lg border border-gray-100 p-4 font-medium dark:border-gray-700 md:mt-0 md:flex-row md:space-x-0 md:border-0 md:p-0">
+          <ul className="flex flex-col items-center rounded-lg border border-gray-100 p-4 font-medium dark:border-gray-700 max-md:space-y-3 md:mt-0 md:flex-row md:space-x-3 md:border-0 md:p-0">
             <li className="h-8 w-8 sm:h-9 sm:w-9">
               <div className="relative inline-block text-left">
                 <button
