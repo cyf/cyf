@@ -45,7 +45,7 @@ export default function Footer(props: LngProps) {
         <a href="https://www.chenyifaer.com" className="hover:underline">
           {th("title")}
         </a>
-        . All Rights Reserved.&nbsp;
+        . {t("copyright")}&nbsp;
         {process.env.VERCEL_GIT_COMMIT_SHA && (
           <p className="flex items-center justify-center">
             <a
