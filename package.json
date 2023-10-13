@@ -18,7 +18,7 @@
     "contentlayer": "^0.3.4",
     "date-fns": "^2.30.0",
     "disqus-react": "^1.1.5",
-    "focus-trap-react": "^10.2.2",
+    "focus-trap-react": "^10.2.3",
     "framer-motion": "^10.16.4",
     "i18next": "^23.5.1",
     "i18next-browser-languagedetector": "^7.1.0",
