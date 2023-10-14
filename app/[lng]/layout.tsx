@@ -1,4 +1,5 @@
 import "./globals.css";
+import "./cookiebot.scss";
 import cx from "classnames";
 import Footer from "@/components/layout/footer";
 import { dir } from "i18next";
