@@ -15,13 +15,13 @@ const CookieBanner = (props: LngProps) => {
         data-blockingmode="auto"
         strategy="afterInteractive"
       />
-      <Script
-        id="CookieDeclaration"
-        src={`https://consent.cookiebot.com/${NEXT_PUBLIC_COOKIE_BANNER_ID}/cd.js`}
-        data-culture={props.lng.toUpperCase()}
-        strategy="afterInteractive"
-        async
-      />
+      {/*<Script*/}
+      {/*  id="CookieDeclaration"*/}
+      {/*  src={`https://consent.cookiebot.com/${NEXT_PUBLIC_COOKIE_BANNER_ID}/cd.js`}*/}
+      {/*  data-culture={props.lng.toUpperCase()}*/}
+      {/*  strategy="afterInteractive"*/}
+      {/*  async*/}
+      {/*/>*/}
     </>
   );
 };
