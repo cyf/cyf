@@ -17,7 +17,7 @@ export default function Card({
 }) {
   return (
     <Link href={url} target="_blank" rel="noreferrer">
-      <div className="relative col-span-1 h-96 overflow-hidden rounded-xl border border-gray-200 bg-white hover:shadow-md dark:border-gray-700 dark:bg-gray-900 dark:hover:shadow-gray-700">
+      <div className="relative col-span-1 h-96 overflow-hidden rounded-xl border border-gray-200 hover:shadow-md dark:border-gray-700 dark:hover:shadow-gray-700">
         <div className="flex h-60 items-center justify-center">{demo}</div>
         <div className="mx-auto max-w-md text-center">
           <h2 className="bg-clip-text font-display text-xl font-bold text-black/80 dark:text-white/80 md:text-3xl md:font-normal">
