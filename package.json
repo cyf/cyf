@@ -62,5 +62,8 @@
     "prop-types": "^15.8.1",
     "tailwindcss": "^3.3.3",
     "typescript": "5.2.2"
+  },
+  "engines": {
+    "node": "^18"
   }
 }
