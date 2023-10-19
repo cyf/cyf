@@ -1,11 +1,11 @@
 import "./globals.css";
 import cx from "classnames";
-import Footer from "@/components/layout/footer";
 import { dir } from "i18next";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { BiArrowToTop } from "react-icons/bi";
 import NextTopLoader from "nextjs-toploader";
+import Footer from "@/components/layout/footer";
 import GoogleAnalytics from "@/components/shared/google-analytics";
 // import CookieBanner from "@/components/shared/cookie-banner";
 import ScrollToTop from "@/components/layout/scroll-to-top";
