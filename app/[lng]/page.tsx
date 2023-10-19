@@ -15,7 +15,7 @@ import {
   SiTelegram,
 } from "react-icons/si";
 import { BiTestTube } from "react-icons/bi";
-import { FaBlog } from "react-icons/fa";
+import { FaBlog, FaMusic } from "react-icons/fa";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { Github } from "@/components/shared/icons";
@@ -184,8 +184,7 @@ const features = [
   },
   {
     title: "Telegram",
-    description:
-      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
+    description: "直播通知群.",
     demo: (
       <SiTelegram className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
@@ -201,9 +200,16 @@ const features = [
     url: "mailto:chenyifaer777@gmail.com",
   },
   {
+    title: "FaForever",
+    description: "一个可以听发姐音乐的桌面客户端.",
+    demo: (
+      <FaMusic className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+    ),
+    url: "https://chenyifaer.com/faforever",
+  },
+  {
     title: "FaFa Runner",
-    description:
-      "Precedent offers a collection of hooks, utilities, and `@vercel/og`",
+    description: "一个休闲小游戏",
     demo: (
       <IoGameControllerOutline className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
@@ -211,8 +217,7 @@ const features = [
   },
   {
     title: "CYF Insider",
-    description:
-      "Precedent offers a collection of hooks, utilities, and `@vercel/og`",
+    description: "参与内测计划, 获得最新的产品体验",
     demo: (
       <BiTestTube className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
