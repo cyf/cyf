@@ -1,9 +1,9 @@
 "use client";
-import { useCallback, useEffect, useState, useMemo } from "react";
+import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { loadFull } from "tsparticles";
 import type { Engine, Container, ISourceOptions } from "tsparticles-engine";
-import { useTheme } from "next-themes";
+import { useAppTheme } from "@/lib/hooks";
 
 const Particles = dynamic(() => import("react-particles"), {
   ssr: false,
@@ -119,11 +119,7 @@ const config: ISourceOptions = {
 };
 
 export default function Particle() {
-  const { theme, systemTheme } = useTheme();
-  const currentTheme = useMemo(
-    () => (theme === "system" ? systemTheme : theme),
-    [theme, systemTheme],
-  );
+  const { resolvedTheme: theme } = useAppTheme();
 
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadFull(engine);
@@ -137,10 +133,14 @@ export default function Particle() {
   }, []);
 
   useEffect(() => {
-    if (particlesContainer && currentTheme) {
-      particlesContainer.loadTheme(currentTheme);
-    }
-  }, [currentTheme, particlesContainer]);
+    const loadTheme = async () => {
+      if (particlesContainer) {
+        await particlesContainer.loadTheme(theme);
+      }
+    };
+
+    loadTheme();
+  }, [theme, particlesContainer]);
 
   return (
     <Particles options={config} init={particlesInit} loaded={particlesLoaded} />
