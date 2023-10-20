@@ -1,6 +1,8 @@
 import { IconType } from "react-icons";
 import { MdOutlineDesktopMac, MdDarkMode, MdLightMode } from "react-icons/md";
 
+export const defaultTheme = "system";
+
 export type ThemeMode = "system" | "dark" | "light";
 
 export interface Theme {
