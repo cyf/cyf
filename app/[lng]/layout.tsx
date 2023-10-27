@@ -29,7 +29,6 @@ export async function generateMetadata({
       params.lng === "en" ? "ChenYifaer" : "陈一发儿"
     } - 童话镇里一枝花, 人美歌甜陈一发.`,
     metadataBase: new URL("https://chenyifaer.com"),
-    themeColor: "#FFF",
     icons: {
       icon: "/portal/logo.jpg",
     },
