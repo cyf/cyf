@@ -5,6 +5,8 @@ import { LngProps } from "@/i18next-lng";
 const CookieBanner = (props: LngProps) => {
   const NEXT_PUBLIC_COOKIE_BANNER_ID = process.env.NEXT_PUBLIC_COOKIE_BANNER_ID;
 
+  if (!NEXT_PUBLIC_COOKIE_BANNER_ID) return null;
+
   return (
     <>
       <Script

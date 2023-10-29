@@ -6,6 +6,8 @@ const GoogleAnalytics = () => {
   // You can show in the console the GA_TRACKING_ID to confirm
   // console.log(GA_TRACKING_ID);
 
+  if (!GA_TRACKING_ID) return null;
+
   return (
     <>
       <Script
