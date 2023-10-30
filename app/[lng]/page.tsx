@@ -14,6 +14,7 @@ import {
   SiTwitter,
   SiTelegram,
 } from "react-icons/si";
+import { MdOutlineNotificationsActive } from "react-icons/md";
 import { BiTestTube } from "react-icons/bi";
 import { FaBlog, FaMusic } from "react-icons/fa";
 import Image from "next/image";
@@ -215,6 +216,14 @@ const features = [
       <FaMusic className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
     url: "https://chenyifaer.com/faforever",
+  },
+  {
+    title: "Homing Pigeon",
+    description: "一个可以接收直播通知的应用.",
+    demo: (
+      <MdOutlineNotificationsActive className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+    ),
+    url: "https://chenyifaer.com/homing-pigeon",
   },
   {
     title: "FaFa Runner",
