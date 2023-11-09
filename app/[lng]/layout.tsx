@@ -1,7 +1,8 @@
 import "./globals.css";
+import React from "react";
 import cx from "classnames";
 import { dir } from "i18next";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import { BiArrowToTop } from "react-icons/bi";
 import NextTopLoader from "nextjs-toploader";
@@ -17,6 +18,20 @@ import Particles from "./particles";
 const Header = dynamic(() => import("@/components/layout/header"), {
   ssr: false,
 });
+
+export function generateViewport({
+  params,
+}: {
+  params: { lng: string };
+}): Viewport {
+  return {
+    colorScheme: "dark light",
+    themeColor: [
+      { media: "(prefers-color-scheme: light)", color: "white" },
+      { media: "(prefers-color-scheme: dark)", color: "black" },
+    ],
+  };
+}
 
 export async function generateMetadata({
   params,
