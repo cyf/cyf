@@ -25,11 +25,8 @@ export function generateViewport({
   params: { lng: string };
 }): Viewport {
   return {
-    colorScheme: "dark light",
-    themeColor: [
-      { media: "(prefers-color-scheme: light)", color: "white" },
-      { media: "(prefers-color-scheme: dark)", color: "black" },
-    ],
+    colorScheme: "dark",
+    themeColor: "black",
   };
 }
 
