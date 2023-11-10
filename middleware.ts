@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import acceptLanguage from "accept-language";
 import { fallbackLng, languages } from "./i18n/settings";
-import { cacheLngKey } from "./constants";
+import { cacheLngKey, basePath } from "./constants";
 
 acceptLanguage.languages(languages);
 
@@ -15,7 +15,6 @@ export const config = {
 };
 
 const cookieName: string = cacheLngKey;
-const basePath: string = "/portal";
 const getPath = (lng: string) => `${basePath}/${lng}`;
 
 export function middleware(req: NextRequest) {

@@ -9,6 +9,7 @@ import { DiscussionEmbed } from "disqus-react";
 import PostDate from "@/components/post/post-date";
 import { Mdx } from "@/components/mdx/mdx";
 import PostNav from "@/components/post/post-nav";
+import { domain } from "@/constants";
 
 // const DiscussionEmbed = dynamic(
 //     () => import('disqus-react').then((mod) => mod.DiscussionEmbed),
@@ -154,7 +155,7 @@ export default function Legal({
         <DiscussionEmbed
           shortname="chenyifaer"
           config={{
-            url: `https://www.chenyifaer.com/portal/${slug}`,
+            url: `${domain}/${slug}`,
             identifier: post.slug
               .replace(`${params.lng}/`, "")
               .replaceAll("/", "-"),
