@@ -11,6 +11,7 @@ import GoogleAnalytics from "@/components/shared/google-analytics";
 import CookieBanner from "@/components/shared/cookie-banner";
 import ScrollToTop from "@/components/layout/scroll-to-top";
 import { languages } from "@/i18n/settings";
+import { basePath } from "@/constants";
 import { sfPro, inter } from "./fonts";
 import { Providers } from "./providers";
 import Particles from "./particles";
@@ -19,11 +20,7 @@ const Header = dynamic(() => import("@/components/layout/header"), {
   ssr: false,
 });
 
-export function generateViewport({
-  params,
-}: {
-  params: { lng: string };
-}): Viewport {
+export function generateViewport(): Viewport {
   return {
     colorScheme: "dark",
     themeColor: "black",
@@ -42,7 +39,7 @@ export async function generateMetadata({
     } - 童话镇里一枝花, 人美歌甜陈一发.`,
     metadataBase: new URL("https://chenyifaer.com"),
     icons: {
-      icon: "/portal/logo.jpg",
+      icon: `${basePath}/logo.jpg`,
     },
   };
 }
