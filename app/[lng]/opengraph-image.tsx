@@ -27,8 +27,8 @@ export default async function OG() {
         }}
       >
         <img
-          alt="Precedent Logo"
           src={`${basePath}/logo.jpg`}
+          alt="ChenYifaer Logo"
           tw="w-20 h-20 mb-4 opacity-95"
         />
         <h1
@@ -43,7 +43,7 @@ export default async function OG() {
             letterSpacing: "-0.02em",
           }}
         >
-          Precedent
+          ChenYifaer
         </h1>
       </div>
     ),

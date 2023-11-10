@@ -22,18 +22,15 @@ const DemoModal = ({
         <div className="flex flex-col items-center justify-center space-y-3 bg-white px-4 py-6 pt-8 text-center md:px-16">
           <a href="https://chenyifaer.com">
             <Image
-              alt="Precedent Logo"
               src={`${basePath}/logo.jpg`}
+              alt="ChenYifaer Logo"
               className="h-10 w-10 rounded-full"
               width={20}
               height={20}
             />
           </a>
-          <h3 className="font-display text-2xl font-bold">Precedent</h3>
-          <p className="text-sm text-gray-500">
-            Precedent is an opinionated collection of components, hooks, and
-            utilities for your Next.js project.
-          </p>
+          <h3 className="font-display text-2xl font-bold">ChenYifaer</h3>
+          <p className="text-sm text-gray-500">a personal blog</p>
         </div>
       </div>
     </Modal>
