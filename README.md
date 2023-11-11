@@ -34,7 +34,7 @@ yarn dev
 
 ## Production
 
-The production server runs at [https://chneyifaer.com/portal](https://chneyifaer.com/portal)
+The production server runs at [https://chenyifaer.com](https://chenyifaer.com)
 
 Build the application for production:
 
