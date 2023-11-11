@@ -39,8 +39,8 @@ dependencies:
     specifier: ^7.2.0
     version: 7.2.0
   i18next-resources-to-backend:
-    specifier: ^1.1.4
-    version: 1.1.4
+    specifier: ^1.2.0
+    version: 1.2.0
   ms:
     specifier: ^2.1.3
     version: 2.1.3
@@ -3821,8 +3821,8 @@ packages:
       '@babel/runtime': 7.23.2
     dev: false
 
-  /i18next-resources-to-backend@1.1.4:
-    resolution: {integrity: sha512-hMyr9AOmIea17AOaVe1srNxK/l3mbk81P7Uf3fdcjlw3ehZy3UNTd0OP3EEi6yu4J02kf9jzhCcjokz6AFlEOg==}
+  /i18next-resources-to-backend@1.2.0:
+    resolution: {integrity: sha512-8f1l03s+QxDmCfpSXCh9V+AFcxAwIp0UaroWuyOx+hmmv8484GcELHs+lnu54FrNij8cDBEXvEwhzZoXsKcVpg==}
     dependencies:
       '@babel/runtime': 7.23.2
     dev: false
