@@ -30,7 +30,7 @@
     "nextjs-toploader": "^1.6.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-i18next": "^13.4.0",
+    "react-i18next": "^13.4.1",
     "react-icons": "^4.11.0",
     "react-markdown": "^9.0.1",
     "react-particles": "^2.12.2",
