@@ -38,7 +38,7 @@
     "react-rough-notation": "^1.0.5",
     "react-wrap-balancer": "^1.1.0",
     "rehype-slug": "^6.0.0",
-    "tsparticles": "^2.12.0",
+    "tsparticles": "^3.0.2",
     "tsparticles-engine": "^2.12.0",
     "use-debounce": "^10.0.0"
   },
