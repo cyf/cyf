@@ -75,8 +75,8 @@ dependencies:
     specifier: ^2.12.2
     version: 2.12.2(react@18.2.0)
   react-player:
-    specifier: ^2.13.0
-    version: 2.13.0(react@18.2.0)
+    specifier: ^2.14.0
+    version: 2.14.0(react@18.2.0)
   react-rough-notation:
     specifier: ^1.0.5
     version: 1.0.5(react-dom@18.2.0)(react@18.2.0)
@@ -5860,8 +5860,8 @@ packages:
       tsparticles-engine: 2.12.0
     dev: false
 
-  /react-player@2.13.0(react@18.2.0):
-    resolution: {integrity: sha512-gkY7ZdbVFztlKFFhCPcnDrFQm+L399b8fhWsKatZ+b2wpKJwfUHBXQFMRxqYQGT0ic1/wQ7D7EZEWy7ZBqk2pw==}
+  /react-player@2.14.0(react@18.2.0):
+    resolution: {integrity: sha512-tUyv6oVD+B+ccJD81GuQQUVU++q3wsMUoDeDsZ0wAivRsmkq0RjERLT79Bi/JDcMwQm3wCwBEzXYbLnCW7c2nQ==}
     peerDependencies:
       react: '>=16.6.0'
     dependencies:
