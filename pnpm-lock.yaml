@@ -15,8 +15,8 @@ dependencies:
     specifier: ^3.0.18
     version: 3.0.18
   classnames:
-    specifier: ^2.3.3
-    version: 2.3.3
+    specifier: ^2.5.0
+    version: 2.5.0
   contentlayer:
     specifier: ^0.3.4
     version: 0.3.4(esbuild@0.19.5)
@@ -2351,8 +2351,8 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
 
-  /classnames@2.3.3:
-    resolution: {integrity: sha512-1inzZmicIFcmUya7PGtUQeXtcF7zZpPnxtQoYOrz0uiOBGlLFa4ik4361seYL2JCcRDIyfdFHiwQolESFlw+Og==}
+  /classnames@2.5.0:
+    resolution: {integrity: sha512-FQuRlyKinxrb5gwJlfVASbSrDlikDJ07426TrfPsdGLvtochowmkbnSFdQGJ2aoXrSetq5KqGV9emvWpy+91xA==}
     dev: false
 
   /cli-cursor@4.0.0:
