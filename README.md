@@ -1,6 +1,6 @@
-# cyf.github.io
+# cyf-blog
 
-[![CodeFactor](https://www.codefactor.io/repository/github/cyf/cyf.github.io/badge)](https://www.codefactor.io/repository/github/cyf/cyf.github.io)
+[![CodeFactor](https://www.codefactor.io/repository/github/cyf/cyf-blog/badge)](https://www.codefactor.io/repository/github/cyf/cyf-blog)
 
 ## Setup
 
