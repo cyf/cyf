@@ -16,7 +16,7 @@
     "accept-language": "^3.0.18",
     "classnames": "^2.5.1",
     "contentlayer": "^0.3.4",
-    "date-fns": "^3.1.0",
+    "date-fns": "^3.2.0",
     "disqus-react": "^1.1.5",
     "focus-trap-react": "^10.2.3",
     "framer-motion": "^10.17.9",
