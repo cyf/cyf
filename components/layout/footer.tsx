@@ -1,7 +1,8 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
+import { FaRss } from "react-icons/fa";
+import { domain } from "@/constants";
 import { LngProps } from "@/i18next-lng";
 import { useTranslation } from "@/i18n/client";
 
@@ -46,6 +47,10 @@ export default function Footer(props: LngProps) {
           {th("title")}
         </a>
         . {t("copyright")}&nbsp;
+        <a href={`${domain}/rss.xml`} rel="noreferrer" target="_blank">
+          <FaRss color="#ee802f" size="20px" />
+        </a>
+        &nbsp;
         {process.env.VERCEL_GIT_COMMIT_SHA && (
           <p className="flex items-center justify-center">
             <a
