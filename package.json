@@ -19,7 +19,7 @@
     "date-fns": "^3.2.0",
     "disqus-react": "^1.1.5",
     "focus-trap-react": "^10.2.3",
-    "framer-motion": "^10.18.0",
+    "framer-motion": "^11.0.3",
     "i18next": "^23.7.18",
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-resources-to-backend": "^1.2.0",
