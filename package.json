@@ -8,7 +8,7 @@
     "format": "prettier --write \"**/*.{css,js,json,jsx,ts,tsx}\"",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@radix-ui/react-popover": "^1.0.7",
