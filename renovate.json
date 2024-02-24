@@ -12,6 +12,10 @@
     {
       "allowedVersions": "2",
       "matchPackageNames": ["tsparticles"]
+    },
+    {
+      "allowedVersions": "7",
+      "matchPackageNames": ["query-string"]
     }
   ]
 }
