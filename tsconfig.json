@@ -12,8 +12,13 @@
       "@/pages/*": ["pages/*"],
       "@/app/*": ["app/*"],
       "@/lib/*": ["lib/*"],
+      "@/model/*": ["model/*"],
+      "@/request/*": ["request/*"],
+      "@/schema/*": ["schema/*"],
+      "@/services/*": ["services/*"],
       "@/styles/*": ["styles/*"],
       "@/theme/*": ["theme/*"],
+      "@/utils/*": ["utils/*"],
       "contentlayer/generated": ["./.contentlayer/generated"]
     },
     "strict": true,
