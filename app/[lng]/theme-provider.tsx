@@ -1,17 +1,20 @@
 "use client";
-
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider as Provider } from "next-themes";
 import { cacheThemeKey } from "@/constants";
 import { defaultTheme } from "@/theme";
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export default function ThemeProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <ThemeProvider
+    <Provider
       defaultTheme={defaultTheme}
       storageKey={cacheThemeKey}
       attribute="class"
     >
       {children}
-    </ThemeProvider>
+    </Provider>
   );
 }

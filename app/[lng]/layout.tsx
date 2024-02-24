@@ -13,7 +13,8 @@ import ScrollToTop from "@/components/layout/scroll-to-top";
 import { languages } from "@/i18n/settings";
 import { basePath } from "@/constants";
 import { sfPro, inter } from "./fonts";
-import { Providers } from "./providers";
+import ReduxProvider from "./redux-provider";
+import ThemeProvider from "./theme-provider";
 import Particles from "./particles";
 
 const Header = dynamic(() => import("@/components/layout/header"), {
@@ -61,19 +62,21 @@ export default async function RootLayout({
     <html lang={params.lng} dir={dir(params.lng)} suppressHydrationWarning>
       <body className={cx(sfPro.variable, inter.variable)}>
         <NextTopLoader height={1} />
-        <Providers>
-          <Particles />
-          <Header lng={params.lng} />
-          <main
-            id="main"
-            className="flex min-h-screen w-full flex-col items-center justify-center py-32"
-          >
-            {children}
-            <GoogleAnalytics />
-          </main>
-          <Footer lng={params.lng} />
-          <CookieBanner lng={params.lng} />
-        </Providers>
+        <ReduxProvider>
+          <ThemeProvider>
+            <Particles />
+            <Header lng={params.lng} />
+            <main
+              id="main"
+              className="flex min-h-screen w-full flex-col items-center justify-center py-32"
+            >
+              {children}
+              <GoogleAnalytics />
+            </main>
+            <Footer lng={params.lng} />
+            <CookieBanner lng={params.lng} />
+          </ThemeProvider>
+        </ReduxProvider>
         <ScrollToTop
           smooth
           component={

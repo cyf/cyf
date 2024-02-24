@@ -24,6 +24,10 @@ const nextConfig = {
     NEXT_PUBLIC_VERCEL_ENV: process.env.NEXT_PUBLIC_VERCEL_ENV,
     NEXT_PUBLIC_GOOGLE_ID: process.env.NEXT_PUBLIC_GOOGLE_ID,
     NEXT_PUBLIC_COOKIE_BANNER_ID: process.env.NEXT_PUBLIC_COOKIE_BANNER_ID,
+    API_BASE_URL: process.env.API_BASE_URL,
+    ENCRYPT_KEY: process.env.ENCRYPT_KEY,
+    ENCRYPT_IV: process.env.ENCRYPT_IV,
+    REQUEST_SIGN_KEY: process.env.REQUEST_SIGN_KEY,
   },
 };
 
