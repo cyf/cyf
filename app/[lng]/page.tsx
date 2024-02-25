@@ -14,7 +14,7 @@ import {
   SiTwitter,
   SiTelegram,
 } from "react-icons/si";
-import { MdOutlineNotificationsActive } from "react-icons/md";
+import { MdOutlineNotificationsActive, MdJoinInner } from "react-icons/md";
 import { BiTestTube } from "react-icons/bi";
 import { FaBlog, FaMusic } from "react-icons/fa";
 import Image from "next/image";
@@ -83,16 +83,15 @@ export default function Home({
               animationDelay={1000}
               animationDuration={2500}
             >
-              童话镇里一枝花, 人美歌甜陈一发
+              童话镇里一枝花, 人美歌甜陈一发.
             </RoughNotation>
-            .
           </Balancer>
         </p>
         <div
           className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
           style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
         >
-          <a
+          <Link
             className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-sm text-gray-600 shadow-md transition-colors hover:border-gray-800 dark:bg-black dark:text-white/80"
             href="https://github.com/cyf"
             target="_blank"
@@ -100,9 +99,19 @@ export default function Home({
           >
             <Github />
             <p>
-              <span className="sm:inline-block">Star on</span> GitHub{" "}
+              <span className="sm:inline-block">Star on GitHub</span>
             </p>
-          </a>
+          </Link>
+          <Link
+            href={`/${params.lng}/admin`}
+            className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-red-300 bg-white px-5 py-2 text-sm text-red-500 shadow-md transition-colors hover:border-red-500 dark:bg-black dark:text-red-500"
+            rel="noopener noreferrer"
+          >
+            <MdJoinInner className="h-5 w-5" />
+            <p>
+              <span className="sm:inline-block">Join Insider</span>
+            </p>
+          </Link>
         </div>
       </div>
       <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 sm:grid-cols-2 lg:grid-cols-3 xl:px-0">
