@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { MdLiveTv } from "react-icons/md";
+import { MdLiveTv, MdLogin } from "react-icons/md";
 // import { BiTestTube } from "react-icons/bi";
 // import { IoGameControllerOutline } from "react-icons/io5";
 // import { Github } from "@/components/shared/icons";
@@ -88,15 +88,12 @@ export default function Header(props: LngProps) {
             {/*</li>*/}
             <li className="h-8 w-8 sm:h-9 sm:w-9">
               <div className="relative inline-block text-left">
-                <button
-                  onClick={() => {
-                    router.push(`/${props.lng}/live`);
-                    toggleMenu();
-                  }}
+                <Link
+                  href={`/${props.lng}/live`}
                   className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
                 >
                   <MdLiveTv className="h-5 w-5" />
-                </button>
+                </Link>
               </div>
             </li>
             {/*<li className="h-8 w-8 sm:h-9 sm:w-9">*/}
@@ -117,10 +114,20 @@ export default function Header(props: LngProps) {
             </li>
             <Link
               href={`/${props.lng}/admin`}
-              className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black dark:border-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white"
+              className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black dark:border-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white max-md:hidden"
             >
               Sign In
             </Link>
+            <li className="h-8 w-8 sm:h-9 sm:w-9 md:hidden">
+              <div className="relative inline-block text-left">
+                <Link
+                  href={`/${props.lng}/admin`}
+                  className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
+                >
+                  <MdLogin className="h-5 w-5" />
+                </Link>
+              </div>
+            </li>
           </ul>
         </div>
         <button
@@ -129,7 +136,7 @@ export default function Header(props: LngProps) {
           aria-controls="navbar-language"
           aria-expanded="false"
         >
-          <span className="sr-only">Open main menu</span>
+          <span className="sr-only">Open menu</span>
           <svg
             className="h-5 w-5"
             aria-hidden="true"
