@@ -1,7 +1,5 @@
 # cyf-blog
 
-[![CodeFactor](https://www.codefactor.io/repository/github/cyf/cyf-blog/badge)](https://www.codefactor.io/repository/github/cyf/cyf-blog)
-
 ## Setup
 
 Make sure to install the dependencies:
@@ -17,7 +15,9 @@ pnpm install
 yarn install
 ```
 
-## Development
+## Development Server
+
+Start the development server on `http://localhost:3000`:
 
 ```bash
 # npm
@@ -32,6 +32,8 @@ yarn dev
 
 ## Production
 
+The production server runs at [https://chenyifaer.com](https://chenyifaer.com)
+
 Build the application for production:
 
 ```bash
@@ -45,3 +47,15 @@ pnpm run build
 yarn build
 ```
 
+Locally preview production build:
+
+```bash
+# npm
+npm run preview
+
+# pnpm
+pnpm run preview
+
+# yarn
+yarn preview
+```
