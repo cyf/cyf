@@ -1,4 +1,6 @@
 export {
+  store,
+  persistStore,
   makeStore,
   useAppStore,
   useAppSelector,

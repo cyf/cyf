@@ -11,6 +11,7 @@ import {
   useStore,
   type TypedUseSelectorHook,
 } from "react-redux";
+import { persistStore as persistAppStore, type Persistor } from "redux-persist";
 
 /* Instruments */
 import { persistedReducer } from "./reducers";
@@ -28,6 +29,9 @@ export const makeStore = () => {
     },
   });
 };
+
+export const store: AppStore = makeStore();
+export const persistStore: Persistor = persistAppStore(store);
 
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;

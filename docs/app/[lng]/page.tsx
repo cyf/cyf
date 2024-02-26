@@ -243,12 +243,12 @@ const features = [
     ),
     url: "https://chenyifaer.com/fafa-runner",
   },
-  {
-    title: "CYF Insider",
-    description: "参与内测计划, 获得最新的产品体验",
-    demo: (
-      <BiTestTube className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
-    ),
-    url: "https://chenyifaer.com/join",
-  },
+  // {
+  //   title: "CYF Insider",
+  //   description: "参与内测计划, 获得最新的产品体验",
+  //   demo: (
+  //     <BiTestTube className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+  //   ),
+  //   url: "https://chenyifaer.com/join",
+  // },
 ];
