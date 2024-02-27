@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+}
+
+model User {
+  id             String    @id @default(cuid()) @map("id")
+  username       String    @unique @map("username")
+  nickname       String?   @map("nickname")
+  password       String?   @map("password")
+  email          String?   @unique @map("email")
+  email_verified DateTime? @map("email_verified")
+  phone          String?   @unique @map("phone")
+  phone_verified DateTime? @map("phone_verified")
+  avatar         String?   @map("avatar")
+
+  role        RoleType @default(USER) @map("role")
+  create_date DateTime @default(now()) @map("create_date")
+  update_date DateTime @updatedAt @map("update_date")
+  is_del      IsDel    @default(NO) @map("is_del")
+
+  @@index([username], type: Hash)
+  @@index([email], type: Hash)
+  @@index([phone], type: Hash)
+  @@map("users")
+}
+
+enum RoleType {
+  USER
+  ADMIN
+}
+
+enum IsDel {
+  YES
+  NO
+}

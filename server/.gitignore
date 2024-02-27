@@ -1,0 +1,13 @@
+*.iws
+out/
+*.coverage
+*.coveragexml
+node_modules/
+.idea/
+coverage/
+._*
+# Local
+.env
+dist
+.webpack
+test.mjs
