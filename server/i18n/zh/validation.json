@@ -1,0 +1,7 @@
+{
+  "NOT_EMPTY": "{property} 不能为空",
+  "INVALID_EMAIL": "邮箱无效",
+  "INVALID_BOOLEAN": "{property} 不是一个布尔值",
+  "MIN": "{property} with value: \"{value}\" needs to be at least {constraints.0}, ow and {message}",
+  "MAX": "{property} with value: \"{value}\" needs to be less than {constraints.0}, ow and {message}"
+}
