@@ -1,7 +1,5 @@
 # cyf-blog
 
-[![CodeFactor](https://www.codefactor.io/repository/github/cyf/cyf-blog/badge)](https://www.codefactor.io/repository/github/cyf/cyf-blog)
-
 ## Setup
 
 Make sure to install the dependencies:
