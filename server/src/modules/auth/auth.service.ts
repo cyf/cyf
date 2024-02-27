@@ -1,4 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common'
+import {
+  Injectable,
+  ConflictException,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { omitBy } from 'lodash'
 import { User, UserService } from '@/modules/user'
@@ -43,6 +48,11 @@ export class AuthService {
   }
 
   async register(createUserDto: CreateUserDto) {
+    const existedUser = await this.userService.findByAccount(
+      createUserDto.email || createUserDto.phone || createUserDto.username,
+    )
+    if (existedUser) throw new ConflictException()
+
     const user = await this.userService.create(createUserDto)
     const payload = {
       id: user.id,
@@ -59,6 +69,7 @@ export class AuthService {
 
   async signIn(username: string, pass: string) {
     const user = await this.userService.findByAccount(username)
+    if (!user) throw new NotFoundException()
     if (!compare(encrypt(decrypt(pass)), user?.password)) {
       throw new UnauthorizedException()
     }
