@@ -17,6 +17,8 @@ import ReduxProvider from "./redux-provider";
 import ThemeProvider from "./theme-provider";
 import Particles from "./particles";
 
+const NEXT_PUBLIC_SHOW_PARTICLES = process.env.NEXT_PUBLIC_SHOW_PARTICLES;
+
 const Header = dynamic(() => import("@/components/layout/header"), {
   ssr: false,
 });
@@ -64,7 +66,7 @@ export default async function RootLayout({
         <NextTopLoader height={1} />
         <ReduxProvider>
           <ThemeProvider>
-            <Particles />
+            {NEXT_PUBLIC_SHOW_PARTICLES && <Particles />}
             <Header lng={params.lng} />
             <main
               id="main"

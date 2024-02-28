@@ -4,6 +4,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_VERCEL_ENV: string;
     NEXT_PUBLIC_GOOGLE_ID: string;
     NEXT_PUBLIC_COOKIE_BANNER_ID: string;
+    NEXT_PUBLIC_SHOW_PARTICLES: string;
     API_BASE_URL: string;
     ENCRYPT_KEY: string;
     ENCRYPT_IV: string;
