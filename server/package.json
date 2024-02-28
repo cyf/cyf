@@ -75,7 +75,7 @@
     "@types/jest": "^29.5.12",
     "@types/js-yaml": "^4.0.9",
     "@types/lodash": "^4.14.202",
-    "@types/node": "^18.19.18",
+    "@types/node": "^18.19.19",
     "@types/passport-jwt": "^4.0.1",
     "@types/supertest": "^6.0.2",
     "@types/webpack-env": "^1.18.4",
