@@ -337,8 +337,8 @@ importers:
         specifier: ^10.4.5
         version: 10.4.5(@nestjs/common@10.3.3)(@nestjs/core@10.3.3)(class-validator@0.14.1)(rxjs@7.8.1)
       nestjs-throttler-storage-redis:
-        specifier: ^0.4.1
-        version: 0.4.1(@nestjs/common@10.3.3)(@nestjs/core@10.3.3)(@nestjs/throttler@5.1.2)(ioredis@5.3.2)(reflect-metadata@0.2.1)
+        specifier: ^0.4.2
+        version: 0.4.2(@nestjs/common@10.3.3)(@nestjs/core@10.3.3)(@nestjs/throttler@5.1.2)(ioredis@5.3.2)(reflect-metadata@0.2.1)
       passport:
         specifier: ^0.7.0
         version: 0.7.0
@@ -9372,8 +9372,8 @@ packages:
       string-format: 2.0.0
     dev: false
 
-  /nestjs-throttler-storage-redis@0.4.1(@nestjs/common@10.3.3)(@nestjs/core@10.3.3)(@nestjs/throttler@5.1.2)(ioredis@5.3.2)(reflect-metadata@0.2.1):
-    resolution: {integrity: sha512-nSjPWfzAqwTFl6WA+wqwjJIHf63ffG9RJTojccHrDIE6cEk5Iw5IjO98crcBbu4PEqezWoX2eaUwAtpB1Ei8jA==}
+  /nestjs-throttler-storage-redis@0.4.2(@nestjs/common@10.3.3)(@nestjs/core@10.3.3)(@nestjs/throttler@5.1.2)(ioredis@5.3.2)(reflect-metadata@0.2.1):
+    resolution: {integrity: sha512-aYiTAhkRDNbvTx8RlliZ7wW6B2EoxbioBHlBEnFAo3VT2jBNZB4JjVE4n84mt2YQvImM95NvXiDg72uxzlooKw==}
     peerDependencies:
       '@nestjs/common': ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
       '@nestjs/core': ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
