@@ -1,0 +1,12 @@
+{
+  "title": "Sign in to CYF",
+  "tips": "Only your email and profile picture will be stored",
+  "account-label": "Account",
+  "account-placeholder": "please enter you username or email",
+  "password-label": "Password",
+  "password-placeholder": "please enter you password",
+  "login": "Login",
+  "or": "or",
+  "agree-content": "I have carefully read and agreed to ",
+  "and": " and "
+}

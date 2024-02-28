@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { Apple, Google, LoadingDots } from "@/components/shared/icons";
 import { basePath, cacheTokenKey } from "@/constants";
 import { authService } from "@/services";
+import { useTranslation } from "@/i18n/client";
 
 export default function Login({
   params,
@@ -16,6 +17,8 @@ export default function Login({
     lng: string;
   };
 }) {
+  const { t } = useTranslation(params.lng, "footer");
+  const { t: tl } = useTranslation(params.lng, "login");
   const search = useSearchParams();
   const redirectUrl = search.get("r");
   const [checked, setChecked] = useState(false);
@@ -95,10 +98,8 @@ export default function Login({
               height={20}
             />
           </Link>
-          <h3 className="text-xl font-semibold">Sign in to CYF</h3>
-          <p className="text-sm text-gray-500">
-            Only your email and profile picture will be stored.
-          </p>
+          <h3 className="text-xl font-semibold">{tl("title")}</h3>
+          <p className="text-sm text-gray-500">{tl("tips")}</p>
         </div>
         <div className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 dark:bg-gray-900 sm:px-10">
           <form
@@ -117,12 +118,12 @@ export default function Login({
             }}
           >
             <label htmlFor="account" className="text-black dark:text-white">
-              Account
+              {tl("account-label")}
             </label>
             <input
               type="text"
               name="account"
-              placeholder="please enter you username or email"
+              placeholder={tl("account-placeholder")}
               className={`rounded-[8px] bg-white text-black dark:bg-black dark:text-white ${
                 accountError ? "border-red-400 dark:border-red-400" : ""
               }`}
@@ -133,12 +134,12 @@ export default function Login({
               </span>
             )}
             <label htmlFor="password" className="text-black dark:text-white">
-              Password
+              {tl("password-label")}
             </label>
             <input
               type="password"
               name="password"
-              placeholder="please enter you password"
+              placeholder={tl("password-placeholder")}
               className={`rounded-[8px] bg-white text-black dark:bg-black dark:text-white ${
                 passwordError ? "border-red-400 dark:border-red-400" : ""
               }`}
@@ -154,12 +155,13 @@ export default function Login({
               } flex items-center justify-center gap-3.5 rounded-[4px] bg-blue-500 py-2 hover:bg-blue-600`}
               type="submit"
             >
-              登录{loading && <LoadingDots />}
+              {tl("login")}
+              {loading && <LoadingDots />}
             </button>
           </form>
 
           <div className="flex items-center text-[16px] text-gray-500 before:mr-[10px] before:h-[1px] before:flex-1 before:bg-gray-300 before:content-[''] after:ml-[10px] after:h-[1px] after:flex-1 after:bg-gray-300 after:content-[''] dark:text-gray-100 before:dark:bg-gray-600 after:dark:bg-gray-600">
-            or
+            {tl("or")}
           </div>
           <div className="flex flex-row justify-center gap-3.5 space-y-0 pt-4">
             <button
@@ -213,26 +215,26 @@ export default function Login({
             checked={checked}
             type="checkbox"
             onChange={onCheckboxChange}
-            className={`mt-[0.1875rem] h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 ${
+            className={`mr-1 mt-[0.1875rem] h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 ${
               showRed
                 ? "border-2 border-red-400 dark:border-2 dark:border-red-400"
                 : ""
             }`}
           />
-          <p className="text-sm text-gray-500">
-            I have carefully read and agreed to{" "}
+          <p className="text-left text-sm text-gray-500">
+            {tl("agree-content")}
             <Link
               className="text-blue-500"
               href={`/${params.lng}/legal/privacy`}
             >
-              Privacy Policy
-            </Link>{" "}
-            and{" "}
+              {t("privacy")}
+            </Link>
+            {tl("and")}
             <Link
               className="text-blue-500"
               href={`/${params.lng}/legal/terms-of-use`}
             >
-              Terms and Conditions
+              {t("terms-of-use")}
             </Link>
           </p>
         </div>
