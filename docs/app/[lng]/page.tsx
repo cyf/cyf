@@ -1,4 +1,5 @@
 "use client";
+import { useCallback } from "react";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 import { RoughNotation } from "react-rough-notation";
@@ -15,7 +16,7 @@ import {
   SiTelegram,
 } from "react-icons/si";
 import { MdOutlineNotificationsActive, MdJoinInner } from "react-icons/md";
-import { BiTestTube } from "react-icons/bi";
+// import { BiTestTube } from "react-icons/bi";
 import { FaBlog, FaMusic } from "react-icons/fa";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -35,13 +36,39 @@ export default function Home({
     lng: string;
   };
 }) {
-  const { t } = useTranslation(params.lng, "header");
+  const { t } = useTranslation(params.lng, "common");
+  const { t: th } = useTranslation(params.lng, "header");
   const post = allPosts
     .filter((post) => post.slug.startsWith(`${params.lng}/blog`))
     .sort((a, b) => {
       return new Date(a.publishedAt) > new Date(b.publishedAt) ? -1 : 1;
     })
     .at(0);
+
+  const Section = useCallback(
+    ({ title, links }: { title: string; links: any[] }) => {
+      return (
+        <div className="mt-14 w-full max-w-screen-xl animate-fade-up px-5 xl:px-0">
+          <div className="flex flex-row flex-nowrap items-center justify-center text-center text-3xl before:mr-5 before:h-[1px] before:max-w-xs before:flex-1 before:border-b-[1px] before:border-dashed before:border-b-gray-300 before:content-[''] after:ml-5 after:h-[1px] after:max-w-xs after:flex-1 after:border-b-[1px] after:border-dashed after:border-b-gray-300 after:content-[''] dark:before:border-b-gray-600 dark:after:border-b-gray-600">
+            {title}
+          </div>
+          <div className="mt-6 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {links.map(({ title, description, demo, url }) => (
+              <DynamicCard
+                key={title}
+                title={title}
+                description={description}
+                demo={demo}
+                url={url}
+              />
+            ))}
+          </div>
+        </div>
+      );
+    },
+    [],
+  );
+
   return (
     <>
       <div className="z-10 w-full max-w-xl px-5 xl:px-0">
@@ -68,7 +95,7 @@ export default function Home({
           className="animate-fade-up bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-black/80 opacity-0 drop-shadow-sm dark:text-white/80 md:text-7xl md:leading-[5rem]"
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
-          <Balancer>{t("title")}</Balancer>
+          <Balancer>{th("title")}</Balancer>
         </h1>
         <p
           className="mt-6 animate-fade-up text-center text-red-400 opacity-0 md:text-xl"
@@ -114,22 +141,16 @@ export default function Home({
           </Link>
         </div>
       </div>
-      <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 sm:grid-cols-2 lg:grid-cols-3 xl:px-0">
-        {features.map(({ title, description, demo, url }) => (
-          <DynamicCard
-            key={title}
-            title={title}
-            description={description}
-            demo={demo}
-            url={url}
-          />
-        ))}
-      </div>
+      <Section title={t("music")} links={musics} />
+      <Section title={t("shopping")} links={shoppings} />
+      <Section title={t("social")} links={socials} />
+      <Section title={t("live")} links={lives} />
+      <Section title={t("app")} links={apps} />
     </>
   );
 }
 
-const features = [
+const musics = [
   {
     title: "Music",
     description:
@@ -140,6 +161,18 @@ const features = [
     url: "https://chenyifaer.com/music",
   },
   {
+    title: "Spotify",
+    description:
+      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
+    demo: (
+      <SiSpotify className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+    ),
+    url: "https://open.spotify.com/artist/10xtjTRMlKZ7aFx6VBQlSj",
+  },
+];
+
+const shoppings = [
+  {
     title: "Taobao",
     description:
       "Pre-built beautiful, a11y-first components, powered by [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Framer Motion](https://framer.com/motion)",
@@ -148,6 +181,9 @@ const features = [
     ),
     url: "https://chenyifaer.taobao.com",
   },
+];
+
+const socials = [
   {
     title: "Instagram",
     description:
@@ -156,33 +192,6 @@ const features = [
       <SiInstagram className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
     url: "https://instagram.com/yifaer_chen",
-  },
-  {
-    title: "YouTube",
-    description:
-      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
-    demo: (
-      <SiYoutube className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
-    ),
-    url: "https://www.youtube.com/@chenyifaer",
-  },
-  {
-    title: "Twitch",
-    description:
-      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
-    demo: (
-      <SiTwitch className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
-    ),
-    url: "https://www.twitch.tv/thebs_chen",
-  },
-  {
-    title: "Spotify",
-    description:
-      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
-    demo: (
-      <SiSpotify className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
-    ),
-    url: "https://open.spotify.com/artist/10xtjTRMlKZ7aFx6VBQlSj",
   },
   {
     title: "Weibo",
@@ -219,6 +228,30 @@ const features = [
     ),
     url: "mailto:chenyifaer777@gmail.com",
   },
+];
+
+const lives = [
+  {
+    title: "YouTube",
+    description:
+      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
+    demo: (
+      <SiYoutube className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+    ),
+    url: "https://www.youtube.com/@chenyifaer",
+  },
+  {
+    title: "Twitch",
+    description:
+      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
+    demo: (
+      <SiTwitch className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+    ),
+    url: "https://www.twitch.tv/thebs_chen",
+  },
+];
+
+const apps = [
   {
     title: "FaForever",
     description: "一个可以听发姐音乐的桌面客户端.",
