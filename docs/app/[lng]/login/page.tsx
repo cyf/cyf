@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 // import EmailValidator from "email-validator";
 import Cookies from "js-cookie";
-import { Github, Google, LoadingDots } from "@/components/shared/icons";
+import { Apple, Google, LoadingDots } from "@/components/shared/icons";
 import { basePath, cacheTokenKey } from "@/constants";
 import { authService } from "@/services";
 
@@ -21,7 +21,7 @@ export default function Login({
   const [checked, setChecked] = useState(false);
   const [showRed, setRed] = useState(false);
   const [googleClicked, setGoogleClicked] = useState(false);
-  const [githubClicked, setGitHubClicked] = useState(false);
+  const [appleClicked, setAppleClicked] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const [accountError, setAccountError] = useState<string | null>(null);
@@ -95,7 +95,7 @@ export default function Login({
               height={20}
             />
           </Link>
-          <h3 className="text-xl font-semibold">Sign in to CYF Insider</h3>
+          <h3 className="text-xl font-semibold">Sign in to CYF</h3>
           <p className="text-sm text-gray-500">
             Only your email and profile picture will be stored.
           </p>
@@ -185,9 +185,9 @@ export default function Login({
               {googleClicked ? <LoadingDots /> : <Google className="h-5 w-5" />}
             </button>
             <button
-              disabled={githubClicked}
+              disabled={appleClicked}
               className={`${
-                githubClicked
+                appleClicked
                   ? "cursor-not-allowed border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-gray-700"
                   : "border border-gray-200 bg-white text-black hover:bg-gray-50 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-700"
               } flex h-10 flex-1 items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none`}
@@ -196,15 +196,15 @@ export default function Login({
                   setRed(true);
                   return;
                 }
-                // setGitHubClicked(true);
-                // signIn("github", {
+                // setAppleClicked(true);
+                // signIn("apple", {
                 //   ...(callbackUrl ? { callbackUrl } : {}),
                 // }).finally(() => {
-                //   setGitHubClicked(false);
+                //   setAppleClicked(false);
                 // });
               }}
             >
-              {githubClicked ? <LoadingDots /> : <Github className="h-5 w-5" />}
+              {appleClicked ? <LoadingDots /> : <Apple className="h-5 w-5" />}
             </button>
           </div>
         </div>
