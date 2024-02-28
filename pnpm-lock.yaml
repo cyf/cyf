@@ -392,8 +392,8 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       '@types/express-session':
-        specifier: ^1.17.10
-        version: 1.17.10
+        specifier: ^1.18.0
+        version: 1.18.0
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.12
@@ -3421,8 +3421,8 @@ packages:
       '@types/send': 0.17.4
     dev: true
 
-  /@types/express-session@1.17.10:
-    resolution: {integrity: sha512-U32bC/s0ejXijw5MAzyaV4tuZopCh/K7fPoUDyNbsRXHvPSeymygYD1RFL99YOLhF5PNOkzswvOTRaVHdL1zMw==}
+  /@types/express-session@1.18.0:
+    resolution: {integrity: sha512-27JdDRgor6PoYlURY+Y5kCakqp5ulC0kmf7y+QwaY+hv9jEFuQOThgkjyA53RP3jmKuBsH5GR6qEfFmvb8mwOA==}
     dependencies:
       '@types/express': 4.17.21
     dev: true
