@@ -13,6 +13,10 @@ declare namespace NodeJS {
     ENCRYPT_KEY: string
     ENCRYPT_IV: string
     REQUEST_SIGN_KEY: string
+    SMTP_SERVER_HOST: string
+    SMTP_SERVER_USER: string
+    SMTP_SERVER_PASS: string
+    SMTP_SERVER_FROM: string
     RENDER_GIT_BRANCH: string
     RENDER_GIT_COMMIT: string
     RENDER_GIT_REPO_SLUG: string

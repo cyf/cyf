@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing'
-import { UserService } from './user.service'
-import { PrismaModule } from '../prisma'
 import { CacheModule, CacheStore } from '@nestjs/cache-manager'
 import { redisStore } from 'cache-manager-redis-store'
+import { UserService } from './user.service'
+import { PrismaModule } from '../prisma'
 
 describe('UsersService', () => {
   let service: UserService

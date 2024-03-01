@@ -18,8 +18,6 @@ model User {
   password       String?   @map("password")
   email          String?   @unique @map("email")
   email_verified DateTime? @map("email_verified")
-  phone          String?   @unique @map("phone")
-  phone_verified DateTime? @map("phone_verified")
   avatar         String?   @map("avatar")
 
   role        RoleType @default(USER) @map("role")
@@ -33,7 +31,6 @@ model User {
 
   @@index([username], type: Hash)
   @@index([email], type: Hash)
-  @@index([phone], type: Hash)
   @@map("users")
 }
 
@@ -53,6 +50,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([provider, providerAccountId])
+  @@map("accounts")
 }
 
 model Session {
@@ -60,6 +58,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
 }
 
 model VerificationToken {
@@ -68,6 +68,7 @@ model VerificationToken {
   expires    DateTime
 
   @@id([identifier, token])
+  @@map("verification_tokens")
 }
 
 model Authenticator {
@@ -82,6 +83,8 @@ model Authenticator {
   transports           String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("authenticators")
 }
 
 enum RoleType {

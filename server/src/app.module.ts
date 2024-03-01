@@ -22,15 +22,26 @@ import {
 import { join } from 'path'
 import * as yaml from 'js-yaml'
 import { readFileSync } from 'fs'
-import { AuthModule, UserModule, HealthModule, PrismaModule } from './modules'
+import {
+  AccountModule,
+  AuthModule,
+  AuthenticatorModule,
+  HealthModule,
+  MailModule,
+  PrismaModule,
+  SessionModule,
+  UserModule,
+  VerificationTokenModule,
+  SocketIoModule,
+} from './modules'
 import { LoggerMiddleware } from './common/middlewares/logger.middleware'
 import { ReplayAttackMiddleware } from './common/middlewares/replay-attack.middleware'
 import { HttpExceptionFilter } from './common/filters/http-exception.filter'
 import { ValidationPipe } from './common/pipes/validation.pipe'
-import { LoggingInterceptor } from '@/common/interceptors/logging.interceptor'
-import { TimeoutInterceptor } from '@/common/interceptors/timeout.interceptor'
+import { LoggingInterceptor } from './common/interceptors/logging.interceptor'
+import { TimeoutInterceptor } from './common/interceptors/timeout.interceptor'
 import { ResponseInterceptor } from './common/interceptors/response.interceptor'
-import { type RedisOptions } from 'ioredis'
+import type { RedisOptions } from 'ioredis'
 
 @Module({
   imports: [
@@ -96,9 +107,15 @@ import { type RedisOptions } from 'ioredis'
       renderPath: '/',
       exclude: ['/api/(.*)'],
     }),
-    PrismaModule,
+    AccountModule,
     AuthModule,
+    AuthenticatorModule,
+    HealthModule,
+    MailModule,
+    PrismaModule,
+    SessionModule,
     UserModule,
+    VerificationTokenModule,
     RouterModule.register([
       {
         path: '/backend',
@@ -111,7 +128,7 @@ import { type RedisOptions } from 'ioredis'
         ],
       },
     ]),
-    HealthModule,
+    SocketIoModule,
   ],
   providers: [
     { provide: APP_INTERCEPTOR, useClass: LoggingInterceptor },
