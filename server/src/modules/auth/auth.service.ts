@@ -49,7 +49,7 @@ export class AuthService {
 
   async register(createUserDto: CreateUserDto) {
     const existedUser = await this.userService.findByAccount(
-      createUserDto.email || createUserDto.phone || createUserDto.username,
+      createUserDto.email || createUserDto.username,
     )
     if (existedUser) throw new ConflictException()
 

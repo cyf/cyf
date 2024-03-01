@@ -25,10 +25,6 @@ export class CreateUserDto {
   email?: string
 
   @IsOptional()
-  @IsMobilePhone()
-  phone?: string
-
-  @IsOptional()
   @IsString()
   @IsUrl({ protocols: ['http', 'https'] })
   avatar?: string

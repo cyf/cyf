@@ -23,6 +23,7 @@ import {
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { UserService } from './user.service'
+import { MailService } from '@/modules/mail'
 import { HttpExceptionFilter } from '@/common/filters/http-exception.filter'
 import { VersionGuard } from '@/common/guards/version.guard'
 import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard'
@@ -34,6 +35,7 @@ import { Public } from '@/common/decorators/public.decorator'
 @UseFilters(new HttpExceptionFilter())
 export class UserController {
   constructor(
+    private readonly mailService: MailService,
     private readonly userService: UserService,
     private readonly i18n: I18nService,
   ) {}

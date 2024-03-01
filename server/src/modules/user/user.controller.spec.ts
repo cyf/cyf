@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { UserController } from './user.controller'
 import { UserService } from './user.service'
 import { AppModule } from '../../app.module'
+import { MailModule } from '@/modules/mail'
 import { PrismaModule } from '@/modules/prisma'
 
 describe('UsersController', () => {
@@ -9,7 +10,7 @@ describe('UsersController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [AppModule, PrismaModule],
+      imports: [AppModule, MailModule, PrismaModule],
       controllers: [UserController],
       providers: [UserService],
     }).compile()

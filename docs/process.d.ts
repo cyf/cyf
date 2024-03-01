@@ -7,6 +7,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_SHOW_PARTICLES: string;
     NEXT_PUBLIC_WEBSITE_GLOBAL_GRAY: string;
     API_BASE_URL: string;
+    WS_BASE_URL: string;
     ENCRYPT_KEY: string;
     ENCRYPT_IV: string;
     REQUEST_SIGN_KEY: string;

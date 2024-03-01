@@ -22,14 +22,13 @@ export class UserService {
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    const { username, nickname, password, email, phone, avatar } = createUserDto
+    const { username, nickname, password, email, avatar } = createUserDto
     return this.prismaService.user.create({
       data: {
         username,
         nickname,
         password: password ? hashed(encrypt(decrypt(password))) : null,
         email,
-        phone,
         avatar,
       },
       select: {
@@ -38,8 +37,6 @@ export class UserService {
         nickname: true,
         email: true,
         email_verified: true,
-        phone: true,
-        phone_verified: true,
         avatar: true,
         role: true,
         create_date: true,
@@ -56,8 +53,6 @@ export class UserService {
         nickname: true,
         email: true,
         email_verified: true,
-        phone: true,
-        phone_verified: true,
         avatar: true,
         role: true,
         create_date: true,
@@ -77,8 +72,6 @@ export class UserService {
         nickname: true,
         email: true,
         email_verified: true,
-        phone: true,
-        phone_verified: true,
         avatar: true,
         role: true,
         create_date: true,
@@ -99,7 +92,6 @@ export class UserService {
         nickname: true,
         password: true,
         email: true,
-        phone: true,
         avatar: true,
         role: true,
         create_date: true,
@@ -114,9 +106,6 @@ export class UserService {
             {
               email: account,
             },
-            {
-              phone: account,
-            },
           ],
         },
         is_del: IsDel.NO,
@@ -125,14 +114,13 @@ export class UserService {
   }
 
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User | null> {
-    const { username, nickname, password, email, phone, avatar } = updateUserDto
+    const { username, nickname, password, email, avatar } = updateUserDto
     return this.prismaService.user.update({
       data: {
         username,
         nickname,
         password: password ? hashed(encrypt(decrypt(password))) : null,
         email,
-        phone,
         avatar,
       },
       select: {
@@ -141,8 +129,6 @@ export class UserService {
         nickname: true,
         email: true,
         email_verified: true,
-        phone: true,
-        phone_verified: true,
         avatar: true,
         role: true,
         create_date: true,
@@ -163,8 +149,6 @@ export class UserService {
         nickname: true,
         email: true,
         email_verified: true,
-        phone: true,
-        phone_verified: true,
         avatar: true,
         role: true,
         create_date: true,
