@@ -11,16 +11,22 @@ import {
   BadRequestException,
   NotFoundException,
   UseInterceptors,
+  Inject,
 } from '@nestjs/common'
 import { I18nContext, I18nService } from 'nestjs-i18n'
-import { CacheInterceptor, CacheKey, CacheTTL } from '@nestjs/cache-manager'
+import {
+  CACHE_MANAGER,
+  CacheInterceptor,
+  CacheKey,
+  CacheTTL,
+} from '@nestjs/cache-manager'
 import {
   // ApiBearerAuth,
   // ApiOperation,
   // ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
-import { CreateUserDto } from './dto/create-user.dto'
+// import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { UserService } from './user.service'
 import { MailService } from '@/modules/mail'
@@ -28,6 +34,8 @@ import { HttpExceptionFilter } from '@/common/filters/http-exception.filter'
 import { VersionGuard } from '@/common/guards/version.guard'
 import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard'
 import { Public } from '@/common/decorators/public.decorator'
+import { CurrentUser } from '@/common/decorators/user.decorator'
+import { Cache } from 'cache-manager'
 
 @Controller()
 @ApiTags('user')
@@ -38,6 +46,7 @@ export class UserController {
     private readonly mailService: MailService,
     private readonly userService: UserService,
     private readonly i18n: I18nService,
+    @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
   ) {}
 
   @Public()
@@ -59,10 +68,29 @@ export class UserController {
     })
   }
 
-  @Public()
-  @Post()
-  async create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto)
+  @Post('verify')
+  async verify(@CurrentUser() user: any) {
+    const cachedValue = await this.cacheManager.get(`email_verify__${user.id}`)
+    if (cachedValue) {
+      return { status: 'email_verification_sent' }
+    }
+
+    const res = await this.mailService.create(user.id, {
+      to: user.email, // list of receivers
+      subject: 'Verify Testing ✔', // Subject line
+      context: {
+        author: 'Test User',
+      },
+      template: 'email-verify',
+    })
+
+    await this.cacheManager.set(
+      `email_verify__${user.id}`,
+      'true',
+      5 * 60 * 1000,
+    )
+
+    return res
   }
 
   @Get()

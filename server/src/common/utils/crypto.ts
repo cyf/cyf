@@ -7,6 +7,7 @@ const ENCRYPT_IV = process.env.ENCRYPT_IV
 const key = CryptoJS.enc.Utf8.parse(ENCRYPT_KEY)
 const iv = CryptoJS.enc.Utf8.parse(ENCRYPT_IV)
 
+// 用于数据库中隐私信息加密
 export const encrypt = (text: string) => {
   return CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(text), key, {
     mode: CryptoJS.mode.CTR,
@@ -14,6 +15,7 @@ export const encrypt = (text: string) => {
   }).toString()
 }
 
+// 用于数据库中隐私信息解密
 export const decrypt = (encrypted: string): string => {
   const bytes = CryptoJS.AES.decrypt(encrypted, key, {
     mode: CryptoJS.mode.CTR,
