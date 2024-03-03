@@ -7,7 +7,10 @@ const ENCRYPT_IV = process.env.ENCRYPT_IV;
 const key = CryptoJS.enc.Utf8.parse(ENCRYPT_KEY);
 const iv = CryptoJS.enc.Utf8.parse(ENCRYPT_IV);
 
-const _encryptDefUrls = ["/api/backend/auth/login"];
+const _encryptDefUrls = [
+  "/api/backend/auth/login",
+  "/api/backend/auth/register",
+];
 const _encryptKeys = ["password", "newPassword", "oldPassword"];
 
 export const encrypt = (text: string) => {

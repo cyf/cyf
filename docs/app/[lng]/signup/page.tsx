@@ -3,14 +3,14 @@ import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useAgreementDialog } from "@/components/home/agreement-dialog";
 import { Apple, Google, LoadingDots } from "@/components/shared/icons";
 import { basePath, cacheTokenKey } from "@/constants";
-// import { authService } from "@/services";
+import { authService } from "@/services";
 import { useTranslation } from "@/i18n/client";
 import {
   Form,
@@ -77,23 +77,25 @@ export default function Login({
     // ✅ This will be type-safe and validated.
     console.log(values);
     const { username, nickname, email, password } = values;
-    // setLoading(true);
-    // await authService
-    //   .login({
-    //     account,
-    //     password,
-    //   })
-    //   .then((res: any) => {
-    //     setLoading(false);
-    //     if (res?.code === 0) {
-    //       Cookies.set(cacheTokenKey, res?.data?.access_token);
-    //       redirectUrl && window.location.replace(redirectUrl);
-    //     }
-    //   })
-    //   .catch((error: any) => {
-    //     setLoading(false);
-    //     console.error(error);
-    //   });
+    setLoading(true);
+    await authService
+      .register({
+        username,
+        nickname,
+        email,
+        password,
+      })
+      .then((res: any) => {
+        setLoading(false);
+        if (res?.code === 0) {
+          Cookies.set(cacheTokenKey, res?.data?.access_token);
+          redirectUrl && window.location.replace(redirectUrl);
+        }
+      })
+      .catch((error: any) => {
+        setLoading(false);
+        console.error(error);
+      });
   }
 
   return (
