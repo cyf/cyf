@@ -3,5 +3,7 @@
   "shopping": "购物",
   "social": "社交",
   "live": "直播",
-  "app": "应用"
+  "app": "应用",
+  "cancel": "取消",
+  "confirm": "确认"
 }

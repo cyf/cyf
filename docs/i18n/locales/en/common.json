@@ -3,5 +3,7 @@
   "shopping": "Shopping",
   "social": "Social",
   "live": "Live Streaming",
-  "app": "Apps"
+  "app": "Apps",
+  "cancel": "Cancel",
+  "confirm": "Confirm"
 }
