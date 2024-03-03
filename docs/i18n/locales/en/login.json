@@ -22,5 +22,6 @@
   "go-to-login": "go to login",
   "or": "OR",
   "agree-content": "I have carefully read and agreed to ",
-  "and": " and "
+  "and": " and ",
+  "confirm-agree": "Please agree to the privacy agreement"
 }
