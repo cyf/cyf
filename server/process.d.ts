@@ -17,6 +17,12 @@ declare namespace NodeJS {
     SMTP_SERVER_USER: string
     SMTP_SERVER_PASS: string
     SMTP_SERVER_FROM: string
+    ASSETS_HOST: string
+    ASSETS_REGION: string
+    ASSETS_ENDPOINT: string
+    ASSETS_BUCKET: string
+    ASSETS_ACCESS_KEY_ID: string
+    ASSETS_ACCESS_KEY_SECRET: string
     RENDER_GIT_BRANCH: string
     RENDER_GIT_COMMIT: string
     RENDER_GIT_REPO_SLUG: string
