@@ -5,6 +5,11 @@ import { join } from 'path'
 import { MailService } from './mail.service'
 import { PrismaModule } from '@/modules/prisma'
 
+const dir =
+  process.env.NODE_ENV === 'production'
+    ? join(__dirname, '../../..', 'templates')
+    : join(__dirname, '..', 'templates')
+
 @Module({
   imports: [
     MailerModule.forRoot({
@@ -21,7 +26,7 @@ import { PrismaModule } from '@/modules/prisma'
         from: process.env.SMTP_SERVER_FROM,
       },
       template: {
-        dir: join(__dirname, '..', 'templates'),
+        dir,
         adapter: new PugAdapter({
           inlineCssEnabled: true,
         }),
