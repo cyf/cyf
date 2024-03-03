@@ -90,6 +90,7 @@ export default function Header(props: LngProps) {
               <div className="relative inline-block text-left">
                 <Link
                   href="https://www.chatcyf.com/live/"
+                  target="_blank"
                   className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
                 >
                   <MdLiveTv className="h-5 w-5" />
