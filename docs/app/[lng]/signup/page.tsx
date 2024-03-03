@@ -25,7 +25,9 @@ import { Button } from "@/components/ui/button";
 
 const formSchema = z
   .object({
-    username: z.string().min(6),
+    username: z.string().min(6, {
+      message: "Username must be at least 6 characters.",
+    }),
     nickname: z.string(),
     email: z.string().email({ message: "Email is invalid." }),
     password: z.string().min(6, {
