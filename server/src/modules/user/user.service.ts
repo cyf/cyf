@@ -65,7 +65,7 @@ export class UserService {
   }
 
   async findOne(id: string): Promise<User | null> {
-    return this.prismaService.user.findUnique({
+    return this.prismaService.user.findFirst({
       select: {
         id: true,
         username: true,

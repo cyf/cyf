@@ -3,9 +3,7 @@ export interface User {
   username: string;
   nickname: string | null;
   email: string | null;
-  email_verified: boolean | null;
-  phone: string | null;
-  phone_verified: boolean | null;
+  email_verified: string | null;
   avatar: string | null;
   create_date: string;
   update_date: string;

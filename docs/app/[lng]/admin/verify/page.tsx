@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { useTranslation } from "@/i18n/client";
 import { useAppSelector, selectUser } from "@/model";
+import { userService } from "@/services";
 import type { Socket } from "socket.io-client";
 
 const WS_BASE_URL = process.env.WS_BASE_URL;
@@ -17,6 +18,7 @@ export default function User({
   const { t } = useTranslation(params.lng, "login");
   const socketRef = useRef<Socket>();
   const user = useAppSelector(selectUser);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!WS_BASE_URL) return;
@@ -53,23 +55,39 @@ export default function User({
 
   const sendMessage = () => {
     // Send the message to the server
-    socketRef.current?.emit("hello2", "222222", (res: any) => {
-      console.log("emit hello2: ", res);
-    });
+    // socketRef.current?.emit("hello2", "222222", (res: any) => {
+    //   console.log("emit hello2: ", res);
+    // });
+  };
+
+  const sendEmail = async () => {
+    setLoading(true);
+    await userService
+      .verify()
+      .then((res: any) => {
+        console.log(res);
+        setLoading(false);
+        if (res?.code === 0) {
+        }
+      })
+      .catch((error: any) => {
+        setLoading(false);
+        console.error(error);
+      });
   };
 
   return (
     <>
       <div className="min-h-[calc(100vh-8rem)] w-full max-w-screen-xl flex-1 px-5 xl:px-0">
         <div className="w-full">
-          <span>User Page</span>
+          <span>Verify Page</span>
           <br />
           <span>
             {user?.nickname}({user?.id})
           </span>
         </div>
         {/* Button to submit the new message */}
-        <button onClick={sendMessage}>Send</button>
+        <button onClick={sendEmail}>Send Email</button>
       </div>
     </>
   );

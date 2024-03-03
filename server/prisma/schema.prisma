@@ -27,11 +27,30 @@ model User {
 
   accounts      Account[]
   sessions      Session[]
+  emails        Email[]
   Authenticator Authenticator[]
 
   @@index([username], type: Hash)
   @@index([email], type: Hash)
   @@map("users")
+}
+
+model Email {
+  id         String @id @default(cuid()) @map("id")
+  message_id String @map("message_id")
+  to         String @map("to")
+  subject    String @map("subject")
+  context    String @map("context")
+  template   String @map("template")
+
+  create_date DateTime @default(now()) @map("create_date")
+  create_by   String   @map("create_by")
+  update_date DateTime @updatedAt @map("update_date")
+  is_del      IsDel    @default(NO) @map("is_del")
+
+  user User @relation(fields: [create_by], references: [id], onDelete: Cascade)
+
+  @@map("emails")
 }
 
 model Account {

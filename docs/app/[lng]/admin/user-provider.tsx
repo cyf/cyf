@@ -1,13 +1,35 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import {
   fetchUserAsync,
   selectUser,
   useAppDispatch,
   useAppSelector,
 } from "@/model";
+import { domain } from "@/constants";
+import { languages } from "@/i18n/settings";
+import { LngProps } from "@/i18next-lng";
 
-export default function UserProvider({ children }: React.PropsWithChildren) {
+const ignoreRedirectPages = ["/admin/verify"];
+
+const ignorePathnameRegex = RegExp(
+  `^(/(${languages.join("|")}))?(${ignoreRedirectPages
+    .flatMap((p) => (p === "/" ? ["", "/"] : p))
+    .join("|")})/?$`,
+  "i",
+);
+
+export default function UserProvider({
+  children,
+  lng,
+}: {
+  children: React.ReactNode;
+} & LngProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const search = useSearchParams();
+  const redirectUrl = search.get("r");
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const initialized = useRef(false);
@@ -15,6 +37,21 @@ export default function UserProvider({ children }: React.PropsWithChildren) {
     initialized.current = true;
     dispatch(fetchUserAsync());
   }
+
+  useEffect(() => {
+    if (user && !user?.email_verified && !ignorePathnameRegex.test(pathname)) {
+      console.log("verify", domain, pathname);
+      router.push(`/${lng}/admin/verify?r=${domain}${pathname}`);
+    } else if (
+      user &&
+      user?.email_verified &&
+      ignorePathnameRegex.test(pathname)
+    ) {
+      if (redirectUrl) {
+        window.location.replace(redirectUrl);
+      }
+    }
+  }, [user, lng, pathname, redirectUrl]);
 
   return children;
 }
