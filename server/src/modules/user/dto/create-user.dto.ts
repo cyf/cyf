@@ -16,13 +16,13 @@ export class CreateUserDto {
   @IsString()
   nickname?: string
 
-  @IsOptional()
-  @IsString()
-  password?: string
-
-  @IsOptional()
+  @IsNotEmpty()
   @IsEmail()
-  email?: string
+  email: string
+
+  @IsNotEmpty()
+  @IsString()
+  password: string
 
   @IsOptional()
   @IsString()
