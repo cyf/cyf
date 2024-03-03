@@ -11,3 +11,4 @@ coverage/
 dist
 .webpack
 test.mjs
+templates/*.html
