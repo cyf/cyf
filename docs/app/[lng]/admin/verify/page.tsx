@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
 import { useTranslation } from "@/i18n/client";
 import { useAppSelector, selectUser } from "@/model";
 import { userService } from "@/services";
@@ -15,9 +17,12 @@ export default function User({
     lng: string;
   };
 }) {
-  const { t } = useTranslation(params.lng, "login");
+  const { t } = useTranslation(params.lng, "common");
+  const { t: tl } = useTranslation(params.lng, "login");
+  const { t: tv } = useTranslation(params.lng, "verify");
   const socketRef = useRef<Socket>();
   const user = useAppSelector(selectUser);
+  const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -65,9 +70,23 @@ export default function User({
     await userService
       .verify()
       .then((res: any) => {
-        console.log(res);
         setLoading(false);
+        console.log(res);
         if (res?.code === 0) {
+          if (res?.data?.status === "email_verification_sent") {
+            toast({
+              title: tv("verify_email_sent"),
+              action: (
+                <ToastAction
+                  className="focus:ring-0 focus:ring-offset-0"
+                  altText="Goto schedule to undo"
+                >
+                  {t("confirm")}
+                </ToastAction>
+              ),
+            });
+            return;
+          }
         }
       })
       .catch((error: any) => {
