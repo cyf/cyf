@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { ToastAction } from "@/components/ui/toast";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/components/ui/use-toast";
 import { useTranslation } from "@/i18n/client";
 import { useAppSelector, selectUser } from "@/model";
@@ -100,7 +101,10 @@ export default function User({
       <div className="min-h-[calc(100vh-8rem)] w-full max-w-screen-xl flex-1 px-5 xl:px-0">
         <div className="w-full">
           <span>Verify Page</span>
-          <br />
+          <Avatar>
+            <AvatarImage src={user?.avatar || ""} alt="avatar" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
           <span>
             {user?.nickname}({user?.id})
           </span>

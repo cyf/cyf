@@ -7,7 +7,11 @@ export const login = (data: Record<string, any>) => {
 
 // 注册接口
 export const register = (data: Record<string, any>) => {
-  return axios.post("/api/backend/auth/register", data);
+  return axios.post("/api/backend/auth/register", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 // 获取用户信息(要求登录)

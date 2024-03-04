@@ -26,6 +26,7 @@ import {
   // ApiResponse,
   ApiTags,
 } from '@nestjs/swagger'
+import { Cache } from 'cache-manager'
 // import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { UserService } from './user.service'
@@ -35,7 +36,7 @@ import { VersionGuard } from '@/common/guards/version.guard'
 import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard'
 import { Public } from '@/common/decorators/public.decorator'
 import { CurrentUser } from '@/common/decorators/user.decorator'
-import { Cache } from 'cache-manager'
+import { putObject } from '@/common/utils/upload'
 
 @Controller()
 @ApiTags('user')
@@ -119,7 +120,8 @@ export class UserController {
       throw new BadRequestException()
     }
 
-    const user = await this.userService.update(id, updateUserDto)
+    const s3File = await putObject(updateUserDto.file)
+    const user = await this.userService.update(id, updateUserDto, s3File.url)
 
     if (!user) {
       throw new NotFoundException()
