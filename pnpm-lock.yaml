@@ -442,8 +442,8 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       mime:
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.1
+        version: 4.0.1
       nestjs-form-data:
         specifier: ^1.9.6
         version: 1.9.6(@nestjs/common@10.3.3)(@nestjs/core@10.3.3)(class-transformer@0.5.1)(class-validator@0.14.1)(reflect-metadata@0.2.1)(rxjs@7.8.1)
@@ -12094,9 +12094,9 @@ packages:
     engines: {node: '>=4.0.0'}
     hasBin: true
 
-  /mime@3.0.0:
-    resolution: {integrity: sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A==}
-    engines: {node: '>=10.0.0'}
+  /mime@4.0.1:
+    resolution: {integrity: sha512-5lZ5tyrIfliMXzFtkYyekWbtRXObT9OWa8IwQ5uxTBDHucNNwniRqo0yInflj+iYi5CBa6qxadGzGarDfuEOxA==}
+    engines: {node: '>=16'}
     hasBin: true
     dev: false
 

@@ -55,7 +55,7 @@
     "ioredis": "^5.3.2",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
-    "mime": "^3.0.0",
+    "mime": "^4.0.1",
     "nestjs-form-data": "^1.9.6",
     "nestjs-i18n": "^10.4.5",
     "nestjs-throttler-storage-redis": "^0.4.2",
