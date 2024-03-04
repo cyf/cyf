@@ -7,6 +7,7 @@ import { MailModule } from '../mail'
 import { PrismaModule } from '../prisma'
 import { SessionModule } from '../session'
 import { VerificationTokenModule } from '../verification-token'
+import { NestjsFormDataModule } from 'nestjs-form-data'
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { VerificationTokenModule } from '../verification-token'
     PrismaModule,
     SessionModule,
     VerificationTokenModule,
+    NestjsFormDataModule,
   ],
   controllers: [UserController],
   providers: [UserService],

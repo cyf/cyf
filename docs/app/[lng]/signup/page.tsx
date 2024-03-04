@@ -25,6 +25,9 @@ import { Button } from "@/components/ui/button";
 
 const formSchema = z
   .object({
+    file: z.instanceof(File, {
+      message: "Please upload a file.",
+    }),
     username: z.string().min(6, {
       message: "Username must be at least 6 characters.",
     }),
@@ -40,6 +43,10 @@ const formSchema = z
   .refine((data) => data.password === data["repeat-password"], {
     message: "The passwords entered are different.",
     path: ["repeat-password"],
+  })
+  .refine((data) => data.file.size < 5 * 1000 * 1000, {
+    message: "File size cannot be larger than 5MB.",
+    path: ["file"],
   });
 
 export default function Login({
@@ -63,6 +70,7 @@ export default function Login({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      file: new File([], ""),
       username: "",
       nickname: "",
       email: "",
@@ -75,11 +83,12 @@ export default function Login({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
-    const { username, nickname, email, password } = values;
+    console.log("values", values);
+    const { file, username, nickname, email, password } = values;
     setLoading(true);
     await authService
       .register({
+        file,
         username,
         nickname,
         email,
@@ -132,6 +141,30 @@ export default function Login({
                 }}
                 className="space-y-4"
               >
+                <FormField
+                  required
+                  control={form.control}
+                  name="file"
+                  render={({ field: { value, onChange, ...fieldProps } }) => (
+                    <FormItem>
+                      <FormLabel>Avatar</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...fieldProps}
+                          accept="image/jpg, image/jpeg, image/png"
+                          type="file"
+                          multiple={false}
+                          onChange={(event) => {
+                            onChange(
+                              event.target.files && event.target.files[0],
+                            );
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <FormField
                   required
                   control={form.control}

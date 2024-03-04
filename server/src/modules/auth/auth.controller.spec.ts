@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing'
+import { NestjsFormDataModule } from 'nestjs-form-data'
 import { AuthController } from './auth.controller'
 import { AuthService } from './auth.service'
 import { AppModule } from '../../app.module'
@@ -23,6 +24,7 @@ describe('AuthController', () => {
             ignoreExpiration: false,
           },
         }),
+        NestjsFormDataModule,
       ],
       controllers: [AuthController],
       providers: [AuthService],

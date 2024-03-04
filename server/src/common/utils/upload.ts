@@ -1,11 +1,11 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
 import dayjs from 'dayjs'
 import mime from 'mime'
-import type { Express } from 'express'
+import { MemoryStoredFile } from 'nestjs-form-data'
 
 const client = new S3Client({
   region: process.env.ASSETS_REGION,
-  endpoint: `${process.env.ASSETS_REGION}.${process.env.ASSETS_ENDPOINT}`,
+  endpoint: process.env.ASSETS_ENDPOINT,
   credentials: {
     accessKeyId: process.env.ASSETS_ACCESS_KEY_ID,
     secretAccessKey: process.env.ASSETS_ACCESS_KEY_SECRET,
@@ -13,13 +13,13 @@ const client = new S3Client({
 })
 
 export async function putObject(
-  file: Express.Multer.File,
+  file: MemoryStoredFile,
   dir: string = 'cyf-blog-web/',
 ) {
   const now = dayjs()
   const milliseconds = dayjs().valueOf()
   const beijingTime = now.format('YYYY-MM-DD')
-  const newFileName = `${milliseconds}_${file.originalname}`
+  const newFileName = `${milliseconds}_${file.originalName}`
   const path = `${dir}${beijingTime}/${newFileName}`
   const command = new PutObjectCommand({
     Key: path,
@@ -28,7 +28,7 @@ export async function putObject(
   })
   const data = await client.send(command)
   return {
-    oldFileName: file.originalname,
+    oldFileName: file.originalName,
     fileSize: file.size,
     type: mime.getExtension(file.mimetype),
     url: `${process.env.ASSETS_HOST}/${path}`,

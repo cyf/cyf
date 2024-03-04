@@ -13,6 +13,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger'
 import { JwtService } from '@nestjs/jwt'
+import { FormDataRequest } from 'nestjs-form-data'
 import { omitBy } from 'lodash'
 import { AuthService } from './auth.service'
 import { CreateAuthDto } from '@/modules/auth/dto/create-auth.dto'
@@ -23,6 +24,7 @@ import { CurrentUser } from '@/common/decorators/user.decorator'
 import { HttpExceptionFilter } from '@/common/filters/http-exception.filter'
 import { CreateUserDto } from '@/modules/user/dto/create-user.dto'
 import { RoleType } from '@prisma/client'
+import { putObject } from '@/common/utils/upload'
 
 @Controller('auth')
 @ApiTags('auth')
@@ -36,8 +38,10 @@ export class AuthController {
 
   @Public()
   @Post('register')
+  @FormDataRequest()
   async register(@Body() createUserDto: CreateUserDto) {
-    return this.authService.register(createUserDto)
+    const s3File = await putObject(createUserDto.file)
+    return this.authService.register(createUserDto, s3File.url)
   }
 
   @Public()

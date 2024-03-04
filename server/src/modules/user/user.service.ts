@@ -21,12 +21,12 @@ export class UserService {
     return await this.cacheManager.get<string | undefined>('user-hello')
   }
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
-    const { username, nickname, password, email, avatar } = createUserDto
+  async create(createUserDto: CreateUserDto, avatar?: string): Promise<User> {
+    const { username, nickname, password, email } = createUserDto
     return this.prismaService.user.create({
       data: {
         username,
-        nickname,
+        nickname: nickname || username,
         password: password ? hashed(encrypt(decrypt(password))) : null,
         email,
         avatar,
@@ -113,8 +113,12 @@ export class UserService {
     })
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto): Promise<User | null> {
-    const { username, nickname, password, email, avatar } = updateUserDto
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+    avatar?: string,
+  ): Promise<User | null> {
+    const { username, nickname, password, email } = updateUserDto
     return this.prismaService.user.update({
       data: {
         username,

@@ -47,13 +47,13 @@ export class AuthService {
     return user.role
   }
 
-  async register(createUserDto: CreateUserDto) {
+  async register(createUserDto: CreateUserDto, avatar?: string) {
     const existedUser = await this.userService.findByAccount(
       createUserDto.email || createUserDto.username,
     )
     if (existedUser) throw new ConflictException()
 
-    const user = await this.userService.create(createUserDto)
+    const user = await this.userService.create(createUserDto, avatar)
     const payload = {
       id: user.id,
       username: user.username,

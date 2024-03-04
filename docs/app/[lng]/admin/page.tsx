@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAppSelector, selectUser } from "@/model";
 
 export default function Admin({
@@ -16,7 +17,10 @@ export default function Admin({
       <div className="min-h-[calc(100vh-8rem)] w-full max-w-screen-xl flex-1 px-5 xl:px-0">
         <div className="w-full">
           <span>Admin Page</span>
-          <br />
+          <Avatar>
+            <AvatarImage src={user?.avatar || ""} alt="avatar" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
           <Link
             className="cursor-pointer text-red-400 hover:text-xl"
             href={`/${params.lng}/admin/user`}

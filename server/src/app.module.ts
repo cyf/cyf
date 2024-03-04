@@ -12,6 +12,7 @@ import { CacheModule, CacheStore } from '@nestjs/cache-manager'
 import { ThrottlerGuard, ThrottlerModule, seconds } from '@nestjs/throttler'
 import { redisStore } from 'cache-manager-redis-store'
 import { ThrottlerStorageRedisService } from 'nestjs-throttler-storage-redis'
+import { NestjsFormDataModule } from 'nestjs-form-data'
 import {
   I18nModule,
   AcceptLanguageResolver,
@@ -110,25 +111,20 @@ import type { RedisOptions } from 'ioredis'
     AccountModule,
     AuthModule,
     AuthenticatorModule,
-    HealthModule,
     MailModule,
     PrismaModule,
     SessionModule,
     UserModule,
     VerificationTokenModule,
+    HealthModule,
     RouterModule.register([
       {
         path: '/backend',
-        children: [
-          AuthModule,
-          {
-            path: '/user',
-            module: UserModule,
-          },
-        ],
+        children: [AuthModule, UserModule],
       },
     ]),
     SocketIoModule,
+    NestjsFormDataModule,
   ],
   providers: [
     { provide: APP_INTERCEPTOR, useClass: LoggingInterceptor },

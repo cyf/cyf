@@ -1,11 +1,10 @@
+import { IsNotEmpty, IsString, IsOptional, IsEmail } from 'class-validator'
 import {
-  IsNotEmpty,
-  IsUrl,
-  IsString,
-  IsOptional,
-  IsEmail,
-  IsMobilePhone,
-} from 'class-validator'
+  HasMimeType,
+  IsFile,
+  MaxFileSize,
+  MemoryStoredFile,
+} from 'nestjs-form-data'
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -24,8 +23,8 @@ export class CreateUserDto {
   @IsString()
   password: string
 
-  @IsOptional()
-  @IsString()
-  @IsUrl({ protocols: ['http', 'https'] })
-  avatar?: string
+  @IsFile()
+  @MaxFileSize(5 * 1000 * 1000)
+  @HasMimeType(['image/jpeg', 'image/png', 'image/jpg'])
+  file: MemoryStoredFile
 }
