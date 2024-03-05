@@ -25,9 +25,7 @@ import { Button } from "@/components/ui/button";
 
 const formSchema = z
   .object({
-    file: z.instanceof(File, {
-      message: "Please upload a file.",
-    }),
+    file: z.any(),
     username: z.string().min(6, {
       message: "Username must be at least 6 characters.",
     }),
@@ -43,6 +41,10 @@ const formSchema = z
   .refine((data) => data.password === data["repeat-password"], {
     message: "The passwords entered are different.",
     path: ["repeat-password"],
+  })
+  .refine((data) => !!data.file, {
+    message: "Please upload a file.",
+    path: ["file"],
   })
   .refine((data) => data.file.size < 5 * 1000 * 1000, {
     message: "File size cannot be larger than 5MB.",
@@ -70,7 +72,7 @@ export default function Login({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      file: new File([], ""),
+      file: {},
       username: "",
       nickname: "",
       email: "",
