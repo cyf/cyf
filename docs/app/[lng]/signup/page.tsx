@@ -11,6 +11,8 @@ import { useAgreementDialog } from "@/components/home/agreement-dialog";
 import { Apple, Google, LoadingDots } from "@/components/shared/icons";
 import { basePath, cacheTokenKey } from "@/constants";
 import { authService } from "@/services";
+import { setUser } from "@/model/slices/user/slice";
+import { useAppDispatch } from "@/model/hooks";
 import { useTranslation } from "@/i18n/client";
 import {
   Form,
@@ -60,6 +62,7 @@ export default function Login({
 }) {
   const { t } = useTranslation(params.lng, "footer");
   const { t: tl } = useTranslation(params.lng, "login");
+  const dispatch = useAppDispatch();
   const search = useSearchParams();
   const redirectUrl = search.get("r");
   const [googleClicked, setGoogleClicked] = useState(false);
@@ -100,6 +103,7 @@ export default function Login({
         setLoading(false);
         if (res?.code === 0) {
           Cookies.set(cacheTokenKey, res?.data?.access_token);
+          dispatch(setUser(res?.data?.user));
           redirectUrl && window.location.replace(redirectUrl);
         }
       })

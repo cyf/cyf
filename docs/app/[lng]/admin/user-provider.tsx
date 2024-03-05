@@ -1,12 +1,8 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import {
-  fetchUserAsync,
-  selectUser,
-  useAppDispatch,
-  useAppSelector,
-} from "@/model";
+import { setUserAsync, selectUser } from "@/model/slices/user/slice";
+import { useAppDispatch, useAppSelector } from "@/model/hooks";
 import { domain } from "@/constants";
 import { languages } from "@/i18n/settings";
 import { LngProps } from "@/i18next-lng";
@@ -35,7 +31,7 @@ export default function UserProvider({
   const initialized = useRef(false);
   if (!user && !initialized.current) {
     initialized.current = true;
-    dispatch(fetchUserAsync());
+    dispatch(setUserAsync());
   }
 
   useEffect(() => {

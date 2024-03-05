@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 /* Instruments */
-import { store, persistStore } from "@/model";
+import { store, persistStore } from "@/model/store";
 
 export default function ReduxProvider({ children }: React.PropsWithChildren) {
   return (
