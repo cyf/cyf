@@ -1,21 +1,28 @@
 /* Core */
-import {
-  Action,
-  configureStore,
-  createAsyncThunk,
-  ThunkAction,
-} from "@reduxjs/toolkit";
-import {
-  useSelector,
-  useDispatch,
-  useStore,
-  type TypedUseSelectorHook,
-} from "react-redux";
-import { persistStore as persistAppStore, type Persistor } from "redux-persist";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { persistStore as persistAppStore, persistReducer } from "redux-persist";
+
+import type { Action, ThunkAction } from "@reduxjs/toolkit";
+import type { Persistor } from "redux-persist";
 
 /* Instruments */
-import { persistedReducer } from "./reducers";
 import { middlewares } from "./middlewares";
+import { userSlice } from "./slices/user/slice";
+import storage from "./storage";
+
+const reducer = combineReducers({
+  user: userSlice.reducer,
+});
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, reducer);
+
+// Infer the `RootState` type from the root reducer
+export type RootState = ReturnType<typeof persistedReducer>;
 
 export const makeStore = () => {
   return configureStore({
@@ -33,17 +40,12 @@ export const makeStore = () => {
 export const store: AppStore = makeStore();
 export const persistStore: Persistor = persistAppStore(store);
 
-export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
-export const useAppStore: () => AppStore = useStore;
-
 /* Types */
 export type AppStore = ReturnType<typeof makeStore>;
-export type AppState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];
-export type ReduxThunkAction<ReturnType = void> = ThunkAction<
-  ReturnType,
-  AppState,
+export type AppThunk<ThunkReturnType = void> = ThunkAction<
+  ThunkReturnType,
+  RootState,
   unknown,
   Action
 >;

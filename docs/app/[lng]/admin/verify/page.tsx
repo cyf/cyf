@@ -5,7 +5,8 @@ import { ToastAction } from "@/components/ui/toast";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/components/ui/use-toast";
 import { useTranslation } from "@/i18n/client";
-import { useAppSelector, selectUser } from "@/model";
+import { selectUser } from "@/model/slices/user/slice";
+import { useAppSelector } from "@/model/hooks";
 import { userService } from "@/services";
 import type { Socket } from "socket.io-client";
 

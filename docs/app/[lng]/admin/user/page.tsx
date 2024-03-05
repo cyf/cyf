@@ -1,6 +1,7 @@
 "use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useAppSelector, selectUser } from "@/model";
+import { selectUser } from "@/model/slices/user/slice";
+import { useAppSelector } from "@/model/hooks";
 
 export default function User({
   params,
