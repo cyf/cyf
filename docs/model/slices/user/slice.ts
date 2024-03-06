@@ -3,7 +3,7 @@ import { fetchUser } from "./api";
 import { createAppSlice } from "@/model/createAppSlice";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { AppThunk } from "@/model/store";
-import type { User } from "@/model/entities/user";
+import type { User } from "@/entities/user";
 
 /* Types */
 export interface UserSliceState {

@@ -3,7 +3,6 @@ import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-// import EmailValidator from "email-validator";
 import Cookies from "js-cookie";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -14,7 +13,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  // FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -236,7 +234,7 @@ export default function Login({
               </button>
             </div>
           </div>
-          <div className="flex flex-row items-start justify-center border-b border-gray-200 bg-white px-4 pb-8 text-center dark:border-gray-700 dark:bg-gray-900 sm:px-16">
+          <div className="flex flex-row items-start justify-center border-b border-gray-200 bg-white px-4 py-4 text-center dark:border-gray-700 dark:bg-gray-900 sm:px-16">
             <input
               checked={approved}
               type="checkbox"

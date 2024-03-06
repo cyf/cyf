@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { MdLiveTv, MdLogin } from "react-icons/md";
 // import { BiTestTube } from "react-icons/bi";
 // import { IoGameControllerOutline } from "react-icons/io5";
@@ -10,14 +10,18 @@ import { MdLiveTv, MdLogin } from "react-icons/md";
 import useScroll from "@/lib/hooks/use-scroll";
 import LngDropdown from "./lng-dropdown";
 import ThemeDropdown from "./theme-dropdown";
+import AvatarDropdown from "./avatar-dropdown";
+import { selectUser } from "@/model/slices/user/slice";
+import { useAppSelector } from "@/model/hooks";
 import { LngProps } from "@/i18next-lng";
 import { useTranslation } from "@/i18n/client";
 import { basePath } from "@/constants";
 
 export default function Header(props: LngProps) {
   const { t } = useTranslation(props.lng, "header");
+  const user = useAppSelector(selectUser);
   const scrolled = useScroll(50);
-  const router = useRouter();
+  // const router = useRouter();
 
   // toggle menu
   const toggleMenu = () => {
@@ -113,22 +117,32 @@ export default function Header(props: LngProps) {
             <li className="h-8 w-8 sm:h-9 sm:w-9">
               <ThemeDropdown lng={props.lng} />
             </li>
-            <Link
-              href={`/${props.lng}/admin`}
-              className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black dark:border-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white max-md:hidden"
-            >
-              Sign In
-            </Link>
-            <li className="h-8 w-8 sm:h-9 sm:w-9 md:hidden">
-              <div className="relative inline-block text-left">
+            {user ? (
+              <>
+                <li className="h-8 w-8 sm:h-9 sm:w-9">
+                  <AvatarDropdown lng={props.lng} user={user} />
+                </li>
+              </>
+            ) : (
+              <>
                 <Link
                   href={`/${props.lng}/admin`}
-                  className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
+                  className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black dark:border-white dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white max-md:hidden"
                 >
-                  <MdLogin className="h-5 w-5" />
+                  Sign In
                 </Link>
-              </div>
-            </li>
+                <li className="h-8 w-8 sm:h-9 sm:w-9 md:hidden">
+                  <div className="relative inline-block text-left">
+                    <Link
+                      href={`/${props.lng}/admin`}
+                      className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
+                    >
+                      <MdLogin className="h-5 w-5" />
+                    </Link>
+                  </div>
+                </li>
+              </>
+            )}
           </ul>
         </div>
         <button
