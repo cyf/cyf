@@ -1,10 +1,13 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { MdLogout } from "react-icons/md";
 import Cookies from "js-cookie";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Popover from "@/components/shared/popover";
 import { persistStore } from "@/model/store";
+import { setUser } from "@/model/slices/user/slice";
+import { useAppDispatch } from "@/model/hooks";
 import { useTranslation } from "@/i18n/client";
 import { cacheTokenKey } from "@/constants";
 import type { LngProps } from "@/i18next-lng";
@@ -12,6 +15,8 @@ import type { User } from "@/entities/user";
 
 export default function AvatarDropdown(props: { user: User } & LngProps) {
   const { user, lng } = props;
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const { t: tl } = useTranslation(lng, "login");
   const [openPopover, setOpenPopover] = useState(false);
 
@@ -23,11 +28,12 @@ export default function AvatarDropdown(props: { user: User } & LngProps) {
             <button
               onClick={() => {
                 setOpenPopover(false);
-                Cookies.remove(cacheTokenKey);
                 persistStore.pause();
                 persistStore.flush().then(() => {
                   const res = persistStore.purge();
-                  window.location.reload();
+                  Cookies.remove(cacheTokenKey);
+                  dispatch(setUser(null));
+                  router.push(`/${lng}/admin?r=${window.location.href}`, {});
                   return res;
                 });
               }}
