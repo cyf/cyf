@@ -36,14 +36,10 @@ import { useAppDispatch } from "@/model/hooks";
 import { useTranslation } from "@/i18n/client";
 
 import type { ReactCropperElement } from "react-cropper";
+import type { IBlob } from "@/utils/image";
 
 import "cropperjs/dist/cropper.css";
 import "react-medium-image-zoom/dist/styles.css";
-
-interface IBlob {
-  lastModified: number;
-  name: string;
-}
 
 const formSchema = z
   .object({
@@ -215,8 +211,9 @@ export default function Login({
                                   setOriginImage(content);
                                   setOpen(true);
                                   setImageInfo({
-                                    lastModified: file.lastModified,
                                     name: file.name,
+                                    type: file.type,
+                                    lastModified: file.lastModified,
                                   });
                                   // onChange(file);
                                 })
@@ -462,15 +459,15 @@ export default function Login({
                   const dataURL = canvas.toDataURL();
                   setImage(dataURL);
                   canvas.toBlob((blob) => {
-                    if (blob) {
-                      const b: any = blob;
-                      //A Blob() is almost a File() - it's just missing the two properties below which we will add
-                      b.lastModified = imageInfo?.lastModified;
-                      b.name = imageInfo?.name;
-                      // const file = new File([blob], imageInfo?.name || "", { lastModified: imageInfo?.lastModified });
-                      console.log("file", b);
-                      form.setValue("file", b);
-                      setOpen(false);
+                    if (blob && imageInfo) {
+                      import("@/utils/image")
+                        .then(async (module) => {
+                          const file = await module.blobToFile(blob, imageInfo);
+                          console.log("file", file);
+                          form.setValue("file", file);
+                          setOpen(false);
+                        })
+                        .catch((error) => console.error(error));
                     }
                   });
                 }
