@@ -1,19 +1,23 @@
 "use client";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, createRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import Cropper from "react-cropper";
+import Zoom from "react-medium-image-zoom";
 import Cookies from "js-cookie";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useAgreementDialog } from "@/components/home/agreement-dialog";
-import { Apple, Google, LoadingDots } from "@/components/shared/icons";
-import { basePath, cacheTokenKey } from "@/constants";
-import { authService } from "@/services";
-import { setUser } from "@/model/slices/user/slice";
-import { useAppDispatch } from "@/model/hooks";
-import { useTranslation } from "@/i18n/client";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+} from "@/components/ui/drawer";
 import {
   Form,
   FormControl,
@@ -24,6 +28,22 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Apple, Google, LoadingDots } from "@/components/shared/icons";
+import { domain, basePath, cacheTokenKey } from "@/constants";
+import { authService } from "@/services";
+import { setUser } from "@/model/slices/user/slice";
+import { useAppDispatch } from "@/model/hooks";
+import { useTranslation } from "@/i18n/client";
+
+import type { ReactCropperElement } from "react-cropper";
+
+import "cropperjs/dist/cropper.css";
+import "react-medium-image-zoom/dist/styles.css";
+
+interface IBlob {
+  lastModified: number;
+  name: string;
+}
 
 const formSchema = z
   .object({
@@ -65,9 +85,15 @@ export default function Login({
   const dispatch = useAppDispatch();
   const search = useSearchParams();
   const redirectUrl = search.get("r");
+  const fileInput = createRef<HTMLInputElement>();
+  const cropperRef = createRef<ReactCropperElement>();
   const [googleClicked, setGoogleClicked] = useState(false);
   const [appleClicked, setAppleClicked] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState<any>();
+  const [imageInfo, setImageInfo] = useState<IBlob>();
+  const [originImage, setOriginImage] = useState();
+  const [open, setOpen] = useState<boolean>(false);
   const { setShowAgreementDialog, AgreementDialog, approved, setApproved } =
     useAgreementDialog();
 
@@ -104,7 +130,9 @@ export default function Login({
         if (res?.code === 0) {
           Cookies.set(cacheTokenKey, res?.data?.access_token);
           dispatch(setUser(res?.data?.user));
-          redirectUrl && window.location.replace(redirectUrl);
+          window.location.replace(
+            redirectUrl || `${domain}/${params.lng}/admin`,
+          );
         }
       })
       .catch((error: any) => {
@@ -153,17 +181,47 @@ export default function Login({
                   name="file"
                   render={({ field: { value, onChange, ...fieldProps } }) => (
                     <FormItem>
-                      <FormLabel>Avatar</FormLabel>
+                      <FormLabel>{tl("avatar-label")}</FormLabel>
+                      {image && (
+                        <div className="flex justify-center">
+                          <Zoom>
+                            <Image
+                              className="rounded-full"
+                              src={image}
+                              width={120}
+                              height={120}
+                              alt="@avatar"
+                            />
+                          </Zoom>
+                        </div>
+                      )}
                       <FormControl>
                         <Input
                           {...fieldProps}
+                          ref={fileInput}
+                          placeholder={tl("avatar-placeholder")}
                           accept="image/jpg, image/jpeg, image/png"
                           type="file"
                           multiple={false}
-                          onChange={(event) => {
-                            onChange(
-                              event.target.files && event.target.files[0],
-                            );
+                          onChange={async (event) => {
+                            if (
+                              event.target.files &&
+                              event.target.files.length > 0
+                            ) {
+                              const file = event.target.files[0];
+                              import("@/utils/image")
+                                .then(async (module) => {
+                                  const content = await module.getBase64(file);
+                                  setOriginImage(content);
+                                  setOpen(true);
+                                  setImageInfo({
+                                    lastModified: file.lastModified,
+                                    name: file.name,
+                                  });
+                                  // onChange(file);
+                                })
+                                .catch((error) => console.error(error));
+                            }
                           }}
                         />
                       </FormControl>
@@ -339,7 +397,7 @@ export default function Login({
               </button>
             </div>
           </div>
-          <div className="flex flex-row items-start justify-center border-b border-gray-200 bg-white px-4 pb-8 text-center dark:border-gray-700 dark:bg-gray-900 sm:px-16">
+          <div className="flex flex-row items-start justify-center border-b border-gray-200 bg-white px-4 py-4 text-center dark:border-gray-700 dark:bg-gray-900 sm:px-16">
             <input
               checked={approved}
               type="checkbox"
@@ -367,6 +425,74 @@ export default function Login({
           </div>
         </div>
       </div>
+      <Drawer open={open} onOpenChange={setOpen} dismissible={false}>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle className="text-center">
+              {t("image-cropping")}
+            </DrawerTitle>
+            <DrawerDescription className="text-center">
+              Set your daily activity goal.
+            </DrawerDescription>
+          </DrawerHeader>
+          <div className="mx-auto flex h-[50vh] w-full flex-col items-center">
+            <Cropper
+              ref={cropperRef}
+              style={{ height: "100%", width: "100%" }}
+              zoomTo={0.5}
+              initialAspectRatio={1}
+              aspectRatio={1}
+              // preview=".img-preview"
+              src={originImage}
+              viewMode={1}
+              minCropBoxHeight={10}
+              minCropBoxWidth={10}
+              background={false}
+              responsive={true}
+              autoCropArea={1}
+              checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
+              guides={true}
+            />
+          </div>
+          <DrawerFooter>
+            <Button
+              onClick={() => {
+                if (typeof cropperRef.current?.cropper !== "undefined") {
+                  const canvas = cropperRef.current?.cropper.getCroppedCanvas();
+                  const dataURL = canvas.toDataURL();
+                  setImage(dataURL);
+                  canvas.toBlob((blob) => {
+                    if (blob) {
+                      const b: any = blob;
+                      //A Blob() is almost a File() - it's just missing the two properties below which we will add
+                      b.lastModified = imageInfo?.lastModified;
+                      b.name = imageInfo?.name;
+                      // const file = new File([blob], imageInfo?.name || "", { lastModified: imageInfo?.lastModified });
+                      console.log("file", b);
+                      form.setValue("file", b);
+                      setOpen(false);
+                    }
+                  });
+                }
+              }}
+            >
+              {t("crop-image")}
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => {
+                if (fileInput.current) {
+                  fileInput.current.files = null;
+                  fileInput.current.value = "";
+                }
+                setOpen(false);
+              }}
+            >
+              {t("cancel")}
+            </Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
       <AgreementDialog lng={params.lng} />
     </>
   );

@@ -5,5 +5,7 @@
   "live": "直播",
   "app": "应用",
   "cancel": "取消",
-  "confirm": "确认"
+  "confirm": "确认",
+  "crop-image": "裁剪图片",
+  "image-cropping": "图片裁剪"
 }

@@ -5,5 +5,7 @@
   "live": "Live Streaming",
   "app": "Apps",
   "cancel": "Cancel",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "crop-image": "Crop Image",
+  "image-cropping": "Image Cropping"
 }
