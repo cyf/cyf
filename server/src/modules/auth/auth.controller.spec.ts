@@ -1,12 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing'
+import { PassportModule } from '@nestjs/passport'
+import { JwtModule } from '@nestjs/jwt'
 import { NestjsFormDataModule } from 'nestjs-form-data'
 import { AuthController } from './auth.controller'
 import { AuthService } from './auth.service'
 import { AppModule } from '../../app.module'
 import { UserModule } from '@/modules/user'
-import { PassportModule } from '@nestjs/passport'
-import { JwtModule } from '@nestjs/jwt'
 import { jwtConstants } from '@/common/constants'
+import { JwtStrategy } from '@/common/strategies/jwt.strategy'
 
 describe('AuthController', () => {
   let controller: AuthController
@@ -17,6 +18,7 @@ describe('AuthController', () => {
         AppModule,
         UserModule,
         PassportModule,
+        NestjsFormDataModule,
         JwtModule.register({
           secret: jwtConstants.secret,
           signOptions: { expiresIn: 24 * 60 * 60 },
@@ -24,10 +26,9 @@ describe('AuthController', () => {
             ignoreExpiration: false,
           },
         }),
-        NestjsFormDataModule,
       ],
       controllers: [AuthController],
-      providers: [AuthService],
+      providers: [AuthService, JwtStrategy],
     }).compile()
 
     controller = module.get<AuthController>(AuthController)

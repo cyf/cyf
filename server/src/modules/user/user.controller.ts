@@ -38,7 +38,7 @@ import { Public } from '@/common/decorators/public.decorator'
 import { CurrentUser } from '@/common/decorators/user.decorator'
 import { putObject } from '@/common/utils/upload'
 
-@Controller()
+@Controller('user')
 @ApiTags('user')
 @UseGuards(JwtAuthGuard)
 @UseFilters(new HttpExceptionFilter())
@@ -69,7 +69,7 @@ export class UserController {
     })
   }
 
-  @Post('verify')
+  @Post('email-verify')
   async verify(@CurrentUser() user: any) {
     const cachedValue = await this.cacheManager.get(`email_verify__${user.id}`)
     if (cachedValue) {
@@ -112,6 +112,30 @@ export class UserController {
     }
 
     return user
+  }
+
+  @Public()
+  @Post('has-username')
+  async findOneByUsername(@Body('username') username: string) {
+    if (!username) {
+      throw new BadRequestException()
+    }
+
+    const user = await this.userService.findOneByUsername(username)
+
+    return !user
+  }
+
+  @Public()
+  @Post('has-email')
+  async findOneByEmail(@Body('email') email: string) {
+    if (!email) {
+      throw new BadRequestException()
+    }
+
+    const user = await this.userService.findOneByEmail(email)
+
+    return !user
   }
 
   @Patch(':id')

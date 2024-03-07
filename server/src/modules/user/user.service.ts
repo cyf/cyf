@@ -84,6 +84,46 @@ export class UserService {
     })
   }
 
+  async findOneByUsername(username: string): Promise<User | null> {
+    return this.prismaService.user.findFirst({
+      select: {
+        id: true,
+        username: true,
+        nickname: true,
+        email: true,
+        email_verified: true,
+        avatar: true,
+        role: true,
+        create_date: true,
+        update_date: true,
+      },
+      where: {
+        username,
+        is_del: IsDel.NO,
+      },
+    })
+  }
+
+  async findOneByEmail(email: string): Promise<User | null> {
+    return this.prismaService.user.findFirst({
+      select: {
+        id: true,
+        username: true,
+        nickname: true,
+        email: true,
+        email_verified: true,
+        avatar: true,
+        role: true,
+        create_date: true,
+        update_date: true,
+      },
+      where: {
+        email,
+        is_del: IsDel.NO,
+      },
+    })
+  }
+
   async findByAccount(account: string) {
     return this.prismaService.user.findFirst({
       select: {
