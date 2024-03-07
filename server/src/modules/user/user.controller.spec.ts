@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing'
+// import { PassportModule } from '@nestjs/passport'
 import { NestjsFormDataModule } from 'nestjs-form-data'
 import { UserController } from './user.controller'
 import { UserService } from './user.service'
@@ -11,7 +12,13 @@ describe('UsersController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [AppModule, MailModule, PrismaModule, NestjsFormDataModule],
+      imports: [
+        // PassportModule,
+        AppModule,
+        MailModule,
+        PrismaModule,
+        NestjsFormDataModule,
+      ],
       controllers: [UserController],
       providers: [UserService],
     }).compile()

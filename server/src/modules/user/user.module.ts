@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common'
+// import { PassportModule } from '@nestjs/passport'
+import { NestjsFormDataModule } from 'nestjs-form-data'
 import { UserController } from './user.controller'
 import { UserService } from './user.service'
 import { AccountModule } from '../account'
@@ -7,10 +9,10 @@ import { MailModule } from '../mail'
 import { PrismaModule } from '../prisma'
 import { SessionModule } from '../session'
 import { VerificationTokenModule } from '../verification-token'
-import { NestjsFormDataModule } from 'nestjs-form-data'
 
 @Module({
   imports: [
+    // PassportModule,
     AccountModule,
     AuthenticatorModule,
     MailModule,

@@ -1,11 +1,13 @@
 "use client";
-import { ChangeEvent, createRef, useState } from "react";
+import React, { ChangeEvent, createRef, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Cropper from "react-cropper";
+import EmailValidator from "email-validator";
 import Zoom from "react-medium-image-zoom";
 import Cookies from "js-cookie";
+import AwesomeDebouncePromise from "awesome-debounce-promise";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -24,16 +26,16 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Apple, Google, LoadingDots } from "@/components/shared/icons";
 import { domain, basePath, cacheTokenKey } from "@/constants";
-import { authService } from "@/services";
+import { authService, userService } from "@/services";
 import { setUser } from "@/model/slices/user/slice";
 import { useAppDispatch } from "@/model/hooks";
 import { useTranslation } from "@/i18n/client";
+import { cn } from "@/lib/utils";
 
 import type { ReactCropperElement } from "react-cropper";
 import type { IBlob } from "@/utils/image";
@@ -41,33 +43,84 @@ import type { IBlob } from "@/utils/image";
 import "cropperjs/dist/cropper.css";
 import "react-medium-image-zoom/dist/styles.css";
 
+const hasUsernameAsync = async (username: string) => {
+  try {
+    const res = await userService.hasUsername(username);
+    return res?.data || false;
+  } catch (e) {
+    console.error(e);
+  }
+  return true;
+};
+
+const debounceUsername = AwesomeDebouncePromise(hasUsernameAsync, 500);
+
+const hasEmailAsync = async (email: string) => {
+  try {
+    const res = await userService.hasEmail(email);
+    console.log(res);
+    return res?.data || false;
+  } catch (e) {
+    console.error(e);
+  }
+  return true;
+};
+
+const debounceEmail = AwesomeDebouncePromise(hasEmailAsync, 500);
+
 const formSchema = z
   .object({
     file: z.any(),
     username: z.string().min(6, {
-      message: "Username must be at least 6 characters.",
+      message: "username-validator",
     }),
     nickname: z.string(),
-    email: z.string().email({ message: "Email is invalid." }),
+    email: z.string().email({ message: "email-validator" }),
     password: z.string().min(6, {
-      message: "Password must be at least 6 characters.",
+      message: "password-validator",
     }),
     "repeat-password": z.string().min(6, {
-      message: "Password must be at least 6 characters.",
+      message: "password-validator",
     }),
   })
+  .refine((data) => !!data.file, {
+    message: "file-validator",
+    path: ["file"],
+  })
+  .refine((data) => (data.file?.size || 0) < 5 * 1000 * 1000, {
+    message: "file-size-validator",
+    path: ["file"],
+  })
   .refine((data) => data.password === data["repeat-password"], {
-    message: "The passwords entered are different.",
+    message: "repeat-password-validator",
     path: ["repeat-password"],
   })
-  .refine((data) => !!data.file, {
-    message: "Please upload a file.",
-    path: ["file"],
-  })
-  .refine((data) => data.file.size < 5 * 1000 * 1000, {
-    message: "File size cannot be larger than 5MB.",
-    path: ["file"],
-  });
+  .refine(
+    async (data) => {
+      const username = data.username;
+      if (!username || username.length < 6) {
+        return true;
+      }
+      return await debounceUsername(username);
+    },
+    {
+      message: "username-existed-validator",
+      path: ["username"],
+    },
+  )
+  .refine(
+    async (data) => {
+      const email = data.email;
+      if (!email || !EmailValidator.validate(email)) {
+        return true;
+      }
+      return await debounceEmail(email);
+    },
+    {
+      message: "email-existed-validator",
+      path: ["email"],
+    },
+  );
 
 export default function Login({
   params,
@@ -76,7 +129,8 @@ export default function Login({
     lng: string;
   };
 }) {
-  const { t } = useTranslation(params.lng, "footer");
+  const { t } = useTranslation(params.lng, "validator");
+  const { t: tf } = useTranslation(params.lng, "footer");
   const { t: tl } = useTranslation(params.lng, "login");
   const dispatch = useAppDispatch();
   const search = useSearchParams();
@@ -95,9 +149,9 @@ export default function Login({
 
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema, undefined, { mode: "async" }),
     defaultValues: {
-      file: {},
+      file: null,
       username: "",
       nickname: "",
       email: "",
@@ -137,6 +191,33 @@ export default function Login({
       });
   }
 
+  // 根据内容判断是否显示的页面内组件
+  const ShowContent = useCallback(
+    ({
+      isShow,
+      children,
+    }: {
+      isShow: boolean;
+      children: React.ReactElement;
+    }) => (isShow ? children : null),
+    [],
+  );
+
+  const ValidMessage = useCallback(
+    ({
+      className,
+      children,
+    }: {
+      className?: string;
+      children: React.ReactNode;
+    }) => (
+      <p className={cn("text-sm font-medium text-destructive", className)}>
+        {children}
+      </p>
+    ),
+    [],
+  );
+
   return (
     <>
       <div className="flex w-screen justify-center">
@@ -175,7 +256,10 @@ export default function Login({
                   required
                   control={form.control}
                   name="file"
-                  render={({ field: { value, onChange, ...fieldProps } }) => (
+                  render={({
+                    field: { value, onChange, ...fieldProps },
+                    fieldState: { error },
+                  }) => (
                     <FormItem>
                       <FormLabel>{tl("avatar-label")}</FormLabel>
                       {image && (
@@ -194,6 +278,7 @@ export default function Login({
                       <FormControl>
                         <Input
                           {...fieldProps}
+                          id="avatar"
                           ref={fileInput}
                           placeholder={tl("avatar-placeholder")}
                           accept="image/jpg, image/jpeg, image/png"
@@ -222,7 +307,11 @@ export default function Login({
                           }}
                         />
                       </FormControl>
-                      <FormMessage />
+                      <ShowContent isShow={!!error?.message}>
+                        <ValidMessage className="!mt-1 text-[12px] font-normal">
+                          {t(error?.message || "")}
+                        </ValidMessage>
+                      </ShowContent>
                     </FormItem>
                   )}
                 />
@@ -230,7 +319,7 @@ export default function Login({
                   required
                   control={form.control}
                   name="username"
-                  render={({ field }) => (
+                  render={({ field, fieldState: { error } }) => (
                     <FormItem>
                       <FormLabel>{tl("username-label")}</FormLabel>
                       <FormControl>
@@ -240,14 +329,18 @@ export default function Login({
                           className="focus-visible:ring-0 focus-visible:ring-offset-0"
                         />
                       </FormControl>
-                      <FormMessage className="!mt-1 text-[12px] font-normal" />
+                      <ShowContent isShow={!!error?.message}>
+                        <ValidMessage className="!mt-1 text-[12px] font-normal">
+                          {t(error?.message || "")}
+                        </ValidMessage>
+                      </ShowContent>
                     </FormItem>
                   )}
                 />
                 <FormField
                   control={form.control}
                   name="nickname"
-                  render={({ field }) => (
+                  render={({ field, fieldState: { error } }) => (
                     <FormItem>
                       <FormLabel>{tl("nickname-label")}</FormLabel>
                       <FormControl>
@@ -257,7 +350,11 @@ export default function Login({
                           className="focus-visible:ring-0 focus-visible:ring-offset-0"
                         />
                       </FormControl>
-                      <FormMessage className="!mt-1 text-[12px] font-normal" />
+                      <ShowContent isShow={!!error?.message}>
+                        <ValidMessage className="!mt-1 text-[12px] font-normal">
+                          {t(error?.message || "")}
+                        </ValidMessage>
+                      </ShowContent>
                     </FormItem>
                   )}
                 />
@@ -265,7 +362,7 @@ export default function Login({
                   required
                   control={form.control}
                   name="email"
-                  render={({ field }) => (
+                  render={({ field, fieldState: { error } }) => (
                     <FormItem>
                       <FormLabel>{tl("email-label")}</FormLabel>
                       <FormControl>
@@ -276,7 +373,11 @@ export default function Login({
                           className="focus-visible:ring-0 focus-visible:ring-offset-0"
                         />
                       </FormControl>
-                      <FormMessage className="!mt-1 text-[12px] font-normal" />
+                      <ShowContent isShow={!!error?.message}>
+                        <ValidMessage className="!mt-1 text-[12px] font-normal">
+                          {t(error?.message || "")}
+                        </ValidMessage>
+                      </ShowContent>
                     </FormItem>
                   )}
                 />
@@ -284,7 +385,7 @@ export default function Login({
                   required
                   control={form.control}
                   name="password"
-                  render={({ field }) => (
+                  render={({ field, fieldState: { error } }) => (
                     <FormItem>
                       <FormLabel>{tl("password-label")}</FormLabel>
                       <FormControl>
@@ -295,7 +396,11 @@ export default function Login({
                           className="focus-visible:ring-0 focus-visible:ring-offset-0"
                         />
                       </FormControl>
-                      <FormMessage className="!mt-1 text-[12px] font-normal" />
+                      <ShowContent isShow={!!error?.message}>
+                        <ValidMessage className="!mt-1 text-[12px] font-normal">
+                          {t(error?.message || "")}
+                        </ValidMessage>
+                      </ShowContent>
                     </FormItem>
                   )}
                 />
@@ -303,7 +408,7 @@ export default function Login({
                   required
                   control={form.control}
                   name="repeat-password"
-                  render={({ field }) => (
+                  render={({ field, fieldState: { error } }) => (
                     <FormItem>
                       <FormLabel>{tl("repeat-password-label")}</FormLabel>
                       <FormControl>
@@ -314,7 +419,11 @@ export default function Login({
                           className="focus-visible:ring-0 focus-visible:ring-offset-0"
                         />
                       </FormControl>
-                      <FormMessage className="!mt-1 text-[12px] font-normal" />
+                      <ShowContent isShow={!!error?.message}>
+                        <ValidMessage className="!mt-1 text-[12px] font-normal">
+                          {t(error?.message || "")}
+                        </ValidMessage>
+                      </ShowContent>
                     </FormItem>
                   )}
                 />
@@ -409,14 +518,14 @@ export default function Login({
                 className="text-blue-500"
                 href={`/${params.lng}/legal/privacy`}
               >
-                {t("privacy")}
+                {tf("privacy")}
               </Link>
               {tl("and")}
               <Link
                 className="text-blue-500"
                 href={`/${params.lng}/legal/terms-of-use`}
               >
-                {t("terms-of-use")}
+                {tf("terms-of-use")}
               </Link>
             </p>
           </div>
@@ -426,7 +535,7 @@ export default function Login({
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle className="text-center">
-              {t("image-cropping")}
+              {tf("image-cropping")}
             </DrawerTitle>
             <DrawerDescription className="text-center">
               Set your daily activity goal.
@@ -473,7 +582,7 @@ export default function Login({
                 }
               }}
             >
-              {t("crop-image")}
+              {tf("crop-image")}
             </Button>
             <Button
               variant="outline"
@@ -485,7 +594,7 @@ export default function Login({
                 setOpen(false);
               }}
             >
-              {t("cancel")}
+              {tf("cancel")}
             </Button>
           </DrawerFooter>
         </DrawerContent>

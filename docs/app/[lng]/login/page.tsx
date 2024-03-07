@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -16,7 +16,6 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { setUser } from "@/model/slices/user/slice";
@@ -24,13 +23,14 @@ import { useAppDispatch } from "@/model/hooks";
 import { basePath, cacheTokenKey } from "@/constants";
 import { authService } from "@/services";
 import { useTranslation } from "@/i18n/client";
+import { cn } from "@/lib/utils";
 
 const formSchema = z.object({
   account: z.string().min(1, {
-    message: "Account must not be empty.",
+    message: "account-validator",
   }),
   password: z.string().min(6, {
-    message: "Password must be at least 6 characters.",
+    message: "password-validator",
   }),
 });
 
@@ -41,7 +41,8 @@ export default function Login({
     lng: string;
   };
 }) {
-  const { t } = useTranslation(params.lng, "footer");
+  const { t } = useTranslation(params.lng, "validator");
+  const { t: tf } = useTranslation(params.lng, "footer");
   const { t: tl } = useTranslation(params.lng, "login");
   const dispatch = useAppDispatch();
   const search = useSearchParams();
@@ -87,6 +88,33 @@ export default function Login({
       });
   }
 
+  // 根据内容判断是否显示的页面内组件
+  const ShowContent = useCallback(
+    ({
+      isShow,
+      children,
+    }: {
+      isShow: boolean;
+      children: React.ReactElement;
+    }) => (isShow ? children : null),
+    [],
+  );
+
+  const ValidMessage = useCallback(
+    ({
+      className,
+      children,
+    }: {
+      className?: string;
+      children: React.ReactNode;
+    }) => (
+      <p className={cn("text-sm font-medium text-destructive", className)}>
+        {children}
+      </p>
+    ),
+    [],
+  );
+
   return (
     <>
       <div className="flex w-screen justify-center">
@@ -125,7 +153,7 @@ export default function Login({
                   required
                   control={form.control}
                   name="account"
-                  render={({ field }) => (
+                  render={({ field, fieldState: { error } }) => (
                     <FormItem>
                       <FormLabel>{tl("account-label")}</FormLabel>
                       <FormControl>
@@ -135,7 +163,11 @@ export default function Login({
                           className="focus-visible:ring-0 focus-visible:ring-offset-0"
                         />
                       </FormControl>
-                      <FormMessage className="!mt-1 text-[12px] font-normal" />
+                      <ShowContent isShow={!!error?.message}>
+                        <ValidMessage className="!mt-1 text-[12px] font-normal">
+                          {t(error?.message || "")}
+                        </ValidMessage>
+                      </ShowContent>
                     </FormItem>
                   )}
                 />
@@ -143,7 +175,7 @@ export default function Login({
                   required
                   control={form.control}
                   name="password"
-                  render={({ field }) => (
+                  render={({ field, fieldState: { error } }) => (
                     <FormItem>
                       <FormLabel>{tl("password-label")}</FormLabel>
                       <FormControl>
@@ -154,7 +186,11 @@ export default function Login({
                           className="focus-visible:ring-0 focus-visible:ring-offset-0"
                         />
                       </FormControl>
-                      <FormMessage className="!mt-1 text-[12px] font-normal" />
+                      <ShowContent isShow={!!error?.message}>
+                        <ValidMessage className="!mt-1 text-[12px] font-normal">
+                          {t(error?.message || "")}
+                        </ValidMessage>
+                      </ShowContent>
                     </FormItem>
                   )}
                 />
@@ -249,14 +285,14 @@ export default function Login({
                 className="text-blue-500"
                 href={`/${params.lng}/legal/privacy`}
               >
-                {t("privacy")}
+                {tf("privacy")}
               </Link>
               {tl("and")}
               <Link
                 className="text-blue-500"
                 href={`/${params.lng}/legal/terms-of-use`}
               >
-                {t("terms-of-use")}
+                {tf("terms-of-use")}
               </Link>
             </p>
           </div>

@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
+import { NestjsFormDataModule } from 'nestjs-form-data'
 import { jwtConstants } from '@/common/constants'
 import { UserModule } from '../user'
 import { AuthController } from './auth.controller'
 import { AuthService } from './auth.service'
 import { JwtStrategy } from '@/common/strategies/jwt.strategy'
-import { NestjsFormDataModule } from 'nestjs-form-data'
 
 @Module({
   imports: [

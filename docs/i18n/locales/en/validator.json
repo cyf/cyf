@@ -1,0 +1,11 @@
+{
+  "account-validator": "Account must not be empty.",
+  "file-validator": "Please upload a picture.",
+  "file-size-validator": "File size cannot be larger than 5MB.",
+  "username-validator": "Username must be at least 6 characters.",
+  "username-existed-validator": "The username already exists, please try again with another one.",
+  "email-validator": "Email is invalid.",
+  "email-existed-validator": "The email address has been registered, please try again with another one.",
+  "password-validator": "Password must be at least 6 characters.",
+  "repeat-password-validator": "The passwords entered are different."
+}

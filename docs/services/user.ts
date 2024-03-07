@@ -1,5 +1,23 @@
 import axios from "@/request/axios";
+import { Result } from "@/entities/response";
 
-export const verify = () => {
-  return axios.post("/api/backend/user/verify");
+// 发送邮箱验证邮件
+export const verify = (): Promise<
+  Result<{ id: string; message_id: string }>
+> => {
+  return axios.post("/api/backend/user/email-verify");
+};
+
+// 判断用户名是否存在
+export const hasUsername = (username: string): Promise<Result<boolean>> => {
+  return axios.post("/api/backend/user/has-username", {
+    username,
+  });
+};
+
+// 判断邮箱是否存在
+export const hasEmail = (email: string): Promise<Result<boolean>> => {
+  return axios.post("/api/backend/user/has-email", {
+    email,
+  });
 };
