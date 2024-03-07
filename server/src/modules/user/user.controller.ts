@@ -22,8 +22,8 @@ import {
 } from '@nestjs/cache-manager'
 import {
   // ApiBearerAuth,
-  // ApiOperation,
   // ApiResponse,
+  ApiOperation,
   ApiTags,
 } from '@nestjs/swagger'
 import { Cache } from 'cache-manager'
@@ -50,6 +50,7 @@ export class UserController {
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
   ) {}
 
+  @ApiOperation({ deprecated: true })
   @Public()
   @UseInterceptors(CacheInterceptor)
   @CacheKey('user-hello')
@@ -60,6 +61,7 @@ export class UserController {
     return this.i18n.t('common.HELLO', { lang: I18nContext.current().lang })
   }
 
+  @ApiOperation({ deprecated: true })
   @Get('hello2')
   @UseGuards(new VersionGuard('>=1.0.0'))
   getHello2(): string {
@@ -67,31 +69,6 @@ export class UserController {
       args: { name: 'Kimmy' },
       lang: I18nContext.current().lang,
     })
-  }
-
-  @Post('email-verify')
-  async verify(@CurrentUser() user: any) {
-    const cachedValue = await this.cacheManager.get(`email_verify__${user.id}`)
-    if (cachedValue) {
-      return { status: 'email_verification_sent' }
-    }
-
-    const res = await this.mailService.create(user.id, {
-      to: user.email, // list of receivers
-      subject: 'Verify Testing ✔', // Subject line
-      context: {
-        author: 'Test User',
-      },
-      template: 'email-verify',
-    })
-
-    await this.cacheManager.set(
-      `email_verify__${user.id}`,
-      'true',
-      5 * 60 * 1000,
-    )
-
-    return res
   }
 
   @Get()
@@ -112,30 +89,6 @@ export class UserController {
     }
 
     return user
-  }
-
-  @Public()
-  @Post('has-username')
-  async findOneByUsername(@Body('username') username: string) {
-    if (!username) {
-      throw new BadRequestException()
-    }
-
-    const user = await this.userService.findOneByUsername(username)
-
-    return !user
-  }
-
-  @Public()
-  @Post('has-email')
-  async findOneByEmail(@Body('email') email: string) {
-    if (!email) {
-      throw new BadRequestException()
-    }
-
-    const user = await this.userService.findOneByEmail(email)
-
-    return !user
   }
 
   @Patch(':id')
@@ -167,5 +120,54 @@ export class UserController {
     }
 
     return user
+  }
+
+  @Post('email-verify')
+  async verify(@CurrentUser() user: any) {
+    const cachedValue = await this.cacheManager.get(`email_verify__${user.id}`)
+    if (cachedValue) {
+      return { status: 'email_verification_sent' }
+    }
+
+    const res = await this.mailService.create(user.id, {
+      to: user.email, // list of receivers
+      subject: 'Verify Testing ✔', // Subject line
+      context: {
+        author: 'Test User',
+      },
+      template: 'email-verify',
+    })
+
+    await this.cacheManager.set(
+      `email_verify__${user.id}`,
+      'true',
+      5 * 60 * 1000,
+    )
+
+    return res
+  }
+
+  @Public()
+  @Post('has-username')
+  async findOneByUsername(@Body('username') username: string) {
+    if (!username) {
+      throw new BadRequestException()
+    }
+
+    const user = await this.userService.findOneByUsername(username)
+
+    return !user
+  }
+
+  @Public()
+  @Post('has-email')
+  async findOneByEmail(@Body('email') email: string) {
+    if (!email) {
+      throw new BadRequestException()
+    }
+
+    const user = await this.userService.findOneByEmail(email)
+
+    return !user
   }
 }
