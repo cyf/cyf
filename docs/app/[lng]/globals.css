@@ -79,3 +79,24 @@
 #disqus_thread {
   color-scheme: none;
 }
+
+/* https://rpearce.github.io/react-medium-image-zoom/?path=/story/img--custom-modal-styles */
+.custom-zoom [data-rmiz-modal-overlay],
+.custom-zoom [data-rmiz-modal-img] {
+  transition-duration: 0.8s;
+  transition-timing-function: linear;
+}
+.custom-zoom [data-rmiz-modal-overlay="hidden"] {
+  background-color: rgba(56, 58, 89, 0);
+}
+.custom-zoom [data-rmiz-modal-overlay="visible"] {
+  background-color: rgba(56, 58, 89, 0.3);
+}
+.custom-zoom [data-rmiz-btn-unzoom] {
+  background-color: #bd93f9;
+  color: #000;
+}
+.custom-zoom [data-rmiz-btn-unzoom]:focus-visible {
+  outline-offset: 0.4rem;
+  outline: 0.2rem solid #bd93f9;
+}

@@ -180,7 +180,7 @@ export default function Login({
                       <FormLabel>{tl("avatar-label")}</FormLabel>
                       {image && (
                         <div className="flex justify-center">
-                          <Zoom>
+                          <Zoom classDialog="custom-zoom">
                             <Image
                               className="rounded-full"
                               src={image}
