@@ -3,6 +3,7 @@ import {
   Get,
   Post,
   Body,
+  Headers,
   Patch,
   Param,
   Delete,
@@ -123,19 +124,24 @@ export class UserController {
   }
 
   @Post('email-verify')
-  async verify(@CurrentUser() user: any) {
+  async verify(@CurrentUser() user: any, @Headers('x-locale') locale: string) {
     const cachedValue = await this.cacheManager.get(`email_verify__${user.id}`)
     if (cachedValue) {
       return { status: 'email_verification_sent' }
     }
 
+    const subject = this.i18n.t('validation.SUBJECT', {
+      lang: I18nContext.current().lang,
+    })
     const res = await this.mailService.create(user.id, {
       to: user.email, // list of receivers
-      subject: 'Verify Testing ✔', // Subject line
+      subject, // Subject line
       context: {
-        author: 'Test User',
+        username: user.username,
+        link: 'https://www.chenyifaer.com',
+        copyright: new Date().getFullYear(),
       },
-      template: 'email-verify',
+      template: `email-verify-${locale}`,
     })
 
     await this.cacheManager.set(
