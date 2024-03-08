@@ -29,6 +29,10 @@ const dir =
         dir,
         adapter: new PugAdapter({
           inlineCssEnabled: true,
+          inlineCssOptions: {
+            inlineStyleTags: true,
+            loadRemoteStylesheets: true,
+          },
         }),
         options: {
           strict: true,
