@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { MdLogout } from "react-icons/md";
 import Cookies from "js-cookie";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -9,13 +9,14 @@ import { persistStore } from "@/model/store";
 import { setUser } from "@/model/slices/user/slice";
 import { useAppDispatch } from "@/model/hooks";
 import { useTranslation } from "@/i18n/client";
-import { cacheTokenKey } from "@/constants";
+import { domain, cacheTokenKey } from "@/constants";
 import type { LngProps } from "@/i18next-lng";
 import type { User } from "@/entities/user";
 
 export default function AvatarDropdown(props: { user: User } & LngProps) {
   const { user, lng } = props;
   const router = useRouter();
+  const pathname = usePathname();
   const dispatch = useAppDispatch();
   const { t: tl } = useTranslation(lng, "login");
   const [openPopover, setOpenPopover] = useState(false);
@@ -32,8 +33,7 @@ export default function AvatarDropdown(props: { user: User } & LngProps) {
                 persistStore.flush().then(() => {
                   const res = persistStore.purge();
                   Cookies.remove(cacheTokenKey);
-                  dispatch(setUser(null));
-                  router.push(`/${lng}/login?r=${window.location.href}`, {});
+                  router.push(`/${lng}/login?r=${domain}${pathname}`);
                   return res;
                 });
               }}
