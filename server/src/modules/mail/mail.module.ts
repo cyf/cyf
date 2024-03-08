@@ -32,7 +32,7 @@ const dir =
           inlineCssOptions: {
             inlineStyleTags: true,
             keepLinkTags: true,
-            loadRemoteStylesheets: true,
+            keepStyleTags: true,
           },
         }),
         options: {
