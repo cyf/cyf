@@ -45,6 +45,8 @@ export default function UserProvider({
     ) {
       if (redirectUrl) {
         window.location.replace(redirectUrl);
+      } else {
+        router.push(`/${lng}/admin`);
       }
     }
   }, [user, lng, pathname, redirectUrl]);
