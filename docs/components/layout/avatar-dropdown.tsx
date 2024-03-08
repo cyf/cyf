@@ -33,7 +33,7 @@ export default function AvatarDropdown(props: { user: User } & LngProps) {
                   const res = persistStore.purge();
                   Cookies.remove(cacheTokenKey);
                   dispatch(setUser(null));
-                  router.push(`/${lng}/admin?r=${window.location.href}`, {});
+                  router.push(`/${lng}/login?r=${window.location.href}`, {});
                   return res;
                 });
               }}
