@@ -6,7 +6,6 @@ import session from 'express-session'
 import cookieParser from 'cookie-parser'
 import compression from 'compression'
 import helmet from 'helmet'
-import { join } from 'path'
 import { AppModule } from './app.module'
 
 const RENDER_GIT_BRANCH = process.env.RENDER_GIT_BRANCH
