@@ -1,12 +1,7 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
-// import { useRouter } from "next/navigation";
 import { MdLiveTv, MdLogin } from "react-icons/md";
-// import { BiTestTube } from "react-icons/bi";
-// import { IoGameControllerOutline } from "react-icons/io5";
-// import { Github } from "@/components/shared/icons";
 import useScroll from "@/lib/hooks/use-scroll";
 import LngDropdown from "./lng-dropdown";
 import ThemeDropdown from "./theme-dropdown";
@@ -21,7 +16,6 @@ export default function Header(props: LngProps) {
   const { t } = useTranslation(props.lng, "header");
   const user = useAppSelector(selectUser);
   const scrolled = useScroll(50);
-  // const router = useRouter();
 
   // toggle menu
   const toggleMenu = () => {
@@ -56,40 +50,6 @@ export default function Header(props: LngProps) {
           id="navbar-language"
         >
           <ul className="flex flex-col items-center rounded-lg border border-gray-100 p-4 font-medium dark:border-gray-700 max-md:space-y-3 md:mt-0 md:flex-row md:space-x-3 md:border-0 md:p-0">
-            {/*<li className="h-8 w-8 sm:h-9 sm:w-9">*/}
-            {/*  <div className="relative inline-block text-left">*/}
-            {/*    <button*/}
-            {/*      onClick={() =>*/}
-            {/*        router.push("https://www.chenyifaer.com/fafa-runner")*/}
-            {/*      }*/}
-            {/*      className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"*/}
-            {/*    >*/}
-            {/*      <IoGameControllerOutline className="h-5 w-5" />*/}
-            {/*    </button>*/}
-            {/*  </div>*/}
-            {/*</li>*/}
-            {/*<li className="h-8 w-8 sm:h-9 sm:w-9">*/}
-            {/*  <div className="relative inline-block text-left">*/}
-            {/*    <button*/}
-            {/*      onClick={() => router.push("https://www.chenyifaer.com/join")}*/}
-            {/*      className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"*/}
-            {/*    >*/}
-            {/*      <BiTestTube className="h-5 w-5" />*/}
-            {/*    </button>*/}
-            {/*  </div>*/}
-            {/*</li>*/}
-            {/*<li className="h-8 w-8 sm:h-9 sm:w-9">*/}
-            {/*  <div className="relative inline-block text-left">*/}
-            {/*    <Link*/}
-            {/*        target="_blank"*/}
-            {/*        rel="noopener noreferrer"*/}
-            {/*        href="https://github.com/cyf/cyf-blog"*/}
-            {/*        className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"*/}
-            {/*    >*/}
-            {/*      <Github className="h-5 w-5"/>*/}
-            {/*    </Link>*/}
-            {/*  </div>*/}
-            {/*</li>*/}
             <li className="h-8 w-8 sm:h-9 sm:w-9">
               <div className="relative inline-block text-left">
                 <Link
@@ -101,16 +61,6 @@ export default function Header(props: LngProps) {
                 </Link>
               </div>
             </li>
-            {/*<li className="h-8 w-8 sm:h-9 sm:w-9">*/}
-            {/*  <div className="relative inline-block text-left">*/}
-            {/*    <Link*/}
-            {/*      href={`/${props.lng}/admin`}*/}
-            {/*      className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"*/}
-            {/*    >*/}
-            {/*      <MdOutlineDashboardCustomize className="h-5 w-5" />*/}
-            {/*    </Link>*/}
-            {/*  </div>*/}
-            {/*</li>*/}
             <li className="h-8 w-8 sm:h-9 sm:w-9">
               <LngDropdown lng={props.lng} />
             </li>
