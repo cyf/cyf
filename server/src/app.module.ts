@@ -36,6 +36,7 @@ import {
   SocketIoModule,
 } from './modules'
 import { LoggerMiddleware } from './common/middlewares/logger.middleware'
+import { HeadersMiddleware } from './common/middlewares/headers.middleware'
 import { ReplayAttackMiddleware } from './common/middlewares/replay-attack.middleware'
 import { HttpExceptionFilter } from './common/filters/http-exception.filter'
 import { ValidationPipe } from './common/pipes/validation.pipe'
@@ -98,7 +99,7 @@ import type { RedisOptions } from 'ioredis'
       resolvers: [
         { use: QueryResolver, options: ['x-locale'] },
         new HeaderResolver(['x-locale']),
-        new CookieResolver(),
+        new CookieResolver(['__cyf_blog_lng__']),
         AcceptLanguageResolver,
       ],
       inject: [ConfigService],
@@ -149,6 +150,8 @@ import type { RedisOptions } from 'ioredis'
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware, ReplayAttackMiddleware).forRoutes('*')
+    consumer
+      .apply(LoggerMiddleware, HeadersMiddleware, ReplayAttackMiddleware)
+      .forRoutes('*')
   }
 }
