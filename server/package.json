@@ -10,7 +10,7 @@
     "dev": "prisma generate && nest start",
     "dev:watch": "prisma generate && nest build --webpack --webpackPath webpack-hmr.config.cjs --watch",
     "dev:debug": "prisma generate && nest start --debug --watch",
-    "gen:css": "postcss main.css -o ./public/static/style.css",
+    "gen:css": "postcss main.css -o ./public/style.css",
     "start": "cross-env NODE_ENV=production node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest --detectOpenHandles --forceExit",
