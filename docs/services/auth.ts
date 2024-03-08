@@ -5,12 +5,12 @@ import { User } from "@/entities/user";
 
 // 登录接口
 export const login = (data: Record<string, any>): Promise<Result<Auth>> => {
-  return axios.post("/api/backend/auth/login", data);
+  return axios.post("/api/auth/login", data);
 };
 
 // 注册接口
 export const register = (data: Record<string, any>): Promise<Result<Auth>> => {
-  return axios.post("/api/backend/auth/register", data, {
+  return axios.post("/api/auth/register", data, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -19,5 +19,5 @@ export const register = (data: Record<string, any>): Promise<Result<Auth>> => {
 
 // 获取用户信息(要求登录)
 export const fetchUser = async (): Promise<Result<User>> => {
-  return axios.get("/api/backend/auth/profile");
+  return axios.get("/api/auth/profile");
 };

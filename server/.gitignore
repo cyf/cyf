@@ -12,4 +12,4 @@ dist
 .webpack
 test.mjs
 templates/*.html
-public/*.css
+public/**/*.css

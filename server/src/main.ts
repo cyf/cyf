@@ -38,8 +38,8 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
     credentials: true,
   })
-  app.useStaticAssets(join(__dirname, '..', 'public'))
-  app.setGlobalPrefix('/api')
+  // app.useStaticAssets(join(__dirname, '..', 'public'))
+  // app.setGlobalPrefix('/api')
 
   const config = new DocumentBuilder()
     .setTitle('CYF')
@@ -85,7 +85,7 @@ async function bootstrap() {
   }
 
   const document = SwaggerModule.createDocument(app, config.build(), {})
-  SwaggerModule.setup('api', app, document)
+  SwaggerModule.setup('docs', app, document)
 
   await app.listen(3001)
 

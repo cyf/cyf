@@ -106,7 +106,6 @@ import type { RedisOptions } from 'ioredis'
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
-      renderPath: '/',
       exclude: ['/api/(.*)'],
     }),
     AccountModule,
@@ -120,7 +119,7 @@ import type { RedisOptions } from 'ioredis'
     HealthModule,
     RouterModule.register([
       {
-        path: '/backend',
+        path: '/api',
         children: [AuthModule, UserModule],
       },
     ]),

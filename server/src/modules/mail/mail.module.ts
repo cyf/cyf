@@ -31,6 +31,7 @@ const dir =
           inlineCssEnabled: true,
           inlineCssOptions: {
             inlineStyleTags: true,
+            keepLinkTags: true,
             loadRemoteStylesheets: true,
           },
         }),
