@@ -48,7 +48,7 @@ export class HeadersMiddleware implements NestMiddleware {
       !isString(xVersion) ||
       isEmpty(xLocale) ||
       !isString(xLocale) ||
-      !isIn(xChannel, ['en', 'zh'])
+      !isIn(xLocale, ['en', 'zh'])
     ) {
       throw new BadRequestException('Invalid request header')
     }
