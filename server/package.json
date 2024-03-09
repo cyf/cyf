@@ -20,7 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.525.0",
+    "@aws-sdk/client-s3": "^3.529.1",
     "@nestjs-modules/mailer": "^1.11.2",
     "@nestjs/axios": "^3.0.2",
     "@nestjs/cache-manager": "^2.2.1",
@@ -60,7 +60,7 @@
     "nestjs-form-data": "^1.9.6",
     "nestjs-i18n": "^10.4.5",
     "nestjs-throttler-storage-redis": "^0.4.2",
-    "nodemailer": "^6.9.11",
+    "nodemailer": "^6.9.12",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "pug": "^3.0.2",
@@ -90,7 +90,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/lodash": "^4.14.202",
     "@types/mime": "^3.0.4",
-    "@types/node": "^18.19.21",
+    "@types/node": "^18.19.22",
     "@types/nodemailer": "^6.4.14",
     "@types/passport-jwt": "^4.0.1",
     "@types/supertest": "^6.0.2",
@@ -117,7 +117,7 @@
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.3.3",
+    "typescript": "^5.4.2",
     "webpack": "^5.90.3",
     "webpack-node-externals": "^3.0.0"
   },
