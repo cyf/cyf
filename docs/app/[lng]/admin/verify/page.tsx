@@ -8,6 +8,7 @@ import { useTranslation } from "@/i18n/client";
 import { selectUser, setUserAsync } from "@/model/slices/user/slice";
 import { useAppSelector, useAppDispatch } from "@/model/hooks";
 import { userService } from "@/services";
+import * as crypto from "@/utils/crypto";
 import type { Socket } from "socket.io-client";
 
 const WS_BASE_URL = process.env.WS_BASE_URL;
@@ -28,16 +29,21 @@ export default function User({
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (user && socketRef?.current) {
+      // Listen for incoming messages
+      const event = crypto.encrypt(user.id);
+      socketRef.current?.on(event, (message) => {
+        console.log("receive verified", message);
+        dispatch(setUserAsync());
+      });
+    }
+  }, [user, socketRef?.current]);
+
+  useEffect(() => {
     if (!WS_BASE_URL) return;
 
     // Create a socket connection
     socketRef.current = io(WS_BASE_URL);
-
-    // Listen for incoming messages
-    socketRef.current?.on("verified", (message) => {
-      console.log("receive verified", message);
-      dispatch(setUserAsync());
-    });
 
     socketRef.current?.on("exception", (error) => {
       console.error("exception", error);

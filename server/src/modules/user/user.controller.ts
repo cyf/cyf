@@ -41,7 +41,7 @@ import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard'
 import { Public } from '@/common/decorators/public.decorator'
 import { CurrentUser } from '@/common/decorators/user.decorator'
 import { putObject } from '@/common/utils/upload'
-import { encrypt, decrypt } from '@/common/utils/crypto'
+import * as privacy from '@/common/utils/privacy'
 
 @Controller('user')
 @ApiTags('user')
@@ -136,7 +136,7 @@ export class UserController {
       throw new BadRequestException()
     }
 
-    const userId = decrypt(id)
+    const userId = privacy.decrypt(id)
     const user = await this.userService.findOne(userId)
 
     if (!user) {
@@ -175,7 +175,7 @@ export class UserController {
       context: {
         username: user.username,
         expires,
-        link: `https://www.chenyifaer.com/portal/api/user/email/verify/${encrypt(user.id)}`,
+        link: `https://www.chenyifaer.com/portal/api/user/email/verify/${privacy.encrypt(user.id)}`,
         copyright: new Date().getFullYear(),
       },
       template: `email-verify-${locale}`,
