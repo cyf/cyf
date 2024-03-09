@@ -6,6 +6,7 @@ import {
   Headers,
   Patch,
   Param,
+  Query,
   Delete,
   UseFilters,
   UseGuards,
@@ -130,8 +131,8 @@ export class UserController {
   }
 
   @Public()
-  @Get('email/verify/:id')
-  async verify(@Param('id') id: string) {
+  @Get('email/verify')
+  async verify(@Query('id') id: string) {
     if (!id) {
       throw new BadRequestException()
     }
@@ -182,7 +183,7 @@ export class UserController {
       context: {
         username: user.username,
         expires,
-        link: `https://www.chenyifaer.com/portal/api/user/email/verify/${privacy.encrypt(user.id)}`,
+        link: `https://www.chenyifaer.com/portal/api/user/email/verify?id=${privacy.encrypt(user.id)}`,
         copyright: new Date().getFullYear(),
       },
       template: `email-verify-${locale}`,
