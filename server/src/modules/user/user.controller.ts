@@ -143,12 +143,19 @@ export class UserController {
       throw new NotFoundException()
     }
 
-    const cachedValue = await this.cacheManager.get(`email_verify__${userId}`)
+    const storeKey = `email_verify__${userId}`
+
+    // 从缓存中获取值
+    const cachedValue = await this.cacheManager.get(storeKey)
     if (!cachedValue) {
       return { status: 'email_verification_expired' }
     }
 
+    // 更新用户验证字段
     await this.userService.verify(userId)
+
+    // 从缓存中删除
+    await this.cacheManager.del(storeKey)
 
     this.eventEmitter.emit('email.verified', new EmailVerifiedEvent(id))
 
