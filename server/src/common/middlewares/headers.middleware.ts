@@ -17,7 +17,7 @@ export class HeadersMiddleware implements NestMiddleware {
     if (
       !path.match(/^\/api/) ||
       path.match(/^\/api\/health/) ||
-      path.match(/^\/api\/user\/email\/verify\//)
+      path.match(/^\/api\/user\/email\/verify/)
     ) {
       next()
       return
