@@ -1,4 +1,5 @@
 import { UseFilters, UseGuards } from '@nestjs/common'
+import { OnEvent } from '@nestjs/event-emitter'
 import {
   WebSocketGateway,
   SubscribeMessage,
@@ -19,6 +20,7 @@ import { CurrentUser } from '@/common/decorators/user.decorator'
 import { WebsocketExceptionFilter } from '@/common/filters/ws-exception.filter'
 import { SocketIoAuthGuard } from '@/common/guards/socket-io.guard'
 import { SocketIoThrottlerGuard } from '@/common/guards/socket-io.throttler.guard'
+import { EmailVerifiedEvent } from '@/modules/user'
 
 // const basePath = process.env.NODE_ENV === 'production' ? 'portal/' : ''
 
@@ -79,6 +81,12 @@ export class SocketIoGateway implements OnGatewayInit<Server> {
   @SubscribeMessage('identity')
   async identity(socket: Socket, @MessageBody() data: number): Promise<number> {
     return data
+  }
+
+  @OnEvent('email.verified', { async: true })
+  emailVerify(payload: EmailVerifiedEvent) {
+    console.log('payload', payload)
+    return { event: 'verified', data: { id: payload.id } }
   }
 
   afterInit(server: Server): any {

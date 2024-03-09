@@ -7,6 +7,7 @@ import { PrismaModule } from '@/modules/prisma'
 import { UserModule } from '@/modules/user'
 import { AuthModule } from '@/modules/auth'
 import { jwtConstants } from '@/common/constants'
+import { EventEmitterModule } from '@nestjs/event-emitter'
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { jwtConstants } from '@/common/constants'
     UserModule,
     AuthModule,
     PassportModule,
+    EventEmitterModule,
     JwtModule.register({
       global: true,
       secret: jwtConstants.secret,

@@ -207,4 +207,27 @@ export class UserService {
       },
     })
   }
+
+  async verify(id: string): Promise<User | null> {
+    return this.prismaService.user.update({
+      select: {
+        id: true,
+        username: true,
+        nickname: true,
+        email: true,
+        email_verified: true,
+        avatar: true,
+        role: true,
+        create_date: true,
+        update_date: true,
+      },
+      data: {
+        email_verified: new Date(),
+      },
+      where: {
+        id,
+        is_del: IsDel.NO,
+      },
+    })
+  }
 }

@@ -9,6 +9,7 @@ import {
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { ServeStaticModule } from '@nestjs/serve-static'
 import { CacheModule, CacheStore } from '@nestjs/cache-manager'
+import { EventEmitterModule } from '@nestjs/event-emitter'
 import { ThrottlerGuard, ThrottlerModule, seconds } from '@nestjs/throttler'
 import { redisStore } from 'cache-manager-redis-store'
 import { ThrottlerStorageRedisService } from 'nestjs-throttler-storage-redis'
@@ -103,6 +104,9 @@ import type { RedisOptions } from 'ioredis'
         AcceptLanguageResolver,
       ],
       inject: [ConfigService],
+    }),
+    EventEmitterModule.forRoot({
+      global: true,
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),

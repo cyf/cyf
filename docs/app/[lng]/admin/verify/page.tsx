@@ -5,8 +5,8 @@ import { ToastAction } from "@/components/ui/toast";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/components/ui/use-toast";
 import { useTranslation } from "@/i18n/client";
-import { selectUser } from "@/model/slices/user/slice";
-import { useAppSelector } from "@/model/hooks";
+import { selectUser, setUserAsync } from "@/model/slices/user/slice";
+import { useAppSelector, useAppDispatch } from "@/model/hooks";
 import { userService } from "@/services";
 import type { Socket } from "socket.io-client";
 
@@ -20,9 +20,9 @@ export default function User({
   };
 }) {
   const { t } = useTranslation(params.lng, "common");
-  const { t: tl } = useTranslation(params.lng, "login");
   const { t: tv } = useTranslation(params.lng, "verify");
   const socketRef = useRef<Socket>();
+  const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
@@ -34,8 +34,9 @@ export default function User({
     socketRef.current = io(WS_BASE_URL);
 
     // Listen for incoming messages
-    socketRef.current?.on("hello2", (message) => {
-      console.log("receive hello2", message);
+    socketRef.current?.on("verified", (message) => {
+      console.log("receive verified", message);
+      dispatch(setUserAsync());
     });
 
     socketRef.current?.on("exception", (error) => {
@@ -70,7 +71,7 @@ export default function User({
   const sendEmail = async () => {
     setLoading(true);
     await userService
-      .verify()
+      .send()
       .then((res: any) => {
         setLoading(false);
         console.log(res);

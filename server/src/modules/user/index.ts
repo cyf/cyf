@@ -1,4 +1,5 @@
 export { User } from './entities/user.entity'
+export { default as EmailVerifiedEvent } from './events/email-verified.event'
 export { UserController } from './user.controller'
 export { UserModule } from './user.module'
 export { UserService } from './user.service'

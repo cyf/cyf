@@ -14,6 +14,8 @@ import {
   UseInterceptors,
   Inject,
 } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
+import { EventEmitter2 } from '@nestjs/event-emitter'
 import { I18nContext, I18nService } from 'nestjs-i18n'
 import {
   CACHE_MANAGER,
@@ -31,6 +33,7 @@ import { Cache } from 'cache-manager'
 // import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { UserService } from './user.service'
+import EmailVerifiedEvent from './events/email-verified.event'
 import { MailService } from '@/modules/mail'
 import { HttpExceptionFilter } from '@/common/filters/http-exception.filter'
 import { VersionGuard } from '@/common/guards/version.guard'
@@ -38,6 +41,7 @@ import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard'
 import { Public } from '@/common/decorators/public.decorator'
 import { CurrentUser } from '@/common/decorators/user.decorator'
 import { putObject } from '@/common/utils/upload'
+import { encrypt, decrypt } from '@/common/utils/crypto'
 
 @Controller('user')
 @ApiTags('user')
@@ -48,6 +52,8 @@ export class UserController {
     private readonly mailService: MailService,
     private readonly userService: UserService,
     private readonly i18n: I18nService,
+    private readonly configService: ConfigService,
+    private readonly eventEmitter: EventEmitter2,
     @Inject(CACHE_MANAGER) private readonly cacheManager: Cache,
   ) {}
 
@@ -123,8 +129,34 @@ export class UserController {
     return user
   }
 
-  @Post('email-verify')
-  async verify(@CurrentUser() user: any, @Headers('x-locale') locale: string) {
+  @Public()
+  @Get('email/verify/:id')
+  async verify(@Param('id') id: string) {
+    if (!id) {
+      throw new BadRequestException()
+    }
+
+    const userId = decrypt(id)
+    const user = await this.userService.findOne(userId)
+
+    if (!user) {
+      throw new NotFoundException()
+    }
+
+    const cachedValue = await this.cacheManager.get(`email_verify__${userId}`)
+    if (!cachedValue) {
+      return { status: 'email_verification_expired' }
+    }
+
+    await this.userService.verify(userId)
+
+    this.eventEmitter.emit('email.verified', new EmailVerifiedEvent(id))
+
+    return true
+  }
+
+  @Post('email/send')
+  async send(@CurrentUser() user: any, @Headers('x-locale') locale: string) {
     const cachedValue = await this.cacheManager.get(`email_verify__${user.id}`)
     if (cachedValue) {
       return { status: 'email_verification_sent' }
@@ -133,12 +165,17 @@ export class UserController {
     const subject = this.i18n.t('validation.SUBJECT', {
       lang: I18nContext.current().lang,
     })
+
+    // 获取邮件过期时间配置
+    const expires = this.configService.get<number>('email.verify.expires')
+
     const res = await this.mailService.create(user.id, {
       to: user.email, // list of receivers
       subject, // Subject line
       context: {
         username: user.username,
-        link: 'https://www.chenyifaer.com',
+        expires,
+        link: `https://www.chenyifaer.com/portal/api/user/email/verify/${encrypt(user.id)}`,
         copyright: new Date().getFullYear(),
       },
       template: `email-verify-${locale}`,
@@ -147,7 +184,7 @@ export class UserController {
     await this.cacheManager.set(
       `email_verify__${user.id}`,
       'true',
-      5 * 60 * 1000,
+      expires * 60 * 1000,
     )
 
     return res
