@@ -27,23 +27,29 @@ export default function User({
   const user = useAppSelector(selectUser);
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [verifiedId, setVerifiedId] = useState<string>();
 
   useEffect(() => {
-    if (user && socketRef?.current) {
+    if (user && verifiedId) {
       // Listen for incoming messages
       const event = crypto.encrypt(user.id);
-      socketRef.current?.on(event, (message) => {
-        console.log("receive verified", message);
+      if (verifiedId == event) {
+        // console.log('email verified')
         dispatch(setUserAsync());
-      });
+      }
     }
-  }, [user, socketRef?.current]);
+  }, [user, verifiedId]);
 
   useEffect(() => {
     if (!WS_BASE_URL) return;
 
     // Create a socket connection
     socketRef.current = io(WS_BASE_URL);
+
+    socketRef.current?.on("verified", (data: any) => {
+      // console.log("receive verified", data);
+      setVerifiedId(data?.id);
+    });
 
     socketRef.current?.on("exception", (error) => {
       console.error("exception", error);
