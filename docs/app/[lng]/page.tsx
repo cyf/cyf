@@ -131,7 +131,7 @@ export default function Home({
           </Link>
           <Link
             href={`/${params.lng}/admin`}
-            className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-red-300 bg-white px-5 py-2 text-sm text-red-500 shadow-md transition-colors hover:border-red-500 dark:bg-black dark:text-red-500"
+            className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-green-300 bg-white px-5 py-2 text-sm text-green-500 shadow-md transition-colors hover:border-green-500 dark:bg-black dark:text-green-500"
             rel="noopener noreferrer"
           >
             <MdJoinInner className="h-5 w-5" />
