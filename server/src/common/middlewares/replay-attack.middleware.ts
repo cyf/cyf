@@ -20,7 +20,11 @@ export class ReplayAttackMiddleware implements NestMiddleware {
   async use(req: Request, _res: Response, next: NextFunction) {
     logger.debug('[ReplayAttackMiddleware]: use.')
     const path = req.originalUrl
-    if (!path.match(/^\/api/) || path.match(/^\/api\/health/)) {
+    if (
+      !path.match(/^\/api/) ||
+      path.match(/^\/api\/health/) ||
+      path.match(/^\/api\/user\/email\/verify\//)
+    ) {
       next()
       return
     }

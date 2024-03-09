@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common'
+import { ConfigModule } from '@nestjs/config'
+import { EventEmitterModule } from '@nestjs/event-emitter'
 // import { PassportModule } from '@nestjs/passport'
 import { NestjsFormDataModule } from 'nestjs-form-data'
 import { UserController } from './user.controller'
@@ -13,6 +15,7 @@ import { VerificationTokenModule } from '../verification-token'
 @Module({
   imports: [
     // PassportModule,
+    ConfigModule,
     AccountModule,
     AuthenticatorModule,
     MailModule,
@@ -20,6 +23,7 @@ import { VerificationTokenModule } from '../verification-token'
     SessionModule,
     VerificationTokenModule,
     NestjsFormDataModule,
+    EventEmitterModule,
   ],
   controllers: [UserController],
   providers: [UserService],

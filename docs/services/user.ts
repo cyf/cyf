@@ -2,10 +2,8 @@ import axios from "@/request/axios";
 import { Result } from "@/entities/response";
 
 // 发送邮箱验证邮件
-export const verify = (): Promise<
-  Result<{ id: string; message_id: string }>
-> => {
-  return axios.post("/api/user/email-verify");
+export const send = (): Promise<Result<{ id: string; message_id: string }>> => {
+  return axios.post("/api/user/email/send");
 };
 
 // 判断用户名是否存在
