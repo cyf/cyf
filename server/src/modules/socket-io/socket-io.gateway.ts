@@ -86,7 +86,7 @@ export class SocketIoGateway implements OnGatewayInit<Server> {
   @OnEvent('email.verified', { async: true })
   emailVerify(payload: EmailVerifiedEvent) {
     console.log('payload', payload)
-    return { event: payload.id, data: { id: payload.id } }
+    this.server.emit('verified', payload)
   }
 
   afterInit(server: Server): any {
