@@ -7,6 +7,7 @@ import Cropper from "react-cropper";
 import EmailValidator from "email-validator";
 import Zoom from "react-medium-image-zoom";
 import Cookies from "js-cookie";
+import { AiOutlineCloudUpload } from "react-icons/ai";
 import AwesomeDebouncePromise from "awesome-debounce-promise";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -31,7 +32,7 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Input, FileInput } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { LoadingDots } from "@/components/shared/icons";
 import { domain, cacheTokenKey } from "@/constants";
@@ -252,25 +253,12 @@ export default function Login({
                   }) => (
                     <FormItem>
                       <FormLabel>{tl("avatar-label")}</FormLabel>
-                      {image && (
-                        <div className="flex justify-center">
-                          <Zoom classDialog="custom-zoom">
-                            <Image
-                              className="rounded-full"
-                              src={image}
-                              width={120}
-                              height={120}
-                              alt="@avatar"
-                            />
-                          </Zoom>
-                        </div>
-                      )}
                       <FormControl>
-                        <Input
+                        <FileInput
                           {...fieldProps}
                           id="avatar"
+                          htmlFor="upload"
                           ref={fileInput}
-                          placeholder={tl("avatar-placeholder")}
                           accept="image/jpg, image/jpeg, image/png"
                           type="file"
                           multiple={false}
@@ -295,7 +283,78 @@ export default function Login({
                                 .catch((error) => console.error(error));
                             }
                           }}
-                        />
+                        >
+                          <label
+                            htmlFor="upload"
+                            className="flex flex-col items-center justify-center"
+                          >
+                            <ShowContent isShow={!image}>
+                              <>
+                                <span className="flex h-24 w-24 cursor-pointer items-center justify-center rounded-[4px] border-[1px] border-gray-300 bg-gray-100 dark:border-gray-500 dark:bg-gray-800">
+                                  <AiOutlineCloudUpload className="h-5 w-5" />
+                                </span>
+                                <span
+                                  className="mt-2 text-sm text-muted-foreground"
+                                  onClick={(
+                                    e: React.MouseEvent<
+                                      HTMLSpanElement,
+                                      MouseEvent
+                                    >,
+                                  ) => {
+                                    e.preventDefault();
+                                  }}
+                                >
+                                  {tl("avatar-placeholder")}
+                                </span>
+                              </>
+                            </ShowContent>
+                            <ShowContent isShow={!!image}>
+                              <>
+                                <div
+                                  className="flex justify-center"
+                                  onClick={(
+                                    e: React.MouseEvent<
+                                      HTMLDivElement,
+                                      MouseEvent
+                                    >,
+                                  ) => {
+                                    e.preventDefault();
+                                  }}
+                                >
+                                  <Zoom classDialog="custom-zoom">
+                                    <Image
+                                      className="rounded-full"
+                                      src={image}
+                                      width={120}
+                                      height={120}
+                                      alt="@avatar"
+                                    />
+                                  </Zoom>
+                                </div>
+                                <span
+                                  className="mt-2 cursor-pointer text-sm text-muted-foreground"
+                                  onClick={(
+                                    e: React.MouseEvent<
+                                      HTMLSpanElement,
+                                      MouseEvent
+                                    >,
+                                  ) => {
+                                    e.preventDefault();
+                                    setImage(null);
+                                    onChange(null);
+                                    form.setValue("file", null);
+                                    if (fileInput.current) {
+                                      fileInput.current.files = null;
+                                      fileInput.current.value = "";
+                                    }
+                                  }}
+                                >
+                                  {tl("clear-avatar")}
+                                </span>
+                              </>
+                            </ShowContent>
+                          </label>
+                        </FileInput>
                       </FormControl>
                       <ShowContent isShow={!!error?.message}>
                         <ValidMessage className="!mt-1 text-[12px] font-normal">
