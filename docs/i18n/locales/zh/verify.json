@@ -1,3 +1,11 @@
 {
-  "verify_email_sent": "认证邮件已发送"
+  "hi": "你好",
+  "description": "欢迎加入CYF内测计划! 您已经踏上了创造美丽视觉产品的道路. 链接在{{expires}}分钟内有效. 如有任何问题, ",
+  "contact-us": "请保持联系",
+  "send-email": "发送邮件",
+  "wrong-email": "邮件地址错误?",
+  "login-again": "后使用其他电子邮件登录.",
+  "thanks": "谢谢",
+  "kjxbyz": "科技小白英仔",
+  "verify-email-sent": "认证邮件已发送"
 }
