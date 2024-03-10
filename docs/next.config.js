@@ -11,6 +11,7 @@ const nextConfig = {
   swcMinify: true,
   images: {
     remotePatterns: [
+      { hostname: "chenyifaer.com" },
       { hostname: "lh3.googleusercontent.com" },
       { hostname: "visitor-badge.laobi.icu" },
     ],

@@ -1,23 +1,16 @@
 "use client";
 import { useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
 import { MdLogout } from "react-icons/md";
-import Cookies from "js-cookie";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Popover from "@/components/shared/popover";
-import { persistStore } from "@/model/store";
-import { setUser } from "@/model/slices/user/slice";
-import { useAppDispatch } from "@/model/hooks";
 import { useTranslation } from "@/i18n/client";
-import { domain, cacheTokenKey } from "@/constants";
+import { useLogout } from "@/lib/hooks";
 import type { LngProps } from "@/i18next-lng";
 import type { User } from "@/entities/user";
 
 export default function AvatarDropdown(props: { user: User } & LngProps) {
   const { user, lng } = props;
-  const router = useRouter();
-  const pathname = usePathname();
-  const dispatch = useAppDispatch();
+  const logout = useLogout(lng);
   const { t: tl } = useTranslation(lng, "login");
   const [openPopover, setOpenPopover] = useState(false);
 
@@ -29,13 +22,7 @@ export default function AvatarDropdown(props: { user: User } & LngProps) {
             <button
               onClick={() => {
                 setOpenPopover(false);
-                persistStore.pause();
-                persistStore.flush().then(() => {
-                  const res = persistStore.purge();
-                  Cookies.remove(cacheTokenKey);
-                  router.push(`/${lng}/login?r=${domain}${pathname}`);
-                  return res;
-                });
+                logout();
               }}
               className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100 dark:hover:bg-gray-700"
             >

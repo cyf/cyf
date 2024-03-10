@@ -1,3 +1,11 @@
 {
-  "verify_email_sent": "Verification email has been sent"
+  "hi": "Hi",
+  "description": "Welcome to CYF Insider! You're already on your way to creating beautiful visual products. The verification link is valid within {{expires}} minutes. If you have any questions, ",
+  "contact-us": "please get in touch",
+  "send-email": "Send email",
+  "wrong-email": "Wrong email address?",
+  "login-again": " to log in with a different email.",
+  "thanks": "Thanks",
+  "kjxbyz": "KJXBYZ",
+  "verify-email-sent": "Verification email has been sent"
 }
