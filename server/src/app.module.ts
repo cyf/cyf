@@ -112,6 +112,7 @@ import type { RedisOptions } from 'ioredis'
       rootPath: join(__dirname, '..', 'public'),
       exclude: ['/api/(.*)'],
     }),
+    NestjsFormDataModule,
     AccountModule,
     AuthModule,
     AuthenticatorModule,
@@ -124,11 +125,10 @@ import type { RedisOptions } from 'ioredis'
     RouterModule.register([
       {
         path: '/api',
-        children: [AuthModule, UserModule],
+        children: [AuthModule, UserModule, HealthModule],
       },
     ]),
     SocketIoModule,
-    NestjsFormDataModule,
   ],
   providers: [
     { provide: APP_INTERCEPTOR, useClass: LoggingInterceptor },
