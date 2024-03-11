@@ -120,7 +120,7 @@ export default function Login({
     <>
       <div className="flex w-screen justify-center">
         <div className="z-10 h-fit w-full max-w-md overflow-hidden border border-gray-100 dark:border-gray-900 sm:rounded-2xl sm:shadow-xl">
-          <PageHeader lng={params.lng} />
+          <PageHeader title={tl("title")} description={tl("tips")} />
           <div className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 dark:bg-gray-900 sm:px-10">
             <Form {...form}>
               <form

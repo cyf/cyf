@@ -24,7 +24,7 @@ export default function Admin({
           </Avatar>
           <Link
             className="cursor-pointer text-red-400 hover:text-xl"
-            href={`/${params.lng}/admin/user`}
+            href={`/${params.lng}/admin/form`}
           >
             {user?.nickname}
           </Link>

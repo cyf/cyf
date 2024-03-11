@@ -2,10 +2,12 @@
   "account-validator": "帐号不能为空.",
   "file-validator": "请上传图片.",
   "file-size-validator": "文件大小不能大于 5MB.",
-  "username-validator": "用户名必须至少有 6 个字符.",
+  "username-validator": "用户名必须至少有6个字符.",
   "username-existed-validator": "用户名已存在, 请换一个重试.",
-  "email-validator": "电子邮件格式无效.",
+  "email-validator": "请输入你的邮箱地址.",
   "email-existed-validator": "邮箱已注册, 请换一个重试.",
-  "password-validator": "密码必须至少有 6 个字符.",
-  "repeat-password-validator": "输入的密码不同."
+  "password-validator": "密码必须至少有6个字符.",
+  "repeat-password-validator": "输入的密码不同.",
+  "app-validator": "请选择应用.",
+  "platforms-validator": "请选择平台."
 }
