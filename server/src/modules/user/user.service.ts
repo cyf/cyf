@@ -132,6 +132,7 @@ export class UserService {
         nickname: true,
         password: true,
         email: true,
+        email_verified: true,
         avatar: true,
         role: true,
         create_date: true,
