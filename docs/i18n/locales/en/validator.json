@@ -4,8 +4,10 @@
   "file-size-validator": "File size cannot be larger than 5MB.",
   "username-validator": "Username must be at least 6 characters.",
   "username-existed-validator": "The username already exists, please try again with another one.",
-  "email-validator": "Email is invalid.",
+  "email-validator": "Please enter your email address.",
   "email-existed-validator": "The email address has been registered, please try again with another one.",
   "password-validator": "Password must be at least 6 characters.",
-  "repeat-password-validator": "The passwords entered are different."
+  "repeat-password-validator": "The passwords entered are different.",
+  "app-validator": "Please select an app.",
+  "platforms-validator": "Please select your platform(s)."
 }
