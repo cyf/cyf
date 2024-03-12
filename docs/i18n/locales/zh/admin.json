@@ -1,0 +1,10 @@
+{
+  "email-placeholder": "请输入你的邮箱",
+  "columns": "列",
+  "status": "状态",
+  "email": "邮件",
+  "amount": "数量",
+  "actions": "操作",
+  "no-results": "没有结果.",
+  "selected": "选中{{selected}}条, 共计{{total}}条."
+}

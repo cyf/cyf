@@ -1,0 +1,10 @@
+{
+  "email-placeholder": "please enter you email",
+  "columns": "Columns",
+  "status": "Status",
+  "email": "Email",
+  "amount": "Amount",
+  "actions": "Actions",
+  "no-results": "No results.",
+  "selected": "{{selected}} of {{total}} row(s) selected."
+}
