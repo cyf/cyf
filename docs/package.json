@@ -99,7 +99,7 @@
     "@types/lodash": "^4.14.202",
     "@types/ms": "^0.7.34",
     "@types/node": "^18.19.23",
-    "@types/react": "^18.2.64",
+    "@types/react": "^18.2.65",
     "@types/react-dom": "^18.2.21",
     "@types/redux-logger": "^3.0.13",
     "@types/rss": "^0.0.32",
