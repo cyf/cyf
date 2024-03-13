@@ -1,9 +1,13 @@
 import { Reflector } from '@nestjs/core'
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
+import {
+  CanActivate,
+  ExecutionContext,
+  Injectable,
+  HttpStatus,
+} from '@nestjs/common'
 import { WsException } from '@nestjs/websockets'
 import { JwtService } from '@nestjs/jwt'
 import { Socket } from 'socket.io'
-import httpStatus from 'http-status'
 import { jwtConstants } from '@/common/constants'
 import { IS_PUBLIC_KEY } from '@/common/decorators/public.decorator'
 
@@ -28,7 +32,7 @@ export class SocketIoAuthGuard implements CanActivate {
     const token = this.extractTokenFromHeader(client)
     if (!token) {
       throw new WsException({
-        code: httpStatus.UNAUTHORIZED,
+        code: HttpStatus.UNAUTHORIZED,
         msg: 'unauthorized',
       })
     }
@@ -40,7 +44,7 @@ export class SocketIoAuthGuard implements CanActivate {
       })
     } catch {
       throw new WsException({
-        code: httpStatus.UNAUTHORIZED,
+        code: HttpStatus.UNAUTHORIZED,
         msg: 'unauthorized',
       })
     }

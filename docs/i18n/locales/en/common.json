@@ -7,5 +7,9 @@
   "cancel": "Cancel",
   "confirm": "Confirm",
   "crop-image": "Crop Image",
-  "image-cropping": "Image Cropping"
+  "image-cropping": "Image Cropping",
+  "loading": "Loading...",
+  "succeed": "Succeed",
+  "error": "Uh oh! Something went wrong.",
+  "error-description": "There was a problem with your request."
 }

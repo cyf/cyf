@@ -1,8 +1,11 @@
 {
-  "email-placeholder": "please enter you email",
+  "email-placeholder": "Please enter you email",
   "columns": "Columns",
-  "status": "Status",
+  "app": "App",
+  "platform": "Platform",
   "email": "Email",
+  "create_date": "Create Date",
+  "create_by": "Create By",
   "amount": "Amount",
   "actions": "Actions",
   "no-results": "No results.",

@@ -1,8 +1,11 @@
 {
   "email-placeholder": "请输入你的邮箱",
   "columns": "列",
-  "status": "状态",
+  "app": "应用",
+  "platform": "平台",
   "email": "邮件",
+  "create_date": "创建时间",
+  "create_by": "创建人",
   "amount": "数量",
   "actions": "操作",
   "no-results": "没有结果.",
