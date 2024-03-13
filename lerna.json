@@ -4,6 +4,7 @@
   "npmClient": "pnpm",
   "command": {
     "version": {
+      "forcePublish": true,
       "message": "chore(release): publish %s"
     }
   }
