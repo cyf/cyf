@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "version": "0.0.0",
+  "npmClient": "pnpm",
+  "command": {
+    "version": {
+      "message": "chore(release): publish %s"
+    }
+  }
+}
