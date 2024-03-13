@@ -1,8 +1,7 @@
-import { Catch, ArgumentsHost } from '@nestjs/common'
+import { Catch, ArgumentsHost, HttpStatus } from '@nestjs/common'
 import { WsException, BaseWsExceptionFilter } from '@nestjs/websockets'
 import { Socket } from 'socket.io'
 import { isString } from 'class-validator'
-import httpStatus from 'http-status'
 import logger from '../logger/logger'
 
 @Catch(WsException)
@@ -13,7 +12,7 @@ export class WebsocketExceptionFilter extends BaseWsExceptionFilter<WsException>
 
     const error = exception.getError()
     const code = isString(error)
-      ? httpStatus.INTERNAL_SERVER_ERROR
+      ? HttpStatus.INTERNAL_SERVER_ERROR
       : (error as any).code
     const msg = isString(error) ? error : (error as any).msg
 

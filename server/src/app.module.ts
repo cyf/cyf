@@ -34,6 +34,7 @@ import {
   SessionModule,
   UserModule,
   VerificationTokenModule,
+  InsiderModule,
   SocketIoModule,
 } from './modules'
 import { LoggerMiddleware } from './common/middlewares/logger.middleware'
@@ -121,11 +122,12 @@ import type { RedisOptions } from 'ioredis'
     SessionModule,
     UserModule,
     VerificationTokenModule,
+    InsiderModule,
     HealthModule,
     RouterModule.register([
       {
         path: '/api',
-        children: [AuthModule, UserModule, HealthModule],
+        children: [AuthModule, UserModule, InsiderModule, HealthModule],
       },
     ]),
     SocketIoModule,

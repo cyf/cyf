@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common'
+import { Inject, Injectable, NotFoundException } from '@nestjs/common'
 import { CACHE_MANAGER } from '@nestjs/cache-manager'
 import { Cache } from 'cache-manager'
 import { IsDel } from '@prisma/client'
@@ -160,7 +160,7 @@ export class UserService {
     avatar?: string,
   ): Promise<User | null> {
     const { username, nickname, password, email } = updateUserDto
-    return this.prismaService.user.update({
+    const user = await this.prismaService.user.update({
       data: {
         username,
         nickname,
@@ -184,10 +184,16 @@ export class UserService {
         is_del: IsDel.NO,
       },
     })
+
+    if (!user) {
+      throw new NotFoundException()
+    }
+
+    return user
   }
 
   async remove(id: string): Promise<User | null> {
-    return this.prismaService.user.update({
+    const user = await this.prismaService.user.update({
       select: {
         id: true,
         username: true,
@@ -207,6 +213,12 @@ export class UserService {
         is_del: IsDel.NO,
       },
     })
+
+    if (!user) {
+      throw new NotFoundException()
+    }
+
+    return user
   }
 
   async verify(id: string): Promise<User | null> {

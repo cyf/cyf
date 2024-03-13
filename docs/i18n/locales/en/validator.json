@@ -9,5 +9,5 @@
   "password-validator": "Password must be at least 6 characters.",
   "repeat-password-validator": "The passwords entered are different.",
   "app-validator": "Please select an app.",
-  "platforms-validator": "Please select your platform(s)."
+  "platform-validator": "Please select your platform(s)."
 }

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -12,6 +12,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import dayjs from "dayjs";
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -33,7 +34,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
+import { ToastAction } from "@/components/ui/toast";
+import { toast } from "@/components/ui/use-toast";
 import { selectUser } from "@/model/slices/user/slice";
+import { Insider } from "@/entities/insider";
+import { insiderService } from "@/services";
 import { useAppSelector } from "@/model/hooks";
 import { useTranslation } from "@/i18n/client";
 
@@ -41,25 +52,31 @@ interface ColumnMetaType {
   headerClassName?: string;
 }
 
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
+const apps = [
+  {
+    id: "fafa-runner",
+    label: "FaFa Runner",
+  },
+  {
+    id: "homing-pigeon",
+    label: "Homing Pigeon",
+  },
+] as const;
 
-const data = new Array(15)
-  .fill(1)
-  .map((v, i) => ++i)
-  .map(
-    (value) =>
-      ({
-        id: `value_${value}`,
-        amount: 721,
-        status: "failed",
-        email: `${value}@hotmail.com`,
-      }) as Payment,
-  );
+const platforms = [
+  {
+    id: "ios",
+    label: "iOS",
+  },
+  {
+    id: "android",
+    label: "Android",
+  },
+  {
+    id: "macos",
+    label: "MacOS",
+  },
+] as const;
 
 export default function Admin({
   params,
@@ -69,6 +86,7 @@ export default function Admin({
   };
 }) {
   const { t } = useTranslation(params.lng, "admin");
+  const { t: tc } = useTranslation(params.lng, "common");
   const user = useAppSelector(selectUser);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -78,7 +96,10 @@ export default function Admin({
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const columns: ColumnDef<Payment, ColumnMetaType>[] = [
+  const [loading, setLoading] = useState(false);
+  const [insiders, setInsiders] = useState<Insider[]>([]);
+
+  const columns: ColumnDef<Insider, ColumnMetaType>[] = [
     {
       id: "select",
       header: ({ table }) => (
@@ -102,11 +123,42 @@ export default function Admin({
       enableHiding: false,
     },
     {
-      accessorKey: "status",
-      header: t("status"),
-      cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("status")}</div>
-      ),
+      accessorKey: "app",
+      header: t("app"),
+      cell: ({ row }) => {
+        const app = row.getValue("app") as string | undefined;
+        return (
+          <Select defaultValue={app}>
+            <SelectValue />
+            <SelectContent>
+              {apps.map((app) => (
+                <SelectItem key={app.id} value={app.id}>
+                  {app.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        );
+      },
+    },
+    {
+      accessorKey: "platform",
+      header: t("platform"),
+      cell: ({ row }) => {
+        const platform = row.getValue("platform") as string | undefined;
+        return (
+          <Select defaultValue={platform}>
+            <SelectValue />
+            <SelectContent>
+              {platforms.map((platform) => (
+                <SelectItem key={platform.id} value={platform.id}>
+                  {platform.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        );
+      },
     },
     {
       accessorKey: "email",
@@ -126,17 +178,23 @@ export default function Admin({
       ),
     },
     {
-      accessorKey: "amount",
-      header: () => <div className="text-right">{t("amount")}</div>,
+      accessorKey: "user",
+      header: () => <div className="text-right">{t("create_by")}</div>,
       cell: ({ row }) => {
-        const amount = parseFloat(row.getValue("amount"));
-
-        // Format the amount as a dollar amount
-        const formatted = new Intl.NumberFormat("en-US", {
-          style: "currency",
-          currency: "USD",
-        }).format(amount);
-
+        const user = row.getValue("user") as any;
+        return (
+          <div className="text-right font-medium">
+            {user?.nickname || user?.username}
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: "create_date",
+      header: () => <div className="text-right">{t("create_date")}</div>,
+      cell: ({ row }) => {
+        const date = new Date(row.getValue("create_date"));
+        const formatted = dayjs(date).format("YYYY-MM-DD HH:ss");
         return <div className="text-right font-medium">{formatted}</div>;
       },
     },
@@ -154,7 +212,10 @@ export default function Admin({
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
+              <Button
+                variant="ghost"
+                className="h-8 w-8 p-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+              >
                 <span className="sr-only">Open menu</span>
                 <MoreHorizontal className="h-4 w-4" />
               </Button>
@@ -177,7 +238,7 @@ export default function Admin({
   ];
 
   const table = useReactTable({
-    data,
+    data: insiders,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -194,6 +255,28 @@ export default function Admin({
       rowSelection,
     },
   });
+
+  useEffect(() => {
+    setLoading(true);
+    insiderService
+      .list()
+      .then((res: any) => {
+        setLoading(false);
+        console.log(res);
+        if (res?.code === 0) {
+          setInsiders(res?.data || []);
+        }
+      })
+      .catch((error: any) => {
+        setLoading(false);
+        console.error(error);
+        toast({
+          title: tc("error"),
+          variant: "destructive",
+          description: error?.msg || tc("error-description"),
+        });
+      });
+  }, []);
 
   return (
     <>
@@ -293,7 +376,7 @@ export default function Admin({
                       colSpan={columns.length}
                       className="h-24 text-center"
                     >
-                      {t("no-results")}
+                      {loading ? tc("loading") : t("no-results")}
                     </TableCell>
                   </TableRow>
                 )}

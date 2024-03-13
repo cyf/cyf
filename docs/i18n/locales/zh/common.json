@@ -7,5 +7,9 @@
   "cancel": "取消",
   "confirm": "确认",
   "crop-image": "裁剪图片",
-  "image-cropping": "图片裁剪"
+  "image-cropping": "图片裁剪",
+  "loading": "加载中...",
+  "succeed": "操作成功",
+  "error": "呃! 出了一些问题.",
+  "error-description": "您的请求有问题."
 }

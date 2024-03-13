@@ -15,8 +15,8 @@ model User {
   id             String    @id @default(cuid()) @map("id")
   username       String    @unique @map("username")
   nickname       String?   @map("nickname")
-  password       String?   @map("password")
-  email          String?   @unique @map("email")
+  password       String    @map("password")
+  email          String    @unique @map("email")
   email_verified DateTime? @map("email_verified")
   avatar         String?   @map("avatar")
 
@@ -25,14 +25,33 @@ model User {
   update_date DateTime @updatedAt @map("update_date")
   is_del      IsDel    @default(NO) @map("is_del")
 
-  accounts      Account[]
-  sessions      Session[]
-  emails        Email[]
-  Authenticator Authenticator[]
+  accounts       Account[]
+  sessions       Session[]
+  emails         Email[]
+  authenticators Authenticator[]
+  insiders       Insider[]
 
   @@index([username], type: Hash)
   @@index([email], type: Hash)
   @@map("users")
+}
+
+model Insider {
+  id       String @id @default(cuid()) @map("id")
+  app      String @map("app")
+  platform String @map("platform")
+  email    String @map("email")
+
+  create_date DateTime @default(now()) @map("create_date")
+  create_by   String   @map("create_by")
+  update_date DateTime @updatedAt @map("update_date")
+  update_by   String   @map("update_by")
+  is_del      IsDel    @default(NO) @map("is_del")
+
+  user User @relation(fields: [create_by], references: [id], onDelete: Cascade)
+
+  @@unique([app, platform, email, create_by])
+  @@map("insiders")
 }
 
 model Email {
