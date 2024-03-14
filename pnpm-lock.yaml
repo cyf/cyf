@@ -26,6 +26,9 @@ importers:
 
   docs:
     dependencies:
+      '@emotion/is-prop-valid':
+        specifier: ^1.2.2
+        version: 1.2.2
       '@hookform/resolvers':
         specifier: ^3.3.4
         version: 3.3.4(react-hook-form@7.51.0)
@@ -142,7 +145,7 @@ importers:
         version: 10.2.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       framer-motion:
         specifier: ^11.0.13
-        version: 11.0.13(react-dom@18.2.0)(react@18.2.0)
+        version: 11.0.13(@emotion/is-prop-valid@1.2.2)(react-dom@18.2.0)(react@18.2.0)
       http-status:
         specifier: ^1.7.4
         version: 1.7.4
@@ -2117,6 +2120,16 @@ packages:
 
   /@effect-ts/system@0.57.5:
     resolution: {integrity: sha512-/crHGujo0xnuHIYNc1VgP0HGJGFSoSqq88JFXe6FmFyXPpWt8Xu39LyLg7rchsxfXFeEdA9CrIZvLV5eswXV5g==}
+    dev: false
+
+  /@emotion/is-prop-valid@1.2.2:
+    resolution: {integrity: sha512-uNsoYd37AFmaCdXlg6EYD1KaPOaRWRByMCYzbKUX4+hhMfrxdVSelShywL4JVaAeM/eHUOSprYBQls+/neX3pw==}
+    dependencies:
+      '@emotion/memoize': 0.8.1
+    dev: false
+
+  /@emotion/memoize@0.8.1:
+    resolution: {integrity: sha512-W2P2c/VRW1/1tLox0mVUalvnWXxavmv/Oum2aPsRcoDJuob75FC3Y8FbpfLwUegRcxINtGUMPq0tFCvYNTBXNA==}
     dev: false
 
   /@esbuild-plugins/node-resolve@0.1.4(esbuild@0.20.1):
@@ -9877,7 +9890,7 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
 
-  /framer-motion@11.0.13(react-dom@18.2.0)(react@18.2.0):
+  /framer-motion@11.0.13(@emotion/is-prop-valid@1.2.2)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-zDjUj7dBiB6WklCvklKH06mwbYO0hzWrq5Rdz/DgeBFsCVQRmb9Zv7I9dPM7lX5c8eMxxba5D6sEVIv1kj/Ttg==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
@@ -9891,6 +9904,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
+      '@emotion/is-prop-valid': 1.2.2
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       tslib: 2.6.2
