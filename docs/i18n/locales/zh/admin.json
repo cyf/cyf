@@ -8,6 +8,21 @@
   "create_by": "创建人",
   "amount": "数量",
   "actions": "操作",
+  "add": "增加",
   "no-results": "没有结果.",
-  "selected": "选中{{selected}}条, 共计{{total}}条."
+  "selected": "选中{{selected}}条, 共计{{total}}条.",
+  "form": {
+    "title": "加入内测计划",
+    "tips": "参与内测计划, 您将获得最新的产品体验.",
+    "app-label": "应用",
+    "app-placeholder": "请选择应用",
+    "app-description": "请选择参与内测的应用",
+    "platform-label": "平台",
+    "platform-description": "请选择参与内测的平台",
+    "email-label": "邮箱",
+    "email-placeholder": "请输入你的邮箱",
+    "email-description": "请输入注册平台的邮箱地址",
+    "email-description2": "iOS/macOS平台请填写Apple ID邮箱地址, Android平台请填写注册账号的邮箱地址",
+    "submit": "提交"
+  }
 }

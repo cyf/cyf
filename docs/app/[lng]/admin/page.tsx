@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -13,7 +13,24 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import dayjs from "dayjs";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  ArrowUpDown,
+  ChevronDown,
+  MoreHorizontal,
+  Plus,
+  Send,
+} from "lucide-react";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormDescription,
+} from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -38,8 +55,17 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ToastAction } from "@/components/ui/toast";
 import { toast } from "@/components/ui/use-toast";
 import { selectUser } from "@/model/slices/user/slice";
@@ -47,6 +73,7 @@ import { Insider } from "@/entities/insider";
 import { insiderService } from "@/services";
 import { useAppSelector } from "@/model/hooks";
 import { useTranslation } from "@/i18n/client";
+import { cn } from "@/lib/utils";
 
 interface ColumnMetaType {
   headerClassName?: string;
@@ -78,6 +105,16 @@ const platforms = [
   },
 ] as const;
 
+const formSchema = z.object({
+  app: z.string().min(1, {
+    message: "app-validator",
+  }),
+  platform: z.string().min(1, {
+    message: "platform-validator",
+  }),
+  email: z.string().email({ message: "email-validator" }),
+});
+
 export default function Admin({
   params,
 }: {
@@ -86,6 +123,7 @@ export default function Admin({
   };
 }) {
   const { t } = useTranslation(params.lng, "admin");
+  const { t: tv } = useTranslation(params.lng, "validator");
   const { t: tc } = useTranslation(params.lng, "common");
   const user = useAppSelector(selectUser);
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -96,7 +134,8 @@ export default function Admin({
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const [loading, setLoading] = useState(false);
+  const [showAddDialogOpened, setAddDialogOpened] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [insiders, setInsiders] = useState<Insider[]>([]);
 
   const columns: ColumnDef<Insider, ColumnMetaType>[] = [
@@ -256,7 +295,8 @@ export default function Admin({
     },
   });
 
-  useEffect(() => {
+  // 列表
+  const fetchData = () => {
     setLoading(true);
     insiderService
       .list()
@@ -276,7 +316,97 @@ export default function Admin({
           description: error?.msg || tc("error-description"),
         });
       });
+  };
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // 1. Define your form.
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      app: "",
+      platform: "",
+      email: "",
+    },
+  });
+
+  // 2. Define a submit handler.
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log("values", values);
+    const { app, platform, email } = values;
+    setLoading(true);
+    await insiderService
+      .create({
+        app,
+        platform,
+        email,
+      })
+      .then((res: any) => {
+        setLoading(false);
+        console.log(res);
+        if (res?.code === 0) {
+          setAddDialogOpened(false);
+          toast({
+            title: tc("succeed"),
+            action: (
+              <ToastAction
+                className="focus:ring-0 focus:ring-offset-0"
+                altText="Goto schedule to undo"
+              >
+                {tc("confirm")}
+              </ToastAction>
+            ),
+          });
+        }
+      })
+      .catch((error: any) => {
+        setLoading(false);
+        console.error(error);
+        toast({
+          title: tc("error"),
+          variant: "destructive",
+          description: error?.msg || tc("error-description"),
+        });
+      });
+  }
+
+  useEffect(() => {
+    if (!showAddDialogOpened) {
+      form?.reset();
+    }
+  }, [form, showAddDialogOpened]);
+
+  // 根据内容判断是否显示的页面内组件
+  const ShowContent = useCallback(
+    ({
+      isShow,
+      children,
+    }: {
+      isShow: boolean;
+      children: React.ReactElement;
+    }) => (isShow ? children : null),
+    [],
+  );
+
+  const ValidMessage = useCallback(
+    ({
+      className,
+      children,
+    }: {
+      className?: string;
+      children: React.ReactNode;
+    }) => (
+      <p className={cn("text-sm font-medium text-destructive", className)}>
+        {children}
+      </p>
+    ),
+    [],
+  );
 
   return (
     <>
@@ -300,7 +430,8 @@ export default function Admin({
                   variant="outline"
                   className="ml-auto focus-visible:ring-0 focus-visible:ring-offset-0"
                 >
-                  {t("columns")} <ChevronDown className="ml-2 h-4 w-4" />
+                  {t("columns")}
+                  <ChevronDown className="ml-2 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -321,6 +452,14 @@ export default function Admin({
                   })}
               </DropdownMenuContent>
             </DropdownMenu>
+            <Button
+              variant="outline"
+              className="ml-2 focus-visible:ring-0 focus-visible:ring-offset-0"
+              onClick={() => setAddDialogOpened(true)}
+            >
+              <Plus className="mr-2 h-4 w-4" />
+              {t("add")}
+            </Button>
           </div>
           <div className="rounded-md border">
             <Table>
@@ -429,6 +568,149 @@ export default function Admin({
           </div>
         </div>
       </div>
+      <Dialog open={showAddDialogOpened} onOpenChange={setAddDialogOpened}>
+        <DialogContent
+          className="max-w-[60%] max-sm:max-w-[95%]"
+          onEscapeKeyDown={(e) => e.preventDefault()}
+          onPointerDown={(e) => e.preventDefault()}
+          onInteractOutside={(e) => e.preventDefault()}
+        >
+          <DialogHeader>
+            <DialogTitle className="text-center">{t("form.title")}</DialogTitle>
+            <DialogDescription className="text-center">
+              {t("form.tips")}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 dark:bg-gray-900 sm:px-10">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-4"
+              >
+                <FormField
+                  required
+                  control={form.control}
+                  name="app"
+                  render={({ field, fieldState: { error } }) => (
+                    <FormItem>
+                      <FormLabel>{t("form.app-label")}</FormLabel>
+                      <FormDescription className="text-[12px]">
+                        {t("form.app-description")}
+                      </FormDescription>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger className="text-sm text-muted-foreground focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0">
+                            <SelectValue
+                              placeholder={t("form.app-placeholder")}
+                            />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {apps.map((app) => (
+                            <SelectItem key={app.id} value={app.id}>
+                              {app.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <ShowContent isShow={!!error?.message}>
+                        <ValidMessage className="!mt-1 text-[12px] font-normal">
+                          {tv(error?.message || "")}
+                        </ValidMessage>
+                      </ShowContent>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  required
+                  control={form.control}
+                  name="platform"
+                  render={({ field, fieldState: { error } }) => (
+                    <FormItem>
+                      <div className="mb-4">
+                        <FormLabel className="text-base">
+                          {t("form.platform-label")}
+                        </FormLabel>
+                        <FormDescription className="text-[12px]">
+                          {t("form.platform-description")}
+                        </FormDescription>
+                      </div>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="flex flex-col space-y-1"
+                        >
+                          {platforms.map((item) => (
+                            <FormItem
+                              key={item.id}
+                              className="flex items-center space-x-3 space-y-0"
+                            >
+                              <FormControl>
+                                <RadioGroupItem value={item.id} />
+                              </FormControl>
+                              <FormLabel className="font-normal after:hidden">
+                                {item.label}
+                              </FormLabel>
+                            </FormItem>
+                          ))}
+                        </RadioGroup>
+                      </FormControl>
+
+                      <ShowContent isShow={!!error?.message}>
+                        <ValidMessage className="!mt-1 text-[12px] font-normal">
+                          {tv(error?.message || "")}
+                        </ValidMessage>
+                      </ShowContent>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  required
+                  control={form.control}
+                  name="email"
+                  render={({ field, fieldState: { error } }) => (
+                    <FormItem>
+                      <FormLabel>{t("form.email-label")}</FormLabel>
+                      <FormDescription className="text-[12px]">
+                        {t("form.email-description")}
+                        <br />
+                        <span className="text-red-400">
+                          {t("form.email-description2")}
+                        </span>
+                      </FormDescription>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder={t("form.email-placeholder")}
+                          {...field}
+                          className="focus-visible:ring-0 focus-visible:ring-offset-0"
+                        />
+                      </FormControl>
+                      <ShowContent isShow={!!error?.message}>
+                        <ValidMessage className="!mt-1 text-[12px] font-normal">
+                          {tv(error?.message || "")}
+                        </ValidMessage>
+                      </ShowContent>
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  disabled={loading}
+                  className="flex w-full items-center justify-center gap-1 rounded-[4px] bg-blue-500 py-4 text-black hover:bg-blue-600 dark:text-white"
+                  type="submit"
+                >
+                  <Send className="mr-2 h-5 w-5 dark:text-gray-300" />
+                  <p className="text-lg">{t("form.submit")}</p>
+                </Button>
+              </form>
+            </Form>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

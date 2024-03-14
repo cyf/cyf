@@ -514,7 +514,11 @@ export default function Login({
         </div>
       </div>
       <Drawer open={open} onOpenChange={setOpen} dismissible={false}>
-        <DrawerContent>
+        <DrawerContent
+          onEscapeKeyDown={(e) => e.preventDefault()}
+          onPointerDown={(e) => e.preventDefault()}
+          onInteractOutside={(e) => e.preventDefault()}
+        >
           <DrawerHeader>
             <DrawerTitle className="text-center">
               {tf("image-cropping")}
