@@ -4,10 +4,10 @@ import Cookies from "js-cookie";
 import { persistStore } from "@/model/store";
 import { cacheTokenKey, domain } from "@/constants";
 
-export default function useLogout(lng: string): () => void {
+export default function useLogout(lng: string) {
   const pathname = usePathname();
 
-  return () => {
+  const logout = () => {
     persistStore.pause();
     persistStore.flush().then(() => {
       const res = persistStore.purge();
@@ -15,5 +15,17 @@ export default function useLogout(lng: string): () => void {
       window.location.replace(`${domain}/${lng}/login?r=${domain}${pathname}`);
       return res;
     });
+  };
+
+  const reset = () => {
+    persistStore.pause();
+    persistStore.flush().then(() => {
+      return persistStore.purge();
+    });
+  };
+
+  return {
+    logout,
+    reset,
   };
 }
