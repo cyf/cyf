@@ -3,8 +3,6 @@ import { PrismaService } from '@/modules/prisma'
 import { CreateInsiderDto } from './dto/create-insider.dto'
 import { UpdateInsiderDto } from './dto/update-insider.dto'
 import { IsDel } from '@prisma/client'
-import { encrypt, hashed } from '@/common/utils/crypto'
-import { decrypt } from '@/common/utils/privacy'
 
 @Injectable()
 export class InsiderService {
