@@ -102,7 +102,7 @@
     "@types/lodash": "^4.17.0",
     "@types/ms": "^0.7.34",
     "@types/node": "^18.19.24",
-    "@types/react": "^18.2.65",
+    "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@types/redux-logger": "^3.0.13",
     "@types/rss": "^0.0.32",
