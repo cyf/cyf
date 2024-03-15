@@ -516,7 +516,7 @@ export default function Login({
       <Drawer open={open} onOpenChange={setOpen} dismissible={false}>
         <DrawerContent
           onEscapeKeyDown={(e) => e.preventDefault()}
-          onPointerDown={(e) => e.preventDefault()}
+          // onPointerDown={(e) => e.preventDefault()}
           onInteractOutside={(e) => e.preventDefault()}
         >
           <DrawerHeader>
