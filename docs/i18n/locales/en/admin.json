@@ -9,6 +9,8 @@
   "amount": "Amount",
   "actions": "Actions",
   "add": "Add",
+  "copy-insider-id": "Copy Insider ID",
+  "edit": "Edit",
   "no-results": "No results.",
   "selected": "{{selected}} of {{total}} row(s) selected.",
   "form": {

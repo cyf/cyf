@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
   UseFilters,
-  NotFoundException,
+  BadRequestException,
 } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
 import { ConfigService } from '@nestjs/config'
@@ -55,6 +55,10 @@ export class InsiderController {
 
   @Get(':id')
   async findOne(@Param('id') id: string, @CurrentUser() user: any) {
+    if (!id) {
+      throw new BadRequestException()
+    }
+
     return this.insiderService.findOne(id, user?.id)
   }
 
@@ -64,11 +68,19 @@ export class InsiderController {
     @Body() updateInsiderDto: UpdateInsiderDto,
     @CurrentUser() user: any,
   ) {
+    if (!id) {
+      throw new BadRequestException()
+    }
+
     return this.insiderService.update(id, updateInsiderDto, user?.id)
   }
 
   @Delete(':id')
   async remove(@Param('id') id: string, @CurrentUser() user: any) {
+    if (!id) {
+      throw new BadRequestException()
+    }
+
     return this.insiderService.remove(id, user?.id)
   }
 }

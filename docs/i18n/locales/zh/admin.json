@@ -9,6 +9,8 @@
   "amount": "数量",
   "actions": "操作",
   "add": "增加",
+  "copy-insider-id": "复制内测ID",
+  "edit": "编辑",
   "no-results": "没有结果.",
   "selected": "选中{{selected}}条, 共计{{total}}条.",
   "form": {

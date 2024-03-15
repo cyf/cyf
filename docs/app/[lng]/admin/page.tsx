@@ -68,10 +68,8 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ToastAction } from "@/components/ui/toast";
 import { toast } from "@/components/ui/use-toast";
-import { selectUser } from "@/model/slices/user/slice";
 import { Insider } from "@/entities/insider";
 import { insiderService } from "@/services";
-import { useAppSelector } from "@/model/hooks";
 import { useTranslation } from "@/i18n/client";
 import { cn } from "@/lib/utils";
 
@@ -125,7 +123,6 @@ export default function Admin({
   const { t } = useTranslation(params.lng, "admin");
   const { t: tv } = useTranslation(params.lng, "validator");
   const { t: tc } = useTranslation(params.lng, "common");
-  const user = useAppSelector(selectUser);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -136,7 +133,13 @@ export default function Admin({
 
   const [showAddDialogOpened, setAddDialogOpened] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+
+  // 列表
   const [insiders, setInsiders] = useState<Insider[]>([]);
+
+  // 编辑
+  const [insiderId, setInsiderId] = useState<string | null>();
+  const [insider, setInsider] = useState<Insider | null>();
 
   const columns: ColumnDef<Insider, ColumnMetaType>[] = [
     {
@@ -246,7 +249,7 @@ export default function Admin({
         cellClassName: "text-center",
       },
       cell: ({ row }) => {
-        const payment = row.original;
+        const item = row.original;
 
         return (
           <DropdownMenu>
@@ -260,15 +263,21 @@ export default function Admin({
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
               <DropdownMenuItem
-                onClick={() => navigator.clipboard.writeText(payment.id)}
+                onClick={() => navigator.clipboard.writeText(item.id)}
               >
-                Copy payment ID
+                {t("copy-insider-id")}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>View customer</DropdownMenuItem>
-              <DropdownMenuItem>View payment details</DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  setInsiderId(item.id);
+                  setAddDialogOpened(true);
+                }}
+              >
+                {t("edit")}
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         );
@@ -295,6 +304,16 @@ export default function Admin({
     },
   });
 
+  // 1. Define your form.
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      app: "",
+      platform: "",
+      email: "",
+    },
+  });
+
   // 列表
   const fetchData = () => {
     setLoading(true);
@@ -318,26 +337,60 @@ export default function Admin({
       });
   };
 
+  // 详情
+  const fetchDetail = (id: string) => {
+    setLoading(true);
+    insiderService
+      .findOne(id)
+      .then((res: any) => {
+        setLoading(false);
+        console.log(res);
+        if (res?.code === 0) {
+          setInsider(res?.data || null);
+          form.setValue("app", res?.data?.app || "");
+          form.setValue("platform", res?.data?.platform || "");
+          form.setValue("email", res?.data?.email || "");
+        }
+      })
+      .catch((error: any) => {
+        setLoading(false);
+        console.error(error);
+        toast({
+          title: tc("error"),
+          variant: "destructive",
+          description: error?.msg || tc("error-description"),
+        });
+      });
+  };
+
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      app: "",
-      platform: "",
-      email: "",
-    },
-  });
+  useEffect(() => {
+    if (insiderId) {
+      fetchDetail(insiderId);
+    } else {
+      setInsider(null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [insiderId]);
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log("values", values);
+    if (!insiderId) {
+      await create(values);
+    } else {
+      await update(values);
+    }
+  }
+
+  // 创建
+  const create = async (values: z.infer<typeof formSchema>) => {
     const { app, platform, email } = values;
     setLoading(true);
     await insiderService
@@ -351,6 +404,7 @@ export default function Admin({
         console.log(res);
         if (res?.code === 0) {
           setAddDialogOpened(false);
+          fetchData();
           toast({
             title: tc("succeed"),
             action: (
@@ -373,7 +427,48 @@ export default function Admin({
           description: error?.msg || tc("error-description"),
         });
       });
-  }
+  };
+
+  // 更新
+  const update = async (values: z.infer<typeof formSchema>) => {
+    if (!insiderId) return;
+    const { app, platform, email } = values;
+    setLoading(true);
+    await insiderService
+      .update(insiderId, {
+        app,
+        platform,
+        email,
+      })
+      .then((res: any) => {
+        setLoading(false);
+        console.log(res);
+        if (res?.code === 0) {
+          setAddDialogOpened(false);
+          fetchData();
+          toast({
+            title: tc("succeed"),
+            action: (
+              <ToastAction
+                className="focus:ring-0 focus:ring-offset-0"
+                altText="Goto schedule to undo"
+              >
+                {tc("confirm")}
+              </ToastAction>
+            ),
+          });
+        }
+      })
+      .catch((error: any) => {
+        setLoading(false);
+        console.error(error);
+        toast({
+          title: tc("error"),
+          variant: "destructive",
+          description: error?.msg || tc("error-description"),
+        });
+      });
+  };
 
   useEffect(() => {
     if (!showAddDialogOpened) {
@@ -568,7 +663,13 @@ export default function Admin({
           </div>
         </div>
       </div>
-      <Dialog open={showAddDialogOpened} onOpenChange={setAddDialogOpened}>
+      <Dialog
+        open={showAddDialogOpened}
+        onOpenChange={(open: boolean) => {
+          setAddDialogOpened(open);
+          !open && setInsiderId(null);
+        }}
+      >
         <DialogContent
           className="max-w-[60%] max-sm:max-w-[95%]"
           onEscapeKeyDown={(e) => e.preventDefault()}
@@ -600,6 +701,7 @@ export default function Admin({
                       <Select
                         onValueChange={field.onChange}
                         defaultValue={field.value}
+                        value={insider?.app}
                       >
                         <FormControl>
                           <SelectTrigger className="text-sm text-muted-foreground focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0">
@@ -642,6 +744,7 @@ export default function Admin({
                         <RadioGroup
                           onValueChange={field.onChange}
                           defaultValue={field.value}
+                          value={insider?.platform}
                           className="flex flex-col space-y-1"
                         >
                           {platforms.map((item) => (
@@ -652,7 +755,7 @@ export default function Admin({
                               <FormControl>
                                 <RadioGroupItem value={item.id} />
                               </FormControl>
-                              <FormLabel className="font-normal after:hidden">
+                              <FormLabel className="cursor-pointer font-normal after:hidden">
                                 {item.label}
                               </FormLabel>
                             </FormItem>
