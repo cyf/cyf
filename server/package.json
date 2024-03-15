@@ -68,7 +68,7 @@
     "redis": "^4.6.13",
     "reflect-metadata": "^0.2.1",
     "rxjs": "^7.8.1",
-    "socket.io": "^4.7.4",
+    "socket.io": "^4.7.5",
     "sort-keys-recursive": "^2.1.10",
     "winston": "^3.12.0"
   },
