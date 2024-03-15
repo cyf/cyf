@@ -572,7 +572,7 @@ export default function Admin({
         <DialogContent
           className="max-w-[60%] max-sm:max-w-[95%]"
           onEscapeKeyDown={(e) => e.preventDefault()}
-          onPointerDown={(e) => e.preventDefault()}
+          // onPointerDown={(e) => e.preventDefault()}
           onInteractOutside={(e) => e.preventDefault()}
         >
           <DialogHeader>
