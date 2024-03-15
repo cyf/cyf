@@ -7,7 +7,7 @@ import logger from '../logger/logger'
 @Catch(WsException)
 export class WebsocketExceptionFilter extends BaseWsExceptionFilter<WsException> {
   catch(exception: WsException, host: ArgumentsHost) {
-    logger.debug('exception:', exception)
+    logger.error('ws exception:', exception)
     const client = host.switchToWs().getClient<Socket>()
 
     const error = exception.getError()

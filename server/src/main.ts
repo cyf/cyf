@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core'
+import { IoAdapter } from '@nestjs/platform-socket.io'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import bodyParser from 'body-parser'
@@ -39,6 +40,7 @@ async function bootstrap() {
   })
   // app.useStaticAssets(join(__dirname, '..', 'public'))
   // app.setGlobalPrefix('/api')
+  app.useWebSocketAdapter(new IoAdapter(app))
 
   const config = new DocumentBuilder()
     .setTitle('CYF')

@@ -10,7 +10,7 @@ import logger from '../logger/logger'
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter<HttpException> {
   catch(exception: HttpException, host: ArgumentsHost) {
-    logger.debug('exception', exception)
+    logger.error('http exception', exception)
     const ctx = host.switchToHttp()
     const response = ctx.getResponse()
     const request = ctx.getRequest() as Request
