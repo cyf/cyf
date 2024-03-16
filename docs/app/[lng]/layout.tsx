@@ -87,7 +87,7 @@ export default async function RootLayout({
               <Header lng={params.lng} />
               <main
                 id="main"
-                className="flex min-h-screen w-full flex-col items-center justify-center py-32"
+                className="flex min-h-screen w-full flex-col items-center justify-center pt-16"
               >
                 {children}
                 <GoogleAnalytics />

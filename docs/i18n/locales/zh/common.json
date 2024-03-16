@@ -11,5 +11,8 @@
   "loading": "加载中...",
   "succeed": "操作成功",
   "error": "呃! 出了一些问题.",
-  "error-description": "您的请求有问题."
+  "error-description": "您的请求有问题.",
+  "access-not-allowed": "访问拒绝",
+  "access-not-allowed-description": "您没有权限访问该页面. 以下是一些有用的链接:",
+  "return-to-home": "返回首页"
 }

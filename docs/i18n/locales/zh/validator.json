@@ -9,5 +9,8 @@
   "password-validator": "密码必须至少有6个字符.",
   "repeat-password-validator": "输入的密码不同.",
   "app-validator": "请选择应用.",
-  "platform-validator": "请选择平台."
+  "platform-validator": "请选择平台.",
+  "primary-validator": "请选择数据字典群组.",
+  "key-validator": "请输入数据字典键值.",
+  "label-validator": "请输入数据字典文本."
 }

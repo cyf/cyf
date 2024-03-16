@@ -11,5 +11,8 @@
   "loading": "Loading...",
   "succeed": "Succeed",
   "error": "Uh oh! Something went wrong.",
-  "error-description": "There was a problem with your request."
+  "error-description": "There was a problem with your request.",
+  "access-not-allowed": "Access not allowed",
+  "access-not-allowed-description": "You do not have permission to access this page. Here are some useful links:",
+  "return-to-home": "Return to home"
 }

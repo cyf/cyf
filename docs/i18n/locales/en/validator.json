@@ -9,5 +9,8 @@
   "password-validator": "Password must be at least 6 characters.",
   "repeat-password-validator": "The passwords entered are different.",
   "app-validator": "Please select an app.",
-  "platform-validator": "Please select your platform(s)."
+  "platform-validator": "Please select your platform(s).",
+  "primary-validator": "Please select a data dictionary group.",
+  "key-validator": "Please enter the data dictionary key.",
+  "label-validator": "Please enter data dictionary label."
 }

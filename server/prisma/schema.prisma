@@ -30,6 +30,7 @@ model User {
   emails         Email[]
   authenticators Authenticator[]
   insiders       Insider[]
+  dictionaries   Dictionary[]
 
   @@index([username], type: Hash)
   @@index([email], type: Hash)
@@ -52,6 +53,25 @@ model Insider {
 
   @@unique([app, platform, email, create_by])
   @@map("insiders")
+}
+
+model Dictionary {
+  id          String  @id @default(cuid()) @map("id")
+  primary     String  @map("primary")
+  key         String  @map("key")
+  label       String  @map("label")
+  description String? @map("description")
+
+  create_date DateTime @default(now()) @map("create_date")
+  create_by   String   @map("create_by")
+  update_date DateTime @updatedAt @map("update_date")
+  update_by   String   @map("update_by")
+  is_del      IsDel    @default(NO) @map("is_del")
+
+  user User @relation(fields: [create_by], references: [id], onDelete: Cascade)
+
+  @@unique([primary, key])
+  @@map("dictionaries")
 }
 
 model Email {

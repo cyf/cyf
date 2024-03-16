@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Headers,
   Patch,
   Param,
   Query,
@@ -29,6 +28,9 @@ import {
   // ApiResponse,
   ApiOperation,
   ApiTags,
+  ApiQuery,
+  ApiHeaders,
+  ApiHeader,
 } from '@nestjs/swagger'
 import { Cache } from 'cache-manager'
 // import { CreateUserDto } from './dto/create-user.dto'
@@ -46,6 +48,33 @@ import * as privacy from '@/common/utils/privacy'
 
 @Controller('user')
 @ApiTags('user')
+@ApiHeaders([
+  {
+    name: 'x-sign',
+    description: '加密字符串',
+    required: true,
+  },
+  {
+    name: 'x-version',
+    description: '版本号',
+    required: true,
+  },
+  {
+    name: 'x-locale',
+    description: '语言',
+    required: true,
+  },
+])
+@ApiQuery({
+  name: 'nonce',
+  description: '请求过程中只能使用一次的字符串',
+  required: true,
+})
+@ApiQuery({
+  name: 'timestamp',
+  description: '请求时间戳',
+  required: true,
+})
 @UseGuards(JwtAuthGuard)
 @UseFilters(new HttpExceptionFilter())
 export class UserController {
@@ -80,11 +109,21 @@ export class UserController {
   }
 
   @Get()
+  @ApiHeader({
+    name: 'x-token',
+    description: '请求token',
+    required: true,
+  })
   async findAll() {
     return this.userService.findAll()
   }
 
   @Get(':id')
+  @ApiHeader({
+    name: 'x-token',
+    description: '请求token',
+    required: true,
+  })
   async findOne(@Param('id') id: string) {
     if (!id) {
       throw new BadRequestException()
@@ -100,6 +139,11 @@ export class UserController {
   }
 
   @Patch(':id')
+  @ApiHeader({
+    name: 'x-token',
+    description: '请求token',
+    required: true,
+  })
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     if (!id) {
       throw new BadRequestException()
@@ -116,6 +160,11 @@ export class UserController {
   }
 
   @Delete(':id')
+  @ApiHeader({
+    name: 'x-token',
+    description: '请求token',
+    required: true,
+  })
   async remove(@Param('id') id: string) {
     if (!id) {
       throw new BadRequestException()
@@ -164,14 +213,20 @@ export class UserController {
   }
 
   @Post('email/send')
-  async send(@CurrentUser() user: any, @Headers('x-locale') locale: string) {
+  @ApiHeader({
+    name: 'x-token',
+    description: '请求token',
+    required: true,
+  })
+  async send(@CurrentUser() user: any) {
     const cachedValue = await this.cacheManager.get(`email_verify__${user.id}`)
     if (cachedValue) {
       return { status: 'email_verification_sent' }
     }
 
+    const locale = I18nContext.current().lang
     const subject = this.i18n.t('validation.SUBJECT', {
-      lang: I18nContext.current().lang,
+      lang: locale,
     })
 
     // 获取邮件过期时间配置

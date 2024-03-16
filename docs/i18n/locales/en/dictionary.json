@@ -1,0 +1,30 @@
+{
+  "columns": "Columns",
+  "primary": "Primary",
+  "key": "Key",
+  "label": "Label",
+  "description": "Description",
+  "create_date": "Create Date",
+  "user": "Create By",
+  "actions": "Actions",
+  "add": "Add",
+  "copy-dictionary-id": "Copy ID",
+  "edit": "Edit",
+  "no-results": "No results.",
+  "selected": "{{selected}} of {{total}} row(s) selected.",
+  "form": {
+    "primary-label": "Primary",
+    "primary-placeholder": "Please enter the group where the data dictionary is located",
+    "primary-description": "The group in which the data dictionary is located",
+    "key-label": "Key",
+    "key-placeholder": "Please enter the data dictionary key",
+    "key-description": "Data dictionary unique key",
+    "label-label": "Label",
+    "label-placeholder": "Please enter the data dictionary label",
+    "label-description": "Data dictionary label",
+    "description-label": "Description",
+    "description-placeholder": "Please enter a description of the data dictionary",
+    "description-description": "Data dictionary description",
+    "submit": "Submit"
+  }
+}

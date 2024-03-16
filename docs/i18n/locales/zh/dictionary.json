@@ -1,0 +1,30 @@
+{
+  "columns": "列",
+  "primary": "组",
+  "key": "键值",
+  "label": "标签",
+  "description": "描述",
+  "create_date": "创建时间",
+  "user": "创建人",
+  "actions": "操作",
+  "add": "增加",
+  "copy-dictionary-id": "复制ID",
+  "edit": "编辑",
+  "no-results": "没有结果.",
+  "selected": "选中{{selected}}条, 共计{{total}}条.",
+  "form": {
+    "primary-label": "组",
+    "primary-placeholder": "请输入数据字典所在的组",
+    "primary-description": "数据字典所在的组",
+    "key-label": "键值",
+    "key-placeholder": "请输入数据字典的键",
+    "key-description": "数据字典的键",
+    "label-label": "标签",
+    "label-placeholder": "请输入数据字典的标签",
+    "label-description": "数据字典的标签",
+    "description-label": "描述",
+    "description-placeholder": "请输入数据字典的描述",
+    "description-description": "数据字典的描述",
+    "submit": "提交"
+  }
+}

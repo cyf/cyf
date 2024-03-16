@@ -46,32 +46,6 @@ async function bootstrap() {
     .setTitle('CYF')
     .setDescription('Api Server for CYF.')
     .setContact('kjxbyz', 'https://kjxbyz.com', 'kjxbyz@163.com')
-    .addGlobalParameters(
-      {
-        name: 'x-sign',
-        in: 'header',
-      },
-      {
-        name: 'x-token',
-        in: 'header',
-      },
-      {
-        name: 'x-version',
-        in: 'header',
-      },
-      {
-        name: 'x-locale',
-        in: 'header',
-      },
-      {
-        name: 'nonce',
-        in: 'query',
-      },
-      {
-        name: 'timestamp',
-        in: 'query',
-      },
-    )
 
   if (RENDER_GIT_REPO_SLUG && RENDER_GIT_BRANCH) {
     config

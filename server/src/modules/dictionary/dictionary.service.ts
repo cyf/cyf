@@ -1,62 +1,57 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { IsDel } from '@prisma/client'
 import { PrismaService } from '@/modules/prisma'
-import { CreateInsiderDto } from './dto/create-insider.dto'
-import { UpdateInsiderDto } from './dto/update-insider.dto'
+import { CreateDictionaryDto } from './dto/create-dictionary.dto'
+import { UpdateDictionaryDto } from './dto/update-dictionary.dto'
 import { ExistedException } from '@/common/exception/existed.exception'
 
 @Injectable()
-export class InsiderService {
+export class DictionaryService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async preCreate(createInsiderDto: CreateInsiderDto, createBy: string) {
-    const { app, platform, email } = createInsiderDto
-    const insider = await this.prismaService.insider.findFirst({
+  async preCreate(createDictionaryDto: CreateDictionaryDto) {
+    const { primary, key } = createDictionaryDto
+    const dictionary = await this.prismaService.dictionary.findFirst({
       select: {
         id: true,
-        app: true,
-        platform: true,
-        email: true,
+        primary: true,
+        key: true,
+        label: true,
+        description: true,
         create_date: true,
         create_by: true,
-        user: {
-          select: {
-            username: true,
-            nickname: true,
-          },
-        },
       },
       where: {
-        app,
-        platform,
-        email,
-        create_by: createBy,
+        primary,
+        key,
         is_del: IsDel.NO,
       },
     })
 
-    if (insider) {
+    if (dictionary) {
       throw new ExistedException()
     }
 
-    return insider
+    return dictionary
   }
 
-  async create(createInsiderDto: CreateInsiderDto, createBy: string) {
-    const { app, platform, email } = createInsiderDto
-    return this.prismaService.insider.create({
+  async create(createDictionaryDto: CreateDictionaryDto, createBy: string) {
+    const { primary, key, label, description } = createDictionaryDto
+    return this.prismaService.dictionary.create({
       data: {
-        app,
-        platform,
-        email,
+        primary,
+        key,
+        label,
+        description,
         create_by: createBy,
         update_by: createBy,
       },
       select: {
         id: true,
-        app: true,
-        platform: true,
-        email: true,
+        primary: true,
+        key: true,
+        label: true,
+        description: true,
         create_date: true,
         create_by: true,
         user: {
@@ -69,13 +64,14 @@ export class InsiderService {
     })
   }
 
-  async findAll(createBy: string | null) {
-    return this.prismaService.insider.findMany({
+  async findAll() {
+    return this.prismaService.dictionary.findMany({
       select: {
         id: true,
-        app: true,
-        platform: true,
-        email: true,
+        primary: true,
+        key: true,
+        label: true,
+        description: true,
         create_date: true,
         create_by: true,
         user: {
@@ -86,19 +82,34 @@ export class InsiderService {
         },
       },
       where: {
-        ...(createBy ? { create_by: createBy } : {}),
         is_del: IsDel.NO,
       },
     })
   }
 
+  async findAllPrimary() {
+    const dictionaries = await this.prismaService.dictionary.findMany({
+      select: {
+        primary: true,
+      },
+      where: {
+        is_del: IsDel.NO,
+      },
+    })
+
+    return Array.from(
+      new Set(dictionaries.map((dictionary) => dictionary?.primary)),
+    )
+  }
+
   async findOne(id: string, createBy: string) {
-    const insider = await this.prismaService.insider.findFirst({
+    const dictionary = await this.prismaService.dictionary.findFirst({
       select: {
         id: true,
-        app: true,
-        platform: true,
-        email: true,
+        primary: true,
+        key: true,
+        label: true,
+        description: true,
         create_date: true,
         create_by: true,
         user: {
@@ -115,31 +126,33 @@ export class InsiderService {
       },
     })
 
-    if (!insider) {
+    if (!dictionary) {
       throw new NotFoundException()
     }
 
-    return insider
+    return dictionary
   }
 
   async update(
     id: string,
-    updateInsiderDto: UpdateInsiderDto,
+    updateDictionaryDto: UpdateDictionaryDto,
     updateBy: string,
   ) {
-    const { app, platform, email } = updateInsiderDto
-    const insider = await this.prismaService.insider.update({
+    const { primary, key, label, description } = updateDictionaryDto
+    const dictionary = await this.prismaService.dictionary.update({
       data: {
-        app,
-        platform,
-        email,
+        primary,
+        key,
+        label,
+        description,
         update_by: updateBy,
       },
       select: {
         id: true,
-        app: true,
-        platform: true,
-        email: true,
+        primary: true,
+        key: true,
+        label: true,
+        description: true,
         create_date: true,
         create_by: true,
         user: {
@@ -156,24 +169,25 @@ export class InsiderService {
       },
     })
 
-    if (!insider) {
+    if (!dictionary) {
       throw new NotFoundException()
     }
 
-    return insider
+    return dictionary
   }
 
   async remove(id: string, updateBy: string) {
-    const insider = await this.prismaService.insider.update({
+    const dictionary = await this.prismaService.dictionary.update({
       data: {
         is_del: IsDel.YES,
         update_by: updateBy,
       },
       select: {
         id: true,
-        app: true,
-        platform: true,
-        email: true,
+        primary: true,
+        key: true,
+        label: true,
+        description: true,
         create_date: true,
         create_by: true,
         user: {
@@ -190,10 +204,10 @@ export class InsiderService {
       },
     })
 
-    if (!insider) {
+    if (!dictionary) {
       throw new NotFoundException()
     }
 
-    return insider
+    return dictionary
   }
 }

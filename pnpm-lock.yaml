@@ -194,6 +194,9 @@ importers:
       react-cropper:
         specifier: ^2.3.3
         version: 2.3.3(react@18.2.0)
+      react-datalist-input:
+        specifier: ^3.2.1
+        version: 3.2.1(react-dom@18.2.0)(react@18.2.0)
       react-day-picker:
         specifier: ^8.10.0
         version: 8.10.0(date-fns@3.4.0)(react@18.2.0)
@@ -15632,6 +15635,16 @@ packages:
     dependencies:
       cropperjs: 1.6.1
       react: 18.2.0
+    dev: false
+
+  /react-datalist-input@3.2.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-5aJu+DG7/j9TwKmNIU6fizr6t03N2esu/A+Zdv1gRCUgWCkrBueYeC4TEGbKNgSEMk/66lXtQXp3qEDRdl7lVg==}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-day-picker@8.10.0(date-fns@3.4.0)(react@18.2.0):

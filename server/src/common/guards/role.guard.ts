@@ -5,6 +5,7 @@ import {
   Injectable,
   CanActivate,
   UnauthorizedException,
+  ForbiddenException,
 } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
 import { RoleType } from '@prisma/client'
@@ -34,7 +35,7 @@ export class RolesAuthGuard implements CanActivate {
     }
 
     if (requiredRole && requiredRole !== role) {
-      throw new UnauthorizedException()
+      throw new ForbiddenException()
     }
 
     return true
