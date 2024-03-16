@@ -13,7 +13,7 @@ export default function AccessNotAllowed({
 
   return (
     <div className="flex h-auto w-full max-w-screen-xl flex-1 px-5 xl:px-0">
-      <section className="mx-auto max-w-2xl self-center bg-white dark:bg-gray-900 ">
+      <section className="mx-auto self-center">
         <div className="container mx-auto flex min-h-screen items-center">
           <div className="mx-auto flex max-w-sm flex-col items-center text-center">
             <p className="rounded-full bg-blue-50 p-3 text-sm font-medium text-blue-500 dark:bg-gray-800">
