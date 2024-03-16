@@ -99,6 +99,7 @@ export default function User({
           if (res?.data?.status === "email_verification_sent") {
             toast({
               title: tv("verify-email-sent"),
+              duration: 2000,
               action: (
                 <ToastAction
                   className="focus:ring-0 focus:ring-offset-0"
