@@ -16,7 +16,6 @@ import { basePath } from "@/constants";
 import { sfPro, inter } from "./fonts";
 import ReduxProvider from "./redux-provider";
 import ThemeProvider from "./theme-provider";
-import ResetStoreProvider from "./reset-store-provider";
 import Particles from "./particles";
 
 // 是否显示背景特效
@@ -81,22 +80,20 @@ export default async function RootLayout({
       <body className={cx(sfPro.variable, inter.variable)}>
         <NextTopLoader height={1} />
         <ReduxProvider>
-          <ResetStoreProvider lng={params.lng}>
-            <ThemeProvider>
-              {NEXT_PUBLIC_SHOW_PARTICLES && <Particles />}
-              <Header lng={params.lng} />
-              <main
-                id="main"
-                className="flex min-h-screen w-full flex-col items-center justify-center pt-16"
-              >
-                {children}
-                <GoogleAnalytics />
-              </main>
-              <Footer lng={params.lng} />
-              <CookieBanner lng={params.lng} />
-              <Toaster />
-            </ThemeProvider>
-          </ResetStoreProvider>
+          <ThemeProvider>
+            {NEXT_PUBLIC_SHOW_PARTICLES && <Particles />}
+            <Header lng={params.lng} />
+            <main
+              id="main"
+              className="flex min-h-screen w-full flex-col items-center justify-center pt-16"
+            >
+              {children}
+              <GoogleAnalytics />
+            </main>
+            <Footer lng={params.lng} />
+            <CookieBanner lng={params.lng} />
+            <Toaster />
+          </ThemeProvider>
         </ReduxProvider>
         <ScrollToTop
           smooth
