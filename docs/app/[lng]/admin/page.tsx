@@ -331,6 +331,7 @@ export default function Admin({
         console.error(error);
         toast({
           title: tc("error"),
+          duration: 2000,
           variant: "destructive",
           description: error?.msg || tc("error-description"),
         });
@@ -357,6 +358,7 @@ export default function Admin({
         console.error(error);
         toast({
           title: tc("error"),
+          duration: 2000,
           variant: "destructive",
           description: error?.msg || tc("error-description"),
         });
@@ -407,6 +409,7 @@ export default function Admin({
           fetchData();
           toast({
             title: tc("succeed"),
+            duration: 2000,
             action: (
               <ToastAction
                 className="focus:ring-0 focus:ring-offset-0"
@@ -423,6 +426,7 @@ export default function Admin({
         console.error(error);
         toast({
           title: tc("error"),
+          duration: 2000,
           variant: "destructive",
           description: error?.msg || tc("error-description"),
         });
@@ -448,6 +452,7 @@ export default function Admin({
           fetchData();
           toast({
             title: tc("succeed"),
+            duration: 2000,
             action: (
               <ToastAction
                 className="focus:ring-0 focus:ring-offset-0"
@@ -464,6 +469,7 @@ export default function Admin({
         console.error(error);
         toast({
           title: tc("error"),
+          duration: 2000,
           variant: "destructive",
           description: error?.msg || tc("error-description"),
         });
