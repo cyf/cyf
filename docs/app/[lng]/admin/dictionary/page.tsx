@@ -16,13 +16,8 @@ import dayjs from "dayjs";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  ArrowUpDown,
-  ChevronDown,
-  MoreHorizontal,
-  Plus,
-  Send,
-} from "lucide-react";
+import { ChevronDown, MoreHorizontal, Plus, Send } from "lucide-react";
+import DatalistInput from "react-datalist-input";
 import {
   Form,
   FormControl,
@@ -42,6 +37,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -52,24 +48,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ToastAction } from "@/components/ui/toast";
 import { toast } from "@/components/ui/use-toast";
-import { Insider } from "@/entities/insider";
-import { insiderService } from "@/services";
+import { Dictionary } from "@/entities/dictionary";
+import { dictionaryService } from "@/services";
 import { useTranslation } from "@/i18n/client";
 import { cn } from "@/lib/utils";
 
@@ -77,50 +64,27 @@ interface ColumnMetaType {
   headerClassName?: string;
 }
 
-const apps = [
-  {
-    id: "fafa-runner",
-    label: "FaFa Runner",
-  },
-  {
-    id: "homing-pigeon",
-    label: "Homing Pigeon",
-  },
-] as const;
-
-const platforms = [
-  {
-    id: "ios",
-    label: "iOS",
-  },
-  {
-    id: "android",
-    label: "Android",
-  },
-  {
-    id: "macos",
-    label: "MacOS",
-  },
-] as const;
-
 const formSchema = z.object({
-  app: z.string().min(1, {
-    message: "app-validator",
+  primary: z.string().min(1, {
+    message: "primary-validator",
   }),
-  platform: z.string().min(1, {
-    message: "platform-validator",
+  key: z.string().min(1, {
+    message: "key-validator",
   }),
-  email: z.string().email({ message: "email-validator" }),
+  label: z.string().min(1, {
+    message: "label-validator",
+  }),
+  description: z.any(),
 });
 
-export default function Admin({
+export default function Dictionaries({
   params,
 }: {
   params: {
     lng: string;
   };
 }) {
-  const { t } = useTranslation(params.lng, "admin");
+  const { t } = useTranslation(params.lng, "dictionary");
   const { t: tv } = useTranslation(params.lng, "validator");
   const { t: tc } = useTranslation(params.lng, "common");
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -135,13 +99,12 @@ export default function Admin({
   const [loading, setLoading] = useState<boolean>(false);
 
   // 列表
-  const [insiders, setInsiders] = useState<Insider[]>([]);
+  const [dictionaries, setDictionaries] = useState<Dictionary[]>([]);
 
   // 编辑
-  const [insiderId, setInsiderId] = useState<string | null>();
-  const [insider, setInsider] = useState<Insider | null>();
+  const [dictionaryId, setDictionaryId] = useState<string | null>();
 
-  const columns: ColumnDef<Insider, ColumnMetaType>[] = [
+  const columns: ColumnDef<Dictionary, ColumnMetaType>[] = [
     {
       id: "select",
       header: ({ table }) => (
@@ -165,59 +128,32 @@ export default function Admin({
       enableHiding: false,
     },
     {
-      accessorKey: "app",
-      header: t("app"),
+      accessorKey: "primary",
+      header: t("primary"),
       cell: ({ row }) => {
-        const app = row.getValue("app") as string | undefined;
-        return (
-          <Select defaultValue={app}>
-            <SelectValue />
-            <SelectContent>
-              {apps.map((app) => (
-                <SelectItem key={app.id} value={app.id}>
-                  {app.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        );
+        return <div>{row.getValue("primary")}</div>;
       },
     },
     {
-      accessorKey: "platform",
-      header: t("platform"),
+      accessorKey: "key",
+      header: t("key"),
       cell: ({ row }) => {
-        const platform = row.getValue("platform") as string | undefined;
-        return (
-          <Select defaultValue={platform}>
-            <SelectValue />
-            <SelectContent>
-              {platforms.map((platform) => (
-                <SelectItem key={platform.id} value={platform.id}>
-                  {platform.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        );
+        return <div>{row.getValue("key")}</div>;
       },
     },
     {
-      accessorKey: "email",
-      header: ({ column }) => {
-        return (
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            {t("email")}
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        );
+      accessorKey: "label",
+      header: t("label"),
+      cell: ({ row }) => {
+        return <div>{row.getValue("label")}</div>;
       },
-      cell: ({ row }) => (
-        <div className="lowercase">{row.getValue("email")}</div>
-      ),
+    },
+    {
+      accessorKey: "description",
+      header: t("description"),
+      cell: ({ row }) => {
+        return <div>{row.getValue("description")}</div>;
+      },
     },
     {
       accessorKey: "user",
@@ -267,12 +203,12 @@ export default function Admin({
               <DropdownMenuItem
                 onClick={() => navigator.clipboard.writeText(item.id)}
               >
-                {t("copy-insider-id")}
+                {t("copy-dictionary-id")}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onClick={() => {
-                  setInsiderId(item.id);
+                  setDictionaryId(item.id);
                   setAddDialogOpened(true);
                 }}
               >
@@ -286,7 +222,7 @@ export default function Admin({
   ];
 
   const table = useReactTable({
-    data: insiders,
+    data: dictionaries,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -308,22 +244,22 @@ export default function Admin({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      app: "",
-      platform: "",
-      email: "",
+      primary: "",
+      key: "",
+      label: "",
     },
   });
 
   // 列表
   const fetchData = () => {
     setLoading(true);
-    insiderService
+    dictionaryService
       .list()
       .then((res: any) => {
         setLoading(false);
         console.log(res);
         if (res?.code === 0) {
-          setInsiders(res?.data || []);
+          setDictionaries(res?.data || []);
         }
       })
       .catch((error: any) => {
@@ -341,16 +277,16 @@ export default function Admin({
   // 详情
   const fetchDetail = (id: string) => {
     setLoading(true);
-    insiderService
+    dictionaryService
       .findOne(id)
       .then((res: any) => {
         setLoading(false);
         console.log(res);
         if (res?.code === 0) {
-          setInsider(res?.data || null);
-          form.setValue("app", res?.data?.app || "");
-          form.setValue("platform", res?.data?.platform || "");
-          form.setValue("email", res?.data?.email || "");
+          form.setValue("primary", res?.data?.primary || "");
+          form.setValue("key", res?.data?.key || "");
+          form.setValue("label", res?.data?.label || "");
+          form.setValue("description", res?.data?.description || "");
         }
       })
       .catch((error: any) => {
@@ -371,20 +307,18 @@ export default function Admin({
   }, []);
 
   useEffect(() => {
-    if (insiderId) {
-      fetchDetail(insiderId);
-    } else {
-      setInsider(null);
+    if (dictionaryId) {
+      fetchDetail(dictionaryId);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [insiderId]);
+  }, [dictionaryId]);
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log("values", values);
-    if (!insiderId) {
+    if (!dictionaryId) {
       await create(values);
     } else {
       await update(values);
@@ -393,13 +327,14 @@ export default function Admin({
 
   // 创建
   const create = async (values: z.infer<typeof formSchema>) => {
-    const { app, platform, email } = values;
+    const { primary, key, label, description } = values;
     setLoading(true);
-    await insiderService
+    await dictionaryService
       .create({
-        app,
-        platform,
-        email,
+        primary,
+        key,
+        label,
+        description,
       })
       .then((res: any) => {
         setLoading(false);
@@ -435,14 +370,15 @@ export default function Admin({
 
   // 更新
   const update = async (values: z.infer<typeof formSchema>) => {
-    if (!insiderId) return;
-    const { app, platform, email } = values;
+    if (!dictionaryId) return;
+    const { primary, key, label, description } = values;
     setLoading(true);
-    await insiderService
-      .update(insiderId, {
-        app,
-        platform,
-        email,
+    await dictionaryService
+      .update(dictionaryId, {
+        primary,
+        key,
+        label,
+        description,
       })
       .then((res: any) => {
         setLoading(false);
@@ -516,12 +452,12 @@ export default function Admin({
           <div className="flex items-center py-4">
             <Input
               wrapperClassName="w-full"
-              placeholder={t("email-placeholder")}
+              placeholder={t("form.label-placeholder")}
               value={
-                (table.getColumn("email")?.getFilterValue() as string) ?? ""
+                (table.getColumn("label")?.getFilterValue() as string) ?? ""
               }
               onChange={(event) =>
-                table.getColumn("email")?.setFilterValue(event.target.value)
+                table.getColumn("label")?.setFilterValue(event.target.value)
               }
               className="w-full max-w-sm focus-visible:ring-0 focus-visible:ring-offset-0 max-sm:w-[90%]"
             />
@@ -673,7 +609,7 @@ export default function Admin({
         open={showAddDialogOpened}
         onOpenChange={(open: boolean) => {
           setAddDialogOpened(open);
-          !open && setInsiderId(null);
+          !open && setDictionaryId(null);
         }}
       >
         <DialogContent
@@ -684,11 +620,8 @@ export default function Admin({
         >
           <DialogHeader>
             <DialogTitle className="text-center">
-              {insiderId ? t("edit") : t("add")}
+              {dictionaryId ? t("edit") : t("add")}
             </DialogTitle>
-            <DialogDescription className="text-center">
-              {t("form.tips")}
-            </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 dark:bg-gray-900 sm:px-10">
             <Form {...form}>
@@ -699,78 +632,44 @@ export default function Admin({
                 <FormField
                   required
                   control={form.control}
-                  name="app"
-                  render={({ field, fieldState: { error } }) => (
+                  name="primary"
+                  render={({
+                    field: { onChange, value, ...ret },
+                    fieldState: { error },
+                  }) => (
                     <FormItem>
-                      <FormLabel>{t("form.app-label")}</FormLabel>
+                      <FormLabel>{t("form.primary-label")}</FormLabel>
                       <FormDescription className="text-[12px]">
-                        {t("form.app-description")}
+                        {t("form.primary-description")}
                       </FormDescription>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                        value={insider?.app}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="text-sm text-muted-foreground focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0">
-                            <SelectValue
-                              placeholder={t("form.app-placeholder")}
-                            />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {apps.map((app) => (
-                            <SelectItem key={app.id} value={app.id}>
-                              {app.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                      <ShowContent isShow={!!error?.message}>
-                        <ValidMessage className="!mt-1 text-[12px] font-normal">
-                          {tv(error?.message || "")}
-                        </ValidMessage>
-                      </ShowContent>
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  required
-                  control={form.control}
-                  name="platform"
-                  render={({ field, fieldState: { error } }) => (
-                    <FormItem>
-                      <div className="mb-4">
-                        <FormLabel className="text-base">
-                          {t("form.platform-label")}
-                        </FormLabel>
-                        <FormDescription className="text-[12px]">
-                          {t("form.platform-description")}
-                        </FormDescription>
-                      </div>
                       <FormControl>
-                        <RadioGroup
-                          onValueChange={field.onChange}
-                          defaultValue={field.value}
-                          value={insider?.platform}
-                          className="flex flex-col space-y-1"
-                        >
-                          {platforms.map((item) => (
-                            <FormItem
-                              key={item.id}
-                              className="flex items-center space-x-3 space-y-0"
-                            >
-                              <FormControl>
-                                <RadioGroupItem value={item.id} />
-                              </FormControl>
-                              <FormLabel className="cursor-pointer font-normal after:hidden">
-                                {item.label}
-                              </FormLabel>
-                            </FormItem>
-                          ))}
-                        </RadioGroup>
+                        <DatalistInput
+                          showLabel={false}
+                          label=""
+                          value={value}
+                          placeholder={t("form.primary-placeholder")}
+                          onSelect={(item) => onChange(item.id)}
+                          className="relative"
+                          inputProps={{
+                            ...ret,
+                            onChange,
+                            className:
+                              "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50",
+                          }}
+                          listboxProps={{
+                            className:
+                              "w-full max-h-[300px] overflow-y-auto border border-input rounded-[5px] absolute mt-[2px] p-0 flex flex-col list-none z-10 bg-white dark:bg-black",
+                          }}
+                          listboxOptionProps={{
+                            className:
+                              "w-full cursor-pointer m-0 p-[5px] text-slate-500 dark:text-slate-400 focus:bg-gray-100 dark:focus:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900",
+                          }}
+                          items={[
+                            { id: "app", value: "app" },
+                            { id: "platform", value: "platform" },
+                          ]}
+                        />
                       </FormControl>
-
                       <ShowContent isShow={!!error?.message}>
                         <ValidMessage className="!mt-1 text-[12px] font-normal">
                           {tv(error?.message || "")}
@@ -782,21 +681,65 @@ export default function Admin({
                 <FormField
                   required
                   control={form.control}
-                  name="email"
+                  name="key"
                   render={({ field, fieldState: { error } }) => (
                     <FormItem>
-                      <FormLabel>{t("form.email-label")}</FormLabel>
+                      <FormLabel>{t("form.key-label")}</FormLabel>
                       <FormDescription className="text-[12px]">
-                        {t("form.email-description")}
-                        <br />
-                        <span className="text-red-400">
-                          {t("form.email-description2")}
-                        </span>
+                        {t("form.key-description")}
                       </FormDescription>
                       <FormControl>
                         <Input
-                          type="email"
-                          placeholder={t("form.email-placeholder")}
+                          placeholder={t("form.key-placeholder")}
+                          {...field}
+                          className="focus-visible:ring-0 focus-visible:ring-offset-0"
+                        />
+                      </FormControl>
+                      <ShowContent isShow={!!error?.message}>
+                        <ValidMessage className="!mt-1 text-[12px] font-normal">
+                          {tv(error?.message || "")}
+                        </ValidMessage>
+                      </ShowContent>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  required
+                  control={form.control}
+                  name="label"
+                  render={({ field, fieldState: { error } }) => (
+                    <FormItem>
+                      <FormLabel>{t("form.label-label")}</FormLabel>
+                      <FormDescription className="text-[12px]">
+                        {t("form.label-description")}
+                      </FormDescription>
+                      <FormControl>
+                        <Input
+                          placeholder={t("form.label-placeholder")}
+                          {...field}
+                          className="focus-visible:ring-0 focus-visible:ring-offset-0"
+                        />
+                      </FormControl>
+                      <ShowContent isShow={!!error?.message}>
+                        <ValidMessage className="!mt-1 text-[12px] font-normal">
+                          {tv(error?.message || "")}
+                        </ValidMessage>
+                      </ShowContent>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field, fieldState: { error } }) => (
+                    <FormItem>
+                      <FormLabel>{t("form.description-label")}</FormLabel>
+                      <FormDescription className="text-[12px]">
+                        {t("form.description-description")}
+                      </FormDescription>
+                      <FormControl>
+                        <Textarea
+                          placeholder={t("form.description-placeholder")}
                           {...field}
                           className="focus-visible:ring-0 focus-visible:ring-offset-0"
                         />

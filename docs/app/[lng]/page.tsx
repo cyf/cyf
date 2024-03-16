@@ -71,7 +71,7 @@ export default function Home({
 
   return (
     <>
-      <div className="z-10 w-full max-w-xl px-5 xl:px-0">
+      <div className="z-10 mt-16 w-full max-w-xl px-5 xl:px-0">
         {post && (
           <Link
             href={`/${post.slug}`}

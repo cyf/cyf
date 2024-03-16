@@ -37,7 +37,7 @@ export default async function Blog({
     });
 
   return (
-    <div className="z-10 w-full max-w-6xl px-4 sm:px-6">
+    <div className="z-10 mt-16 w-full max-w-6xl px-4 sm:px-6">
       <div className="pb-12 md:pb-20">
         {/* Page header */}
         <div className="max-w-3xl pb-12 text-center md:pb-20 md:text-left">

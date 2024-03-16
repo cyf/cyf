@@ -10,19 +10,21 @@ import {
   UseFilters,
   BadRequestException,
 } from '@nestjs/common'
-import { ApiTags, ApiQuery, ApiHeaders } from '@nestjs/swagger'
-import { ConfigService } from '@nestjs/config'
-import { I18nService } from 'nestjs-i18n'
+import { ApiTags, ApiSecurity, ApiQuery, ApiHeaders } from '@nestjs/swagger'
+import { RoleType } from '@prisma/client'
+import { DictionaryService } from './dictionary.service'
+import { CreateDictionaryDto } from './dto/create-dictionary.dto'
+import { UpdateDictionaryDto } from './dto/update-dictionary.dto'
+import { CurrentUser } from '@/common/decorators/user.decorator'
 import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard'
 import { HttpExceptionFilter } from '@/common/filters/http-exception.filter'
-import { CurrentUser } from '@/common/decorators/user.decorator'
+import { Roles } from '@/common/decorators/roles.decorator'
+import { I18nService } from 'nestjs-i18n'
 import { ExistedException } from '@/common/exception/existed.exception'
-import { InsiderService } from './insider.service'
-import { CreateInsiderDto } from './dto/create-insider.dto'
-import { UpdateInsiderDto } from './dto/update-insider.dto'
 
-@Controller('insider')
-@ApiTags('insider')
+@Controller('dictionary')
+@ApiTags('dictionary')
+@ApiSecurity('admin')
 @ApiHeaders([
   {
     name: 'x-sign',
@@ -57,62 +59,70 @@ import { UpdateInsiderDto } from './dto/update-insider.dto'
 })
 @UseGuards(JwtAuthGuard)
 @UseFilters(new HttpExceptionFilter())
-export class InsiderController {
+export class DictionaryController {
   constructor(
-    private readonly insiderService: InsiderService,
+    private readonly dictionaryService: DictionaryService,
     private readonly i18n: I18nService,
-    private readonly configService: ConfigService,
   ) {}
 
   @Post()
+  @Roles(RoleType.ADMIN)
   async create(
-    @Body() createInsiderDto: CreateInsiderDto,
+    @Body() createDictionaryDto: CreateDictionaryDto,
     @CurrentUser() user: any,
   ) {
-    const insider = await this.insiderService.preCreate(
-      createInsiderDto,
-      user?.id,
-    )
-    if (insider) {
+    const dictionary =
+      await this.dictionaryService.preCreate(createDictionaryDto)
+    if (dictionary) {
       throw new ExistedException()
     }
 
-    return this.insiderService.create(createInsiderDto, user?.id)
+    return this.dictionaryService.create(createDictionaryDto, user?.id)
   }
 
   @Get()
-  async findAll(@CurrentUser() user: any) {
-    return this.insiderService.findAll(user?.role === 'USER' ? user?.id : null)
+  @Roles(RoleType.ADMIN)
+  async findAll() {
+    return this.dictionaryService.findAll()
+  }
+
+  @Get()
+  @Roles(RoleType.ADMIN)
+  async findAllPrimary() {
+    return this.dictionaryService.findAllPrimary()
   }
 
   @Get(':id')
+  @Roles(RoleType.ADMIN)
   async findOne(@Param('id') id: string, @CurrentUser() user: any) {
     if (!id) {
       throw new BadRequestException()
     }
 
-    return this.insiderService.findOne(id, user?.id)
+    return this.dictionaryService.findOne(id, user?.id)
   }
 
   @Patch(':id')
+  @Roles(RoleType.ADMIN)
   async update(
     @Param('id') id: string,
-    @Body() updateInsiderDto: UpdateInsiderDto,
+    @Body() updateDictionaryDto: UpdateDictionaryDto,
     @CurrentUser() user: any,
   ) {
     if (!id) {
       throw new BadRequestException()
     }
 
-    return this.insiderService.update(id, updateInsiderDto, user?.id)
+    return this.dictionaryService.update(id, updateDictionaryDto, user?.id)
   }
 
   @Delete(':id')
+  @Roles(RoleType.ADMIN)
   async remove(@Param('id') id: string, @CurrentUser() user: any) {
     if (!id) {
       throw new BadRequestException()
     }
 
-    return this.insiderService.remove(id, user?.id)
+    return this.dictionaryService.remove(id, user?.id)
   }
 }

@@ -11,6 +11,9 @@ import {
   // ApiOperation,
   // ApiResponse,
   ApiTags,
+  ApiQuery,
+  ApiHeaders,
+  ApiHeader,
 } from '@nestjs/swagger'
 import { JwtService } from '@nestjs/jwt'
 import { FormDataRequest } from 'nestjs-form-data'
@@ -28,6 +31,33 @@ import { putObject } from '@/common/utils/upload'
 
 @Controller('auth')
 @ApiTags('auth')
+@ApiHeaders([
+  {
+    name: 'x-sign',
+    description: '加密字符串',
+    required: true,
+  },
+  {
+    name: 'x-version',
+    description: '版本号',
+    required: true,
+  },
+  {
+    name: 'x-locale',
+    description: '语言',
+    required: true,
+  },
+])
+@ApiQuery({
+  name: 'nonce',
+  description: '请求过程中只能使用一次的字符串',
+  required: true,
+})
+@ApiQuery({
+  name: 'timestamp',
+  description: '请求时间戳',
+  required: true,
+})
 @UseGuards(JwtAuthGuard)
 @UseFilters(new HttpExceptionFilter())
 export class AuthController {
@@ -54,6 +84,11 @@ export class AuthController {
   }
 
   @Get('refresh')
+  @ApiHeader({
+    name: 'x-token',
+    description: '请求token',
+    required: true,
+  })
   async getRefreshToken(@CurrentUser() user: any) {
     console.log('user', user)
     const payload = {
@@ -70,6 +105,11 @@ export class AuthController {
 
   @Roles(RoleType.USER)
   @Get('profile')
+  @ApiHeader({
+    name: 'x-token',
+    description: '请求token',
+    required: true,
+  })
   async getProfile(@CurrentUser() user: any) {
     console.log('user', user)
     return omitBy(user, (key: string, value: string | Date) =>

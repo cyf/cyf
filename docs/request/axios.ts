@@ -89,7 +89,7 @@ api.interceptors.response.use(
   async (error) => {
     const { response, request, code } = error;
     const { status } = response || {};
-    if (status === 401) {
+    if ([401, 403].includes(status)) {
       Cookies.remove(cacheTokenKey);
       if (isServer) {
         const { cookies } = await import("next/headers"),
@@ -97,8 +97,13 @@ api.interceptors.response.use(
         const { useRouter, usePathname } = await import("next/navigation"),
           router = useRouter(),
           path = usePathname();
-        const loginUrl = `${domain}/${locale}/login?r=${encodeURIComponent(`${domain}/${locale}${path}`)}`;
-        router.replace(loginUrl);
+
+        if (status === 401) {
+          const loginUrl = `${domain}/${locale}/login?r=${encodeURIComponent(`${domain}/${locale}${path}`)}`;
+          router.replace(loginUrl);
+        } else {
+          router.replace(`${domain}/${locale}/403`);
+        }
       } else {
         const locale =
           document.cookie.replace(
@@ -108,8 +113,12 @@ api.interceptors.response.use(
             "$1",
           ) || fallbackLng;
 
-        const loginUrl = `${domain}/${locale}/login?r=${encodeURIComponent(window.location.href)}`;
-        window.location.replace(loginUrl);
+        if (status === 401) {
+          const loginUrl = `${domain}/${locale}/login?r=${encodeURIComponent(window.location.href)}`;
+          window.location.replace(loginUrl);
+        } else {
+          window.location.replace(`${domain}/${locale}/403`);
+        }
       }
     }
     return Promise.reject(error);
