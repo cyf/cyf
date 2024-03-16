@@ -90,7 +90,7 @@ api.interceptors.response.use(
     const { response, request, code } = error;
     const { status } = response || {};
     if ([401, 403].includes(status)) {
-      status === 401 && Cookies.remove(cacheTokenKey);
+      console.log("isServer", isServer);
       if (isServer) {
         const { cookies } = await import("next/headers"),
           locale = cookies().get(cacheLngKey)?.value || fallbackLng;
@@ -99,6 +99,9 @@ api.interceptors.response.use(
           path = usePathname();
 
         if (status === 401) {
+          const { useLogout } = await import("@/lib/hooks"),
+            { reset } = useLogout(locale);
+          await reset();
           const loginUrl = `${domain}/${locale}/login?r=${encodeURIComponent(`${domain}/${locale}${path}`)}`;
           router.replace(loginUrl);
         } else {
@@ -114,6 +117,8 @@ api.interceptors.response.use(
           ) || fallbackLng;
 
         if (status === 401) {
+          localStorage.removeItem("persist:root");
+          Cookies.remove(cacheTokenKey);
           const loginUrl = `${domain}/${locale}/login?r=${encodeURIComponent(window.location.href)}`;
           window.location.replace(loginUrl);
         } else {

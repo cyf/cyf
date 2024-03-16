@@ -17,11 +17,16 @@ export default function useLogout(lng: string) {
     });
   };
 
-  const reset = () => {
+  const reset = async () => {
     persistStore.pause();
-    persistStore.flush().then(() => {
-      return persistStore.purge();
-    });
+    persistStore
+      .flush()
+      .then(() => {
+        return persistStore.purge();
+      })
+      .then(() => {
+        Cookies.remove(cacheTokenKey);
+      });
   };
 
   return {
