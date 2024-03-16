@@ -38,7 +38,7 @@
     "@tanstack/react-table": "^8.13.2",
     "accept-language": "^3.0.18",
     "awesome-debounce-promise": "^2.1.0",
-    "axios": "^1.6.7",
+    "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.5.1",
     "clsx": "^2.1.0",
