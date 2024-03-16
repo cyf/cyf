@@ -11,7 +11,6 @@ import Legal from "@/components/home/legal";
 import Or from "@/components/home/or";
 import PageHeader from "@/components/home/page-header";
 import ThirdPartyAccount from "@/components/home/third-party-account";
-import { LoadingDots } from "@/components/shared/icons";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -184,6 +183,7 @@ export default function Login({
                   )}
                 />
                 <Button
+                  disabled={loading}
                   className={`${
                     loading
                       ? "cursor-not-allowed bg-gray-100 dark:bg-gray-700"
@@ -192,7 +192,6 @@ export default function Login({
                   type="submit"
                 >
                   {tl("login")}
-                  {loading && <LoadingDots />}
                 </Button>
               </form>
             </Form>
