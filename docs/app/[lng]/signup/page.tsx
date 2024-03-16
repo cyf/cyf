@@ -34,7 +34,6 @@ import {
 } from "@/components/ui/form";
 import { Input, FileInput } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { LoadingDots } from "@/components/shared/icons";
 import { domain, cacheTokenKey } from "@/constants";
 import { authService, userService } from "@/services";
 import { setUser } from "@/model/slices/user/slice";
@@ -478,6 +477,7 @@ export default function Login({
                   )}
                 />
                 <Button
+                  disabled={loading}
                   className={`${
                     loading
                       ? "cursor-not-allowed bg-gray-100 dark:bg-gray-700"
@@ -486,7 +486,6 @@ export default function Login({
                   type="submit"
                 >
                   {tl("signup")}
-                  {loading && <LoadingDots />}
                 </Button>
               </form>
             </Form>
