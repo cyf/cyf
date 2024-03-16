@@ -90,7 +90,7 @@ api.interceptors.response.use(
     const { response, request, code } = error;
     const { status } = response || {};
     if ([401, 403].includes(status)) {
-      Cookies.remove(cacheTokenKey);
+      status === 401 && Cookies.remove(cacheTokenKey);
       if (isServer) {
         const { cookies } = await import("next/headers"),
           locale = cookies().get(cacheLngKey)?.value || fallbackLng;
