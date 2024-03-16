@@ -5,7 +5,7 @@
   "platform": "平台",
   "email": "邮件",
   "create_date": "创建时间",
-  "create_by": "创建人",
+  "user": "创建人",
   "amount": "数量",
   "actions": "操作",
   "add": "增加",

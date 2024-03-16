@@ -5,7 +5,7 @@
   "platform": "Platform",
   "email": "Email",
   "create_date": "Create Date",
-  "create_by": "Create By",
+  "user": "Create By",
   "amount": "Amount",
   "actions": "Actions",
   "add": "Add",

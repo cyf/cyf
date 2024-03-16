@@ -221,7 +221,7 @@ export default function Admin({
     },
     {
       accessorKey: "user",
-      header: () => <div className="text-right">{t("create_by")}</div>,
+      header: () => <div className="text-right">{t("user")}</div>,
       cell: ({ row }) => {
         const user = row.getValue("user") as any;
         return (
