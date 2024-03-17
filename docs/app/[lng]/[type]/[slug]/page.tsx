@@ -52,7 +52,7 @@ export default function Legal({
   if (!post) notFound();
 
   return (
-    <div className="z-10 mt-16 w-full max-w-6xl px-4 sm:px-6">
+    <div className="z-10 my-16 w-full max-w-6xl px-4 sm:px-6">
       <div className="pb-12 md:pb-20">
         <article>
           {/* Article header */}

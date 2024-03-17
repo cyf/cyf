@@ -226,7 +226,7 @@ export default function Login({
 
   return (
     <>
-      <div className="flex w-screen justify-center">
+      <div className="my-16 flex w-screen justify-center">
         <div className="z-10 h-fit w-full max-w-md overflow-hidden border border-gray-100 dark:border-gray-900 sm:rounded-2xl sm:shadow-xl">
           <PageHeader title={tl("title")} description={tl("tips")} />
           <div className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 dark:bg-gray-900 sm:px-10">
