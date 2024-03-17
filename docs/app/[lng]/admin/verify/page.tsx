@@ -142,7 +142,7 @@ export default function User({
   };
 
   return (
-    <div className="flex h-auto w-full max-w-screen-xl flex-1 px-5 xl:px-0">
+    <div className="mt-16 flex h-auto w-full max-w-screen-xl flex-1 px-5 xl:px-0">
       <section className="mx-auto max-w-2xl self-center bg-gray-50 px-6 py-8 dark:bg-gray-900">
         <header>
           <div className="flex justify-center">
