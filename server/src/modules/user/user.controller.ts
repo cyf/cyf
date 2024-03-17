@@ -193,7 +193,7 @@ export class UserController {
       throw new NotFoundException()
     }
 
-    const storeKey = `email_verify__${userId}`
+    const storeKey = `email_verify__${id}`
 
     // 从缓存中获取值
     const cachedValue = await this.cacheManager.get(storeKey)
@@ -219,7 +219,8 @@ export class UserController {
     required: true,
   })
   async send(@CurrentUser() user: any) {
-    const cachedValue = await this.cacheManager.get(`email_verify__${user.id}`)
+    const id = privacy.encrypt(user.id)
+    const cachedValue = await this.cacheManager.get(`email_verify__${id}`)
     if (cachedValue) {
       return { status: 'email_verification_sent' }
     }
@@ -231,21 +232,20 @@ export class UserController {
 
     // 获取邮件过期时间配置
     const expires = this.configService.get<number>('email.verify.expires')
-
     const res = await this.mailService.create(user.id, {
       to: user.email, // list of receivers
       subject, // Subject line
       context: {
         username: user.username,
         expires,
-        link: `https://www.chenyifaer.com/portal/api/user/email/verify?id=${privacy.encrypt(user.id)}`,
+        link: `https://www.chenyifaer.com/portal/api/user/email/verify?id=${id}`,
         copyright: new Date().getFullYear(),
       },
       template: `email-verify-${locale}`,
     })
 
     await this.cacheManager.set(
-      `email_verify__${user.id}`,
+      `email_verify__${id}`,
       'true',
       expires * 60 * 1000,
     )

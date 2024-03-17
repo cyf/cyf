@@ -4,18 +4,24 @@ import {
   ExecutionContext,
   Injectable,
   HttpStatus,
+  Inject,
+  forwardRef,
 } from '@nestjs/common'
 import { WsException } from '@nestjs/websockets'
 import { JwtService } from '@nestjs/jwt'
 import { Socket } from 'socket.io'
 import { jwtConstants } from '@/common/constants'
 import { IS_PUBLIC_KEY } from '@/common/decorators/public.decorator'
+import { JwtPayload } from '@/common/interfaces/jwt-payload.interface'
+import { AuthService } from '@/modules/auth'
 
 @Injectable()
 export class SocketIoAuthGuard implements CanActivate {
   constructor(
-    private jwtService: JwtService,
-    private reflector: Reflector,
+    @Inject(forwardRef(() => AuthService))
+    private readonly authService: AuthService,
+    private readonly jwtService: JwtService,
+    private readonly reflector: Reflector,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -39,9 +45,10 @@ export class SocketIoAuthGuard implements CanActivate {
     try {
       // 💡 We're assigning the payload to the request object here
       // so that we can access it in our route handlers
-      request['user'] = await this.jwtService.verifyAsync(token, {
+      const user = await this.jwtService.verifyAsync(token, {
         secret: jwtConstants.secret,
       })
+      request['user'] = await this.authService.verifyPayload(user as JwtPayload)
     } catch {
       throw new WsException({
         code: HttpStatus.UNAUTHORIZED,

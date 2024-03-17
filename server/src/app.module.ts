@@ -71,7 +71,7 @@ import type { RedisOptions } from 'ioredis'
           },
           username: process.env.KV_USERNAME,
           password: process.env.KV_PASSWORD,
-          ttl: 60,
+          ttl: 60 * 1000,
         })
         return {
           store: store as unknown as CacheStore,

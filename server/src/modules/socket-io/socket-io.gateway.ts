@@ -69,9 +69,9 @@ export class SocketIoGateway implements OnGatewayInit<Server> {
   @SubscribeMessage('events')
   findAll(
     @MessageBody() data: any,
-    @CurrentUser('id') operator: string,
+    @CurrentUser('id') id: string,
   ): Observable<WsResponse<number>> {
-    console.log('operator', operator)
+    console.log('id', id)
     return from([1, 2, 3]).pipe(
       map((item) => ({ event: 'events', data: item })),
     )
@@ -86,7 +86,7 @@ export class SocketIoGateway implements OnGatewayInit<Server> {
   @OnEvent('email.verified', { async: true })
   emailVerify(payload: EmailVerifiedEvent) {
     console.log('payload', payload)
-    this.server.emit('verified', payload)
+    this.server.emit(payload.id, { verified: true })
   }
 
   afterInit(server: Server): any {

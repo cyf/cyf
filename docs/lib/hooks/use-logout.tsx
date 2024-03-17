@@ -2,7 +2,7 @@
 import { usePathname } from "next/navigation";
 import Cookies from "js-cookie";
 import { persistStore } from "@/model/store";
-import { cacheTokenKey, domain } from "@/constants";
+import { cacheIdKey, cacheTokenKey, domain } from "@/constants";
 
 export default function useLogout(lng: string) {
   const pathname = usePathname();
@@ -12,6 +12,7 @@ export default function useLogout(lng: string) {
     persistStore.flush().then(() => {
       const res = persistStore.purge();
       Cookies.remove(cacheTokenKey);
+      Cookies.remove(cacheIdKey);
       window.location.replace(`${domain}/${lng}/login?r=${domain}${pathname}`);
       return res;
     });
@@ -26,6 +27,7 @@ export default function useLogout(lng: string) {
       })
       .then(() => {
         Cookies.remove(cacheTokenKey);
+        Cookies.remove(cacheIdKey);
       });
   };
 

@@ -22,7 +22,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { setUser } from "@/model/slices/user/slice";
 import { useAppDispatch } from "@/model/hooks";
-import { cacheTokenKey } from "@/constants";
+import { cacheIdKey, cacheTokenKey } from "@/constants";
 import { authService } from "@/services";
 import { useTranslation } from "@/i18n/client";
 import { cn } from "@/lib/utils";
@@ -77,6 +77,9 @@ export default function Login({
         setLoading(false);
         console.log("res", res);
         if (res?.code === 0) {
+          if (res?.data?.user?.id) {
+            Cookies.set(cacheIdKey, res?.data?.user?.id);
+          }
           Cookies.set(cacheTokenKey, res?.data?.access_token);
           dispatch(setUser(res?.data?.user));
           redirectUrl && window.location.replace(redirectUrl);
