@@ -70,8 +70,8 @@ export default function Home({
   );
 
   return (
-    <>
-      <div className="z-10 mt-16 w-full max-w-xl px-5 xl:px-0">
+    <div className="my-16 w-full max-w-screen-xl">
+      <div className="mx-auto w-full max-w-xl px-5 xl:px-0">
         {post && (
           <Link
             href={`/${post.slug}`}
@@ -131,7 +131,7 @@ export default function Home({
           </Link>
           <Link
             href={`/${params.lng}/admin`}
-            className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-green-300 bg-white px-5 py-2 text-sm text-green-500 shadow-md transition-colors hover:border-green-500 dark:bg-black dark:text-green-500"
+            className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-green-200 bg-white px-5 py-2 text-sm text-green-300 shadow-md transition-colors hover:border-green-500 hover:text-green-500 dark:bg-black dark:text-green-200 hover:dark:text-green-500"
             rel="noopener noreferrer"
           >
             <MdJoinInner className="h-5 w-5" />
@@ -146,7 +146,7 @@ export default function Home({
       <Section title={t("social")} links={socials} />
       <Section title={t("live")} links={lives} />
       <Section title={t("app")} links={apps} />
-    </>
+    </div>
   );
 }
 
@@ -276,12 +276,4 @@ const apps = [
     ),
     url: "https://chenyifaer.com/fafa-runner",
   },
-  // {
-  //   title: "CYF Insider",
-  //   description: "参与内测计划, 获得最新的产品体验",
-  //   demo: (
-  //     <BiTestTube className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
-  //   ),
-  //   url: "https://chenyifaer.com/join",
-  // },
 ];
