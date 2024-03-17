@@ -221,7 +221,10 @@ export default function Login({
           />
         </div>
       </div>
-      <AgreementDialog lng={params.lng} />
+      <AgreementDialog
+        lng={params.lng}
+        callback={() => onSubmit(form.getValues())}
+      />
     </>
   );
 }
