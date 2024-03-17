@@ -691,7 +691,7 @@ export default function Dictionaries({
                           }}
                           listboxOptionProps={{
                             className:
-                              "w-full cursor-pointer m-0 p-[5px] text-slate-500 dark:text-slate-400 focus:bg-gray-100 dark:focus:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900",
+                              "w-full cursor-pointer px-3 py-2 text-slate-500 dark:text-slate-400 focus:bg-gray-100 dark:focus:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900",
                           }}
                           items={primaries.map((primary: string) => ({
                             id: primary,
