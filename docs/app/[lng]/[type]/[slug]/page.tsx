@@ -57,8 +57,9 @@ export default function Legal({
         <article>
           {/* Article header */}
           <header className="mx-auto mb-20 max-w-3xl">
-            {/* Title */}
-            <h1 className="h1 mb-4 text-center">{post.title}</h1>
+            <h1 className="h1 mb-4 text-center text-5xl font-bold">
+              {post.title}
+            </h1>
           </header>
 
           {/* Article content */}
