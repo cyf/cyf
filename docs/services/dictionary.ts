@@ -14,6 +14,18 @@ export const list = (): Promise<Result<Dictionary[]>> => {
   return axios.get("/api/dictionary");
 };
 
+// 获取组列表
+export const listAllPrimary = (): Promise<Result<Dictionary[]>> => {
+  return axios.get("/api/dictionary/primary");
+};
+
+// 根据组获取数据字典列表
+export const listByPrimary = (
+  primary: string,
+): Promise<Result<Dictionary[]>> => {
+  return axios.get(`/api/dictionary/primary/${primary}`);
+};
+
 // 获取数据字典详情
 export const findOne = (id: string): Promise<Result<Dictionary>> => {
   return axios.get(`/api/dictionary/${id}`);

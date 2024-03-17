@@ -9,5 +9,6 @@ import { AuthModule } from '@/modules/auth'
   imports: [ConfigModule, PrismaModule, AuthModule],
   controllers: [DictionaryController],
   providers: [DictionaryService],
+  exports: [DictionaryService],
 })
 export class DictionaryModule {}
