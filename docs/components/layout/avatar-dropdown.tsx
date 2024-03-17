@@ -53,7 +53,7 @@ export default function AvatarDropdown(props: { user: User } & LngProps) {
             <DropdownMenuItem>
               <Link
                 href={`/${lng}/admin`}
-                className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm transition-all duration-75 hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm transition-all duration-75"
               >
                 <CirclePlus className="mr-0 h-4 w-4" />
                 <p className="text-sm">{tm("insider-program")}</p>
@@ -63,7 +63,7 @@ export default function AvatarDropdown(props: { user: User } & LngProps) {
               <DropdownMenuItem>
                 <Link
                   href={`/${lng}/admin/dictionary`}
-                  className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm transition-all duration-75 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm transition-all duration-75"
                 >
                   <TableProperties className="mr-0 h-4 w-4" />
                   <p className="text-sm">{tm("data-dictionary")}</p>
@@ -77,7 +77,7 @@ export default function AvatarDropdown(props: { user: User } & LngProps) {
                   setOpenPopover(false);
                   logout();
                 }}
-                className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm transition-all duration-75 hover:bg-gray-100 dark:hover:bg-gray-700"
+                className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm transition-all duration-75"
               >
                 <LogOut className="mr-0 h-4 w-4" />
                 <p className="text-sm">{tl("logout")}</p>

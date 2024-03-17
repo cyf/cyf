@@ -38,7 +38,7 @@ export default function ThemeDropdown(props: LngProps) {
                   <button
                     key={t1.mode}
                     onClick={() => setTheme(t1.mode)}
-                    className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm transition-all duration-75 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm transition-all duration-75"
                   >
                     <t1.icon className="mr-0 h-4 w-4" />
                     <p className="text-sm">{t(`menus.${t1.mode}`)}</p>
