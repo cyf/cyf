@@ -1,9 +1,10 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { io } from "socket.io-client";
 import { IoIosSend } from "react-icons/io";
+import Cookies from "js-cookie";
 import { ToastAction } from "@/components/ui/toast";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
@@ -11,6 +12,7 @@ import { useTranslation } from "@/i18n/client";
 import { useLogout } from "@/lib/hooks";
 import { selectUser, setUserAsync } from "@/model/slices/user/slice";
 import { useAppSelector, useAppDispatch } from "@/model/hooks";
+import { cacheIdKey, cacheTokenKey } from "@/constants";
 import { userService } from "@/services";
 import * as crypto from "@/utils/crypto";
 import type { Socket } from "socket.io-client";
@@ -34,30 +36,31 @@ export default function User({
   const { toast } = useToast();
 
   const [loading, setLoading] = useState(false);
-  const [verifiedId, setVerifiedId] = useState<string>();
-
-  useEffect(() => {
-    if (user && verifiedId) {
-      // Listen for incoming messages
-      const event = crypto.encrypt(user.id);
-      if (verifiedId == event) {
-        // console.log('email verified')
-        dispatch(setUserAsync());
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, verifiedId]);
 
   useEffect(() => {
     if (!WS_BASE_URL) return;
 
-    // Create a socket connection
-    socketRef.current = io(WS_BASE_URL);
+    const token = Cookies.get(cacheTokenKey);
+    const id = Cookies.get(cacheIdKey);
 
-    socketRef.current?.on("verified", (data: any) => {
-      // console.log("receive verified", data);
-      setVerifiedId(data?.id);
+    // Create a socket connection
+    socketRef.current = io(WS_BASE_URL, {
+      extraHeaders: token ? { authorization: `Bearer ${token}` } : undefined,
     });
+
+    socketRef.current?.on("connect", () => {
+      console.log("connect");
+    });
+
+    if (id) {
+      const event = crypto.encrypt(id);
+      socketRef.current?.on(event, (data: any) => {
+        console.log(`event receive`, data);
+        if (data?.verified) {
+          dispatch(setUserAsync());
+        }
+      });
+    }
 
     socketRef.current?.on("exception", (error) => {
       console.error("exception", error);
@@ -79,12 +82,20 @@ export default function User({
     return () => {
       socketRef.current?.disconnect();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // const sendMessage = () => {
   //   // Send the message to the server
   //   socketRef.current?.emit("hello2", "222222", (res: any) => {
   //     console.log("emit hello2: ", res);
+  //   });
+  // };
+
+  // const sendMessage = () => {
+  //   // Send the message to the server
+  //   socketRef.current?.emit("events", "222222", (res: any) => {
+  //     console.log("emit events: ", res);
   //   });
   // };
 
@@ -100,22 +111,33 @@ export default function User({
             toast({
               title: tv("verify-email-sent"),
               duration: 2000,
-              action: (
-                <ToastAction
-                  className="focus:ring-0 focus:ring-offset-0"
-                  altText="Goto schedule to undo"
-                >
-                  {t("confirm")}
-                </ToastAction>
-              ),
+              variant: "destructive",
             });
             return;
           }
+          toast({
+            title: t("succeed"),
+            duration: 2000,
+            action: (
+              <ToastAction
+                className="focus:ring-0 focus:ring-offset-0"
+                altText="Goto schedule to undo"
+              >
+                {t("confirm")}
+              </ToastAction>
+            ),
+          });
         }
       })
       .catch((error: any) => {
         setLoading(false);
         console.error(error);
+        toast({
+          title: t("error"),
+          duration: 2000,
+          variant: "destructive",
+          description: error?.msg || t("error-description"),
+        });
       });
   };
 
@@ -161,6 +183,14 @@ export default function User({
               <IoIosSend className="h-5 w-5" />
               <span className="mx-2">{tv("send-email")}</span>
             </Button>
+            {/*<Button*/}
+            {/*  disabled={loading}*/}
+            {/*  className="inline-flex w-auto min-w-[150px] items-center justify-center overflow-hidden rounded-lg bg-blue-600 px-4 py-2.5 text-sm text-white shadow transition-colors duration-300 hover:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-80"*/}
+            {/*  onClick={sendMessage}*/}
+            {/*>*/}
+            {/*  <IoIosSend className="h-5 w-5" />*/}
+            {/*  <span className="mx-2">Events</span>*/}
+            {/*</Button>*/}
           </div>
           <p className="mt-2 text-[14px] leading-loose text-gray-600 dark:text-gray-300">
             {tv("wrong-email")}&nbsp;

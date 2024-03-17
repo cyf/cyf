@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/form";
 import { Input, FileInput } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { domain, cacheTokenKey } from "@/constants";
+import { domain, cacheTokenKey, cacheIdKey } from "@/constants";
 import { authService, userService } from "@/services";
 import { setUser } from "@/model/slices/user/slice";
 import { useAppDispatch } from "@/model/hooks";
@@ -181,6 +181,9 @@ export default function Login({
         setLoading(false);
         console.log("res", res);
         if (res?.code === 0) {
+          if (res?.data?.user?.id) {
+            Cookies.set(cacheIdKey, res?.data?.user?.id);
+          }
           Cookies.set(cacheTokenKey, res?.data?.access_token);
           dispatch(setUser(res?.data?.user));
           window.location.replace(

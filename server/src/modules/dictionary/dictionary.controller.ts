@@ -9,7 +9,6 @@ import {
   UseGuards,
   UseFilters,
   BadRequestException,
-  Query,
 } from '@nestjs/common'
 import { ApiTags, ApiSecurity, ApiQuery, ApiHeaders } from '@nestjs/swagger'
 import { RoleType } from '@prisma/client'

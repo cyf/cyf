@@ -3,7 +3,7 @@ import { v4 as uuidV4 } from "uuid";
 import { isPlainObject, isEmpty } from "lodash";
 import Cookies from "js-cookie";
 import { fallbackLng } from "@/i18n/settings";
-import { domain, cacheTokenKey, cacheLngKey } from "@/constants";
+import { domain, cacheIdKey, cacheTokenKey, cacheLngKey } from "@/constants";
 import { encryptSensitiveInfo, sign } from "@/utils";
 import pkgInfo from "../package.json";
 
@@ -119,6 +119,7 @@ api.interceptors.response.use(
         if (status === 401) {
           localStorage.removeItem("persist:root");
           Cookies.remove(cacheTokenKey);
+          Cookies.remove(cacheIdKey);
           const loginUrl = `${domain}/${locale}/login?r=${encodeURIComponent(window.location.href)}`;
           window.location.replace(loginUrl);
         } else {
