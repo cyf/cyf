@@ -68,11 +68,9 @@ export default function Header(props: LngProps) {
               <ThemeDropdown lng={props.lng} />
             </li>
             {user ? (
-              <>
-                <li className="h-8 w-8 sm:h-9 sm:w-9">
-                  <AvatarDropdown lng={props.lng} user={user} />
-                </li>
-              </>
+              <li className="h-8 w-8 sm:h-9 sm:w-9">
+                <AvatarDropdown lng={props.lng} user={user} />
+              </li>
             ) : (
               <>
                 <Link

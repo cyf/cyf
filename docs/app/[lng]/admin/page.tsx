@@ -533,7 +533,7 @@ export default function Admin({
 
   return (
     <>
-      <div className="w-full max-w-screen-xl flex-1 px-5 xl:px-0">
+      <div className="mt-16 w-full max-w-screen-xl flex-1 px-5 xl:px-0">
         <div className="w-full">
           <div className="flex items-center py-4">
             <Input
