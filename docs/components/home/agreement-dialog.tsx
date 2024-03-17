@@ -25,11 +25,13 @@ export default function AgreementDialog({
   showAgreementDialog,
   setShowAgreementDialog,
   setApproved,
+  callback,
   lng,
 }: {
   showAgreementDialog: boolean;
   setShowAgreementDialog: Dispatch<SetStateAction<boolean>>;
   setApproved: Dispatch<SetStateAction<boolean>>;
+  callback: () => void;
 } & LngProps) {
   const { t } = useTranslation(lng, "common");
   const { t: tf } = useTranslation(lng, "footer");
@@ -64,6 +66,7 @@ export default function AgreementDialog({
           <AlertDialogAction
             onClick={() => {
               setApproved(true);
+              callback();
             }}
           >
             {t("confirm")}
@@ -79,12 +82,13 @@ export function useAgreementDialog() {
   const [approved, setApproved] = useState(false);
 
   const AgreementDialogCallback = useCallback(
-    ({ lng }: LngProps) => {
+    ({ callback, lng }: { callback: () => void } & LngProps) => {
       return (
         <AgreementDialog
           showAgreementDialog={showAgreementDialog}
           setShowAgreementDialog={setShowAgreementDialog}
           setApproved={setApproved}
+          callback={callback}
           lng={lng}
         />
       );

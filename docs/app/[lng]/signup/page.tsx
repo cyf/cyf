@@ -587,7 +587,10 @@ export default function Login({
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-      <AgreementDialog lng={params.lng} />
+      <AgreementDialog
+        lng={params.lng}
+        callback={() => onSubmit(form.getValues())}
+      />
     </>
   );
 }
