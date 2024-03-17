@@ -25,16 +25,16 @@ api.interceptors.request.use(
     config.params["timestamp"] = Date.now();
     config.params["nonce"] = uuidV4();
 
-    if (config.method?.toUpperCase() === "GET") {
-      config.params = {
-        ...config.params,
-        ...encryptSensitiveInfo(config.url || "", config.params),
-      };
-    }
+    // if (config.method?.toUpperCase() === "GET") {
+    //   config.params = {
+    //     ...config.params,
+    //     ...encryptSensitiveInfo(config.url || "", config.params),
+    //   };
+    // }
 
     const data = config.data;
     if (
-      config.method?.toUpperCase() === "POST" &&
+      ["POST", "PATCH"].includes(config.method?.toUpperCase() || "") &&
       isPlainObject(data) &&
       !isEmpty(data)
     ) {

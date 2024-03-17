@@ -16,7 +16,13 @@ import dayjs from "dayjs";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChevronDown, MoreHorizontal, Plus, Send } from "lucide-react";
+import {
+  ChevronDown,
+  MoreHorizontal,
+  Plus,
+  Send,
+  RefreshCcw,
+} from "lucide-react";
 import DatalistInput from "react-datalist-input";
 import {
   Form,
@@ -100,6 +106,7 @@ export default function Dictionaries({
 
   // 列表
   const [dictionaries, setDictionaries] = useState<Dictionary[]>([]);
+  const [primaries, setPrimaries] = useState<string[]>([]);
 
   // 编辑
   const [dictionaryId, setDictionaryId] = useState<string | null>();
@@ -250,6 +257,20 @@ export default function Dictionaries({
     },
   });
 
+  const fetchPrimary = () => {
+    dictionaryService
+      .listAllPrimary()
+      .then((res: any) => {
+        console.log(res);
+        if (res?.code === 0) {
+          setPrimaries(res?.data || []);
+        }
+      })
+      .catch((error: any) => {
+        console.error(error);
+      });
+  };
+
   // 列表
   const fetchData = () => {
     setLoading(true);
@@ -302,6 +323,7 @@ export default function Dictionaries({
   };
 
   useEffect(() => {
+    fetchPrimary();
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -461,11 +483,18 @@ export default function Dictionaries({
               }
               className="w-full max-w-sm focus-visible:ring-0 focus-visible:ring-offset-0 max-sm:w-[90%]"
             />
+            <Button
+              variant="outline"
+              className="ml-auto focus-visible:ring-0 focus-visible:ring-offset-0"
+              onClick={fetchData}
+            >
+              <RefreshCcw className="h-4 w-4" />
+            </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="outline"
-                  className="ml-auto focus-visible:ring-0 focus-visible:ring-offset-0"
+                  className="ml-2 focus-visible:ring-0 focus-visible:ring-offset-0"
                 >
                   {t("columns")}
                   <ChevronDown className="ml-2 h-4 w-4" />
@@ -664,10 +693,10 @@ export default function Dictionaries({
                             className:
                               "w-full cursor-pointer m-0 p-[5px] text-slate-500 dark:text-slate-400 focus:bg-gray-100 dark:focus:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-900",
                           }}
-                          items={[
-                            { id: "app", value: "app" },
-                            { id: "platform", value: "platform" },
-                          ]}
+                          items={primaries.map((primary: string) => ({
+                            id: primary,
+                            value: primary,
+                          }))}
                         />
                       </FormControl>
                       <ShowContent isShow={!!error?.message}>

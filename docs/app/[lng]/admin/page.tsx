@@ -22,6 +22,7 @@ import {
   MoreHorizontal,
   Plus,
   Send,
+  RefreshCcw,
 } from "lucide-react";
 import {
   Form,
@@ -69,39 +70,14 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { ToastAction } from "@/components/ui/toast";
 import { toast } from "@/components/ui/use-toast";
 import { Insider } from "@/entities/insider";
-import { insiderService } from "@/services";
+import { Dictionary } from "@/entities/dictionary";
+import { insiderService, dictionaryService } from "@/services";
 import { useTranslation } from "@/i18n/client";
 import { cn } from "@/lib/utils";
 
 interface ColumnMetaType {
   headerClassName?: string;
 }
-
-const apps = [
-  {
-    id: "fafa-runner",
-    label: "FaFa Runner",
-  },
-  {
-    id: "homing-pigeon",
-    label: "Homing Pigeon",
-  },
-] as const;
-
-const platforms = [
-  {
-    id: "ios",
-    label: "iOS",
-  },
-  {
-    id: "android",
-    label: "Android",
-  },
-  {
-    id: "macos",
-    label: "MacOS",
-  },
-] as const;
 
 const formSchema = z.object({
   app: z.string().min(1, {
@@ -136,6 +112,10 @@ export default function Admin({
 
   // 列表
   const [insiders, setInsiders] = useState<Insider[]>([]);
+  const [apps, setApps] = useState<Pick<Dictionary, "id" | "label">[]>([]);
+  const [platforms, setPlatforms] = useState<
+    Pick<Dictionary, "id" | "label">[]
+  >([]);
 
   // 编辑
   const [insiderId, setInsiderId] = useState<string | null>();
@@ -314,6 +294,46 @@ export default function Admin({
     },
   });
 
+  const fetchApps = () => {
+    dictionaryService
+      .listByPrimary("app")
+      .then((res: any) => {
+        console.log(res);
+        if (res?.code === 0) {
+          const data = res?.data || [];
+          setApps(
+            data.map((item: Dictionary) => ({
+              id: item.key,
+              label: item.label,
+            })),
+          );
+        }
+      })
+      .catch((error: any) => {
+        console.error(error);
+      });
+  };
+
+  const fetchPlatforms = () => {
+    dictionaryService
+      .listByPrimary("platform")
+      .then((res: any) => {
+        console.log(res);
+        if (res?.code === 0) {
+          const data = res?.data || [];
+          setPlatforms(
+            data.map((item: Dictionary) => ({
+              id: item.key,
+              label: item.label,
+            })),
+          );
+        }
+      })
+      .catch((error: any) => {
+        console.error(error);
+      });
+  };
+
   // 列表
   const fetchData = () => {
     setLoading(true);
@@ -366,6 +386,8 @@ export default function Admin({
   };
 
   useEffect(() => {
+    fetchApps();
+    fetchPlatforms();
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -525,11 +547,18 @@ export default function Admin({
               }
               className="w-full max-w-sm focus-visible:ring-0 focus-visible:ring-offset-0 max-sm:w-[90%]"
             />
+            <Button
+              variant="outline"
+              className="ml-auto focus-visible:ring-0 focus-visible:ring-offset-0"
+              onClick={fetchData}
+            >
+              <RefreshCcw className="h-4 w-4" />
+            </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="outline"
-                  className="ml-auto focus-visible:ring-0 focus-visible:ring-offset-0"
+                  className="ml-2 focus-visible:ring-0 focus-visible:ring-offset-0"
                 >
                   {t("columns")}
                   <ChevronDown className="ml-2 h-4 w-4" />

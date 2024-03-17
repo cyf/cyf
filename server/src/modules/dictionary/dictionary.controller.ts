@@ -9,6 +9,7 @@ import {
   UseGuards,
   UseFilters,
   BadRequestException,
+  Query,
 } from '@nestjs/common'
 import { ApiTags, ApiSecurity, ApiQuery, ApiHeaders } from '@nestjs/swagger'
 import { RoleType } from '@prisma/client'
@@ -86,10 +87,19 @@ export class DictionaryController {
     return this.dictionaryService.findAll()
   }
 
-  @Get()
+  @Get('primary')
   @Roles(RoleType.ADMIN)
   async findAllPrimary() {
     return this.dictionaryService.findAllPrimary()
+  }
+
+  @Get('primary/:primary')
+  async findAllByPrimary(@Param('primary') primary: string) {
+    if (!primary) {
+      throw new BadRequestException()
+    }
+
+    return this.dictionaryService.findAllByPrimary(primary)
   }
 
   @Get(':id')

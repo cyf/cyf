@@ -7,6 +7,7 @@ import session from 'express-session'
 import cookieParser from 'cookie-parser'
 import compression from 'compression'
 import helmet from 'helmet'
+import { useContainer } from 'class-validator'
 import { AppModule } from './app.module'
 
 const RENDER_GIT_BRANCH = process.env.RENDER_GIT_BRANCH
@@ -61,6 +62,8 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config.build(), {})
   SwaggerModule.setup('docs', app, document)
+
+  useContainer(app.select(AppModule), { fallbackOnErrors: true })
 
   await app.listen(3001)
 

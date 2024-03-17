@@ -87,6 +87,30 @@ export class DictionaryService {
     })
   }
 
+  async findAllByPrimary(primary: string) {
+    return this.prismaService.dictionary.findMany({
+      select: {
+        id: true,
+        primary: true,
+        key: true,
+        label: true,
+        description: true,
+        create_date: true,
+        create_by: true,
+        user: {
+          select: {
+            username: true,
+            nickname: true,
+          },
+        },
+      },
+      where: {
+        primary,
+        is_del: IsDel.NO,
+      },
+    })
+  }
+
   async findAllPrimary() {
     const dictionaries = await this.prismaService.dictionary.findMany({
       select: {
