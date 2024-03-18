@@ -121,7 +121,7 @@
     "webpack": "^5.90.3",
     "webpack-node-externals": "^3.0.0"
   },
-  "packageManager": "pnpm@8.15.4",
+  "packageManager": "pnpm@8.15.5",
   "engines": {
     "node": ">= 18"
   },
