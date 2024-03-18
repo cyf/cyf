@@ -1,5 +1,7 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { RiTranslate } from "react-icons/ri";
 import {
   DropdownMenu,
@@ -7,16 +9,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/i18n/client";
 import { languages } from "@/i18n/settings";
-import { LngProps } from "@/i18next-lng";
+import type { LngProps } from "@/i18next-lng";
 
 export default function LngDropdown(props: LngProps) {
   const { t } = useTranslation(props.lng, "header");
   const pathName = usePathname();
   const [openPopover, setOpenPopover] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const redirectedPathName = (locale: string) => {
     if (!pathName) return "/";
@@ -29,9 +32,12 @@ export default function LngDropdown(props: LngProps) {
     <div className="relative inline-block text-left">
       <DropdownMenu open={openPopover} onOpenChange={setOpenPopover}>
         <DropdownMenuTrigger asChild>
-          <button className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9">
+          <Button
+            variant="link"
+            className="hidden h-8 w-8 items-center justify-center overflow-hidden rounded-full p-0 transition-all duration-75 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 active:scale-95 sm:h-9 sm:w-9 md:flex"
+          >
             <RiTranslate className="h-5 w-5" />
-          </button>
+          </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <div className="w-full min-w-[14rem] rounded-md bg-white p-2 dark:bg-black">
@@ -51,6 +57,31 @@ export default function LngDropdown(props: LngProps) {
           </div>
         </DropdownMenuContent>
       </DropdownMenu>
+      <Drawer open={openDrawer} onOpenChange={setOpenDrawer}>
+        <DrawerTrigger asChild>
+          <Button
+            variant="link"
+            className="h-8 w-8 items-center justify-center overflow-hidden rounded-full p-0 transition-all duration-75 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 active:scale-95 sm:h-9 sm:w-9 md:hidden"
+          >
+            <RiTranslate className="h-5 w-5" />
+          </Button>
+        </DrawerTrigger>
+        <DrawerContent>
+          <div className="min-w-sm mx-auto w-full rounded-md p-2">
+            {languages.map((locale) => {
+              return (
+                <Link
+                  key={locale}
+                  href={redirectedPathName(locale)}
+                  className={`relative flex w-full items-center justify-start space-x-2 rounded-md px-2 py-3 text-left text-sm transition-all duration-75 ${locale === props.lng ? "pointer-events-none opacity-50" : "hover:bg-accent hover:text-accent-foreground"}`}
+                >
+                  <p className="text-sm">{t(`languages.${locale}`)}</p>
+                </Link>
+              );
+            })}
+          </div>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 }
