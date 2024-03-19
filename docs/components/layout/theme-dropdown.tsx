@@ -41,15 +41,19 @@ export default function ThemeDropdown(props: LngProps) {
           <div className="w-full min-w-[14rem] rounded-md bg-white p-2 dark:bg-black">
             {themes.map((t1: Theme) => {
               return (
-                <DropdownMenuItem key={t1.mode} disabled={theme === t1.mode}>
-                  <button
+                <DropdownMenuItem
+                  className="p-0"
+                  key={t1.mode}
+                  disabled={theme === t1.mode}
+                >
+                  <Button
                     key={t1.mode}
                     onClick={() => setTheme(t1.mode)}
-                    className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm transition-all duration-75"
+                    className="relative flex w-full items-center justify-start space-x-2 rounded-md bg-background px-2 py-6 text-left text-sm text-inherit transition-all duration-75 hover:bg-accent hover:text-accent-foreground"
                   >
                     <t1.icon className="mr-0 h-4 w-4" />
                     <p className="text-sm">{t(`menus.${t1.mode}`)}</p>
-                  </button>
+                  </Button>
                 </DropdownMenuItem>
               );
             })}

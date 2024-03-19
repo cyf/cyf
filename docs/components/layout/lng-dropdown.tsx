@@ -47,7 +47,7 @@ export default function LngDropdown(props: LngProps) {
                   <Link
                     key={locale}
                     href={redirectedPathName(locale)}
-                    className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm transition-all duration-75"
+                    className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm font-medium transition-all duration-75"
                   >
                     <p className="text-sm">{t(`languages.${locale}`)}</p>
                   </Link>
@@ -73,7 +73,7 @@ export default function LngDropdown(props: LngProps) {
                 <Link
                   key={locale}
                   href={redirectedPathName(locale)}
-                  className={`relative flex w-full items-center justify-start space-x-2 rounded-md px-2 py-3 text-left text-sm transition-all duration-75 ${locale === props.lng ? "pointer-events-none opacity-50" : "hover:bg-accent hover:text-accent-foreground"}`}
+                  className={`relative flex w-full items-center justify-start space-x-2 rounded-md px-2 py-3 text-left text-sm font-medium transition-all duration-75 ${locale === props.lng ? "pointer-events-none opacity-50" : "hover:bg-accent hover:text-accent-foreground"}`}
                 >
                   <p className="text-sm">{t(`languages.${locale}`)}</p>
                 </Link>
