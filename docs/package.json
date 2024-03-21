@@ -34,7 +34,7 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
-    "@reduxjs/toolkit": "^2.2.1",
+    "@reduxjs/toolkit": "^2.2.2",
     "@tanstack/react-table": "^8.14.0",
     "accept-language": "^3.0.18",
     "awesome-debounce-promise": "^2.1.0",
@@ -50,7 +50,7 @@
     "disqus-react": "^1.1.5",
     "email-validator": "^2.0.4",
     "focus-trap-react": "^10.2.3",
-    "framer-motion": "^11.0.17",
+    "framer-motion": "^11.0.18",
     "http-status": "^1.7.4",
     "i18next": "^23.10.1",
     "i18next-browser-languagedetector": "^7.2.0",
@@ -83,7 +83,7 @@
     "redux-persist": "^6.0.0",
     "rehype-slug": "^6.0.0",
     "rss": "^1.2.2",
-    "socket.io-client": "^4.7.4",
+    "socket.io-client": "^4.7.5",
     "sort-keys-recursive": "^2.1.10",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
@@ -113,13 +113,13 @@
     "eslint-config-next": "^14.1.4",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
-    "postcss": "^8.4.37",
+    "postcss": "^8.4.38",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.12",
     "prop-types": "^15.8.1",
     "redux-logger": "^3.0.6",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.3"
   },
   "engines": {
     "node": "^18"
