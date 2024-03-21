@@ -68,7 +68,7 @@
     "redis": "^4.6.13",
     "reflect-metadata": "^0.2.1",
     "rxjs": "^7.8.1",
-    "socket.io": "^4.7.4",
+    "socket.io": "^4.7.5",
     "sort-keys-recursive": "^2.1.10",
     "winston": "^3.12.0"
   },
@@ -117,8 +117,8 @@
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.4.2",
-    "webpack": "^5.90.3",
+    "typescript": "^5.4.3",
+    "webpack": "^5.91.0",
     "webpack-node-externals": "^3.0.0"
   },
   "packageManager": "pnpm@8.15.5",
