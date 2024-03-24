@@ -5,6 +5,7 @@
   "scripts": {
     "build:docs": "pnpm --filter docs build",
     "build:server": "pnpm --filter server build",
+    "build:ui": "pnpm --filter docs build:ui",
     "dev:docs": "pnpm --filter docs dev",
     "dev:server": "pnpm --filter server dev:watch",
     "start": "pnpm --filter server start",

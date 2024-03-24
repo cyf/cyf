@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:ui": "tsx ./scripts/build-ui.ts",
     "format": "prettier --write \"**/*.{css,js,json,jsx,ts,tsx}\"",
     "start": "next start",
     "lint": "next lint",
@@ -119,6 +120,7 @@
     "prop-types": "^15.8.1",
     "redux-logger": "^3.0.6",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.7.1",
     "typescript": "^5.4.3"
   },
   "engines": {
