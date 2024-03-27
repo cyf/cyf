@@ -253,7 +253,7 @@ importers:
         version: 2.2.2
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.2)
+        version: 1.0.7(tailwindcss@3.4.3)
       tsparticles:
         specifier: ^2.12.0
         version: 2.12.0
@@ -275,13 +275,13 @@ importers:
     devDependencies:
       '@tailwindcss/forms':
         specifier: ^0.5.7
-        version: 0.5.7(tailwindcss@3.4.2)
+        version: 0.5.7(tailwindcss@3.4.3)
       '@tailwindcss/line-clamp':
         specifier: ^0.4.4
-        version: 0.4.4(tailwindcss@3.4.2)
+        version: 0.4.4(tailwindcss@3.4.3)
       '@tailwindcss/typography':
         specifier: ^0.5.11
-        version: 0.5.11(tailwindcss@3.4.2)
+        version: 0.5.11(tailwindcss@3.4.3)
       '@types/crypto-js':
         specifier: ^4.2.2
         version: 4.2.2
@@ -343,8 +343,8 @@ importers:
         specifier: ^3.0.6
         version: 3.0.6
       tailwindcss:
-        specifier: ^3.4.2
-        version: 3.4.2(ts-node@10.9.2)
+        specifier: ^3.4.3
+        version: 3.4.3(ts-node@10.9.2)
       tsx:
         specifier: ^4.7.1
         version: 4.7.1
@@ -519,13 +519,13 @@ importers:
         version: 10.3.6(@nestjs/common@10.3.6)(@nestjs/core@10.3.6)(@nestjs/platform-express@10.3.6)
       '@tailwindcss/forms':
         specifier: ^0.5.7
-        version: 0.5.7(tailwindcss@3.4.2)
+        version: 0.5.7(tailwindcss@3.4.3)
       '@tailwindcss/line-clamp':
         specifier: ^0.4.4
-        version: 0.4.4(tailwindcss@3.4.2)
+        version: 0.4.4(tailwindcss@3.4.3)
       '@tailwindcss/typography':
         specifier: ^0.5.11
-        version: 0.5.11(tailwindcss@3.4.2)
+        version: 0.5.11(tailwindcss@3.4.3)
       '@types/bcrypt':
         specifier: ^5.0.2
         version: 5.0.2
@@ -623,11 +623,11 @@ importers:
         specifier: ^6.3.4
         version: 6.3.4
       tailwindcss:
-        specifier: ^3.4.2
-        version: 3.4.2(ts-node@10.9.2)
+        specifier: ^3.4.3
+        version: 3.4.3(ts-node@10.9.2)
       tailwindcss-animate:
         specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.2)
+        version: 1.0.7(tailwindcss@3.4.3)
       ts-jest:
         specifier: ^29.1.2
         version: 29.1.2(@babel/core@7.23.9)(jest@29.7.0)(typescript@5.4.3)
@@ -6079,24 +6079,24 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@tailwindcss/forms@0.5.7(tailwindcss@3.4.2):
+  /@tailwindcss/forms@0.5.7(tailwindcss@3.4.3):
     resolution: {integrity: sha512-QE7X69iQI+ZXwldE+rzasvbJiyV/ju1FGHH0Qn2W3FKbuYtqp8LKcy6iSw79fVUT5/Vvf+0XgLCeYVG+UV6hOw==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
     dependencies:
       mini-svg-data-uri: 1.4.4
-      tailwindcss: 3.4.2(ts-node@10.9.2)
+      tailwindcss: 3.4.3(ts-node@10.9.2)
     dev: true
 
-  /@tailwindcss/line-clamp@0.4.4(tailwindcss@3.4.2):
+  /@tailwindcss/line-clamp@0.4.4(tailwindcss@3.4.3):
     resolution: {integrity: sha512-5U6SY5z8N42VtrCrKlsTAA35gy2VSyYtHWCsg1H87NU1SXnEfekTVlrga9fzUDrrHcGi2Lb5KenUWb4lRQT5/g==}
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 3.4.2(ts-node@10.9.2)
+      tailwindcss: 3.4.3(ts-node@10.9.2)
     dev: true
 
-  /@tailwindcss/typography@0.5.11(tailwindcss@3.4.2):
+  /@tailwindcss/typography@0.5.11(tailwindcss@3.4.3):
     resolution: {integrity: sha512-ahOULqBQGCdSqL3vMNjH1R5cU2gxTh059fJIKF2enHXE8c/s3yKGDSKZ1+4poCr7BZRREJS8n5cCFmwsW4Ok3A==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
@@ -6105,7 +6105,7 @@ packages:
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.4.2(ts-node@10.9.2)
+      tailwindcss: 3.4.3(ts-node@10.9.2)
     dev: true
 
   /@tanstack/react-table@8.15.0(react-dom@18.2.0)(react@18.2.0):
@@ -17472,15 +17472,15 @@ packages:
       '@babel/runtime': 7.24.0
     dev: false
 
-  /tailwindcss-animate@1.0.7(tailwindcss@3.4.2):
+  /tailwindcss-animate@1.0.7(tailwindcss@3.4.3):
     resolution: {integrity: sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
     dependencies:
-      tailwindcss: 3.4.2(ts-node@10.9.2)
+      tailwindcss: 3.4.3(ts-node@10.9.2)
 
-  /tailwindcss@3.4.2(ts-node@10.9.2):
-    resolution: {integrity: sha512-1kIzVecynNKMhhX8mPTOwTkkVHupUTMbEvk4n1ByxdM8sQTJ8fE41Y4TdORG6GmiVXHhfZ/++0hiIFJFwfadsA==}
+  /tailwindcss@3.4.3(ts-node@10.9.2):
+    resolution: {integrity: sha512-U7sxQk/n397Bmx4JHbJx/iSOOv5G+II3f1kpLpY2QeUv5DcPdcTsYLlusZfq1NthHS1c1cZoyFmmkex1rzke0A==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:

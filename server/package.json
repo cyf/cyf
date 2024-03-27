@@ -111,7 +111,7 @@
     "run-script-webpack-plugin": "^0.2.0",
     "source-map-support": "^0.5.21",
     "supertest": "^6.3.4",
-    "tailwindcss": "^3.4.2",
+    "tailwindcss": "^3.4.3",
     "tailwindcss-animate": "^1.0.7",
     "ts-jest": "^29.1.2",
     "ts-loader": "^9.5.1",
