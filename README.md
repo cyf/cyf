@@ -1,4 +1,4 @@
-# cyf-blog
+# cyf
 
 ## Setup
 
