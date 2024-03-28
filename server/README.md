@@ -1,4 +1,4 @@
-# cyf-server
+# server
 
 ## Installation
 
