@@ -90,7 +90,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/lodash": "^4.17.0",
     "@types/mime": "^3.0.4",
-    "@types/node": "^18.19.26",
+    "@types/node": "^18.19.28",
     "@types/nodemailer": "^6.4.14",
     "@types/passport-jwt": "^4.0.1",
     "@types/supertest": "^6.0.2",
