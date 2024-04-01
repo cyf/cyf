@@ -3,8 +3,7 @@ import { useCallback } from "react";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 import { RoughNotation } from "react-rough-notation";
-import { FiMail } from "react-icons/fi";
-import { IoGameControllerOutline } from "react-icons/io5";
+import { Gamepad2, Mail, Music } from "lucide-react";
 import {
   SiTaobao,
   SiSpotify,
@@ -17,7 +16,7 @@ import {
 } from "react-icons/si";
 import { MdOutlineNotificationsActive, MdJoinInner } from "react-icons/md";
 // import { BiTestTube } from "react-icons/bi";
-import { FaBlog, FaMusic } from "react-icons/fa";
+import { FaBlog } from "react-icons/fa";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import { Github } from "@/components/shared/icons";
@@ -98,7 +97,7 @@ export default function Home({
           <Balancer>{th("title")}</Balancer>
         </h1>
         <p
-          className="mt-6 animate-fade-up text-center text-red-400 opacity-0 md:text-xl"
+          className="mt-6 animate-fade-up text-center text-[#ff7979] opacity-0 md:text-xl"
           style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
         >
           <Balancer>
@@ -106,7 +105,7 @@ export default function Home({
               animate
               type="highlight"
               show={true}
-              color="rgb(36, 54, 110)"
+              color="#c7ecee"
               animationDelay={1000}
               animationDuration={2500}
             >
@@ -131,7 +130,7 @@ export default function Home({
           </Link>
           <Link
             href={`/${params.lng}/admin`}
-            className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-green-200 bg-white px-5 py-2 text-sm text-green-300 shadow-md transition-colors hover:border-green-500 hover:text-green-500 dark:bg-black dark:text-green-200 hover:dark:text-green-500"
+            className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-green-500 bg-white px-5 py-2 text-sm text-green-500 shadow-md transition-colors hover:border-gray-800 dark:bg-black dark:text-green-500 dark:hover:border-gray-800 hover:dark:text-green-500"
             rel="noopener noreferrer"
           >
             <MdJoinInner className="h-5 w-5" />
@@ -156,7 +155,7 @@ const musics = [
     description:
       "Pre-built beautiful, a11y-first components, powered by [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Framer Motion](https://framer.com/motion)",
     demo: (
-      <FaMusic className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+      <Music className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
     url: "https://chenyifaer.com/music",
   },
@@ -224,7 +223,7 @@ const socials = [
     description:
       "Precedent comes with authentication and database via [Auth.js](https://authjs.dev/) + [Prisma](https://prisma.io/)",
     demo: (
-      <FiMail className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+      <Mail className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
     url: "mailto:chenyifaer777@gmail.com",
   },
@@ -256,7 +255,7 @@ const apps = [
     title: "FaForever",
     description: "一个可以听发姐音乐的桌面客户端.",
     demo: (
-      <FaMusic className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+      <Music className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
     url: "https://chenyifaer.com/faforever",
   },
@@ -272,7 +271,7 @@ const apps = [
     title: "FaFa Runner",
     description: "一个休闲小游戏",
     demo: (
-      <IoGameControllerOutline className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+      <Gamepad2 className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
     url: "https://chenyifaer.com/fafa-runner",
   },

@@ -6,7 +6,7 @@ import { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import { BiArrowToTop } from "react-icons/bi";
 import NextTopLoader from "nextjs-toploader";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "muse-ui";
 import Footer from "@/components/layout/footer";
 import GoogleAnalytics from "@/components/shared/google-analytics";
 import CookieBanner from "@/components/shared/cookie-banner";

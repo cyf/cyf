@@ -3,7 +3,7 @@ import { allPosts } from "contentlayer/generated";
 import PostItem from "@/components/post/post-item";
 import LatestPosts from "@/components/post/latest-posts";
 // import Topics from "@/components/post/topics";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export async function generateMetadata({
   params,

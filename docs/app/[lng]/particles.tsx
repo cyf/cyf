@@ -80,10 +80,10 @@ export default function Particle() {
           },
           particles: {
             color: {
-              value: theme === "dark" ? "#ffffff" : "#0d47a1",
+              value: "#ff7979",
             },
             links: {
-              color: theme === "dark" ? "#ffffff" : "#0d47a1",
+              color: "#ff7979",
               distance: 150,
               enable: true,
               opacity: 0.5,

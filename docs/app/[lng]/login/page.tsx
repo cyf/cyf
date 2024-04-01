@@ -11,15 +11,15 @@ import Legal from "@/components/home/legal";
 import Or from "@/components/home/or";
 import PageHeader from "@/components/home/page-header";
 import ThirdPartyAccount from "@/components/home/third-party-account";
-import { Button } from "@/components/ui/button";
 import {
+  Button,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+  Input,
+} from "muse-ui";
 import { setUser } from "@/model/slices/user/slice";
 import { useAppDispatch } from "@/model/hooks";
 import { cacheIdKey, cacheTokenKey } from "@/constants";

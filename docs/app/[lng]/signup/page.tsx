@@ -24,16 +24,15 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-} from "@/components/ui/drawer";
-import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-} from "@/components/ui/form";
-import { Input, FileInput } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+  Input,
+  FileInput,
+  Button,
+} from "muse-ui";
 import { domain, cacheTokenKey, cacheIdKey } from "@/constants";
 import { authService, userService } from "@/services";
 import { setUser } from "@/model/slices/user/slice";

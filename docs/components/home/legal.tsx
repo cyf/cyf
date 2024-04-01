@@ -1,6 +1,7 @@
+"use client";
 import React, { Dispatch, SetStateAction } from "react";
 import Link from "next/link";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "muse-ui";
 import { useTranslation } from "@/i18n/client";
 import type { LngProps } from "@/i18next-lng";
 
