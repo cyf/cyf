@@ -14,10 +14,6 @@
       "matchPackageNames": ["mime", "@types/mime"]
     },
     {
-      "allowedVersions": "7.44",
-      "matchPackageNames": ["react-hook-form"]
-    },
-    {
       "allowedVersions": "7",
       "matchPackageNames": ["query-string"]
     },
