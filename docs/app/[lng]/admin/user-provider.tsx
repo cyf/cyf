@@ -49,6 +49,7 @@ export default function UserProvider({
         router.push(`/${lng}/admin`);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, lng, pathname, redirectUrl]);
 
   return children;
