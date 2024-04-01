@@ -7,6 +7,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import Link from "next/link";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,10 +17,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+} from "muse-ui";
 import { useTranslation } from "@/i18n/client";
-import { LngProps } from "@/i18next-lng";
-import Link from "next/link";
+import type { LngProps } from "@/i18next-lng";
 
 export default function AgreementDialog({
   showAgreementDialog,

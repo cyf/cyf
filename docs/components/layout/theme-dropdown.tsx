@@ -6,9 +6,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
+  Drawer,
+  DrawerContent,
+  DrawerTrigger,
+  Button,
+} from "muse-ui";
 import { useAppTheme } from "@/lib/hooks";
 import { useTranslation } from "@/i18n/client";
 import { themes, icons } from "@/theme";

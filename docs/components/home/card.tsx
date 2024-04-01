@@ -1,6 +1,5 @@
 "use client";
 import { ReactNode } from "react";
-import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import Balancer from "react-wrap-balancer";
 

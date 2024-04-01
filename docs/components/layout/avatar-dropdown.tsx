@@ -2,23 +2,23 @@
 import React, { useState, useCallback } from "react";
 import Link from "next/link";
 import { CirclePlus, TableProperties, LogOut } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
+  Button,
+} from "muse-ui";
 import { useTranslation } from "@/i18n/client";
 import { useLogout } from "@/lib/hooks";
 import type { LngProps } from "@/i18next-lng";
