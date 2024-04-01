@@ -75,10 +75,10 @@ export default function Home({
           <Link
             href={`/${post.slug}`}
             rel="noreferrer"
-            className="mx-auto mb-12 flex max-w-fit animate-fade-up items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-7 py-2 transition-colors hover:bg-blue-200"
+            className="mx-auto mb-12 flex max-w-fit animate-fade-up items-center justify-center space-x-2 overflow-hidden rounded-full bg-[#ff7979] bg-opacity-10 px-7 py-2 text-[#ff7979] transition-colors hover:bg-opacity-20 dark:bg-opacity-20 dark:hover:bg-opacity-30"
           >
-            <FaBlog className="h-5 w-5 text-[#1d9bf0]" />
-            <p className="text-sm font-semibold text-[#1d9bf0]">{post.title}</p>
+            <FaBlog className="h-5 w-5" />
+            <p className="text-sm font-semibold">{post.title}</p>
           </Link>
         )}
         <div className="mb-8 flex items-center justify-center space-x-20">
@@ -130,7 +130,7 @@ export default function Home({
           </Link>
           <Link
             href={`/${params.lng}/admin`}
-            className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-green-500 bg-white px-5 py-2 text-sm text-green-500 shadow-md transition-colors hover:border-gray-800 dark:bg-black dark:text-green-500 dark:hover:border-gray-800 hover:dark:text-green-500"
+            className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-[#ff7979] bg-white px-5 py-2 text-sm text-[#ff7979] shadow-md transition-colors hover:border-gray-800 dark:bg-black dark:text-[#ff7979] dark:hover:border-gray-800"
             rel="noopener noreferrer"
           >
             <MdJoinInner className="h-5 w-5" />

@@ -48,7 +48,7 @@ export default function Footer(props: LngProps) {
         </a>
         . {t("copyright")}&nbsp;
         <a href={`${domain}/rss.xml`} rel="noreferrer" target="_blank">
-          <FaRss color="#ee802f" size="20px" />
+          <FaRss color="#ff7979" size="20px" />
         </a>
         &nbsp;
         {process.env.VERCEL_GIT_COMMIT_SHA && (
