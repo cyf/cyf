@@ -7,7 +7,7 @@ const config = {
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
-    "../node_modules/muse-ui/dist/**/*.{js,mjs}",
+    "./node_modules/muse-ui/dist/**/*.{js,mjs}",
   ],
   prefix: "",
   theme: {
