@@ -45,11 +45,15 @@ export default function LngDropdown(props: LngProps) {
           <div className="w-full min-w-[14rem] rounded-md bg-white p-2 dark:bg-black">
             {languages.map((locale) => {
               return (
-                <DropdownMenuItem key={locale} disabled={locale === props.lng}>
+                <DropdownMenuItem
+                  key={locale}
+                  disabled={locale === props.lng}
+                  className="hover:bg-accent hover:text-accent-foreground focus-visible:ring-0 focus-visible:ring-offset-0"
+                >
                   <Link
                     key={locale}
                     href={redirectedPathName(locale)}
-                    className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm font-medium transition-all duration-75 hover:bg-accent hover:text-accent-foreground"
+                    className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm font-medium transition-all duration-75"
                   >
                     <p className="text-sm">{t(`languages.${locale}`)}</p>
                   </Link>
