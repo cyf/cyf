@@ -49,7 +49,7 @@ export default function LngDropdown(props: LngProps) {
                   <Link
                     key={locale}
                     href={redirectedPathName(locale)}
-                    className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm font-medium transition-all duration-75"
+                    className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm font-medium transition-all duration-75 hover:bg-accent hover:text-accent-foreground"
                   >
                     <p className="text-sm">{t(`languages.${locale}`)}</p>
                   </Link>
