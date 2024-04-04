@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FaRss } from "react-icons/fa";
 import { domain } from "@/constants";
 import { useTranslation } from "@/i18n/client";
-import type { LngProps } from "@/i18next-lng";
+import type { LngProps } from "@/types/i18next-lng";
 
 export default function Footer(props: LngProps) {
   const { t } = useTranslation(props.lng, "footer");

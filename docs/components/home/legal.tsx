@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import Link from "next/link";
 import { Checkbox } from "muse-ui";
 import { useTranslation } from "@/i18n/client";
-import type { LngProps } from "@/i18next-lng";
+import type { LngProps } from "@/types/i18next-lng";
 
 export default function Legal({
   approved,

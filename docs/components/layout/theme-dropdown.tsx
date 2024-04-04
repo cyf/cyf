@@ -16,7 +16,7 @@ import { useTranslation } from "@/i18n/client";
 import { themes, icons } from "@/theme";
 import type { IconType } from "react-icons";
 import type { Theme, ThemeMode } from "@/theme";
-import type { LngProps } from "@/i18next-lng";
+import type { LngProps } from "@/types/i18next-lng";
 
 export default function ThemeDropdown(props: LngProps) {
   const { t } = useTranslation(props.lng, "header");

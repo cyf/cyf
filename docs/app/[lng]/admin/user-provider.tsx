@@ -5,7 +5,7 @@ import { setUserAsync, selectUser } from "@/model/slices/user/slice";
 import { useAppDispatch, useAppSelector } from "@/model/hooks";
 import { domain } from "@/constants";
 import { languages } from "@/i18n/settings";
-import { LngProps } from "@/i18next-lng";
+import type { LngProps } from "@/types/i18next-lng";
 
 const ignoreRedirectPages = ["/admin/verify"];
 
