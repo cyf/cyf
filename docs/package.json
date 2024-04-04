@@ -85,7 +85,7 @@
     "@types/ms": "^0.7.34",
     "@types/node": "^18.19.29",
     "@types/react": "^18.2.74",
-    "@types/react-dom": "^18.2.23",
+    "@types/react-dom": "^18.2.24",
     "@types/redux-logger": "^3.0.13",
     "@types/rss": "^0.0.32",
     "@types/uuid": "^9.0.8",
