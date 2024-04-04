@@ -21,7 +21,7 @@ import {
 } from "muse-ui";
 import { useTranslation } from "@/i18n/client";
 import { useLogout } from "@/lib/hooks";
-import type { LngProps } from "@/i18next-lng";
+import type { LngProps } from "@/types/i18next-lng";
 import type { User } from "@/entities/user";
 
 export default function AvatarDropdown(props: { user: User } & LngProps) {

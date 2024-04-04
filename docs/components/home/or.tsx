@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "@/i18n/client";
-import type { LngProps } from "@/i18next-lng";
+import type { LngProps } from "@/types/i18next-lng";
 
 export default function Or({ lng }: LngProps) {
   const { t } = useTranslation(lng, "login");

@@ -15,7 +15,7 @@ import {
 } from "muse-ui";
 import { useTranslation } from "@/i18n/client";
 import { languages } from "@/i18n/settings";
-import type { LngProps } from "@/i18next-lng";
+import type { LngProps } from "@/types/i18next-lng";
 
 export default function LngDropdown(props: LngProps) {
   const { t } = useTranslation(props.lng, "header");

@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { Apple, Google, LoadingDots } from "@/components/shared/icons";
 import { useTranslation } from "@/i18n/client";
-import type { LngProps } from "@/i18next-lng";
+import type { LngProps } from "@/types/i18next-lng";
 
 export default function ThirdPartyAccount({
   approved,

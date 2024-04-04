@@ -10,7 +10,7 @@ import { selectUser } from "@/model/slices/user/slice";
 import { useAppSelector } from "@/model/hooks";
 import { useTranslation } from "@/i18n/client";
 import { basePath } from "@/constants";
-import type { LngProps } from "@/i18next-lng";
+import type { LngProps } from "@/types/i18next-lng";
 
 export default function Header(props: LngProps) {
   const { t } = useTranslation(props.lng, "header");
