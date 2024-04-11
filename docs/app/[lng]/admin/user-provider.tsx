@@ -1,9 +1,10 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import Cookies from "js-cookie";
 import { setUserAsync, selectUser } from "@/model/slices/user/slice";
 import { useAppDispatch, useAppSelector } from "@/model/hooks";
-import { domain } from "@/constants";
+import { cacheIdKey, domain } from "@/constants";
 import { languages } from "@/i18n/settings";
 import type { LngProps } from "@/types/i18next-lng";
 
@@ -37,6 +38,8 @@ export default function UserProvider({
   useEffect(() => {
     if (user && !user?.email_verified && !ignorePathnameRegex.test(pathname)) {
       console.log("verify", domain, pathname);
+      const id = Cookies.get(cacheIdKey);
+      if (!id) Cookies.set(cacheIdKey, user.id);
       router.push(`/${lng}/admin/verify?r=${domain}${pathname}`);
     } else if (
       user &&
