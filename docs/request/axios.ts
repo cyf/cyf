@@ -1,10 +1,9 @@
 import axios from "axios";
 import { v4 as uuidV4 } from "uuid";
 import { isPlainObject, isEmpty } from "lodash";
-import Cookies from "js-cookie";
 import { fallbackLng } from "@/i18n/settings";
-import { domain, cacheIdKey, cacheTokenKey, cacheLngKey } from "@/constants";
-import { encryptSensitiveInfo, sign } from "@/utils";
+import { domain, cacheTokenKey, cacheLngKey } from "@/constants";
+import { encryptSensitiveInfo, logout, sign } from "@/utils";
 import pkgInfo from "../package.json";
 
 const baseURL = process.env.API_BASE_URL,
@@ -99,9 +98,7 @@ api.interceptors.response.use(
           path = usePathname();
 
         if (status === 401) {
-          const { useLogout } = await import("@/lib/hooks"),
-            { reset } = useLogout(locale);
-          await reset();
+          await logout();
           const loginUrl = `${domain}/${locale}/login?r=${encodeURIComponent(`${domain}/${locale}${path}`)}`;
           router.replace(loginUrl);
         } else {
@@ -117,9 +114,7 @@ api.interceptors.response.use(
           ) || fallbackLng;
 
         if (status === 401) {
-          localStorage.removeItem("persist:root");
-          Cookies.remove(cacheTokenKey);
-          Cookies.remove(cacheIdKey);
+          await logout();
           const loginUrl = `${domain}/${locale}/login?r=${encodeURIComponent(window.location.href)}`;
           window.location.replace(loginUrl);
         } else {

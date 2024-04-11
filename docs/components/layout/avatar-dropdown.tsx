@@ -26,7 +26,7 @@ import type { User } from "@/entities/user";
 
 export default function AvatarDropdown(props: { user: User } & LngProps) {
   const { user, lng } = props;
-  const { logout } = useLogout(lng);
+  const logout = useLogout(lng);
   const { t: tm } = useTranslation(lng, "menu");
   const { t: tl } = useTranslation(lng, "login");
   const [openPopover, setOpenPopover] = useState(false);
