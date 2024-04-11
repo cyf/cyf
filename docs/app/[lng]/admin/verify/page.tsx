@@ -29,7 +29,7 @@ export default function User({
   const { t: tv } = useTranslation(params.lng, "verify");
   const socketRef = useRef<Socket>();
   const dispatch = useAppDispatch();
-  const { logout } = useLogout(params.lng);
+  const logout = useLogout(params.lng);
   const user = useAppSelector(selectUser);
   const { toast } = useToast();
 
