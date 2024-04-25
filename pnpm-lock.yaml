@@ -26,9 +26,6 @@ importers:
 
   docs:
     dependencies:
-      '@emotion/is-prop-valid':
-        specifier: ^1.2.2
-        version: 1.2.2
       '@hookform/resolvers':
         specifier: ^3.3.4
         version: 3.3.4(react-hook-form@7.51.3(react@18.2.0))
@@ -11523,8 +11520,10 @@ snapshots:
   '@emotion/is-prop-valid@1.2.2':
     dependencies:
       '@emotion/memoize': 0.8.1
+    optional: true
 
-  '@emotion/memoize@0.8.1': {}
+  '@emotion/memoize@0.8.1':
+    optional: true
 
   '@esbuild-plugins/node-resolve@0.1.4(esbuild@0.17.19)':
     dependencies:
