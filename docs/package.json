@@ -22,7 +22,7 @@
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.5.1",
-    "clsx": "^2.1.0",
+    "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "contentlayer": "^0.3.4",
     "crypto-js": "^4.2.0",
