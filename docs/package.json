@@ -66,7 +66,7 @@
     "rss": "^1.2.2",
     "socket.io-client": "^4.7.5",
     "sort-keys-recursive": "^2.1.10",
-    "tailwind-merge": "^2.2.2",
+    "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "tsparticles": "^3.3.0",
     "use-debounce": "^10.0.0",
