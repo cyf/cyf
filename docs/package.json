@@ -26,7 +26,7 @@
     "contentlayer": "^0.3.4",
     "crypto-js": "^4.2.0",
     "date-fns": "^3.6.0",
-    "dayjs": "^1.11.10",
+    "dayjs": "^1.11.11",
     "disqus-react": "^1.1.5",
     "email-validator": "^2.0.4",
     "focus-trap-react": "^10.2.3",
