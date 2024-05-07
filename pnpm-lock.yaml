@@ -506,8 +506,8 @@ importers:
         specifier: ^6.0.2
         version: 6.0.2
       '@types/webpack-env':
-        specifier: ^1.18.4
-        version: 1.18.4
+        specifier: ^1.18.5
+        version: 1.18.5
       '@types/webpack-node-externals':
         specifier: ^3.0.4
         version: 3.0.4
@@ -3787,8 +3787,8 @@ packages:
   '@types/validator@13.11.9':
     resolution: {integrity: sha512-FCTsikRozryfayPuiI46QzH3fnrOoctTjvOYZkho9BTFLCOZ2rgZJHMOVgCOfttjPJcgOx52EpkY0CMfy87MIw==}
 
-  '@types/webpack-env@1.18.4':
-    resolution: {integrity: sha512-I6e+9+HtWADAWeeJWDFQtdk4EVSAbj6Rtz4q8fJ7mSr1M0jzlFcs8/HZ+Xb5SHzVm1dxH7aUiI+A8kA8Gcrm0A==}
+  '@types/webpack-env@1.18.5':
+    resolution: {integrity: sha512-wz7kjjRRj8/Lty4B+Kr0LN6Ypc/3SymeCCGSbaXp2leH0ZVg/PriNiOwNj4bD4uphI7A8NXS4b6Gl373sfO5mA==}
 
   '@types/webpack-node-externals@3.0.4':
     resolution: {integrity: sha512-8Z3/edqxE3RRlOJwKSgOFxLZRt/i1qFlv/Bi308ZUKo9jh8oGngd9r8GR0ZNKW5AEJq8QNQE3b17CwghTjQ0Uw==}
@@ -14709,7 +14709,7 @@ snapshots:
 
   '@types/validator@13.11.9': {}
 
-  '@types/webpack-env@1.18.4': {}
+  '@types/webpack-env@1.18.5': {}
 
   '@types/webpack-node-externals@3.0.4':
     dependencies:
