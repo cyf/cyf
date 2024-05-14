@@ -20,7 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.574.0",
+    "@aws-sdk/client-s3": "^3.575.0",
     "@nestjs-modules/mailer": "^2.0.2",
     "@nestjs/axios": "^3.0.2",
     "@nestjs/cache-manager": "^2.2.2",
@@ -96,8 +96,8 @@
     "@types/supertest": "^6.0.2",
     "@types/webpack-env": "^1.18.5",
     "@types/webpack-node-externals": "^3.0.4",
-    "@typescript-eslint/eslint-plugin": "^7.8.0",
-    "@typescript-eslint/parser": "^7.8.0",
+    "@typescript-eslint/eslint-plugin": "^7.9.0",
+    "@typescript-eslint/parser": "^7.9.0",
     "autoprefixer": "^10.4.19",
     "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
@@ -121,7 +121,7 @@
     "webpack": "^5.91.0",
     "webpack-node-externals": "^3.0.0"
   },
-  "packageManager": "pnpm@9.1.0",
+  "packageManager": "pnpm@9.1.1",
   "engines": {
     "node": "^18"
   },
