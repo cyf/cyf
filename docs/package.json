@@ -30,7 +30,7 @@
     "disqus-react": "^1.1.5",
     "email-validator": "^2.0.4",
     "focus-trap-react": "^10.2.3",
-    "framer-motion": "^11.2.0",
+    "framer-motion": "^11.2.2",
     "http-status": "^1.7.4",
     "i18next": "^23.11.4",
     "i18next-browser-languagedetector": "^8.0.0",
