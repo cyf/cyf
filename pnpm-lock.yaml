@@ -27,8 +27,8 @@ importers:
   docs:
     dependencies:
       '@hookform/resolvers':
-        specifier: ^3.3.4
-        version: 3.3.4(react-hook-form@7.51.4(react@18.3.1))
+        specifier: ^3.4.0
+        version: 3.4.0(react-hook-form@7.51.4(react@18.3.1))
       '@reduxjs/toolkit':
         specifier: ^2.2.4
         version: 2.2.4(react-redux@9.1.2(@types/react@18.3.2)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
@@ -1369,8 +1369,8 @@ packages:
   '@hapi/topo@5.1.0':
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
 
-  '@hookform/resolvers@3.3.4':
-    resolution: {integrity: sha512-o5cgpGOuJYrd+iMKvkttOclgwRW86EsWJZZRC23prf0uU2i48Htq4PuT73AVb9ionFyZrwYEITuOFGF+BydEtQ==}
+  '@hookform/resolvers@3.4.0':
+    resolution: {integrity: sha512-+oAqK3okmoEDnvUkJ3N/mvNMeeMv5Apgy1jkoRmlaaAF4vBgcJs9tHvtXU7VE4DvPosvAUUkPOaNFunzt1dbgA==}
     peerDependencies:
       react-hook-form: ^7.0.0
 
@@ -11523,7 +11523,7 @@ snapshots:
     dependencies:
       '@hapi/hoek': 9.3.0
 
-  '@hookform/resolvers@3.3.4(react-hook-form@7.51.4(react@18.3.1))':
+  '@hookform/resolvers@3.4.0(react-hook-form@7.51.4(react@18.3.1))':
     dependencies:
       react-hook-form: 7.51.4(react@18.3.1)
 
@@ -19819,7 +19819,7 @@ snapshots:
   muse-ui@4.0.0-alpha.1(@opentelemetry/api@1.7.0)(@types/react-dom@18.3.0)(@types/react@18.3.2)(embla-carousel@8.0.0-rc15)(esbuild@0.17.19):
     dependencies:
       '@faker-js/faker': 8.4.1
-      '@hookform/resolvers': 3.3.4(react-hook-form@7.51.4(react@18.3.1))
+      '@hookform/resolvers': 3.4.0(react-hook-form@7.51.4(react@18.3.1))
       '@radix-ui/react-accessible-icon': 1.0.3(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-alert-dialog': 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
