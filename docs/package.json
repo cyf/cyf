@@ -11,7 +11,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.3.4",
+    "@hookform/resolvers": "^3.4.0",
     "@reduxjs/toolkit": "^2.2.4",
     "@tanstack/react-table": "^8.17.0",
     "@tsparticles/engine": "^3.4.0",
