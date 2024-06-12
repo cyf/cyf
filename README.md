@@ -2,44 +2,27 @@
 
 ## Setup
 
-Make sure to install the dependencies:
-
 ```bash
-# npm
-npm install
-
 # pnpm
-pnpm install
-
-# yarn
-yarn install
+pnpm i
 ```
 
 ## Development
 
 ```bash
-# npm
-npm run dev
+# docs
+pnpm dev:docs
 
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
+# server
+pnpm dev:server
 ```
 
 ## Production
 
-Build the application for production:
-
 ```bash
-# npm
-npm run build
+# docs
+pnpm build:docs
 
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
+# server
+pnpm build:server
 ```
-
