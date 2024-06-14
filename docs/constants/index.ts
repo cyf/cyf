@@ -9,3 +9,4 @@ export const domain =
     ? `https://chenyifaer.com${basePath}`
     : `http://localhost:3000${basePath}`;
 export const pageSize: number = 15;
+export const sitemapUrls = ["login", "signup"];
