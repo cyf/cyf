@@ -41,6 +41,8 @@ import { domain } from "@/constants";
 //   };
 // }
 
+const NEXT_PUBLIC_DISQUS_SHORTNAME = process.env.NEXT_PUBLIC_DISQUS_SHORTNAME;
+
 export default function Legal({
   params,
 }: {
@@ -152,9 +154,9 @@ export default function Legal({
           {/* Article footer */}
         </article>
       </div>
-      {params.type === "blog" && (
+      {NEXT_PUBLIC_DISQUS_SHORTNAME && params.type === "blog" && (
         <DiscussionEmbed
-          shortname="chenyifaer"
+          shortname={NEXT_PUBLIC_DISQUS_SHORTNAME}
           config={{
             url: `${domain}/${slug}`,
             identifier: post.slug
