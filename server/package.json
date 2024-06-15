@@ -20,7 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.592.0",
+    "@aws-sdk/client-s3": "^3.598.0",
     "@nestjs-modules/mailer": "^2.0.2",
     "@nestjs/axios": "^3.0.2",
     "@nestjs/cache-manager": "^2.2.2",
@@ -36,7 +36,7 @@
     "@nestjs/serve-static": "^4.0.2",
     "@nestjs/swagger": "^7.3.1",
     "@nestjs/terminus": "^10.2.3",
-    "@nestjs/throttler": "^5.1.2",
+    "@nestjs/throttler": "^5.2.0",
     "@nestjs/websockets": "^10.3.9",
     "@prisma/client": "^5.15.0",
     "axios": "^1.7.2",
