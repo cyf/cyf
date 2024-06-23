@@ -57,7 +57,7 @@
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "mime": "^3.0.0",
-    "nestjs-form-data": "^1.9.7",
+    "nestjs-form-data": "^1.9.8",
     "nestjs-i18n": "^10.4.5",
     "nestjs-throttler-storage-redis": "^0.4.4",
     "nodemailer": "^6.9.14",
