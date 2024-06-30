@@ -7,19 +7,19 @@
     "build:server": "pnpm --filter server build",
     "dev:docs": "pnpm --filter docs dev",
     "dev:server": "pnpm --filter server dev:watch",
-    "start": "pnpm --filter server start",
-    "format": "pnpm --filter docs --filter server format",
-    "prepare": "husky"
+    "prepare": "husky",
+    "start": "pnpm --filter server start"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "husky": "^9.0.11",
     "lerna": "^8.1.5",
-    "lint-staged": "^15.2.7"
+    "lint-staged": "^15.2.7",
+    "sort-package-json": "^2.10.0"
   },
+  "packageManager": "pnpm@9.4.0",
   "engines": {
     "node": "^18"
-  },
-  "packageManager": "pnpm@9.4.0"
+  }
 }

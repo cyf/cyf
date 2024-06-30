@@ -1,23 +1,46 @@
 {
   "name": "server",
-  "private": true,
   "version": "0.0.1-alpha.0",
+  "private": true,
   "description": "Api Server for cyf.",
   "license": "MIT",
   "scripts": {
     "build": "pnpm run gen:css && prisma generate && prisma db push --accept-data-loss && nest build",
-    "format": "prettier --write \"**/*.ts\"",
     "dev": "prisma generate && nest start",
-    "dev:watch": "prisma generate && nest build --webpack --webpackPath webpack-hmr.config.cjs --watch",
     "dev:debug": "prisma generate && nest start --debug --watch",
+    "dev:watch": "prisma generate && nest build --webpack --webpackPath webpack-hmr.config.cjs --watch",
+    "format": "prettier --write \"**/*.ts\"",
     "gen:css": "postcss main.css -o ./public/style.css",
-    "start": "cross-env NODE_ENV=production node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "start": "cross-env NODE_ENV=production node dist/main",
     "test": "jest --detectOpenHandles --forceExit",
-    "test:watch": "jest --watch",
     "test:cov": "jest --coverage --detectOpenHandles --forceExit",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "moduleNameMapper": {
+      "^@/common/(.*)$": "<rootDir>/common/$1",
+      "^@/modules/(.*)$": "<rootDir>/modules/$1"
+    },
+    "rootDir": "src",
+    "testEnvironment": "node",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": [
+        "ts-jest"
+      ]
+    }
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.606.0",
@@ -109,6 +132,7 @@
     "prettier": "^3.3.2",
     "prisma": "^5.16.1",
     "run-script-webpack-plugin": "^0.2.0",
+    "sort-package-json": "^2.10.0",
     "source-map-support": "^0.5.21",
     "supertest": "^7.0.0",
     "tailwindcss": "^3.4.4",
@@ -124,28 +148,5 @@
   "packageManager": "pnpm@9.4.0",
   "engines": {
     "node": "^18"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": [
-        "ts-jest"
-      ]
-    },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node",
-    "moduleNameMapper": {
-      "^@/common/(.*)$": "<rootDir>/common/$1",
-      "^@/modules/(.*)$": "<rootDir>/modules/$1"
-    }
   }
 }
