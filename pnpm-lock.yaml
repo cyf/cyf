@@ -39,11 +39,11 @@ importers:
         specifier: ^8.19.1
         version: 8.19.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tsparticles/engine':
-        specifier: ^3.4.0
-        version: 3.4.0
+        specifier: ^3.5.0
+        version: 3.5.0
       '@tsparticles/react':
         specifier: ^3.0.0
-        version: 3.0.0(@tsparticles/engine@3.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 3.0.0(@tsparticles/engine@3.5.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       accept-language:
         specifier: ^3.0.18
         version: 3.0.18
@@ -1378,6 +1378,7 @@ packages:
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -1385,6 +1386,7 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.2':
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
+    deprecated: Use @eslint/object-schema instead
 
   '@hutson/parse-repository-url@3.0.2':
     resolution: {integrity: sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==}
@@ -3344,8 +3346,8 @@ packages:
   '@tsparticles/basic@3.4.0':
     resolution: {integrity: sha512-a0HxG0GOhXof7NDqcqdyu9XpmCAQ0M402YECz/jsH4CkBpz3ut0BrgnyjT6Xcqna3pR1Kv1m516/sV2fwNnnQw==}
 
-  '@tsparticles/engine@3.4.0':
-    resolution: {integrity: sha512-OqoMZYJCoiihNnexnnSmInEMNXr0Z8CmE1HSiFVeifgK1qUlonTFe2G09KdvNT8ZdvmIC513yTpFJNDbnMZYRQ==}
+  '@tsparticles/engine@3.5.0':
+    resolution: {integrity: sha512-RCwrJ2SvSYdhXJ24oUCjSUKEZQ9lXwObOWMvfMC9vS6/bk+Qo0N7Xx8AfumqzP/LebB1YJdlCvuoJMauAon0Pg==}
 
   '@tsparticles/interaction-external-attract@3.4.0':
     resolution: {integrity: sha512-6enSRkoXyK0JvW8bJuj2xAUuu9VzDiFvRCPaL+5dcLcDpjheh8nWpGzrgo8p9VxLL5VRYv7PxnYPMviBMQ7WzA==}
@@ -14003,7 +14005,7 @@ snapshots:
 
   '@tsparticles/basic@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
       '@tsparticles/move-base': 3.4.0
       '@tsparticles/shape-circle': 3.4.0
       '@tsparticles/updater-color': 3.4.0
@@ -14011,136 +14013,136 @@ snapshots:
       '@tsparticles/updater-out-modes': 3.4.0
       '@tsparticles/updater-size': 3.4.0
 
-  '@tsparticles/engine@3.4.0': {}
+  '@tsparticles/engine@3.5.0': {}
 
   '@tsparticles/interaction-external-attract@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/interaction-external-bounce@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/interaction-external-bubble@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/interaction-external-connect@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/interaction-external-grab@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/interaction-external-pause@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/interaction-external-push@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/interaction-external-remove@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/interaction-external-repulse@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/interaction-external-slow@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/interaction-external-trail@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/interaction-particles-attract@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/interaction-particles-collisions@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/interaction-particles-links@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/move-base@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/move-parallax@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/plugin-absorbers@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/plugin-easing-quad@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/plugin-emitters-shape-circle@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
       '@tsparticles/plugin-emitters': 3.4.0
 
   '@tsparticles/plugin-emitters-shape-square@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
       '@tsparticles/plugin-emitters': 3.4.0
 
   '@tsparticles/plugin-emitters@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
-  '@tsparticles/react@3.0.0(@tsparticles/engine@3.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@tsparticles/react@3.0.0(@tsparticles/engine@3.5.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
   '@tsparticles/shape-circle@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/shape-emoji@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/shape-image@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/shape-line@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/shape-polygon@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/shape-square@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/shape-star@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/shape-text@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/slim@3.4.0':
     dependencies:
       '@tsparticles/basic': 3.4.0
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
       '@tsparticles/interaction-external-attract': 3.4.0
       '@tsparticles/interaction-external-bounce': 3.4.0
       '@tsparticles/interaction-external-bubble': 3.4.0
@@ -14168,51 +14170,51 @@ snapshots:
 
   '@tsparticles/updater-color@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/updater-destroy@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/updater-life@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/updater-opacity@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/updater-out-modes@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/updater-roll@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/updater-rotate@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/updater-size@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/updater-stroke-color@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/updater-tilt@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/updater-twinkle@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tsparticles/updater-wobble@3.4.0':
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
 
   '@tufjs/canonical-json@2.0.0': {}
 
@@ -16426,7 +16428,7 @@ snapshots:
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
       eslint-plugin-jsx-a11y: 6.8.0(eslint@8.57.0)
       eslint-plugin-react: 7.33.2(eslint@8.57.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.57.0)
@@ -16454,7 +16456,7 @@ snapshots:
       enhanced-resolve: 5.17.0
       eslint: 8.57.0
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.2
       is-core-module: 2.13.1
@@ -16476,7 +16478,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0):
     dependencies:
       array-includes: 3.1.7
       array.prototype.findlastindex: 1.2.4
@@ -22321,7 +22323,7 @@ snapshots:
 
   tsparticles@3.4.0:
     dependencies:
-      '@tsparticles/engine': 3.4.0
+      '@tsparticles/engine': 3.5.0
       '@tsparticles/interaction-external-trail': 3.4.0
       '@tsparticles/plugin-absorbers': 3.4.0
       '@tsparticles/plugin-emitters': 3.4.0
