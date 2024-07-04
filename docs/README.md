@@ -15,7 +15,7 @@ pnpm install
 yarn install
 ```
 
-## Development Server
+## Development
 
 Start the development server on `http://localhost:3000`:
 
@@ -31,8 +31,6 @@ yarn dev
 ```
 
 ## Production
-
-The production server runs at [https://chenyifaer.com](https://chenyifaer.com)
 
 Build the application for production:
 

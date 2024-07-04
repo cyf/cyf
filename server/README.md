@@ -3,21 +3,22 @@
 ## Installation
 
 ```bash
-$ pnpm i
+pnpm i
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ pnpm start
+pnpm start
 
 # watch mode
-$ pnpm start:dev
+pnpm start:dev
 
 # production mode
-$ pnpm start:prod
+pnpm start:prod
 ```
+
 ## Endpoint
 
 ### Swagger
@@ -28,11 +29,11 @@ GET: `http://127.0.0.1:3001/api`
 
 ```bash
 # unit tests
-$ pnpm test
+pnpm test
 
 # e2e tests
-$ pnpm test:e2e
+pnpm test:e2e
 
 # test coverage
-$ pnpm test:cov
+pnpm test:cov
 ```
