@@ -10,7 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.7.0",
+    "@hookform/resolvers": "^3.9.0",
     "@reduxjs/toolkit": "^2.2.6",
     "@tanstack/react-table": "^8.19.2",
     "@tsparticles/engine": "^3.5.0",
@@ -29,7 +29,7 @@
     "disqus-react": "^1.1.5",
     "email-validator": "^2.0.4",
     "focus-trap-react": "^10.2.3",
-    "framer-motion": "^11.2.12",
+    "framer-motion": "^11.2.13",
     "http-status": "^1.7.4",
     "i18next": "^23.11.5",
     "i18next-browser-languagedetector": "^8.0.0",
