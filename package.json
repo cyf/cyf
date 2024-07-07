@@ -18,7 +18,7 @@
     "lint-staged": "^15.2.7",
     "sort-package-json": "^2.10.0"
   },
-  "packageManager": "pnpm@9.4.0",
+  "packageManager": "pnpm@9.5.0",
   "engines": {
     "node": "^18"
   }
