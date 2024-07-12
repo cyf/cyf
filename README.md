@@ -3,26 +3,51 @@
 ## Setup
 
 ```bash
+# npm
+npm install
+
 # pnpm
-pnpm i
+pnpm install
+
+# yarn
+yarn install
 ```
 
 ## Development
 
 ```bash
-# docs
-pnpm dev:docs
+# npm
+npm run dev
 
-# server
-pnpm dev:server
+# pnpm
+pnpm run dev
+
+# yarn
+yarn dev
 ```
 
 ## Production
 
 ```bash
-# docs
-pnpm build:docs
+# npm
+npm run build
 
-# server
-pnpm build:server
+# pnpm
+pnpm run build
+
+# yarn
+yarn build
+```
+
+## Preview
+
+```bash
+# npm
+npm run preview
+
+# pnpm
+pnpm run preview
+
+# yarn
+yarn preview
 ```
