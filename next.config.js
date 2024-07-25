@@ -1,4 +1,4 @@
-const { withContentlayer } = require("next-contentlayer");
+const { withContentlayer } = require("next-contentlayer2");
 
 const basePath =
   process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? "/portal" : "";
