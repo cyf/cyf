@@ -2,6 +2,8 @@
 
 ## Setup
 
+Make sure to install the dependencies:
+
 ```bash
 # npm
 npm install
@@ -14,6 +16,8 @@ yarn install
 ```
 
 ## Development
+
+Start the development server on `http://localhost:3000`:
 
 ```bash
 # npm
@@ -28,6 +32,8 @@ yarn dev
 
 ## Production
 
+Build the application for production:
+
 ```bash
 # npm
 npm run build
@@ -40,6 +46,8 @@ yarn build
 ```
 
 ## Preview
+
+Locally preview production build:
 
 ```bash
 # npm
