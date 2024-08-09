@@ -89,7 +89,7 @@
     "@types/rss": "^0.0.32",
     "@types/uuid": "^9.0.8",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8.57.0",
+    "eslint": "^9.8.0",
     "eslint-config-next": "^14.2.5",
     "husky": "^9.1.4",
     "lint-staged": "^15.2.8",
