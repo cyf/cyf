@@ -1,6 +1,6 @@
 {
   "name": "cyf",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "build": "next build",
@@ -13,12 +13,12 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@reduxjs/toolkit": "^2.2.7",
-    "@tanstack/react-table": "^8.19.3",
+    "@tanstack/react-table": "^8.20.1",
     "@tsparticles/engine": "^3.5.0",
     "@tsparticles/react": "^3.0.0",
     "accept-language": "^3.0.18",
     "awesome-debounce-promise": "^2.1.0",
-    "axios": "^1.7.2",
+    "axios": "^1.7.3",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
@@ -30,7 +30,7 @@
     "disqus-react": "^1.1.5",
     "email-validator": "^2.0.4",
     "focus-trap-react": "^10.2.3",
-    "framer-motion": "^11.3.19",
+    "framer-motion": "^11.3.24",
     "http-status": "^1.7.4",
     "i18next": "^23.12.2",
     "i18next-browser-languagedetector": "^8.0.0",
@@ -38,7 +38,7 @@
     "joi": "^17.13.3",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
-    "lucide-react": "^0.417.0",
+    "lucide-react": "^0.427.0",
     "ms": "^2.1.3",
     "muse-ui": "^4.0.0-alpha.5",
     "next": "^14.2.5",
@@ -50,8 +50,8 @@
     "react-cropper": "^2.3.3",
     "react-datalist-input": "^3.2.1",
     "react-dom": "^18.3.1",
-    "react-hook-form": "^7.52.1",
-    "react-i18next": "^15.0.0",
+    "react-hook-form": "^7.52.2",
+    "react-i18next": "^15.0.1",
     "react-icons": "^5.2.1",
     "react-markdown": "^9.0.1",
     "react-medium-image-zoom": "^5.2.8",
@@ -73,33 +73,33 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
+    "@commitlint/cli": "^19.4.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/line-clamp": "^0.4.4",
-    "@tailwindcss/typography": "^0.5.13",
+    "@tailwindcss/typography": "^0.5.14",
     "@types/crypto-js": "^4.2.2",
     "@types/js-cookie": "^3.0.6",
     "@types/lodash": "^4.17.7",
     "@types/ms": "^0.7.34",
-    "@types/node": "^18.19.42",
+    "@types/node": "^18.19.43",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/redux-logger": "^3.0.13",
     "@types/rss": "^0.0.32",
     "@types/uuid": "^9.0.8",
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.4.20",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.5",
     "husky": "^9.1.4",
-    "lint-staged": "^15.2.7",
-    "postcss": "^8.4.40",
+    "lint-staged": "^15.2.8",
+    "postcss": "^8.4.41",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5",
     "prop-types": "^15.8.1",
     "redux-logger": "^3.0.6",
     "sort-package-json": "^2.10.0",
-    "tailwindcss": "^3.4.7",
+    "tailwindcss": "^3.4.9",
     "typescript": "5.4.5"
   },
   "packageManager": "pnpm@9.6.0",
@@ -108,7 +108,7 @@
   },
   "overrides": {
     "muse-ui": {
-      "react-hook-form": "^7.52.1"
+      "react-hook-form": "^7.52.2"
     }
   }
 }
