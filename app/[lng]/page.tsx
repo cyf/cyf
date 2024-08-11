@@ -265,7 +265,7 @@ const apps = [
     demo: (
       <MdOutlineNotificationsActive className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
-    url: "https://chenyifaer.com/homing-pigeon",
+    url: "https://chenyifaer.com/pigeon",
   },
   {
     title: "FaFa Runner",
@@ -273,6 +273,6 @@ const apps = [
     demo: (
       <Gamepad2 className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
-    url: "https://chenyifaer.com/fafa-runner",
+    url: "https://fafarunner.com",
   },
 ];
