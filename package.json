@@ -16,7 +16,7 @@
     "@tanstack/react-table": "^8.20.1",
     "@tsparticles/engine": "^3.5.0",
     "@tsparticles/react": "^3.0.0",
-    "accept-language": "^3.0.18",
+    "accept-language": "^3.0.20",
     "awesome-debounce-promise": "^2.1.0",
     "axios": "^1.7.3",
     "class-variance-authority": "^0.7.0",
