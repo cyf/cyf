@@ -11,7 +11,7 @@ import {
   SiInstagram,
   SiYoutube,
   SiTwitch,
-  SiTwitter,
+  SiX,
   SiTelegram,
 } from "react-icons/si";
 import { MdOutlineNotificationsActive, MdJoinInner } from "react-icons/md";
@@ -206,7 +206,7 @@ const socials = [
     description:
       "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
     demo: (
-      <SiTwitter className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+      <SiX className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
     url: "https://twitter.com/yifaer_chen",
   },
