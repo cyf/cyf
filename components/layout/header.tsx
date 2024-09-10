@@ -67,7 +67,7 @@ export default function Header(props: LngProps) {
             <li className="h-8 w-8 sm:h-9 sm:w-9">
               <ThemeDropdown lng={props.lng} />
             </li>
-            {user ? (
+            {/* {user ? (
               <li className="h-8 w-8 sm:h-9 sm:w-9">
                 <AvatarDropdown lng={props.lng} user={user} />
               </li>
@@ -90,7 +90,7 @@ export default function Header(props: LngProps) {
                   </div>
                 </li>
               </>
-            )}
+            )} */}
           </ul>
         </div>
         <button
