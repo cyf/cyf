@@ -25,7 +25,7 @@
     "cmdk": "^1.0.0",
     "contentlayer2": "^0.5.1",
     "crypto-js": "^4.2.0",
-    "date-fns": "^3.6.0",
+    "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "disqus-react": "^1.1.5",
     "email-validator": "^2.0.4",
