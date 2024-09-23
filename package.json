@@ -99,7 +99,7 @@
     "prop-types": "^15.8.1",
     "redux-logger": "^3.0.6",
     "sort-package-json": "^2.10.1",
-    "tailwindcss": "^3.4.12",
+    "tailwindcss": "^3.4.13",
     "typescript": "5.4.5"
   },
   "packageManager": "pnpm@9.10.0",
