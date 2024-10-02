@@ -125,7 +125,7 @@ const formSchema = z
     },
   );
 
-export default function Login({
+export default function SignUp({
   params,
 }: {
   params: {
