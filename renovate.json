@@ -16,6 +16,10 @@
     {
       "allowedVersions": "7",
       "matchPackageNames": ["query-string"]
+    },
+    {
+      "allowedVersions": "1",
+      "matchPackageNames": ["http-status"]
     }
   ]
 }
