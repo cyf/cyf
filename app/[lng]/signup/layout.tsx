@@ -1,7 +1,5 @@
-import React from "react";
-import UserProvider from "./user-provider";
-import { languages } from "@/i18n/settings";
 import { useTranslation } from "@/i18n";
+import { languages } from "@/i18n/settings";
 
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
@@ -15,21 +13,20 @@ export async function generateMetadata({
   };
 }) {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { t } = await useTranslation(lng, "admin");
+  const { t } = await useTranslation(lng, "login");
   return {
-    title: t("title"),
+    title: t("signup"),
     description: t("login"),
   };
 }
 
-export default async function AdminLayout({
+export default function Layout({
   children,
-  params,
 }: {
   children: React.ReactNode;
   params: {
     lng: string;
   };
 }) {
-  return <UserProvider lng={params.lng}>{children}</UserProvider>;
+  return children;
 }

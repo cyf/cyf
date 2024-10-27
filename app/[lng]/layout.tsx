@@ -4,6 +4,7 @@ import cx from "classnames";
 import { dir } from "i18next";
 import { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
+import { notFound } from "next/navigation";
 import { BiArrowToTop } from "react-icons/bi";
 import NextTopLoader from "nextjs-toploader";
 import { Toaster } from "muse-ui";
@@ -11,6 +12,7 @@ import Footer from "@/components/layout/footer";
 import GoogleAnalytics from "@/components/shared/google-analytics";
 import CookieBanner from "@/components/shared/cookie-banner";
 import ScrollToTop from "@/components/layout/scroll-to-top";
+import { useTranslation } from "@/i18n";
 import { languages } from "@/i18n/settings";
 import { basePath } from "@/constants";
 import { sfPro, inter } from "./fonts";
@@ -41,15 +43,15 @@ export function generateViewport(): Viewport {
 }
 
 export async function generateMetadata({
-  params,
+  params: { lng },
 }: {
   params: { lng: string };
 }): Promise<Metadata | undefined> {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { t } = await useTranslation(lng, "header");
   return {
-    title: params.lng === "en" ? "ChenYifaer" : "陈一发儿",
-    description: `${
-      params.lng === "en" ? "ChenYifaer" : "陈一发儿"
-    } - 童话镇里一枝花, 人美歌甜陈一发.`,
+    title: t("title"),
+    description: `${t("title")} - 童话镇里一枝花, 人美歌甜陈一发.`,
     metadataBase: new URL("https://chenyifaer.com"),
     icons: {
       icon: `${basePath}/logo.jpg`,
@@ -70,6 +72,10 @@ export default async function RootLayout({
     lng: string;
   };
 }) {
+  if (!languages.includes(params.lng)) {
+    notFound();
+  }
+
   return (
     <html
       lang={params.lng}

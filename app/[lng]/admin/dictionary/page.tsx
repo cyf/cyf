@@ -17,12 +17,12 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  ChevronDown,
-  MoreHorizontal,
-  Plus,
-  Send,
-  RefreshCcw,
-} from "lucide-react";
+  LuChevronDown,
+  LuMoreHorizontal,
+  LuPlus,
+  LuSend,
+  LuRefreshCcw,
+} from "react-icons/lu";
 import DatalistInput from "react-datalist-input";
 import {
   Form,
@@ -196,7 +196,7 @@ export default function Dictionaries({
                 className="h-8 w-8 p-0 focus-visible:ring-0 focus-visible:ring-offset-0"
               >
                 <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="h-4 w-4" />
+                <LuMoreHorizontal className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -482,7 +482,7 @@ export default function Dictionaries({
               className="ml-auto focus-visible:ring-0 focus-visible:ring-offset-0"
               onClick={fetchData}
             >
-              <RefreshCcw className="h-4 w-4" />
+              <LuRefreshCcw className="h-4 w-4" />
             </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -491,7 +491,7 @@ export default function Dictionaries({
                   className="ml-2 focus-visible:ring-0 focus-visible:ring-offset-0"
                 >
                   {t("columns")}
-                  <ChevronDown className="ml-2 h-4 w-4" />
+                  <LuChevronDown className="ml-2 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -517,7 +517,7 @@ export default function Dictionaries({
               className="ml-2 focus-visible:ring-0 focus-visible:ring-offset-0"
               onClick={() => setAddDialogOpened(true)}
             >
-              <Plus className="mr-2 h-4 w-4" />
+              <LuPlus className="mr-2 h-4 w-4" />
               {t("add")}
             </Button>
           </div>
@@ -780,7 +780,7 @@ export default function Dictionaries({
                   className="flex w-full items-center justify-center gap-1 rounded-[4px] bg-blue-500 py-4 text-black hover:bg-blue-600 dark:text-white"
                   type="submit"
                 >
-                  <Send className="mr-2 h-5 w-5 dark:text-gray-300" />
+                  <LuSend className="mr-2 h-5 w-5 dark:text-gray-300" />
                   <p className="text-lg">{t("form.submit")}</p>
                 </Button>
               </form>

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useCallback } from "react";
 import Link from "next/link";
-import { CirclePlus, TableProperties, LogOut } from "lucide-react";
+import { LuPlusCircle, LuTableProperties, LuLogOut } from "react-icons/lu";
 import {
   Avatar,
   AvatarFallback,
@@ -67,7 +67,7 @@ export default function AvatarDropdown(props: { user: User } & LngProps) {
                 href={`/${lng}/admin`}
                 className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm transition-all duration-75"
               >
-                <CirclePlus className="mr-0 h-4 w-4" />
+                <LuPlusCircle className="mr-0 h-4 w-4" />
                 <p className="text-sm">{tm("insider-program")}</p>
               </Link>
             </DropdownMenuItem>
@@ -77,7 +77,7 @@ export default function AvatarDropdown(props: { user: User } & LngProps) {
                   href={`/${lng}/admin/dictionary`}
                   className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm transition-all duration-75"
                 >
-                  <TableProperties className="mr-0 h-4 w-4" />
+                  <LuTableProperties className="mr-0 h-4 w-4" />
                   <p className="text-sm">{tm("data-dictionary")}</p>
                 </Link>
               </DropdownMenuItem>
@@ -91,7 +91,7 @@ export default function AvatarDropdown(props: { user: User } & LngProps) {
                 }}
                 className="relative flex w-full items-center justify-start space-x-2 rounded-md py-2 text-left text-sm transition-all duration-75"
               >
-                <LogOut className="mr-0 h-4 w-4" />
+                <LuLogOut className="mr-0 h-4 w-4" />
                 <p className="text-sm">{tl("logout")}</p>
               </button>
             </DropdownMenuItem>
@@ -119,7 +119,7 @@ export default function AvatarDropdown(props: { user: User } & LngProps) {
               href={`/${lng}/admin`}
               className="relative flex w-full items-center justify-start space-x-2 rounded-md px-2 py-3 text-left text-sm transition-all duration-75 hover:bg-accent hover:text-accent-foreground"
             >
-              <CirclePlus className="mr-0 h-4 w-4" />
+              <LuPlusCircle className="mr-0 h-4 w-4" />
               <p className="text-sm">{tm("insider-program")}</p>
             </Link>
             <ShowContent isShow={user?.role === "ADMIN"}>
@@ -127,7 +127,7 @@ export default function AvatarDropdown(props: { user: User } & LngProps) {
                 href={`/${lng}/admin/dictionary`}
                 className="relative flex w-full select-none items-center justify-start space-x-2 rounded-md px-2 py-3 text-left text-sm transition-all duration-75 hover:bg-accent hover:text-accent-foreground"
               >
-                <TableProperties className="mr-0 h-4 w-4" />
+                <LuTableProperties className="mr-0 h-4 w-4" />
                 <p className="text-sm">{tm("data-dictionary")}</p>
               </Link>
             </ShowContent>
@@ -138,7 +138,7 @@ export default function AvatarDropdown(props: { user: User } & LngProps) {
               }}
               className="relative flex w-full items-center justify-start space-x-2 rounded-md bg-background px-2 py-3 text-left text-sm text-inherit transition-all duration-75 hover:bg-accent hover:text-accent-foreground"
             >
-              <LogOut className="mr-0 h-4 w-4" />
+              <LuLogOut className="mr-0 h-4 w-4" />
               <p className="text-sm">{tl("logout")}</p>
             </Button>
           </div>

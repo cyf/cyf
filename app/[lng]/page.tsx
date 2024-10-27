@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
 import { RoughNotation } from "react-rough-notation";
-import { Gamepad2, Mail, Music } from "lucide-react";
+import { LuGamepad2 } from "react-icons/lu";
 import {
   SiTaobao,
   SiSpotify,
@@ -13,9 +13,10 @@ import {
   SiTwitch,
   SiX,
   SiTelegram,
+  SiShopify,
+  SiGmail,
 } from "react-icons/si";
-import { MdOutlineNotificationsActive, MdJoinInner } from "react-icons/md";
-// import { BiTestTube } from "react-icons/bi";
+import { MdJoinInner } from "react-icons/md";
 import { FaBlog } from "react-icons/fa";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -51,15 +52,19 @@ export default function Home({
           <div className="flex flex-row flex-nowrap items-center justify-center text-center text-3xl before:mr-5 before:h-[1px] before:max-w-xs before:flex-1 before:border-b-[1px] before:border-dashed before:border-b-gray-300 before:content-[''] after:ml-5 after:h-[1px] after:max-w-xs after:flex-1 after:border-b-[1px] after:border-dashed after:border-b-gray-300 after:content-[''] dark:before:border-b-gray-600 dark:after:border-b-gray-600">
             {title}
           </div>
-          <div className="mt-6 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 flex w-full max-w-screen-xl flex-grow animate-fade-up flex-wrap gap-5">
             {links.map(({ title, description, demo, url }) => (
-              <DynamicCard
+              <div
                 key={title}
-                title={title}
-                description={description}
-                demo={demo}
-                url={url}
-              />
+                className="w-full sm:w-[calc(calc(100%-1.25rem)/2)] lg:w-[calc(calc(100%-2.5rem)/3)]"
+              >
+                <DynamicCard
+                  title={title}
+                  description={description}
+                  demo={demo}
+                  url={url}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -140,53 +145,40 @@ export default function Home({
           </Link>
         </div>
       </div>
-      <Section title={t("music")} links={musics} />
       <Section title={t("shopping")} links={shoppings} />
       <Section title={t("social")} links={socials} />
-      <Section title={t("live")} links={lives} />
+      <Section title={t("music-videos")} links={lives} />
       <Section title={t("app")} links={apps} />
     </div>
   );
 }
 
-const musics = [
-  {
-    title: "Music",
-    description:
-      "Pre-built beautiful, a11y-first components, powered by [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Framer Motion](https://framer.com/motion)",
-    demo: (
-      <Music className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
-    ),
-    url: "https://chenyifaer.com/music",
-  },
-  {
-    title: "Spotify",
-    description:
-      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
-    demo: (
-      <SiSpotify className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
-    ),
-    url: "https://open.spotify.com/artist/10xtjTRMlKZ7aFx6VBQlSj",
-  },
-];
-
 const shoppings = [
   {
-    title: "Taobao",
-    description:
-      "Pre-built beautiful, a11y-first components, powered by [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Framer Motion](https://framer.com/motion)",
+    title: "Serious Shop",
+    // description:
+    //   "Pre-built beautiful, a11y-first components, powered by [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Framer Motion](https://framer.com/motion)",
     demo: (
       <SiTaobao className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
     url: "https://chenyifaer.taobao.com",
+  },
+  {
+    title: "Serious Shop (US)",
+    // description:
+    //   "Pre-built beautiful, a11y-first components, powered by [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Framer Motion](https://framer.com/motion)",
+    demo: (
+      <SiShopify className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+    ),
+    url: "https://chenyifaer.us",
   },
 ];
 
 const socials = [
   {
     title: "Instagram",
-    description:
-      "Built on [Next.js](https://nextjs.org/) primitives like `@next/font` and `next/image` for stellar performance.",
+    // description:
+    //   "Built on [Next.js](https://nextjs.org/) primitives like `@next/font` and `next/image` for stellar performance.",
     demo: (
       <SiInstagram className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
@@ -194,8 +186,8 @@ const socials = [
   },
   {
     title: "Weibo",
-    description:
-      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
+    // description:
+    //   "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
     demo: (
       <SiSinaweibo className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
@@ -203,8 +195,8 @@ const socials = [
   },
   {
     title: "Twitter",
-    description:
-      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
+    // description:
+    //   "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
     demo: (
       <SiX className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
@@ -220,10 +212,10 @@ const socials = [
   },
   {
     title: "Email",
-    description:
-      "Precedent comes with authentication and database via [Auth.js](https://authjs.dev/) + [Prisma](https://prisma.io/)",
+    // description:
+    //   "Precedent comes with authentication and database via [Auth.js](https://authjs.dev/) + [Prisma](https://prisma.io/)",
     demo: (
-      <Mail className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+      <SiGmail className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
     url: "mailto:chenyifaer777@gmail.com",
   },
@@ -231,9 +223,18 @@ const socials = [
 
 const lives = [
   {
+    title: "Spotify",
+    // description:
+    //   "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
+    demo: (
+      <SiSpotify className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+    ),
+    url: "https://open.spotify.com/artist/10xtjTRMlKZ7aFx6VBQlSj",
+  },
+  {
     title: "YouTube",
-    description:
-      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
+    // description:
+    //   "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
     demo: (
       <SiYoutube className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
@@ -241,8 +242,8 @@ const lives = [
   },
   {
     title: "Twitch",
-    description:
-      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
+    // description:
+    //   "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
     demo: (
       <SiTwitch className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
@@ -251,27 +252,27 @@ const lives = [
 ];
 
 const apps = [
-  {
-    title: "FaForever",
-    description: "一个可以听发姐音乐的桌面客户端.",
-    demo: (
-      <Music className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
-    ),
-    url: "https://chenyifaer.com/faforever",
-  },
-  {
-    title: "Homing Pigeon",
-    description: "一个可以接收直播通知的应用.",
-    demo: (
-      <MdOutlineNotificationsActive className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
-    ),
-    url: "https://chenyifaer.com/pigeon",
-  },
+  // {
+  //   title: "FaForever",
+  //   description: "一个可以听发姐音乐的桌面客户端.",
+  //   demo: (
+  //     <Music className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+  //   ),
+  //   url: "https://chenyifaer.com/faforever",
+  // },
+  // {
+  //   title: "Homing Pigeon",
+  //   description: "一个可以接收直播通知的应用.",
+  //   demo: (
+  //     <MdOutlineNotificationsActive className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+  //   ),
+  //   url: "https://chenyifaer.com/pigeon",
+  // },
   {
     title: "FaFa Runner",
     description: "一个休闲小游戏",
     demo: (
-      <Gamepad2 className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
+      <LuGamepad2 className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
     ),
     url: "https://fafarunner.com",
   },

@@ -17,7 +17,7 @@ export default function Card({
   return (
     <div
       onClick={() => window.open(url)}
-      className="relative col-span-1 h-96 cursor-pointer overflow-hidden rounded-xl border border-gray-200 hover:shadow-md dark:border-gray-700 dark:hover:shadow-gray-700"
+      className="relative col-span-1 h-96 w-full cursor-pointer overflow-hidden rounded-xl border border-gray-200 hover:shadow-md dark:border-gray-700 dark:hover:shadow-gray-700"
     >
       <div className="flex h-60 items-center justify-center">{demo}</div>
       <div className="mx-auto max-w-md text-center">
