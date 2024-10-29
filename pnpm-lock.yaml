@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@hookform/resolvers':
-        specifier: ^3.9.0
-        version: 3.9.0(react-hook-form@7.53.1(react@18.3.1))
+        specifier: ^3.9.1
+        version: 3.9.1(react-hook-form@7.53.1(react@18.3.1))
       '@reduxjs/toolkit':
         specifier: ^2.3.0
         version: 2.3.0(react-redux@9.1.2(@types/react@18.3.12)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
@@ -645,8 +645,8 @@ packages:
   '@hapi/topo@5.1.0':
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
 
-  '@hookform/resolvers@3.9.0':
-    resolution: {integrity: sha512-bU0Gr4EepJ/EQsH/IwEzYLsT/PEj5C0ynLQ4m+GSHS+xKH4TfSelhluTgOaoc4kA5s7eCsQbM4wvZLzELmWzUg==}
+  '@hookform/resolvers@3.9.1':
+    resolution: {integrity: sha512-ud2HqmGBM0P0IABqoskKWI6PEf6ZDDBZkFqe2Vnl+mTHCEHzr3ISjjZyCwTjC/qpL25JC9aIDkloQejvMeq0ug==}
     peerDependencies:
       react-hook-form: ^7.0.0
 
@@ -3183,6 +3183,7 @@ packages:
   eslint@8.57.1:
     resolution: {integrity: sha512-ypowyDxpVSYpkXr9WPv2PAZCtNip1Mv5KTW0SCurXv/9iOpcrH9PaqUElksqEB6pChqHGDRCFTyrZlGhnLNGiA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -5985,7 +5986,7 @@ snapshots:
     dependencies:
       '@hapi/hoek': 9.3.0
 
-  '@hookform/resolvers@3.9.0(react-hook-form@7.53.1(react@18.3.1))':
+  '@hookform/resolvers@3.9.1(react-hook-form@7.53.1(react@18.3.1))':
     dependencies:
       react-hook-form: 7.53.1(react@18.3.1)
 
@@ -10081,7 +10082,7 @@ snapshots:
   muse-ui@4.0.0-alpha.5(@opentelemetry/api@1.9.0)(@types/react-dom@18.3.1)(@types/react@18.3.12)(embla-carousel@8.0.0-rc15)(esbuild@0.17.19):
     dependencies:
       '@faker-js/faker': 8.4.1
-      '@hookform/resolvers': 3.9.0(react-hook-form@7.53.1(react@18.3.1))
+      '@hookform/resolvers': 3.9.1(react-hook-form@7.53.1(react@18.3.1))
       '@radix-ui/react-accessible-icon': 1.1.0(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-alert-dialog': 1.1.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
