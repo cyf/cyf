@@ -114,8 +114,8 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1
       react-cookie:
-        specifier: ^7.2.1
-        version: 7.2.1(react@18.3.1)
+        specifier: ^7.2.2
+        version: 7.2.2(react@18.3.1)
       react-cropper:
         specifier: ^2.3.3
         version: 2.3.3(react@18.3.1)
@@ -3183,6 +3183,7 @@ packages:
   eslint@8.57.1:
     resolution: {integrity: sha512-ypowyDxpVSYpkXr9WPv2PAZCtNip1Mv5KTW0SCurXv/9iOpcrH9PaqUElksqEB6pChqHGDRCFTyrZlGhnLNGiA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -4606,8 +4607,8 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  react-cookie@7.2.1:
-    resolution: {integrity: sha512-UcE6njAy5UmKzU9RywIvvtbHIQydhh6JP55yVbGwQ8Tp/wSPp2HOYVZdRI55zfbkW6zQv9SEs42mS3a9cIUQ0g==}
+  react-cookie@7.2.2:
+    resolution: {integrity: sha512-e+hi6axHcw9VODoeVu8WyMWyoosa1pzpyjfvrLdF7CexfU+WSGZdDuRfHa4RJgTpfv3ZjdIpHE14HpYBieHFhg==}
     peerDependencies:
       react: '>= 16.3.0'
 
@@ -10537,7 +10538,7 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
-  react-cookie@7.2.1(react@18.3.1):
+  react-cookie@7.2.2(react@18.3.1):
     dependencies:
       '@types/hoist-non-react-statics': 3.3.5
       hoist-non-react-statics: 3.3.2
