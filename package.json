@@ -23,7 +23,7 @@
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
-    "contentlayer2": "^0.5.1",
+    "contentlayer2": "^0.5.3",
     "crypto-js": "^4.2.0",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
