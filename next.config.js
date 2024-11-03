@@ -1,11 +1,11 @@
 const { withContentlayer } = require("next-contentlayer2");
 
-const basePath =
-  process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? "/portal" : "";
+// const basePath =
+//   process.env.NEXT_PUBLIC_VERCEL_ENV === "production" ? "/portal" : "";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  basePath,
+  // basePath,
   trailingSlash: true,
   reactStrictMode: true,
   swcMinify: true,
