@@ -133,16 +133,16 @@ export default function Home({
               <span className="sm:inline-block">Star on GitHub</span>
             </p>
           </Link>
-          <Link
-            href={`/${params.lng}/admin`}
-            className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-[#ff7979] bg-white px-5 py-2 text-sm text-[#ff7979] shadow-md transition-colors hover:border-gray-800 dark:bg-black dark:text-[#ff7979] dark:hover:border-gray-800"
-            rel="noopener noreferrer"
-          >
-            <MdJoinInner className="h-5 w-5" />
-            <p>
-              <span className="sm:inline-block">Join Insider</span>
-            </p>
-          </Link>
+          {/*<Link*/}
+          {/*  href={`/${params.lng}/admin`}*/}
+          {/*  className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-[#ff7979] bg-white px-5 py-2 text-sm text-[#ff7979] shadow-md transition-colors hover:border-gray-800 dark:bg-black dark:text-[#ff7979] dark:hover:border-gray-800"*/}
+          {/*  rel="noopener noreferrer"*/}
+          {/*>*/}
+          {/*  <MdJoinInner className="h-5 w-5" />*/}
+          {/*  <p>*/}
+          {/*    <span className="sm:inline-block">Join Insider</span>*/}
+          {/*  </p>*/}
+          {/*</Link>*/}
         </div>
       </div>
       <Section title={t("shopping")} links={shoppings} />
