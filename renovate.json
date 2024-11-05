@@ -28,6 +28,10 @@
     {
       "allowedVersions": "1",
       "matchPackageNames": ["http-status"]
+    },
+    {
+      "matchPackagePatterns": ["contentlayer2", "next-contentlayer2"],
+      "groupName": "contentlayer2"
     }
   ]
 }
