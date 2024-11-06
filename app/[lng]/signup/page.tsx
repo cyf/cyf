@@ -125,16 +125,16 @@ const formSchema = z
     },
   );
 
-export default function SignUp({
-  params,
+export default function Page({
+  params: { lng },
 }: {
   params: {
     lng: string;
   };
 }) {
-  const { t } = useTranslation(params.lng, "validator");
-  const { t: tf } = useTranslation(params.lng, "footer");
-  const { t: tl } = useTranslation(params.lng, "login");
+  const { t } = useTranslation(lng, "validator");
+  const { t: tf } = useTranslation(lng, "footer");
+  const { t: tl } = useTranslation(lng, "login");
   const dispatch = useAppDispatch();
   const search = useSearchParams();
   const redirectUrl = search.get("r");
@@ -185,9 +185,7 @@ export default function SignUp({
           }
           Cookies.set(cacheTokenKey, res?.data?.access_token);
           dispatch(setUser(res?.data?.user));
-          window.location.replace(
-            redirectUrl || `${domain}/${params.lng}/admin`,
-          );
+          window.location.replace(redirectUrl || `${domain}/${lng}/admin`);
         }
       })
       .catch((error: any) => {
@@ -494,24 +492,20 @@ export default function SignUp({
             <div className="flex flex-row justify-center text-[12px] text-gray-500 dark:text-gray-400">
               <span>{tl("has-account")},&nbsp;</span>
               <Link
-                href={`/${params.lng}/login${redirectUrl ? `?r=${encodeURIComponent(redirectUrl)}` : ""}`}
+                href={`/${lng}/login${redirectUrl ? `?r=${encodeURIComponent(redirectUrl)}` : ""}`}
                 className="text-blue-500"
               >
                 {tl("go-to-login")}
               </Link>
             </div>
-            <Or lng={params.lng} />
+            <Or lng={lng} />
             <ThirdPartyAccount
               approved={approved}
               setShowAgreementDialog={setShowAgreementDialog}
-              lng={params.lng}
+              lng={lng}
             />
           </div>
-          <Legal
-            approved={approved}
-            setApproved={setApproved}
-            lng={params.lng}
-          />
+          <Legal approved={approved} setApproved={setApproved} lng={lng} />
         </div>
       </div>
       <Drawer open={open} onOpenChange={setOpen} dismissible={false}>
@@ -586,10 +580,7 @@ export default function SignUp({
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-      <AgreementDialog
-        lng={params.lng}
-        callback={() => onSubmit(form.getValues())}
-      />
+      <AgreementDialog lng={lng} callback={() => onSubmit(form.getValues())} />
     </>
   );
 }

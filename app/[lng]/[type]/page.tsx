@@ -6,14 +6,14 @@ import LatestPosts from "@/components/post/latest-posts";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
-  params,
+  params: { lng },
 }: {
   params: { lng: string };
 }): Promise<Metadata | undefined> {
   return {
-    title: params.lng === "en" ? "Blog" : "博客",
+    title: lng === "en" ? "Blog" : "博客",
     description: `${
-      params.lng === "en" ? "Blog" : "博客"
+      lng === "en" ? "Blog" : "博客"
     } - 童话镇里一枝花, 人美歌甜陈一发.`,
     metadataBase: new URL("https://chenyifaer.com"),
     icons: {
@@ -23,15 +23,15 @@ export async function generateMetadata({
 }
 
 export default async function Blog({
-  params,
+  params: { lng, type },
 }: {
   params: { lng: string; type: string };
 }) {
-  if (!["blog", "legal"].includes(params.type)) return notFound();
+  if (!["blog", "legal"].includes(type)) return notFound();
 
   // Sort posts by date
   const posts = allPosts
-    .filter((post) => post.slug.startsWith(`${params.lng}/${params.type}`))
+    .filter((post) => post.slug.startsWith(`${lng}/${type}`))
     .sort((a, b) => {
       return new Date(a.publishedAt) > new Date(b.publishedAt) ? -1 : 1;
     });
@@ -53,7 +53,7 @@ export default async function Blog({
           {/* Articles container */}
           <div className="-mt-4 md:grow">
             {posts.map((post, postIndex) => (
-              <PostItem key={postIndex} {...post} lng={params.lng} />
+              <PostItem key={postIndex} {...post} lng={lng} />
             ))}
           </div>
 

@@ -16,7 +16,7 @@ import {
   SiShopify,
   SiGmail,
 } from "react-icons/si";
-import { MdJoinInner } from "react-icons/md";
+// import { MdJoinInner } from "react-icons/md";
 import { FaBlog } from "react-icons/fa";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -30,16 +30,16 @@ const DynamicCard = dynamic(() => import("@/components/home/card"), {
 });
 
 export default function Home({
-  params,
+  params: { lng },
 }: {
   params: {
     lng: string;
   };
 }) {
-  const { t } = useTranslation(params.lng, "common");
-  const { t: th } = useTranslation(params.lng, "header");
+  const { t } = useTranslation(lng, "common");
+  const { t: th } = useTranslation(lng, "header");
   const post = allPosts
-    .filter((post) => post.slug.startsWith(`${params.lng}/blog`))
+    .filter((post) => post.slug.startsWith(`${lng}/blog`))
     .sort((a, b) => {
       return new Date(a.publishedAt) > new Date(b.publishedAt) ? -1 : 1;
     })
@@ -134,7 +134,7 @@ export default function Home({
             </p>
           </Link>
           {/*<Link*/}
-          {/*  href={`/${params.lng}/admin`}*/}
+          {/*  href={`/${lng}/admin`}*/}
           {/*  className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-[#ff7979] bg-white px-5 py-2 text-sm text-[#ff7979] shadow-md transition-colors hover:border-gray-800 dark:bg-black dark:text-[#ff7979] dark:hover:border-gray-800"*/}
           {/*  rel="noopener noreferrer"*/}
           {/*>*/}

@@ -1,9 +1,11 @@
 /* Core */
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { persistStore as persistAppStore, persistReducer } from "redux-persist";
+import { persistReducer } from "redux-persist";
+// import { persistStore as persistAppStore, persistReducer } from "redux-persist";
 
 import type { Action, ThunkAction } from "@reduxjs/toolkit";
-import type { Persistor } from "redux-persist";
+// import type { Persistor } from "redux-persist";
+export type { Persistor } from "redux-persist";
 
 /* Instruments */
 import { middlewares } from "./middlewares";
@@ -37,8 +39,8 @@ export const makeStore = () => {
   });
 };
 
-export const store: AppStore = makeStore();
-export const persistStore: Persistor = persistAppStore(store);
+// export const store: AppStore = makeStore();
+// export const persistStore: Persistor = persistAppStore(store);
 
 /* Types */
 export type AppStore = ReturnType<typeof makeStore>;

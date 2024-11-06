@@ -3,13 +3,13 @@ import Link from "next/link";
 import { useTranslation } from "@/i18n/client";
 
 export default function AccessNotAllowed({
-  params,
+  params: { lng },
 }: {
   params: {
     lng: string;
   };
 }) {
-  const { t } = useTranslation(params.lng, "common");
+  const { t } = useTranslation(lng, "common");
 
   return (
     <div className="flex h-auto w-full max-w-screen-xl flex-1 px-5 xl:px-0">
@@ -41,7 +41,7 @@ export default function AccessNotAllowed({
 
             <div className="mt-6 flex w-full shrink-0 items-center gap-x-3 sm:w-auto">
               <Link
-                href={`/${params.lng}`}
+                href={`/${lng}`}
                 className="w-1/2 shrink-0 rounded-lg bg-blue-500 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 sm:w-auto"
               >
                 {t("return-to-home")}

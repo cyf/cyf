@@ -83,15 +83,15 @@ const formSchema = z.object({
 });
 
 export default function Admin({
-  params,
+  params: { lng },
 }: {
   params: {
     lng: string;
   };
 }) {
-  const { t } = useTranslation(params.lng, "admin");
-  const { t: tv } = useTranslation(params.lng, "validator");
-  const { t: tc } = useTranslation(params.lng, "common");
+  const { t } = useTranslation(lng, "admin");
+  const { t: tv } = useTranslation(lng, "validator");
+  const { t: tc } = useTranslation(lng, "common");
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],

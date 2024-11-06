@@ -36,15 +36,15 @@ const formSchema = z.object({
   }),
 });
 
-export default function Login({
-  params,
+export default function Page({
+  params: { lng },
 }: {
   params: {
     lng: string;
   };
 }) {
-  const { t } = useTranslation(params.lng, "validator");
-  const { t: tl } = useTranslation(params.lng, "login");
+  const { t } = useTranslation(lng, "validator");
+  const { t: tl } = useTranslation(lng, "login");
   const dispatch = useAppDispatch();
   const search = useSearchParams();
   const redirectUrl = search.get("r");
@@ -201,30 +201,23 @@ export default function Login({
             <div className="flex flex-row justify-center text-[12px] text-gray-500 dark:text-gray-400">
               <span>{tl("no-account")},&nbsp;</span>
               <Link
-                href={`/${params.lng}/signup${redirectUrl ? `?r=${encodeURIComponent(redirectUrl)}` : ""}`}
+                href={`/${lng}/signup${redirectUrl ? `?r=${encodeURIComponent(redirectUrl)}` : ""}`}
                 className="text-blue-500"
               >
                 {tl("go-to-register")}
               </Link>
             </div>
-            <Or lng={params.lng} />
+            <Or lng={lng} />
             <ThirdPartyAccount
               approved={approved}
               setShowAgreementDialog={setShowAgreementDialog}
-              lng={params.lng}
+              lng={lng}
             />
           </div>
-          <Legal
-            approved={approved}
-            setApproved={setApproved}
-            lng={params.lng}
-          />
+          <Legal approved={approved} setApproved={setApproved} lng={lng} />
         </div>
       </div>
-      <AgreementDialog
-        lng={params.lng}
-        callback={() => onSubmit(form.getValues())}
-      />
+      <AgreementDialog lng={lng} callback={() => onSubmit(form.getValues())} />
     </>
   );
 }

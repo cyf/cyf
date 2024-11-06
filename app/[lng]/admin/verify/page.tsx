@@ -18,18 +18,18 @@ import type { Socket } from "socket.io-client";
 const WS_BASE_URL = process.env.WS_BASE_URL;
 
 export default function User({
-  params,
+  params: { lng },
 }: {
   params: {
     lng: string;
   };
 }) {
-  const { t } = useTranslation(params.lng, "common");
-  const { t: tl } = useTranslation(params.lng, "login");
-  const { t: tv } = useTranslation(params.lng, "verify");
+  const { t } = useTranslation(lng, "common");
+  const { t: tl } = useTranslation(lng, "login");
+  const { t: tv } = useTranslation(lng, "verify");
   const socketRef = useRef<Socket>();
   const dispatch = useAppDispatch();
-  const logout = useLogout(params.lng);
+  const logout = useLogout(lng);
   const user = useAppSelector(selectUser);
   const { toast } = useToast();
 

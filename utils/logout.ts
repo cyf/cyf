@@ -1,18 +1,7 @@
-import Cookies from "js-cookie";
-import { persistStore } from "@/model/store";
-import { cacheIdKey, cacheTokenKey } from "@/constants";
+import eventBus from "@/lib/event-bus";
 
 const logout = async () => {
-  persistStore.pause();
-  persistStore
-    .flush()
-    .then(() => {
-      return persistStore.purge();
-    })
-    .then(() => {
-      Cookies.remove(cacheTokenKey);
-      Cookies.remove(cacheIdKey);
-    });
+  eventBus.emit("logout");
 };
 
 export default logout;

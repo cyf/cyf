@@ -24,12 +24,12 @@ export async function generateMetadata({
 
 export default async function AdminLayout({
   children,
-  params,
+  params: { lng },
 }: {
   children: React.ReactNode;
   params: {
     lng: string;
   };
 }) {
-  return <UserProvider lng={params.lng}>{children}</UserProvider>;
+  return <UserProvider lng={lng}>{children}</UserProvider>;
 }

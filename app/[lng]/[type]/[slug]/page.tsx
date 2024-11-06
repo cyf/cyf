@@ -44,12 +44,12 @@ import { domain } from "@/constants";
 const NEXT_PUBLIC_DISQUS_SHORTNAME = process.env.NEXT_PUBLIC_DISQUS_SHORTNAME;
 
 export default function Legal({
-  params,
+  params: { slug, type, lng },
 }: {
   params: { slug: string; type: string; lng: string };
 }) {
-  const slug = `${params.lng}/${params.type}/${params.slug}`;
-  const post = allPosts.find((post) => post.slug === slug);
+  const path = `${lng}/${type}/${slug}`;
+  const post = allPosts.find((post) => post.slug === path);
 
   if (!post) notFound();
 
@@ -118,7 +118,7 @@ export default function Legal({
                 <Mdx code={post.body.code} />
               </div>
 
-              {params.type === "blog" && (
+              {type === "blog" && (
                 <div className="text-lg text-gray-600">
                   <hr className="mt-8 h-px w-full border-0 bg-gray-200 pt-px dark:bg-gray-600" />
                   {/*<div className="mt-8 dark:text-gray-300">*/}
@@ -133,7 +133,7 @@ export default function Legal({
                   {/*</div>*/}
                   <div className="mt-6">
                     <Link
-                      href={`/${params.lng}/${params.type}`}
+                      href={`/${lng}/${type}`}
                       className="inline-flex items-center text-base font-medium text-[#ff7979] hover:underline"
                     >
                       <svg
@@ -154,16 +154,14 @@ export default function Legal({
           {/* Article footer */}
         </article>
       </div>
-      {NEXT_PUBLIC_DISQUS_SHORTNAME && params.type === "blog" && (
+      {NEXT_PUBLIC_DISQUS_SHORTNAME && type === "blog" && (
         <DiscussionEmbed
           shortname={NEXT_PUBLIC_DISQUS_SHORTNAME}
           config={{
             url: `${domain}/${slug}`,
-            identifier: post.slug
-              .replace(`${params.lng}/`, "")
-              .replaceAll("/", "-"),
+            identifier: post.slug.replace(`${lng}/`, "").replaceAll("/", "-"),
             title: post.title,
-            language: params.lng,
+            language: lng,
           }}
         />
       )}
