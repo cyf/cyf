@@ -19,15 +19,11 @@ import {
 // import { MdJoinInner } from "react-icons/md";
 import { FaBlog } from "react-icons/fa";
 import Image from "next/image";
-import dynamic from "next/dynamic";
+import Card from "@/components/home/card";
 import { Github } from "@/components/shared/icons";
 import { useTranslation } from "@/i18n/client";
 import { basePath } from "@/constants";
 import { allPosts } from "contentlayer/generated";
-
-const DynamicCard = dynamic(() => import("@/components/home/card"), {
-  ssr: false,
-});
 
 export default function Home({
   params: { lng },
@@ -58,7 +54,7 @@ export default function Home({
                 key={title}
                 className="w-full sm:w-[calc(calc(100%-1.25rem)/2)] lg:w-[calc(calc(100%-2.5rem)/3)]"
               >
-                <DynamicCard
+                <Card
                   title={title}
                   description={description}
                   demo={demo}
@@ -259,14 +255,6 @@ const apps = [
   //     <Music className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
   //   ),
   //   url: "https://chenyifaer.com/faforever",
-  // },
-  // {
-  //   title: "Homing Pigeon",
-  //   description: "一个可以接收直播通知的应用.",
-  //   demo: (
-  //     <MdOutlineNotificationsActive className="h-24 w-24 text-gray-600 transition-all dark:text-white/80" />
-  //   ),
-  //   url: "https://chenyifaer.com/pigeon",
   // },
   {
     title: "FaFa Runner",
