@@ -2,8 +2,9 @@
 import { ImageResponse } from "next/og";
 import { basePath } from "@/constants";
 
+const keywords: string[] = ["陈一发儿", "ChenYifaer"];
 export const runtime = "edge";
-export const alt = "陈一发儿,ChenYifaer";
+export const alt = keywords.join();
 export const contentType = "image/png";
 
 export default async function OG() {
@@ -28,8 +29,8 @@ export default async function OG() {
       >
         <img
           src={`${basePath}/logo.jpg`}
-          alt="ChenYifaer Logo"
-          tw="w-20 h-20 mb-4 opacity-95"
+          alt={alt}
+          tw="w-20 h-20 mb-4 opacity-95 rounded-full"
         />
         <h1
           style={{
@@ -43,7 +44,7 @@ export default async function OG() {
             letterSpacing: "-0.02em",
           }}
         >
-          ChenYifaer
+          {keywords.at(1)}
         </h1>
       </div>
     ),
