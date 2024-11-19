@@ -32,6 +32,14 @@
     {
       "matchPackagePatterns": ["contentlayer2", "next-contentlayer2"],
       "groupName": "contentlayer2"
+    },
+    {
+      "matchPackagePatterns": [
+        "@tsparticles/engine",
+        "@tsparticles/react",
+        "tsparticles"
+      ],
+      "groupName": "tsparticles"
     }
   ]
 }
