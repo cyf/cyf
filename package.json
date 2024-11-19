@@ -14,7 +14,7 @@
     "@hookform/resolvers": "^3.9.1",
     "@reduxjs/toolkit": "^2.3.0",
     "@tanstack/react-table": "^8.20.5",
-    "@tsparticles/engine": "^3.5.0",
+    "@tsparticles/engine": "^3.6.0",
     "@tsparticles/react": "^3.0.0",
     "accept-language": "^3.0.20",
     "awesome-debounce-promise": "^2.1.0",
